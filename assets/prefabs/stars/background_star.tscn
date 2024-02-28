@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7j3ceqo2i8hq"]
+
+[ext_resource type="Texture2D" uid="uid://ewq1grgfr4pa" path="res://assets/textures/star-512.png" id="1_ywfv1"]
+
+[node name="BackgroundStar" type="Sprite3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+modulate = Color(0.5, 0.5, 0.5, 1)
+billboard = 1
+texture = ExtResource("1_ywfv1")

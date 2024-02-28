@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6c54usfla1jt"]
+
+[ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/star loader/star_loader.tscn" id="1_dh5tb"]
+[ext_resource type="Script" path="res://addons/free-look-camera/camera.gd" id="1_l5jbc"]
+
+[sub_resource type="Environment" id="Environment_42omm"]
+background_mode = 1
+background_color = Color(0.0323333, 0.03, 0.1, 1)
+
+[node name="Root" type="Node"]
+
+[node name="GameScene" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="GameScene"]
+environment = SubResource("Environment_42omm")
+
+[node name="Camera3D" type="Camera3D" parent="GameScene"]
+script = ExtResource("1_l5jbc")
+
+[node name="StarLoader" parent="GameScene" instance=ExtResource("1_dh5tb")]

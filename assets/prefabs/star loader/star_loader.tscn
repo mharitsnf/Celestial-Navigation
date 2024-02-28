@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr167mcbnpy7p"]
+
+[ext_resource type="Script" path="res://assets/prefabs/star loader/star_loader.gd" id="1_kr82w"]
+[ext_resource type="PackedScene" uid="uid://c3gal7bim1lew" path="res://assets/prefabs/stars/main_star.tscn" id="2_0bluc"]
+[ext_resource type="PackedScene" uid="uid://c7j3ceqo2i8hq" path="res://assets/prefabs/stars/background_star.tscn" id="3_osk2d"]
+
+[node name="StarLoader" type="Node" node_paths=PackedStringArray("main_star_container", "background_star_container")]
+script = ExtResource("1_kr82w")
+starmap_filename = "starmap_ver1"
+distance_from_center = 2000.0
+main_star_scene = ExtResource("2_0bluc")
+main_star_container = NodePath("MainStarContainer")
+background_star_scene = ExtResource("3_osk2d")
+background_star_container = NodePath("BackgroundStarContainer")
+
+[node name="MainStarContainer" type="Node3D" parent="."]
+
+[node name="BackgroundStarContainer" type="Node3D" parent="."]
