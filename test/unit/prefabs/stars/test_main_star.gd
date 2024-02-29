@@ -1,9 +1,7 @@
 extends GutTest
 
-
 var main_star : PackedScene = preload("res://assets/prefabs/stars/main_star.tscn")
 var main_star_inst : MainStar
-
 
 func before_each() -> void:
 	main_star_inst = main_star.instantiate()

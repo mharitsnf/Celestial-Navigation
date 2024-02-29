@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://diiot23srn01f"]
+
+[ext_resource type="Script" path="res://assets/prefabs/virtual camera/third_person_camera.gd" id="1_p87k6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_p65c1"]
+
+[node name="ThirdPersonCamera" type="Node3D" node_paths=PackedStringArray("offset_node", "gimbal", "spring_arm", "remote_transform_parent_for_other")]
+script = ExtResource("1_p87k6")
+_offset = Vector3(0, 1, 0)
+offset_node = NodePath("Offset")
+gimbal = NodePath("Offset/Gimbal")
+spring_arm = NodePath("Offset/Gimbal/SpringArm3D")
+remote_transform_parent_for_other = NodePath("Offset/Gimbal/SpringArm3D")
+rotation_speed = 1.0
+
+[node name="Offset" type="Node3D" parent="."]
+
+[node name="Gimbal" type="Node3D" parent="Offset"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Offset/Gimbal"]
+spring_length = 5.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Offset/Gimbal/SpringArm3D"]
+mesh = SubResource("SphereMesh_p65c1")
