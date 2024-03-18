@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://qq3s0v8dgt3x"]
 
-[ext_resource type="Shader" path="res://assets/prefabs/ocean/ocean_shader.gdshader" id="1_abxh2"]
+[ext_resource type="Shader" path="res://assets/prefabs/ocean/ocean_shader.gdshader" id="1_hfygk"]
 
 [sub_resource type="Gradient" id="Gradient_ppngf"]
 interpolation_mode = 1
@@ -39,18 +39,18 @@ noise = SubResource("FastNoiseLite_kjsh4")
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_abxh2")
+shader = ExtResource("1_hfygk")
 shader_parameter/planet_radius = 792.0
-shader_parameter/target_world_position = Vector3(0, 792, 0)
+shader_parameter/target_world_position = Vector3(0, 800, 0)
 shader_parameter/target_up = Vector3(0, 1, 0)
 shader_parameter/target_right = Vector3(1, 0, 0)
 shader_parameter/target_fwd = Vector3(0, 0, 1)
-shader_parameter/cpu_time = 33.5999
-shader_parameter/movement_offset = Vector3(0, 792, 0)
+shader_parameter/cpu_time = 3.7527
+shader_parameter/movement_offset = Vector3(0, 0, 0)
 shader_parameter/plane_size = 200.0
-shader_parameter/speed = 0.5
-shader_parameter/wave_1 = Vector4(0.025, 30, 1, 0)
-shader_parameter/wave_2 = Vector4(0.025, 25, 0, 1)
+shader_parameter/speed = 0.25
+shader_parameter/wave_1 = Vector4(0.06, 30, 1, 0)
+shader_parameter/wave_2 = Vector4(0.08, 25, 0, 1)
 shader_parameter/albedo = Color(0.360784, 0.556863, 0.901961, 1)
 shader_parameter/albedo2 = Color(0.74902, 0.960784, 1, 1)
 shader_parameter/metallic = 0.0
@@ -61,7 +61,7 @@ shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_tnjn4")
 shader_parameter/edge_scale = 0.6
 shader_parameter/near = 1.0
 shader_parameter/far = 100.0
-shader_parameter/edge_color = Color(1, 1, 1, 1)
+shader_parameter/edge_color = Color(0.8, 0.94902, 1, 1)
 shader_parameter/edge_noise_scale = 1.0
 shader_parameter/edge_noise_texture = SubResource("NoiseTexture2D_8ry6f")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_38q81")

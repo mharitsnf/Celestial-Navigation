@@ -42,12 +42,15 @@ func recalculate_basis(target : Node3D) -> Basis:
 # ===== ===== ===== ===== ===== =====
 
 # ===== Group nodes accessor =====
+## Get the only/first node in a group.
 func get_only_node_in_group(group_name : String) -> Variant:
     return get_tree().get_first_node_in_group(group_name)
 
+## Get the index of a certain node in group.
 func get_index_in_group(group_name : String, target : Node) -> int:
     return get_tree().get_nodes_in_group(group_name).find(target, 0)
 
+## Get node by index in group.
 func get_node_in_group(group_name : String, object_type : Variant, index : int) -> Variant:
     if index < 0 or index > get_tree().get_nodes_in_group(group_name).size() - 1:
         return null

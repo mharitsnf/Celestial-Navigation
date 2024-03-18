@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://yw5vawpt68bx"]
+
+[ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_jqiig"]
+[ext_resource type="Material" uid="uid://ywv0hfk4sxqb" path="res://assets/materials/m_one_color.tres" id="2_is12c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iakp2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g360u"]
+material = ExtResource("2_is12c")
+
+[node name="TestBox" node_paths=PackedStringArray("normal_container", "visual_container") instance=ExtResource("1_jqiig")]
+normal_container = NodePath("CollisionShape3D")
+visual_container = NodePath("CollisionShape3D/MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_iakp2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" index="0"]
+mesh = SubResource("BoxMesh_g360u")

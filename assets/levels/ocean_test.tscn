@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dus4k0ekmocc0"]
+[gd_scene load_steps=8 format=3 uid="uid://dus4k0ekmocc0"]
 
+[ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/test_boat.tscn" id="1_2w3q4"]
 [ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/ocean/ocean.tscn" id="1_rln1m"]
-[ext_resource type="Texture2D" uid="uid://dwwdhs5wprpmw" path="res://assets/textures/uv grids.webp" id="2_krkwh"]
 [ext_resource type="Script" path="res://addons/free-look-camera/camera.gd" id="2_uqnki"]
+[ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/test_box/test_box.tscn" id="2_wkhmd"]
 
 [sub_resource type="Environment" id="Environment_fbrbe"]
 background_mode = 1
@@ -20,23 +21,10 @@ radius = 790.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_oggbs"]
 radius = 300.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_g6v0h"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_1ih7k"]
-radius = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2q2o"]
-albedo_texture = ExtResource("2_krkwh")
-
-[sub_resource type="SphereMesh" id="SphereMesh_pdak5"]
-material = SubResource("StandardMaterial3D_u2q2o")
-radius = 1.0
-height = 2.0
-
 [node name="OceanTest" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.425622, -0.409941, 0.806718, -0.111319, 0.908448, 0.402904, -0.898028, 0.0816821, -0.43229, 0, 810.22, 0)
+transform = Transform3D(-0.805498, 0.154973, -0.571976, -0.111319, 0.908447, 0.402904, 0.58205, 0.38821, -0.714501, 0, 810.22, 0)
 light_energy = 0.8
 shadow_enabled = true
 
@@ -57,22 +45,18 @@ gravity_direction = Vector3(0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GravityArea"]
 shape = SubResource("SphereShape3D_oggbs")
 
-[node name="MainBall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792, 0)
-mesh = SubResource("SphereMesh_g6v0h")
+[node name="TestBoat" parent="." instance=ExtResource("1_2w3q4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.84618, 800, 0)
+
+[node name="TestBox" parent="." instance=ExtResource("2_wkhmd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 0)
 
 [node name="Ocean" parent="." node_paths=PackedStringArray("_target") instance=ExtResource("1_rln1m")]
-_target = NodePath("../MainBall")
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35223, 800, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("SphereShape3D_1ih7k")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("SphereMesh_pdak5")
+_target = NodePath("../TestBox")
+wave_data_1 = Vector4(0.06, 30, 1, 0)
+wave_data_2 = Vector4(0.08, 25, 0, 1)
+speed = 0.25
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 6.51283)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792.727, 6.09214)
 script = ExtResource("2_uqnki")

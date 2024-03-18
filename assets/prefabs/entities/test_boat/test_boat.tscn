@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl6seajhin6ok"]
+
+[ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_ehuc2"]
+[ext_resource type="PackedScene" uid="uid://bnapuuma464kw" path="res://assets/models/watercraftPack_026.gltf" id="2_588wo"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1ldm1"]
+points = PackedVector3Array(-0.743173, 0.310938, 2.31259, 1.27856, 0.658408, 2.38565, 1.35177, 0.995489, -1.71686, -0.0460355, 2.37589, 1.86928, -1.3017, 1.06909, -1.71686, 0.651506, 0.0290487, -1.5928, 0.0222587, 2.38809, -0.873691, -1.3017, 1.06909, 2.41022, -0.668258, 0.0413664, -1.56961, 0.936888, 1.91904, 1.90671, 0.645861, 0.0391506, 1.74946, -0.951001, 1.91181, -0.887743, 0.172004, 1.06909, 2.92651, -1.29616, 0.661124, 2.37716, 0.936888, 1.91904, -0.904103, -0.951001, 1.91181, 1.89369, -0.667005, 0.0436108, 1.74569, -1.30483, 0.657377, -1.59434, 0.162814, 0.656212, 2.88301, 1.25795, 0.598555, -1.55457, 1.35177, 0.995489, 2.41068, -0.785907, 1.06909, 2.77919, -1.02577, 0.307237, 2.11045, 0.928376, 0.241156, 2.03502, 0.0927284, 0.30661, 2.531, 0.762021, 1.06909, 2.77919, -0.747036, 0.656366, 2.74204, 0.0222587, 2.38809, 1.88219, 1.27782, 1.06909, -1.71686, -0.254602, 0.0371934, 1.95943, 0.785745, 0.661507, 2.72232, -0.196156, 1.06909, 2.92651)
+
+[node name="TestBoat" node_paths=PackedStringArray("normal_container", "visual_container") instance=ExtResource("1_ehuc2")]
+normal_container = NodePath("CollisionShape3D")
+visual_container = NodePath("CollisionShape3D/watercraftPack_026")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+shape = SubResource("ConvexPolygonShape3D_1ldm1")
+
+[node name="watercraftPack_026" parent="CollisionShape3D" index="0" instance=ExtResource("2_588wo")]
+
+[editable path="CollisionShape3D/watercraftPack_026"]
