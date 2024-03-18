@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://eoephvx2hv1y"]
+[gd_scene load_steps=11 format=3 uid="uid://eoephvx2hv1y"]
 
 [ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/star loader/star_loader.tscn" id="1_h0ces"]
-[ext_resource type="Texture2D" uid="uid://dwwdhs5wprpmw" path="res://assets/textures/uv grids.webp" id="1_r6gee"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="3_hukvy"]
 [ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="4_jvasn"]
 [ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="6_7s3qd"]
@@ -9,7 +8,11 @@
 [sub_resource type="Environment" id="Environment_fbrbe"]
 background_mode = 1
 background_color = Color(0.03, 0.0346667, 0.1, 1)
-sdfgi_enabled = true
+tonemap_mode = 3
+tonemap_exposure = 0.7
+tonemap_white = 0.5
+ssao_enabled = true
+ssil_enabled = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_7e775"]
 radius = 100.0
@@ -21,20 +24,9 @@ radius = 100.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_oggbs"]
 radius = 300.0
 
-[sub_resource type="GDScript" id="GDScript_aqw37"]
-script/source = "extends RigidBody3D
+[sub_resource type="SphereShape3D" id="SphereShape3D_cs5k8"]
 
-func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	state.transform.basis = STUtil.recalculate_basis(self)
-"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1o3cr"]
-albedo_texture = ExtResource("1_r6gee")
-
-[sub_resource type="SphereMesh" id="SphereMesh_i5y16"]
-material = SubResource("StandardMaterial3D_1o3cr")
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_4xqin"]
+[sub_resource type="SphereMesh" id="SphereMesh_uwvh6"]
 
 [node name="CameraTest" type="Node3D"]
 
@@ -65,37 +57,23 @@ gravity_direction = Vector3(0, 0, 0)
 shape = SubResource("SphereShape3D_oggbs")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3406, 11.7006, -116.326)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 102.004, 0)
 lock_rotation = true
-script = SubResource("GDScript_aqw37")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("SphereMesh_i5y16")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("SphereShape3D_4xqin")
+shape = SubResource("SphereShape3D_cs5k8")
 
-[node name="RigidBody3D2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3406, -7.703, -128.293)
-lock_rotation = true
-script = SubResource("GDScript_aqw37")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_uwvh6")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
-mesh = SubResource("SphereMesh_i5y16")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
-shape = SubResource("SphereShape3D_4xqin")
-
-[node name="MainCamera" parent="." instance=ExtResource("3_hukvy")]
+[node name="MainCamera" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("3_hukvy")]
 current = true
+follow_target = NodePath("../VirtualCameras/TPC1")
 
 [node name="VirtualCameras" type="Node" parent="."]
 
 [node name="TPC1" parent="VirtualCameras" node_paths=PackedStringArray("follow_target") instance=ExtResource("4_jvasn")]
 follow_target = NodePath("../../RigidBody3D")
-
-[node name="TPC2" parent="VirtualCameras" node_paths=PackedStringArray("follow_target") instance=ExtResource("4_jvasn")]
-follow_target = NodePath("../../RigidBody3D2")
 
 [node name="FPC1" parent="VirtualCameras" node_paths=PackedStringArray("follow_target") instance=ExtResource("6_7s3qd")]
 follow_target = NodePath("../../RigidBody3D")

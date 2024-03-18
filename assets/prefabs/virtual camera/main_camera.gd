@@ -58,16 +58,6 @@ func set_follow_target(new_target : VirtualCamera) -> void:
 	follow_target = new_target
 
 func _change_target(new_target : VirtualCamera, use_transition : bool = true) -> void:
-	if !new_target:
-		push_error("Returning: new_target is null")
-		return
-	if current_target and current_target.virtual_camera == new_target:
-		push_warning("Returning: New target is the same as current target.")
-		return
-	if is_transitioning():
-		push_warning("Returning: Main camera is still transitioning.")
-		return
-
 	if current_target:
 		current_target.remote_transform.remote_path = NodePath("")
 		previous_target = current_target

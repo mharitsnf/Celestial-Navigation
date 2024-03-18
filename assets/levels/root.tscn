@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://b6c54usfla1jt"]
 
-[ext_resource type="PackedScene" uid="uid://eoephvx2hv1y" path="res://assets/levels/camera_test.tscn" id="1_p30b0"]
+[ext_resource type="PackedScene" uid="uid://dus4k0ekmocc0" path="res://assets/levels/ocean_test.tscn" id="1_gyl1w"]
 
 [node name="Root" type="Node"]
 
-[node name="CameraTest" parent="." instance=ExtResource("1_p30b0")]
+[node name="OceanTest" parent="." instance=ExtResource("1_gyl1w")]

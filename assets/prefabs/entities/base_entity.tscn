@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci81rhjnjhe5x"]
+
+[ext_resource type="Script" path="res://assets/prefabs/entities/base_entity.gd" id="1_ovlfp"]
+
+[node name="BaseEntity" type="RigidBody3D" node_paths=PackedStringArray("visual_node")]
+script = ExtResource("1_ovlfp")
+visual_node = NodePath("VisualNodes")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+
+[node name="VisualNodes" type="Node3D" parent="."]
+
+[node name="BuoyancyNodes" type="Node3D" parent="."]
