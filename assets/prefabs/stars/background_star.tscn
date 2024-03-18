@@ -4,6 +4,6 @@
 
 [node name="BackgroundStar" type="Sprite3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-modulate = Color(0.5, 0.5, 0.5, 1)
+modulate = Color(0.439216, 0.439216, 0.439216, 1)
 billboard = 1
 texture = ExtResource("1_ywfv1")

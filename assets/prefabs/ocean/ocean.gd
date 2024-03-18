@@ -32,11 +32,13 @@ func _process(delta: float) -> void:
     _update_shader_params()
 # ========== ========== ========== ========== ==========
 
+# ========== Time and speed functions ==========
 func get_time_elapsed() -> float:
     return time_elapsed
 
 func get_speed() -> float:
     return speed
+# ========== ========== ========== ========== ==========
 
 # ========== Target and offset functions ==========
 func get_target() -> Node3D:
