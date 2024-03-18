@@ -57,7 +57,7 @@ func _update_collision_normal(normal : Vector3) -> void:
 func _dampen_velocity(state: PhysicsDirectBodyState3D) -> void:
 	if depth_from_ocean_surface > 0.:
 		var flat_vel : Vector3 = basis.inverse() * state.linear_velocity
-		flat_vel *= 1. - water_drag
+		flat_vel.y *= 1. - water_drag
 		state.linear_velocity = basis * flat_vel
 
 func _apply_upwards_force() -> void:

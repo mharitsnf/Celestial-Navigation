@@ -13,6 +13,7 @@ class_name Ocean extends MeshInstance3D
 var default_initial_position : Vector3 = Vector3(0,STUtil.PLANET_RADIUS,0)
 ## Flat initial position
 var initial_position : Vector3 = default_initial_position
+var initial_basis : Basis = Basis.IDENTITY
 ## Flat offset
 var offset : Vector3 = Vector3.ZERO
 var time_elapsed : float = 0.
@@ -51,14 +52,21 @@ func get_offset() -> Vector3:
     return offset
 
 func _reset_initial_position_and_offset(new_target : Node3D) -> void:
-    if !is_inside_tree(): return
-    if new_target: initial_position = _target.basis.inverse() * _target.global_position
-    else: initial_position = default_initial_position
+    if !is_inside_tree():
+        push_warning("Node is not in tree yet.")
+        return
+    
+    if new_target:
+        initial_basis = _target.basis.inverse()
+        initial_position = initial_basis * _target.global_position
+    else:
+        initial_basis = Basis.IDENTITY
+        initial_position = default_initial_position
     offset = Vector3.ZERO
 
 func _calculate_offset() -> void:
     if !_target: return
-    var current_flat_pos : Vector3 = _target.basis.inverse() * _target.global_position
+    var current_flat_pos : Vector3 = initial_basis * _target.global_position
     offset = current_flat_pos - initial_position
 # ========== ========== ========== ========== ==========
 
