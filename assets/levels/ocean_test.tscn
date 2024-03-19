@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dus4k0ekmocc0"]
+[gd_scene load_steps=13 format=3 uid="uid://dus4k0ekmocc0"]
 
 [ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/test_boat.tscn" id="1_2w3q4"]
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/environments/main.tres" id="1_dg3yw"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/star loader/star_loader.tscn" id="2_824qi"]
 [ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/test_box/test_box.tscn" id="2_wkhmd"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="4_6q7yp"]
+[ext_resource type="PackedScene" uid="uid://c26yw05wco6bu" path="res://assets/prefabs/controllers/player/boat/player_boat_controller.tscn" id="5_d5tbi"]
 [ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="5_j08wa"]
+[ext_resource type="PackedScene" uid="uid://bq08c3kmmbx62" path="res://assets/prefabs/controllers/player/camera/tpc_controller.tscn" id="9_knonm"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/player/camera/tpc_controller.gd" id="10_1l1rs"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
 radius = 792.5
@@ -57,10 +60,15 @@ speed = 0.25
 
 [node name="TestBoat" parent="Objects" instance=ExtResource("1_2w3q4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 0)
-move_force = 3.0
+mass = 600.0
+rotation_speed = 25.0
+move_force = 600.0
+float_force = 3000.0
+
+[node name="PlayerBoatController" parent="Objects/TestBoat" instance=ExtResource("5_d5tbi")]
 
 [node name="TestBox" parent="Objects" instance=ExtResource("2_wkhmd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97863, 800, 0)
 
 [node name="CameraSystem" type="Node" parent="."]
 
@@ -71,3 +79,10 @@ follow_target = NodePath("../ThirdPersonCamera")
 _spring_length = 10.0
 _offset = Vector3(0, 2, 0)
 follow_target = NodePath("../../Objects/TestBoat")
+
+[node name="TPCController" parent="CameraSystem/ThirdPersonCamera" instance=ExtResource("9_knonm")]
+script = ExtResource("10_1l1rs")
+joypad_inverted_x = true
+joypad_inverted_y = true
+mouse_inverted_x = true
+mouse_inverted_y = true

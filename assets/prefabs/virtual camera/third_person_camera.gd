@@ -20,7 +20,7 @@ func _lerp_spring_length(delta: float) -> void:
 func _lerp_height_offset(delta: float) -> void:
 	offset_node.position = lerp(offset_node.position, _offset, lerp_weight * delta)
 
-func _rotate_camera(direction : Vector2) -> void:
+func rotate_camera(direction : Vector2) -> void:
 	gimbal.rotate_object_local(Vector3.UP, direction.x * rotation_speed)
 	spring_arm.rotate_object_local(Vector3.RIGHT, direction.y * rotation_speed)
 	spring_arm.rotation_degrees.x = clamp(spring_arm.rotation_degrees.x, min_x_angle, max_x_angle)

@@ -51,7 +51,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_transition(delta)
-	_rotate_joypad()
 # =============== ===============  ===============
 
 # =============== Follow and transition functions ===============
@@ -131,38 +130,7 @@ func _transition(delta : float) -> void:
 		tween_elapsed_time += delta
 # =============== =============== ===============
 
-# =============== Input functions ===============
-func is_active() -> bool:
-	if !main_camera: return false
-	return main_camera.get_follow_target() == self
-
-func _rotate_camera(_direction : Vector2) -> void:
+# =============== Rotation API ===============
+func rotate_camera(_direction : Vector2) -> void:
 	pass
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		_rotate_mouse(event)
-
-func _rotate_mouse(event : InputEventMouseMotion) -> void:
-	if !_rotate_mouse_error_checks(): return
-	var direction : Vector2 = event.relative * .001
-	_rotate_camera(direction)
-
-func _rotate_joypad() -> void:
-	if !_rotate_joypad_error_checks(): return
-	var direction : Vector2 = Input.get_vector("rotate_camera_left", "rotate_camera_right", "rotate_camera_down", "rotate_camera_up")
-	direction *= .01
-	_rotate_camera(direction)
-
-## Error checks for mouse input
-func _rotate_mouse_error_checks() -> bool:
-	if !is_active(): return false
-	if !STUtil.input_device_equals(InputHelper.DEVICE_KEYBOARD): return false
-	return true
-
-## Error checks for joypad input
-func _rotate_joypad_error_checks() -> bool:
-	if !is_active(): return false
-	if STUtil.input_device_equals(InputHelper.DEVICE_KEYBOARD): return false
-	return true
 # =============== =============== ===============
