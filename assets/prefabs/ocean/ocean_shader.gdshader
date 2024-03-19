@@ -139,15 +139,8 @@ void fragment() {
 	float z_pos = linear_depth(FRAGCOORD.z, SCREEN_UV, INV_PROJECTION_MATRIX);
 	float z_dif = z_depth - z_pos;
 	
-	vec2 uv_noise = (UV * edge_noise_scale) + (movement_offset.xz / (1000. * movement_offset_scale));
-	float edge_noise = texture(edge_noise_texture, uv_noise + TIME * (1. / edge_noise_scale) * .1).x;
-	edge_noise = ((edge_noise * 2.) - 1.);
-	float test_res = edge_noise;
-	float displ_z_dif = z_dif + edge_noise;
-	
-	displ_z_dif = smoothstep(0., 1., 1. - displ_z_dif);
 	z_dif = smoothstep(0., 1., 1. - z_dif);
-	float final_z_dif = smoothstep(0., 1., z_dif + displ_z_dif);
+	float final_z_dif = smoothstep(0., 1., z_dif);
 	final_z_dif = step(final_z_dif, edge_scale);
 	
 	// === COLOR

@@ -82,7 +82,6 @@ follow_target = NodePath("../../Objects/TestBoat")
 
 [node name="TPCController" parent="CameraSystem/ThirdPersonCamera" instance=ExtResource("9_knonm")]
 script = ExtResource("10_1l1rs")
-joypad_inverted_x = true
 joypad_inverted_y = true
 mouse_inverted_x = true
 mouse_inverted_y = true
