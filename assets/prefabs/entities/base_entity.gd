@@ -27,7 +27,7 @@ func _physics_process(_delta: float) -> void:
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	state.transform.basis = STUtil.recalculate_basis(self)
 	_dampen_velocity(state)
-	_apply_upwards_force()
+	_apply_buoyancy_force()
 # ========== ========== ========== ==========
 
 # ========== Buoyancy functions ==========
@@ -60,7 +60,7 @@ func _dampen_velocity(state: PhysicsDirectBodyState3D) -> void:
 		flat_vel.y *= 1. - water_drag
 		state.linear_velocity = basis * flat_vel
 
-func _apply_upwards_force() -> void:
+func _apply_buoyancy_force() -> void:
 	if depth_from_ocean_surface > 0.:
 		apply_central_force(global_basis.y * float_force * ProjectSettings.get_setting("physics/3d/default_gravity") * depth_from_ocean_surface)
 

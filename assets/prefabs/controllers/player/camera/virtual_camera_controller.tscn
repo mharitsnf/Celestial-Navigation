@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq08c3kmmbx62"]
+
+[ext_resource type="Script" path="res://assets/prefabs/controllers/player/camera/virtual_camera_controller.gd" id="1_2xdux"]
+
+[node name="VirtualCameraController" type="Node"]
+script = ExtResource("1_2xdux")
+joypad_inverted_y = true
+mouse_inverted_x = true
+mouse_inverted_y = true

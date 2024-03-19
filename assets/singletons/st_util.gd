@@ -42,6 +42,12 @@ func recalculate_basis(target : Node3D) -> Basis:
 # ===== ===== ===== ===== ===== =====
 
 # ===== Group nodes accessor =====
+func get_node_in_group_by_name(group_name: String, object_name: String) -> Variant:
+    var nodes: Array = get_tree().get_nodes_in_group(group_name)
+    for n: Variant in nodes:
+        if n.name == object_name: return n
+    return null
+
 ## Get the only/first node in a group.
 func get_only_node_in_group(group_name : String) -> Variant:
     return get_tree().get_first_node_in_group(group_name)

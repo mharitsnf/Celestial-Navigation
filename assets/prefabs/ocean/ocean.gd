@@ -24,12 +24,14 @@ func _enter_tree() -> void:
     if !is_in_group("ocean"):
         add_to_group("ocean")
 
+    _reset_initial_position_and_offset(_target)
+
 func _ready() -> void:
     shader = get_active_material(0)
 
 func _process(delta: float) -> void:
     time_elapsed += delta
-    _calculate_offset()
+    _calculate_offset(delta)
     _update_shader_params()
 # ========== ========== ========== ========== ==========
 
@@ -52,22 +54,29 @@ func get_offset() -> Vector3:
     return offset
 
 func _reset_initial_position_and_offset(new_target : Node3D) -> void:
-    if !is_inside_tree():
-        push_warning("Node is not in tree yet.")
-        return
+    if !new_target.is_inside_tree():
+        await new_target.tree_entered
     
     if new_target:
         initial_basis = _target.basis.inverse()
         initial_position = initial_basis * _target.global_position
+        initial_position.y = 0
     else:
         initial_basis = Basis.IDENTITY
         initial_position = default_initial_position
+    
     offset = Vector3.ZERO
 
-func _calculate_offset() -> void:
+func _calculate_offset(delta: float) -> void:
     if !_target: return
-    var current_flat_pos : Vector3 = initial_basis * _target.global_position
-    offset = current_flat_pos - initial_position
+    if _target is RigidBody3D:
+        var flat_vel: Vector3 = _target.basis.inverse() * _target.linear_velocity
+        var xz_vel: Vector3 = Vector3(flat_vel.x, 0, flat_vel.z)
+        offset += xz_vel * delta
+    else:
+        var current_flat_pos : Vector3 = initial_basis * _target.global_position
+        current_flat_pos.y = 0
+        offset = current_flat_pos - initial_position
 # ========== ========== ========== ========== ==========
 
 # ========== Shader functions ==========

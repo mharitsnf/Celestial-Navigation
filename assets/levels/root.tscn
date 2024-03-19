@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b6c54usfla1jt"]
 
-[ext_resource type="PackedScene" uid="uid://dus4k0ekmocc0" path="res://assets/levels/ocean_test.tscn" id="1_gyl1w"]
+[ext_resource type="PackedScene" uid="uid://bohsb8opfjfgr" path="res://assets/levels/world_test.tscn" id="1_n8kch"]
 [ext_resource type="Shader" path="res://assets/shaders/pixelize.gdshader" id="2_gyjex"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_d8ppt"]
@@ -26,7 +26,7 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="OceanTest" parent="Main/SubViewport" instance=ExtResource("1_gyl1w")]
+[node name="WorldTest" parent="Main/SubViewport" instance=ExtResource("1_n8kch")]
 
 [node name="Pixelize" type="SubViewportContainer" parent="."]
 anchors_preset = 15

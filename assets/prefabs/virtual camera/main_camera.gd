@@ -36,18 +36,8 @@ func _enter_tree() -> void:
 	if !is_in_group("main_camera"):
 		add_to_group("main_camera")
 
-func _ready() -> void:
-	# for testing
-	set_follow_target(STUtil.get_node_in_group("virtual_cameras", VirtualCamera, current_vcam_index))
-
 func _process(delta: float) -> void:
 	_transition(delta)
-
-	# For testing
-	if Input.is_action_just_pressed("ui_accept"):
-		current_vcam_index += 1
-		current_vcam_index = current_vcam_index % get_tree().get_nodes_in_group("virtual_cameras").size()
-		set_follow_target(STUtil.get_node_in_group("virtual_cameras", VirtualCamera, current_vcam_index))
 
 ## Returns the current follow target.
 func get_follow_target() -> VirtualCamera:
@@ -110,7 +100,6 @@ func _transition(delta : float) -> void:
 			Tween.TRANS_CUBIC,
 			Tween.EASE_IN_OUT
 		)
-
 		
 		var previous_quat : Quaternion = Quaternion(previous_target.remote_transform.global_basis.orthonormalized())
 		var current_quat : Quaternion = Quaternion(current_target.remote_transform.global_basis.orthonormalized())
@@ -123,13 +112,13 @@ func _transition(delta : float) -> void:
 			Tween.EASE_IN_OUT
 		)
 
-		tween_elapsed_time += delta
+		fov = Tween.interpolate_value(
+			previous_target.virtual_camera.get_fov(),
+			current_target.virtual_camera.get_fov() - previous_target.virtual_camera.get_fov(),
+			tween_elapsed_time,
+			tween_duration,
+			Tween.TRANS_CUBIC,
+			Tween.EASE_IN_OUT
+		)
 
-func get_virtual_camera(target_name : String) -> VirtualCamera:
-	var vcams : Array = get_tree().get_nodes_in_group("virtual_cameras")
-	vcams = vcams.filter(
-		func(vcam : Node) -> bool:
-			return vcam.name == target_name
-	)
-	if !vcams.is_empty() and vcams[0] is VirtualCamera: return vcams[0]
-	else: return null
+		tween_elapsed_time += delta

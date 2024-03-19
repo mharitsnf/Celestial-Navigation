@@ -8,6 +8,9 @@ class_name FirstPersonCamera extends VirtualCamera
 @export var gimbal : Node3D # For rotation in local Y
 @export var inner_gimbal : Node3D # For rotation in local X
 
+func _ready() -> void:
+    super()
+
 func _process(delta: float) -> void:
     super(delta)
     _lerp_gimbal_position(delta)

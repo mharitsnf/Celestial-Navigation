@@ -33,6 +33,13 @@ var transitioning : bool = false
 var tween_elapsed_time : float = 0.
 signal transition_finished
 
+# ===== FoV =====
+var _fov: float:
+	set(value):
+		_fov = value
+		if main_camera.get_follow_target() == self:
+			main_camera.fov = value
+
 var main_camera : MainCamera
 var previous_target : TargetNode
 var current_target : TargetNode
@@ -48,6 +55,9 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	main_camera = STUtil.get_only_node_in_group("main_camera")
+
+	if main_camera:
+		_fov = main_camera.fov
 
 func _process(delta: float) -> void:
 	_transition(delta)
@@ -128,6 +138,14 @@ func _transition(delta : float) -> void:
 		)
 
 		tween_elapsed_time += delta
+# =============== =============== ===============
+
+# =============== FoV API ===============
+func get_fov() -> float:
+	return _fov
+
+func set_fov(value: float) -> void:
+	_fov = value
 # =============== =============== ===============
 
 # =============== Rotation API ===============
