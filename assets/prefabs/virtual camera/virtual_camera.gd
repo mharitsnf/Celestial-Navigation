@@ -34,11 +34,9 @@ var tween_elapsed_time : float = 0.
 signal transition_finished
 
 # ===== FoV =====
-var _fov: float:
-	set(value):
-		_fov = value
-		if main_camera.get_follow_target() == self:
-			main_camera.fov = value
+@export var min_fov: float = 30
+@export var max_fov: float = 110
+var _fov: float
 
 var main_camera : MainCamera
 var previous_target : TargetNode
@@ -59,7 +57,11 @@ func _ready() -> void:
 	if main_camera:
 		_fov = main_camera.fov
 
+		if !main_camera.follow_target_changed.is_connected(_on_main_camera_follow_target_changed):
+			main_camera.follow_target_changed.connect(_on_main_camera_follow_target_changed)
+
 func _process(delta: float) -> void:
+	_lerp_main_camera_fov(delta)
 	_transition(delta)
 # =============== ===============  ===============
 
@@ -141,14 +143,27 @@ func _transition(delta : float) -> void:
 # =============== =============== ===============
 
 # =============== FoV API ===============
+func _on_main_camera_follow_target_changed(_mc_follow_target: VirtualCamera) -> void:
+	print("asd")
+# =============== =============== ===============
+
+# =============== FoV API ===============
 func get_fov() -> float:
 	return _fov
 
 func set_fov(value: float) -> void:
-	_fov = value
+	_fov = clamp(value, min_fov, max_fov)
+
+const FOV_LERP_WEIGHT: float = 5.
+func _lerp_main_camera_fov(delta: float) -> void:
+	if !is_active(): return
+	main_camera.fov = lerp(main_camera.fov, _fov, delta * FOV_LERP_WEIGHT)
 # =============== =============== ===============
 
 # =============== Rotation API ===============
 func rotate_camera(_direction : Vector2) -> void:
 	pass
 # =============== =============== ===============
+
+func is_active() -> bool:
+	return main_camera.get_follow_target() == self

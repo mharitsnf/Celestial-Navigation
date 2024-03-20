@@ -21,6 +21,7 @@ class TargetVirtualCamera extends RefCounted:
 var transitioning : bool = false
 var tween_elapsed_time : float = 0.
 signal transition_finished
+signal follow_target_changed(target: VirtualCamera)
 
 var previous_target : TargetVirtualCamera = null
 var current_target : TargetVirtualCamera = null
@@ -84,6 +85,8 @@ func _on_transition_finished() -> void:
 	
 	current_target.remote_transform.remote_path = get_path()
 	set_transitioning(false)
+
+	follow_target_changed.emit(current_target.virtual_camera)
 
 func _transition(delta : float) -> void:
 	if is_transitioning():

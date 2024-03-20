@@ -1,4 +1,4 @@
-extends Node
+class_name MainCameraController extends Node
 
 var parent: MainCamera
 var fpc: FirstPersonCamera
