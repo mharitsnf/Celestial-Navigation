@@ -1,6 +1,6 @@
 class_name State extends Node
 
-var parent: CharacterStateController
+var parent: PlayerCharacterController
 
 func _enter_tree() -> void:
     parent = get_parent()

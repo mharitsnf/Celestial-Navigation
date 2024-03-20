@@ -29,6 +29,11 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	_apply_buoyancy_force()
 # ========== ========== ========== ==========
 
+# ========== Setters and Getters ==========
+func get_normal_container() -> Node3D:
+	return normal_container
+# ========== ========== ========== ==========
+
 # ========== Buoyancy functions ==========
 class GerstnerResult extends RefCounted:
 	var vertex : Vector3 = Vector3.ZERO

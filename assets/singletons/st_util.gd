@@ -42,6 +42,10 @@ func recalculate_basis(target : Node3D) -> Basis:
 # ===== ===== ===== ===== ===== =====
 
 # ===== Group nodes accessor =====
+func get_nodes_in_group(group_name: String) -> Array:
+    return get_tree().get_nodes_in_group(group_name)
+
+## Get node in group by name
 func get_node_in_group_by_name(group_name: String, object_name: String) -> Variant:
     var nodes: Array = get_tree().get_nodes_in_group(group_name)
     for n: Variant in nodes:

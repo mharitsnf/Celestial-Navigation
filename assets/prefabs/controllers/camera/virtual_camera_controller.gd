@@ -8,11 +8,17 @@ class_name VirtualCameraController extends Node
 @export var mouse_inverted_x: bool
 @export var mouse_inverted_y: bool
 var parent: VirtualCamera
+var target_group: Node3D
 
 # ========== Built-in functions ==========
+func _enter_tree() -> void:
+    parent = get_parent()
+    target_group = get_parent().get_parent()
+    if !parent.is_in_group(target_group.name + "VCs"):
+        parent.add_to_group(target_group.name + "VCs")
+
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-    parent = get_parent()
 
 func _process(_delta: float) -> void:
     _rotate_joypad()
@@ -20,6 +26,11 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
         _rotate_mouse(event)
+# ========== ========== ========== ==========
+
+# ========== Target group functions ==========
+func get_target_group() -> Node3D:
+    return target_group
 # ========== ========== ========== ==========
 
 # ========== Input functions ==========

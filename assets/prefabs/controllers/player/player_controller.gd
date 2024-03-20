@@ -3,8 +3,6 @@ class_name PlayerController extends Node
 var manager: PlayerControllerManager
 var parent: BaseEntity
 
-signal active_changed(active_controller: PlayerController)
-
 func _enter_tree() -> void:
 	if !is_in_group("player_controllers"):
 		add_to_group("player_controllers")

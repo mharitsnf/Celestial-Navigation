@@ -1,4 +1,4 @@
-class_name CharacterStateController extends PlayerController
+class_name PlayerCharacterController extends PlayerController
 
 var _current_state: State
 
