@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjn37qac1f86p"]
+
+[ext_resource type="Script" path="res://assets/prefabs/managers/player_controller_manager/player_controller_manager.gd" id="1_joq47"]
+
+[node name="PlayerControllerManager" type="Node"]
+script = ExtResource("1_joq47")

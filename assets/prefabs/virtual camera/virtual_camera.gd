@@ -51,9 +51,9 @@ func _enter_tree() -> void:
 	if !transition_finished.is_connected(_on_transition_finished):
 		transition_finished.connect(_on_transition_finished)
 
-func _ready() -> void:
 	main_camera = STUtil.get_only_node_in_group("main_camera")
 
+func _ready() -> void:
 	if main_camera:
 		_fov = main_camera.fov
 

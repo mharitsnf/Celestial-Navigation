@@ -7,8 +7,8 @@ const ROTATION_WEIGHT : float = .0001
 
 # ========== Built-in functions ==========
 func _process(_delta: float) -> void:
-    _adjust_damping()
-    # print(basis.inverse() * linear_velocity)
+    pass
+    # _adjust_damping()
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
     super(state)
@@ -25,10 +25,10 @@ func _adjust_damping() -> void:
 func rotate_boat(amount : float) -> void:
     visual_container.rotate(visual_container.basis.y, ROTATION_WEIGHT * rotation_speed * amount)
 
-func boat_gas(amount : float) -> void:
+func gas(amount : float) -> void:
     apply_force(visual_container.global_basis.z * move_force * amount)
 
-func boat_brake(amount : float) -> void:
+func brake(amount : float) -> void:
     var flat_vel : Vector3 = basis.inverse() * linear_velocity
     var xz_vel : Vector3 = Vector3(flat_vel.x, 0, flat_vel.z)
     if xz_vel.length() < 0.01: return

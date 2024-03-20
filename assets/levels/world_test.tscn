@@ -1,16 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://bohsb8opfjfgr"]
+[gd_scene load_steps=19 format=3 uid="uid://bohsb8opfjfgr"]
 
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/environments/main.tres" id="1_u0thf"]
 [ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/ocean/ocean.tscn" id="2_dnrth"]
 [ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/star loader/star_loader.tscn" id="3_g722y"]
+[ext_resource type="PackedScene" uid="uid://c2ipvtnsysqv" path="res://assets/prefabs/entities/player_character/player_character_entity.tscn" id="4_3sfcs"]
 [ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/test_boat.tscn" id="4_mvkik"]
+[ext_resource type="PackedScene" uid="uid://cjn37qac1f86p" path="res://assets/prefabs/managers/player_controller_manager/player_controller_manager.tscn" id="4_v2hc8"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/character_state_controller.gd" id="5_crxrg"]
 [ext_resource type="PackedScene" uid="uid://c26yw05wco6bu" path="res://assets/prefabs/controllers/player/boat/player_boat_controller.tscn" id="5_ibpcj"]
 [ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/test_box/test_box.tscn" id="6_u01up"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="7_e0eip"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_swim_state.gd" id="7_vxa1f"]
 [ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="8_5511b"]
-[ext_resource type="PackedScene" uid="uid://ooptmjpxjxo4" path="res://assets/prefabs/controllers/player/camera/main_camera_controller.tscn" id="8_hx6hf"]
-[ext_resource type="PackedScene" uid="uid://bq08c3kmmbx62" path="res://assets/prefabs/controllers/player/camera/virtual_camera_controller.tscn" id="9_klhm3"]
-[ext_resource type="PackedScene" uid="uid://deo4jmce6xulx" path="res://assets/prefabs/controllers/player/camera/fpc_controller.tscn" id="11_5xhnb"]
+[ext_resource type="PackedScene" uid="uid://ooptmjpxjxo4" path="res://assets/prefabs/controllers/camera/main_camera_controller.tscn" id="8_hx6hf"]
+[ext_resource type="PackedScene" uid="uid://bq08c3kmmbx62" path="res://assets/prefabs/controllers/camera/virtual_camera_controller.tscn" id="9_klhm3"]
+[ext_resource type="PackedScene" uid="uid://deo4jmce6xulx" path="res://assets/prefabs/controllers/camera/fpc_controller.tscn" id="11_5xhnb"]
 [ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="11_rv58p"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
@@ -60,12 +64,20 @@ speed = 0.25
 
 [node name="Objects" type="Node" parent="."]
 
+[node name="PlayerControllerManager" parent="Objects" node_paths=PackedStringArray("current_controller") instance=ExtResource("4_v2hc8")]
+current_controller = NodePath("../TestBoat/PlayerBoatController")
+
+[node name="PlayerCharacterEntity" parent="Objects" instance=ExtResource("4_3sfcs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.10216, 800, 0)
+
+[node name="CharacterStateController" type="Node" parent="Objects/PlayerCharacterEntity"]
+script = ExtResource("5_crxrg")
+
+[node name="CharacterSwimState" type="Node" parent="Objects/PlayerCharacterEntity/CharacterStateController"]
+script = ExtResource("7_vxa1f")
+
 [node name="TestBoat" parent="Objects" instance=ExtResource("4_mvkik")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 0)
-mass = 600.0
-rotation_speed = 25.0
-move_force = 1000.0
-float_force = 3000.0
 
 [node name="PlayerBoatController" parent="Objects/TestBoat" instance=ExtResource("5_ibpcj")]
 
@@ -97,5 +109,6 @@ follow_target = NodePath("../../Objects/TestBoat/CollisionShape3D/test_boat")
 joypad_inverted_x = true
 joypad_inverted_y = false
 
+[editable path="Objects/PlayerCharacterEntity"]
 [editable path="Objects/TestBoat"]
 [editable path="Objects/TestBoat/CollisionShape3D/test_boat"]

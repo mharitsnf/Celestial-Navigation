@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ooptmjpxjxo4"]
 
-[ext_resource type="Script" path="res://assets/prefabs/controllers/player/camera/main_camera_controller.gd" id="1_aicj4"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/main_camera_controller.gd" id="1_aicj4"]
 
 [node name="MainCameraController" type="Node"]
 script = ExtResource("1_aicj4")

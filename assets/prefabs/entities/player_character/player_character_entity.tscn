@@ -1,0 +1,82 @@
+[gd_scene load_steps=17 format=3 uid="uid://c2ipvtnsysqv"]
+
+[ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_vu730"]
+[ext_resource type="Script" path="res://assets/prefabs/entities/player_character/character_entity.gd" id="2_lgsjv"]
+[ext_resource type="Shader" path="res://assets/shaders/gradient_color.gdshader" id="2_ru2ob"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hh0jc"]
+
+[sub_resource type="Gradient" id="Gradient_qntnh"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.0588235, 0.372549, 0.419608, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xyrmt"]
+gradient = SubResource("Gradient_qntnh")
+
+[sub_resource type="Gradient" id="Gradient_5tmf5"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.512411)
+colors = PackedColorArray(0.25, 0.25, 0.25, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yhso2"]
+gradient = SubResource("Gradient_5tmf5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8d0gp"]
+render_priority = 0
+shader = ExtResource("2_ru2ob")
+shader_parameter/albedo_tex = SubResource("GradientTexture1D_xyrmt")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_yhso2")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fjb07"]
+material = SubResource("ShaderMaterial_8d0gp")
+
+[sub_resource type="Gradient" id="Gradient_n5phq"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.0431373, 0.109804, 0.180392, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gn8bl"]
+gradient = SubResource("Gradient_n5phq")
+
+[sub_resource type="Gradient" id="Gradient_d48qg"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.512411)
+colors = PackedColorArray(0.25, 0.25, 0.25, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_iogyt"]
+gradient = SubResource("Gradient_d48qg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wuhai"]
+render_priority = 0
+shader = ExtResource("2_ru2ob")
+shader_parameter/albedo_tex = SubResource("GradientTexture1D_gn8bl")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_iogyt")
+
+[sub_resource type="BoxMesh" id="BoxMesh_ox2q4"]
+material = SubResource("ShaderMaterial_wuhai")
+size = Vector3(0.4, 0.2, 0.5)
+
+[node name="PlayerCharacterEntity" node_paths=PackedStringArray("normal_container", "visual_container") instance=ExtResource("1_vu730")]
+mass = 50.0
+script = ExtResource("2_lgsjv")
+rotation_speed = 1.0
+speed_limit = 20.0
+move_force = 50.0
+normal_container = NodePath("CollisionShape3D")
+visual_container = NodePath("CollisionShape3D/Visuals")
+float_force = 75.0
+ocean_surface_offset = -1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_hh0jc")
+
+[node name="Visuals" type="Node3D" parent="CollisionShape3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/Visuals" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_fjb07")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D/Visuals" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.3)
+mesh = SubResource("BoxMesh_ox2q4")

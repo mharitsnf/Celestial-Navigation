@@ -9,7 +9,7 @@ class_name BaseEntity extends RigidBody3D
 @export_range(0., 1., .01) var water_drag : float = .1
 @export var float_force : float = 5.
 
-const OCEAN_SURFACE_OFFSET : float = 0.
+@export var ocean_surface_offset : float = 0.
 var ocean : Ocean
 var depth_from_ocean_surface : float = 0.
 
@@ -17,8 +17,7 @@ var depth_from_ocean_surface : float = 0.
 func _enter_tree() -> void:
 	if !is_in_group("entities"):
 		add_to_group("entities")
-
-func _ready() -> void:
+		
 	ocean = STUtil.get_only_node_in_group("ocean")
 
 func _physics_process(_delta: float) -> void:
@@ -41,6 +40,9 @@ class GerstnerResult extends RefCounted:
 		normal = _normal
 		tangent = _tangent
 		binormal = _binormal
+
+func is_submerged() -> bool:
+	return depth_from_ocean_surface > 0.
 
 func _update_collision_normal(normal : Vector3) -> void:
 	if !_update_normal: return
@@ -76,7 +78,7 @@ func _calculate_depth_to_ocean_surface() -> void:
 	var linear_offset : Vector3 = _calculate_offset_to_ocean_target()
 	var gerstner_result : GerstnerResult = _calculate_total_gerstner(linear_offset)
 	var flat_position : Vector3 = basis.inverse() * global_position
-	var water_height : float = STUtil.PLANET_RADIUS + OCEAN_SURFACE_OFFSET + gerstner_result.vertex.y
+	var water_height : float = STUtil.PLANET_RADIUS + ocean_surface_offset + gerstner_result.vertex.y
 	depth_from_ocean_surface = water_height - flat_position.y
 
 	_update_collision_normal(gerstner_result.normal)
