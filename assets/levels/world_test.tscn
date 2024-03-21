@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c2ipvtnsysqv" path="res://assets/prefabs/entities/player_character/player_character_entity.tscn" id="4_3sfcs"]
 [ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/test_boat.tscn" id="4_mvkik"]
 [ext_resource type="PackedScene" uid="uid://cjn37qac1f86p" path="res://assets/prefabs/managers/player_controller_manager/player_controller_manager.tscn" id="4_v2hc8"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/character_state_controller.gd" id="5_crxrg"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/player_character_controller.gd" id="5_crxrg"]
 [ext_resource type="PackedScene" uid="uid://c26yw05wco6bu" path="res://assets/prefabs/controllers/player/boat/player_boat_controller.tscn" id="5_ibpcj"]
 [ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/test_box/test_box.tscn" id="6_u01up"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="7_e0eip"]
@@ -69,9 +69,8 @@ follow_target = NodePath("../Objects/PlayerControllerManager/TestBoat/BoatTPC")
 
 [node name="Objects" type="Node" parent="."]
 
-[node name="PlayerControllerManager" parent="Objects" node_paths=PackedStringArray("current_controller", "controllers") instance=ExtResource("4_v2hc8")]
+[node name="PlayerControllerManager" parent="Objects" node_paths=PackedStringArray("current_controller") instance=ExtResource("4_v2hc8")]
 current_controller = NodePath("TestBoat/PlayerBoatController")
-controllers = [NodePath("TestBoat/PlayerBoatController"), NodePath("PlayerCharacterEntity/PlayerCharacterController")]
 
 [node name="PlayerCharacterEntity" parent="Objects/PlayerControllerManager" instance=ExtResource("4_3sfcs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.10216, 800, 0)

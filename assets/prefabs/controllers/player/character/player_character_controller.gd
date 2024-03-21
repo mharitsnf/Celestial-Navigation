@@ -6,13 +6,11 @@ func _ready() -> void:
 	# For testing
 	switch_state(get_child(0))
 
-func _process(delta: float) -> void:
-	if !is_active(): return
+func process(delta: float) -> void:
 	if _current_state:
 		_current_state.process(delta)
 
-func _physics_process(delta: float) -> void:
-	if !is_active(): return
+func physics_process(delta: float) -> void:
 	if _current_state:
 		_current_state.physics_process(delta)
 

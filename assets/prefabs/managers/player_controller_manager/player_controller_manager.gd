@@ -1,7 +1,7 @@
 class_name PlayerControllerManager extends Node
 
 @export var current_controller: PlayerController
-@export var controllers: Array[PlayerController]
+var controllers: Array[PlayerController]
 
 var main_camera: MainCamera
 var main_camera_controller: MainCameraController
@@ -15,11 +15,24 @@ func _enter_tree() -> void:
 	main_camera = STUtil.get_only_node_in_group("main_camera")
 	main_camera_controller = STUtil.get_only_node_in_group("main_camera_controller")
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	_get_enter_exit_ship_input()
+	
+	if current_controller:
+		current_controller.process(delta)
+
+func _physics_process(delta: float) -> void:
+	if current_controller:
+		current_controller.physics_process(delta)
 # ========== ========== ========== ==========
 
 # ========== Setter and getters ==========
+func add_controller(value: PlayerController) -> void:
+	controllers.append(value)
+
+func remove_controller(value: PlayerController) -> void:
+	controllers.erase(value)
+
 func get_current_controller() -> PlayerController:
 	return current_controller
 
