@@ -36,5 +36,6 @@ func _get_next_virtual_camera() -> VirtualCamera:
 func _switch_camera() -> void:
 	if Input.is_action_just_pressed("switch_camera"):
 		var next_camera: VirtualCamera = _get_next_virtual_camera()
+		next_camera.copy_rotation(parent.get_follow_target().get_x_rotation(), parent.get_follow_target().get_y_rotation())
 		parent.set_follow_target(next_camera)
 # ========== ========== ========== ==========

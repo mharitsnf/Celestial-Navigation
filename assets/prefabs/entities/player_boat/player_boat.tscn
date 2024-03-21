@@ -9,10 +9,10 @@
 
 [node name="PlayerBoat" instance=ExtResource("1_ra6yq")]
 
-[node name="DropoffPoint" type="Marker3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+[node name="DropoffPoint" type="Marker3D" parent="CollisionShape3D/ForFPC/test_boat" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.2, 0)
 
-[node name="BoatTPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("3_228lg")]
+[node name="BoatTPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("3_228lg")]
 _spring_length = 10.0
 _offset = Vector3(0, 2, 0)
 follow_target = NodePath("..")
@@ -22,13 +22,13 @@ submerged_min_angle = -80.0
 mouse_inverted_x = false
 mouse_inverted_y = false
 
-[node name="BoatFPC" parent="." index="3" node_paths=PackedStringArray("follow_target") instance=ExtResource("4_wblk8")]
+[node name="BoatFPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("4_wblk8")]
 _offset = Vector3(0, 2, -1)
-follow_target = NodePath("../CollisionShape3D/test_boat")
+follow_target = NodePath("../CollisionShape3D/ForFPC")
 
 [node name="FPCController" parent="BoatFPC" index="1" instance=ExtResource("6_w0hrx")]
 
-[node name="PlayerBoatController" parent="." index="4" node_paths=PackedStringArray("dropoff_point") instance=ExtResource("2_7ubxh")]
-dropoff_point = NodePath("../DropoffPoint")
+[node name="PlayerBoatController" parent="." index="3" node_paths=PackedStringArray("dropoff_point") instance=ExtResource("2_7ubxh")]
+dropoff_point = NodePath("../CollisionShape3D/ForFPC/test_boat/DropoffPoint")
 
-[editable path="CollisionShape3D/test_boat"]
+[editable path="CollisionShape3D/ForFPC/test_boat"]

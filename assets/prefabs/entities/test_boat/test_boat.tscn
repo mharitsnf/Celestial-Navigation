@@ -12,19 +12,22 @@ points = PackedVector3Array(-0.443265, 0.682674, 1.11296, 0.876529, 0.416489, 0.
 mass = 600.0
 script = ExtResource("2_crvei")
 rotation_speed = 25.0
-speed_limit = 20.0
 move_force = 1000.0
 normal_container = NodePath("CollisionShape3D")
-visual_container = NodePath("CollisionShape3D/test_boat")
+visual_container = NodePath("CollisionShape3D/ForFPC/test_boat")
 float_force = 900.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 shape = SubResource("ConvexPolygonShape3D_6r5gq")
 
-[node name="test_boat" parent="CollisionShape3D" index="0" instance=ExtResource("2_5ftey")]
+[node name="ForFPC" type="Node3D" parent="CollisionShape3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 
-[node name="Mesh1 Group1 Model" parent="CollisionShape3D/test_boat" index="0"]
+[node name="test_boat" parent="CollisionShape3D/ForFPC" index="0" instance=ExtResource("2_5ftey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="Mesh1 Group1 Model" parent="CollisionShape3D/ForFPC/test_boat" index="0"]
 surface_material_override/0 = ExtResource("3_hgykk")
 
-[editable path="CollisionShape3D/test_boat"]
+[editable path="CollisionShape3D/ForFPC/test_boat"]

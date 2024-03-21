@@ -152,6 +152,15 @@ func _lerp_main_camera_fov(delta: float) -> void:
 	main_camera.fov = lerp(main_camera.fov, _fov, delta * FOV_LERP_WEIGHT)
 # =============== =============== ===============
 
+func get_x_rotation() -> float:
+	return 0.
+
+func get_y_rotation() -> float:
+	return 0.
+
+func copy_rotation(_x_rotation: float, _y_rotation: float) -> void:
+	pass
+
 func rotate_camera(_direction : Vector2, _min_angle: float = min_x_angle) -> void:
 	pass
 

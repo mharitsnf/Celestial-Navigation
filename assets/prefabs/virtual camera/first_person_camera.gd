@@ -27,3 +27,13 @@ func rotate_camera(direction : Vector2, min_angle: float = min_x_angle) -> void:
         min_angle,
         max_x_angle
     )
+
+func get_x_rotation() -> float:
+    return gimbal.rotation.y
+
+func get_y_rotation() -> float:
+    return inner_gimbal.rotation.y
+
+func copy_rotation(x_rotation: float, y_rotation: float) -> void:
+    gimbal.rotation.y = x_rotation
+    inner_gimbal.rotation.x = y_rotation

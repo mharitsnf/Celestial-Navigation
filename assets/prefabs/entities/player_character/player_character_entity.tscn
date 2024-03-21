@@ -106,6 +106,8 @@ follow_target = NodePath("../CollisionShape3D/ForFPC")
 
 [node name="FPCController" parent="CharacterFPC" index="1" instance=ExtResource("9_q00hg")]
 submerged_min_angle = 5.0
+joypad_inverted_x = true
+joypad_inverted_y = false
 
 [node name="PlayerCharacterController" type="Node" parent="." index="3"]
 script = ExtResource("4_eocql")
