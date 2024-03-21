@@ -1,8 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://c2ipvtnsysqv"]
+[gd_scene load_steps=23 format=3 uid="uid://c2ipvtnsysqv"]
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_vu730"]
 [ext_resource type="Script" path="res://assets/prefabs/entities/player_character/character_entity.gd" id="2_lgsjv"]
 [ext_resource type="Shader" path="res://assets/shaders/gradient_color.gdshader" id="2_ru2ob"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/player_character_controller.gd" id="4_eocql"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_base_state.gd" id="5_ujw15"]
+[ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="6_ev88g"]
+[ext_resource type="PackedScene" uid="uid://bq08c3kmmbx62" path="res://assets/prefabs/controllers/camera/virtual_camera_controller.tscn" id="7_jkr5c"]
+[ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="8_6hl70"]
+[ext_resource type="PackedScene" uid="uid://deo4jmce6xulx" path="res://assets/prefabs/controllers/camera/fpc_controller.tscn" id="9_q00hg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hh0jc"]
 
@@ -80,3 +86,26 @@ mesh = SubResource("CapsuleMesh_fjb07")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D/Visuals" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.3)
 mesh = SubResource("BoxMesh_ox2q4")
+
+[node name="PlayerCharacterController" type="Node" parent="." index="1"]
+script = ExtResource("4_eocql")
+
+[node name="CharacterBaseState" type="Node" parent="PlayerCharacterController" index="0"]
+script = ExtResource("5_ujw15")
+
+[node name="CharacterTPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("6_ev88g")]
+_spring_length = 7.5
+_offset = Vector3(0, 3, 0)
+follow_target = NodePath("..")
+
+[node name="VirtualCameraController" parent="CharacterTPC" index="1" instance=ExtResource("7_jkr5c")]
+submerged_min_angle = -80.0
+mouse_inverted_x = false
+mouse_inverted_y = false
+
+[node name="CharacterFPC" parent="." index="3" node_paths=PackedStringArray("follow_target") instance=ExtResource("8_6hl70")]
+_offset = Vector3(0, 1.35, -1.5)
+follow_target = NodePath("../CollisionShape3D/Visuals")
+
+[node name="FPCController" parent="CharacterFPC" index="1" instance=ExtResource("9_q00hg")]
+submerged_min_angle = 5.0

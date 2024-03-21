@@ -1,5 +1,7 @@
 class_name PlayerBoatController extends PlayerController
 
+@export var dropoff_point: Marker3D
+
 var move_input : float
 var brake_input : float
 var rotate_input : float

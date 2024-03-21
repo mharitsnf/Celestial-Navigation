@@ -1,12 +1,17 @@
 class_name PlayerControllerManager extends Node
 
+var previous_controller: PlayerController
 @export var current_controller: PlayerController
 var controllers: Array[PlayerController]
+
+@export var player_character_pscn: PackedScene
+var player_character: CharacterEntity
 
 var main_camera: MainCamera
 var main_camera_controller: MainCameraController
 
 var _transitioning: bool = false
+signal transition_finished
 
 # ========== Built-in functions ==========
 func _enter_tree() -> void:
@@ -72,14 +77,26 @@ func _switch_controller(next_controller: PlayerController) -> void:
 
 	main_camera_controller.set_available_virtual_cameras(available_virtual_cameras)
 	main_camera.set_follow_target(third_person_camera)
+	await main_camera.transition_finished
 
 	set_current_controller(next_controller)
 	set_transitioning(false)
+	transition_finished.emit()
 # ========== ========== ========== ==========
 
 # ========== Input functions ==========
 func _get_enter_exit_ship_input() -> void:
-	if Input.is_action_just_pressed("enter_ship"):
+	if !is_transitioning() and Input.is_action_just_pressed("enter_ship"):
+		if current_controller is PlayerBoatController:
+			if !player_character: player_character = player_character_pscn.instantiate()
+			add_child(player_character)
+			player_character.global_position = current_controller.dropoff_point.global_position
+
+		previous_controller = current_controller
 		var next_controller: PlayerController = _get_next_controller()
 		_switch_controller(next_controller)
+		await transition_finished
+
+		if previous_controller is PlayerCharacterController:
+			remove_child(player_character)
 # ========== ========== ========== ==========
