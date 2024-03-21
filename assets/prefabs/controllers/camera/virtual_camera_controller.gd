@@ -1,5 +1,6 @@
 class_name VirtualCameraController extends Node
 
+@export var submerged_min_angle: float = 0
 @export var rotation_speed: float = 1.
 @export_group("Joypad direction")
 @export var joypad_inverted_x: bool
@@ -40,7 +41,10 @@ func _rotate_mouse(event : InputEventMouseMotion) -> void:
     var direction: Vector2 = event.relative * MOUSE_ROTATION_WEIGHT * rotation_speed
     direction.x *= int(mouse_inverted_x) * 2 - 1
     direction.y *= int(mouse_inverted_y) * 2 - 1
-    parent.rotate_camera(direction)
+    if get_target_group() is BaseEntity and get_target_group().is_submerged():
+        parent.rotate_camera(direction, submerged_min_angle)
+    else:
+        parent.rotate_camera(direction)
 
 const JOYPAD_ROTATION_WEIGHT: float = .01
 func _rotate_joypad() -> void:
@@ -48,7 +52,10 @@ func _rotate_joypad() -> void:
     var direction: Vector2 = Input.get_vector("rotate_camera_left", "rotate_camera_right", "rotate_camera_down", "rotate_camera_up") * JOYPAD_ROTATION_WEIGHT * rotation_speed
     direction.x *= int(joypad_inverted_x) * 2 - 1
     direction.y *= int(joypad_inverted_y) * 2 - 1
-    parent.rotate_camera(direction)
+    if get_target_group() is BaseEntity and get_target_group().is_submerged():
+        parent.rotate_camera(direction, submerged_min_angle)
+    else:
+        parent.rotate_camera(direction)
 # ========== ========== ========== ==========
 
 # ========== Error checks ==========

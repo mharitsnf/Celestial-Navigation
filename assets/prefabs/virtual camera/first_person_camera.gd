@@ -18,12 +18,12 @@ func _process(delta: float) -> void:
 func _lerp_gimbal_position(delta: float) -> void:
     offset_node.position = lerp(offset_node.position, _offset, lerp_weight * delta)
 
-func rotate_camera(direction : Vector2) -> void:
+func rotate_camera(direction : Vector2, min_angle: float = min_x_angle) -> void:
     direction *= -1.
     gimbal.rotate_object_local(Vector3.UP, direction.x * rotation_speed)
     inner_gimbal.rotate_object_local(Vector3.RIGHT, direction.y * rotation_speed)
     inner_gimbal.rotation_degrees.x = clamp(
         inner_gimbal.rotation_degrees.x,
-        min_x_angle,
+        min_angle,
         max_x_angle
     )

@@ -57,9 +57,6 @@ func _ready() -> void:
 	if main_camera:
 		_fov = main_camera.fov
 
-		if !main_camera.follow_target_changed.is_connected(_on_main_camera_follow_target_changed):
-			main_camera.follow_target_changed.connect(_on_main_camera_follow_target_changed)
-
 func _process(delta: float) -> void:
 	_lerp_main_camera_fov(delta)
 	_transition(delta)
@@ -143,11 +140,6 @@ func _transition(delta : float) -> void:
 # =============== =============== ===============
 
 # =============== FoV API ===============
-func _on_main_camera_follow_target_changed(_mc_follow_target: VirtualCamera) -> void:
-	print("asd")
-# =============== =============== ===============
-
-# =============== FoV API ===============
 func get_fov() -> float:
 	return _fov
 
@@ -160,10 +152,8 @@ func _lerp_main_camera_fov(delta: float) -> void:
 	main_camera.fov = lerp(main_camera.fov, _fov, delta * FOV_LERP_WEIGHT)
 # =============== =============== ===============
 
-# =============== Rotation API ===============
-func rotate_camera(_direction : Vector2) -> void:
+func rotate_camera(_direction : Vector2, _min_angle: float = min_x_angle) -> void:
 	pass
-# =============== =============== ===============
 
 func is_active() -> bool:
 	return main_camera.get_follow_target() == self

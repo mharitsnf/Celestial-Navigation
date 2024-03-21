@@ -88,6 +88,7 @@ _offset = Vector3(0, 3, 0)
 follow_target = NodePath("..")
 
 [node name="VirtualCameraController" parent="Objects/PlayerControllerManager/PlayerCharacterEntity/CharacterTPC" instance=ExtResource("9_klhm3")]
+submerged_min_angle = -80.0
 
 [node name="CharacterFPC" parent="Objects/PlayerControllerManager/PlayerCharacterEntity" node_paths=PackedStringArray("follow_target") instance=ExtResource("11_rv58p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.10216, -800, 0)
@@ -108,16 +109,17 @@ _offset = Vector3(0, 2, 0)
 follow_target = NodePath("..")
 
 [node name="VirtualCameraController" parent="Objects/PlayerControllerManager/TestBoat/BoatTPC" instance=ExtResource("9_klhm3")]
+submerged_min_angle = -80.0
 mouse_inverted_x = false
 mouse_inverted_y = false
 
 [node name="BoatFPC" parent="Objects/PlayerControllerManager/TestBoat" node_paths=PackedStringArray("follow_target") instance=ExtResource("11_rv58p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -800, 0)
-_offset = Vector3(0, 2, -2)
-min_x_angle = -20.0
+_offset = Vector3(0, 2, -1)
 follow_target = NodePath("../CollisionShape3D/test_boat")
 
 [node name="FPCController" parent="Objects/PlayerControllerManager/TestBoat/BoatFPC" instance=ExtResource("11_5xhnb")]
+submerged_min_angle = -20.0
 joypad_inverted_x = true
 joypad_inverted_y = false
 

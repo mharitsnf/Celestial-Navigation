@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://assets/prefabs/virtual camera/first_person_camera.gd" id="1_pxrtc"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_qdtxo"]
+[sub_resource type="SphereMesh" id="SphereMesh_f6icg"]
 
 [node name="FirstPersonCamera" type="Node3D" node_paths=PackedStringArray("offset_node", "gimbal", "inner_gimbal", "remote_transform_parent_for_other")]
 script = ExtResource("1_pxrtc")
-_offset = Vector3(0, 1, -1)
+_offset = Vector3(0, 2, 0)
 offset_node = NodePath("Gimbal/InnerGimbal/Offset")
 gimbal = NodePath("Gimbal")
 inner_gimbal = NodePath("Gimbal/InnerGimbal")
@@ -21,4 +21,4 @@ tween_duration = 0.5
 [node name="Offset" type="Node3D" parent="Gimbal/InnerGimbal"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Gimbal/InnerGimbal/Offset"]
-mesh = SubResource("SphereMesh_qdtxo")
+mesh = SubResource("SphereMesh_f6icg")

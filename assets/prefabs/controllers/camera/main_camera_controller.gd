@@ -7,9 +7,10 @@ var parent: MainCamera
 func _enter_tree() -> void:
     if !is_in_group("main_camera_controller"):
         add_to_group("main_camera_controller")
+    parent = get_parent()
 
 func _ready() -> void:
-    parent = get_parent()
+    available_virtual_cameras = STUtil.get_nodes_in_group(parent.get_follow_target().get_parent().name + "VCs")
 
 func _process(_delta: float) -> void:
     _switch_camera()
