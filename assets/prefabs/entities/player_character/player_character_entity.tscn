@@ -64,11 +64,10 @@ size = Vector3(0.4, 0.2, 0.5)
 [node name="PlayerCharacterEntity" node_paths=PackedStringArray("normal_container", "visual_container") instance=ExtResource("1_vu730")]
 mass = 50.0
 script = ExtResource("2_lgsjv")
-rotation_speed = 1.0
-speed_limit = 20.0
-move_force = 50.0
+speed_limit = 3.0
+move_force = 500.0
 normal_container = NodePath("CollisionShape3D")
-visual_container = NodePath("CollisionShape3D/Visuals")
+visual_container = NodePath("CollisionShape3D/ForFPC/Visuals")
 float_force = 75.0
 ocean_surface_offset = -1.0
 
@@ -76,24 +75,22 @@ ocean_surface_offset = -1.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_hh0jc")
 
-[node name="Visuals" type="Node3D" parent="CollisionShape3D" index="0"]
+[node name="ForFPC" type="Node3D" parent="CollisionShape3D" index="0"]
+
+[node name="Visuals" type="Node3D" parent="CollisionShape3D/ForFPC" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/Visuals" index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/ForFPC/Visuals" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_fjb07")
+skeleton = NodePath("")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D/Visuals" index="1"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D/ForFPC/Visuals" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.3)
 mesh = SubResource("BoxMesh_ox2q4")
+skeleton = NodePath("")
 
-[node name="PlayerCharacterController" type="Node" parent="." index="1"]
-script = ExtResource("4_eocql")
-
-[node name="CharacterBaseState" type="Node" parent="PlayerCharacterController" index="0"]
-script = ExtResource("5_ujw15")
-
-[node name="CharacterTPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("6_ev88g")]
+[node name="CharacterTPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("6_ev88g")]
 _spring_length = 7.5
 _offset = Vector3(0, 3, 0)
 follow_target = NodePath("..")
@@ -103,9 +100,15 @@ submerged_min_angle = -80.0
 mouse_inverted_x = false
 mouse_inverted_y = false
 
-[node name="CharacterFPC" parent="." index="3" node_paths=PackedStringArray("follow_target") instance=ExtResource("8_6hl70")]
+[node name="CharacterFPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("8_6hl70")]
 _offset = Vector3(0, 1.35, -1.5)
-follow_target = NodePath("../CollisionShape3D/Visuals")
+follow_target = NodePath("../CollisionShape3D/ForFPC")
 
 [node name="FPCController" parent="CharacterFPC" index="1" instance=ExtResource("9_q00hg")]
 submerged_min_angle = 5.0
+
+[node name="PlayerCharacterController" type="Node" parent="." index="3"]
+script = ExtResource("4_eocql")
+
+[node name="CharacterBaseState" type="Node" parent="PlayerCharacterController" index="0"]
+script = ExtResource("5_ujw15")

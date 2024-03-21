@@ -1,5 +1,8 @@
 class_name BaseEntity extends RigidBody3D
 
+@export_group("Movement")
+@export var speed_limit : float = 20
+@export var move_force : float = 1
 @export_group("Local References")
 @export var normal_container : Node3D
 @export var visual_container : Node3D
@@ -27,11 +30,22 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	state.transform.basis = STUtil.recalculate_basis(self)
 	_dampen_velocity(state)
 	_apply_buoyancy_force()
+	_limit_speed(state)
 # ========== ========== ========== ==========
 
 # ========== Setters and Getters ==========
 func get_normal_container() -> Node3D:
 	return normal_container
+# ========== ========== ========== ==========
+
+# ========== Movement ==========
+func _limit_speed(state: PhysicsDirectBodyState3D) -> void:
+	var flat_vel : Vector3 = basis.inverse() * state.linear_velocity
+	var xz_vel : Vector3 = Vector3(flat_vel.x, 0, flat_vel.z)
+	if xz_vel.length() > speed_limit:
+		var new_vel : Vector3 = xz_vel.normalized() * speed_limit
+		new_vel.y = flat_vel.y
+		state.linear_velocity = basis * new_vel
 # ========== ========== ========== ==========
 
 # ========== Buoyancy functions ==========

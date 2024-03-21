@@ -1,10 +1,8 @@
 class_name CharacterEntity extends BaseEntity
 
-@export var rotation_speed : float = 1
-@export var speed_limit : float = 20
-@export var move_force : float = 1
+func move(direction: Vector3) -> void:
+	apply_force(direction * move_force)
 
-func move(direction: Vector2) -> void:
-    var move_dir: Vector3 = visual_container.basis.z * direction.y + visual_container.basis.x * direction.x
-    move_dir.normalized()
-    apply_force(move_dir * move_force)
+const VISUAL_CONTAINER_ROTATION_WEIGHT: float = 5.
+func rotate_visual_container(look_dir: Vector3, delta: float) -> void:
+	visual_container.basis = visual_container.basis.slerp(Basis.looking_at(look_dir), delta * VISUAL_CONTAINER_ROTATION_WEIGHT)
