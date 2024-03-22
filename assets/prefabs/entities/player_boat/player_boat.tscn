@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bky8p0lm0pm10"]
+[gd_scene load_steps=10 format=3 uid="uid://bky8p0lm0pm10"]
 
 [ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/test_boat.tscn" id="1_ra6yq"]
 [ext_resource type="PackedScene" uid="uid://c26yw05wco6bu" path="res://assets/prefabs/controllers/player/boat/player_boat_controller.tscn" id="2_7ubxh"]
@@ -10,6 +10,9 @@
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_42rn3"]
 points = PackedVector3Array(0.892473, 0.399951, 0.503279, 0.84984, 0.699932, 0.402643, 0.464925, 0.699932, 1.09183, 0.488163, 0.399951, 1.22682, 0.371972, -9.02389e-17, 0.551169, 0.679835, -9.02389e-17, -0.000249863, 0.892473, 0.399951, -2.0397, 0.84984, 0.699932, -2.0397, -1.34706e-05, 0.699932, 1.35695, -1.34706e-05, 0.399951, 1.50548, -1.34706e-05, -9.02389e-17, 0.763199, 0.679835, -9.02389e-17, -1.87035, -0.8925, 0.399951, -2.0397, -0.850042, 0.699932, -2.0397, -0.465127, 0.699932, 1.09183, -0.488365, 0.399951, 1.22682, -0.372174, -9.02389e-17, 0.551169, -0.680036, -9.02389e-17, -1.87035, -0.8925, 0.399951, 0.503279, -0.850042, 0.699932, 0.402643, -0.680036, -9.02389e-17, -0.000249863)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jsh7c"]
+radius = 5.0
 
 [node name="PlayerBoat" instance=ExtResource("1_ra6yq")]
 
@@ -40,8 +43,16 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 shape = SubResource("ConvexPolygonShape3D_42rn3")
 
-[node name="PlayerBoatController" parent="." index="4" node_paths=PackedStringArray("dropoff_point") instance=ExtResource("2_7ubxh")]
+[node name="InteractionScannerArea" type="Area3D" parent="." index="4"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionScannerArea" index="0"]
+shape = SubResource("SphereShape3D_jsh7c")
+
+[node name="PlayerBoatController" parent="." index="5" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("2_7ubxh")]
 dropoff_point = NodePath("../CollisionShape3D/ForFPC/test_boat/DropoffPoint")
 player_character_pscn = ExtResource("7_o8uux")
+interaction_scanner = NodePath("../InteractionScannerArea")
 
 [editable path="CollisionShape3D/ForFPC/test_boat"]

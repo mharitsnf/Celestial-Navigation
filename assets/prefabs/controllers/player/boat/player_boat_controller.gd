@@ -8,7 +8,9 @@ var move_input : float
 var brake_input : float
 var rotate_input : float
 
-func process(_delta: float) -> void:
+func process(delta: float) -> void:
+    super(delta)
+    if is_interacting(): return
     _get_gas_input()
     _get_brake_input()
     _get_rotate_input()
@@ -18,6 +20,7 @@ func process(_delta: float) -> void:
         parent.rotate_boat(rotate_input)
 
 func physics_process(_delta: float) -> void:
+    if is_interacting(): return
     if parent is BoatEntity:
         parent.gas(move_input)
         parent.brake(brake_input)

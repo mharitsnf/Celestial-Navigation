@@ -21,6 +21,9 @@ func input_device_equals(device_name : String) -> bool:
     return InputHelper.guess_device_name() == device_name
 # ===== ===== ===== ===== =====
 
+class Promise extends RefCounted:
+    signal completed
+
 # ===== Remote transform =====
 func create_remote_transform(follower_name : String) -> RemoteTransform3D:
     var remote_transform : RemoteTransform3D = RemoteTransform3D.new()

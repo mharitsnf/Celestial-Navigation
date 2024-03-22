@@ -9,11 +9,14 @@ func _ready() -> void:
 	switch_state(get_child(0))
 
 func process(delta: float) -> void:
+	super(delta)
+	if is_interacting(): return
 	if _current_state:
 		_current_state.process(delta)
 	_get_enter_ship_input()
 
 func physics_process(delta: float) -> void:
+	if is_interacting(): return
 	if _current_state:
 		_current_state.physics_process(delta)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bohsb8opfjfgr"]
+[gd_scene load_steps=15 format=3 uid="uid://bohsb8opfjfgr"]
 
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_u0thf"]
 [ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/ocean/ocean.tscn" id="2_dnrth"]
@@ -9,12 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="7_e0eip"]
 [ext_resource type="PackedScene" uid="uid://ooptmjpxjxo4" path="res://assets/prefabs/controllers/camera/main_camera_controller.tscn" id="8_hx6hf"]
 [ext_resource type="PackedScene" uid="uid://bky8p0lm0pm10" path="res://assets/prefabs/entities/player_boat/player_boat.tscn" id="8_km3yc"]
+[ext_resource type="PackedScene" uid="uid://cghiq2ib783rs" path="res://assets/prefabs/interactables/interactable.tscn" id="9_g82vr"]
+[ext_resource type="Resource" uid="uid://bi15hf02qwdhr" path="res://assets/resources/interactions/test_interaction.tres" id="11_prmj7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
 radius = 792.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_oggbs"]
 radius = 1000.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iu5vw"]
 
 [node name="WorldTest" type="Node3D"]
 
@@ -70,7 +74,13 @@ player_character_pscn = ExtResource("4_3sfcs")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 0)
 
 [node name="TestBox" parent="Objects" instance=ExtResource("6_u01up")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97863, 800, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 6)
+
+[node name="Interactable" parent="Objects/TestBox" instance=ExtResource("9_g82vr")]
+interaction = ExtResource("11_prmj7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/TestBox/Interactable"]
+shape = SubResource("BoxShape3D_iu5vw")
 
 [editable path="Objects/PlayerControllerManager/PlayerBoat"]
 [editable path="Objects/PlayerControllerManager/PlayerBoat/CollisionShape3D/ForFPC/test_boat"]

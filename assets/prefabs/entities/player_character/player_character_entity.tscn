@@ -112,18 +112,26 @@ submerged_min_angle = 5.0
 joypad_inverted_x = true
 joypad_inverted_y = false
 
-[node name="PlayerBoatArea" type="Area3D" parent="." index="3"]
+[node name="PlayerBoatScannerArea" type="Area3D" parent="." index="3"]
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBoatArea" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBoatScannerArea" index="0"]
 shape = SubResource("SphereShape3D_t1ygy")
 
-[node name="PlayerCharacterController" type="Node" parent="." index="4"]
+[node name="InteractionScannerArea" type="Area3D" parent="." index="4"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractionScannerArea" index="0"]
+shape = SubResource("SphereShape3D_t1ygy")
+
+[node name="PlayerCharacterController" type="Node" parent="." index="5" node_paths=PackedStringArray("interaction_scanner")]
 script = ExtResource("4_eocql")
+interaction_scanner = NodePath("../InteractionScannerArea")
 
 [node name="CharacterBaseState" type="Node" parent="PlayerCharacterController" index="0"]
 script = ExtResource("5_ujw15")
 
-[connection signal="area_entered" from="PlayerBoatArea" to="PlayerCharacterController" method="_on_player_boat_area_entered"]
-[connection signal="area_exited" from="PlayerBoatArea" to="PlayerCharacterController" method="_on_player_boat_area_exited"]
+[connection signal="area_entered" from="PlayerBoatScannerArea" to="PlayerCharacterController" method="_on_player_boat_area_entered"]
+[connection signal="area_exited" from="PlayerBoatScannerArea" to="PlayerCharacterController" method="_on_player_boat_area_exited"]
