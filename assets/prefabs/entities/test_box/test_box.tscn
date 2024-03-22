@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://yw5vawpt68bx"]
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_jqiig"]
-[ext_resource type="Material" uid="uid://ywv0hfk4sxqb" path="res://assets/materials/m_one_color.tres" id="2_is12c"]
+[ext_resource type="Material" uid="uid://ywv0hfk4sxqb" path="res://assets/resources/materials/m_one_color.tres" id="2_is12c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iakp2"]
 

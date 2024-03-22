@@ -1,8 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://c2ipvtnsysqv"]
+[gd_scene load_steps=24 format=3 uid="uid://c2ipvtnsysqv"]
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_vu730"]
 [ext_resource type="Script" path="res://assets/prefabs/entities/player_character/character_entity.gd" id="2_lgsjv"]
-[ext_resource type="Shader" path="res://assets/shaders/gradient_color.gdshader" id="2_ru2ob"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/gradient_color.gdshader" id="3_ip4xm"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/player_character_controller.gd" id="4_eocql"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_base_state.gd" id="5_ujw15"]
 [ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="6_ev88g"]
@@ -29,7 +29,7 @@ gradient = SubResource("Gradient_5tmf5")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8d0gp"]
 render_priority = 0
-shader = ExtResource("2_ru2ob")
+shader = ExtResource("3_ip4xm")
 shader_parameter/albedo_tex = SubResource("GradientTexture1D_xyrmt")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_yhso2")
 
@@ -53,13 +53,16 @@ gradient = SubResource("Gradient_d48qg")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wuhai"]
 render_priority = 0
-shader = ExtResource("2_ru2ob")
+shader = ExtResource("3_ip4xm")
 shader_parameter/albedo_tex = SubResource("GradientTexture1D_gn8bl")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_iogyt")
 
 [sub_resource type="BoxMesh" id="BoxMesh_ox2q4"]
 material = SubResource("ShaderMaterial_wuhai")
 size = Vector3(0.4, 0.2, 0.5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t1ygy"]
+radius = 3.0
 
 [node name="PlayerCharacterEntity" node_paths=PackedStringArray("normal_container", "visual_container") instance=ExtResource("1_vu730")]
 mass = 50.0
@@ -109,8 +112,18 @@ submerged_min_angle = 5.0
 joypad_inverted_x = true
 joypad_inverted_y = false
 
-[node name="PlayerCharacterController" type="Node" parent="." index="3"]
+[node name="PlayerBoatArea" type="Area3D" parent="." index="3"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBoatArea" index="0"]
+shape = SubResource("SphereShape3D_t1ygy")
+
+[node name="PlayerCharacterController" type="Node" parent="." index="4"]
 script = ExtResource("4_eocql")
 
 [node name="CharacterBaseState" type="Node" parent="PlayerCharacterController" index="0"]
 script = ExtResource("5_ujw15")
+
+[connection signal="area_entered" from="PlayerBoatArea" to="PlayerCharacterController" method="_on_player_boat_area_entered"]
+[connection signal="area_exited" from="PlayerBoatArea" to="PlayerCharacterController" method="_on_player_boat_area_exited"]

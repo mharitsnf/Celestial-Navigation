@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://0qm7kqsedaiu"]
 
-[ext_resource type="Material" uid="uid://qq3s0v8dgt3x" path="res://assets/materials/m_ocean.tres" id="1_4ome2"]
+[ext_resource type="Material" uid="uid://qq3s0v8dgt3x" path="res://assets/resources/materials/m_ocean.tres" id="1_4ome2"]
 [ext_resource type="Script" path="res://assets/prefabs/ocean/ocean.gd" id="2_1l5eg"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_620a4"]

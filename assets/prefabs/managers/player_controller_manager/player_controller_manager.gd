@@ -21,8 +21,6 @@ func _enter_tree() -> void:
 	main_camera_controller = STUtil.get_only_node_in_group("main_camera_controller")
 
 func _process(delta: float) -> void:
-	_get_enter_exit_ship_input()
-	
 	if current_controller:
 		current_controller.process(delta)
 
@@ -52,14 +50,19 @@ func set_transitioning(value: bool) -> void:
 # ========== ========== ========== ==========
 
 # ========== Enter and exit ship ==========
-func _get_next_controller() -> PlayerController:
+func get_controller_owned_by(controller_owner: BaseEntity) -> PlayerController:
+	for c: PlayerController in controllers:
+		if c.parent == controller_owner: return c
+	return null
+
+func get_next_controller() -> PlayerController:
 	if is_transitioning(): return current_controller
 	for c: PlayerController in controllers:
 		if c == current_controller: continue
 		return c
 	return current_controller
 
-func _switch_controller(next_controller: PlayerController) -> void:
+func switch_controller(next_controller: PlayerController) -> void:
 	if is_transitioning(): return
 	if next_controller == current_controller: return
 	if !main_camera.get_follow_target() is ThirdPersonCamera: return
@@ -82,21 +85,4 @@ func _switch_controller(next_controller: PlayerController) -> void:
 	set_current_controller(next_controller)
 	set_transitioning(false)
 	transition_finished.emit()
-# ========== ========== ========== ==========
-
-# ========== Input functions ==========
-func _get_enter_exit_ship_input() -> void:
-	if !is_transitioning() and Input.is_action_just_pressed("enter_ship"):
-		if current_controller is PlayerBoatController:
-			if !player_character: player_character = player_character_pscn.instantiate()
-			add_child(player_character)
-			player_character.global_position = current_controller.dropoff_point.global_position
-
-		previous_controller = current_controller
-		var next_controller: PlayerController = _get_next_controller()
-		_switch_controller(next_controller)
-		await transition_finished
-
-		if previous_controller is PlayerCharacterController:
-			remove_child(player_character)
 # ========== ========== ========== ==========

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Interaction" load_steps=9 format=3 uid="uid://bi15hf02qwdhr"]
+
+[ext_resource type="Script" path="res://assets/resources/interactions/interaction.gd" id="1_2wh56"]
+[ext_resource type="Resource" uid="uid://ciq6syrmo8jac" path="res://assets/resources/interactions/tracks/fallback.tres" id="2_l4epm"]
+[ext_resource type="Script" path="res://assets/resources/interactions/commands/print/print_ic.gd" id="3_217wt"]
+[ext_resource type="Script" path="res://assets/resources/interactions/tracks/interaction_track.gd" id="4_a0bxs"]
+
+[sub_resource type="Resource" id="Resource_n8pw6"]
+script = ExtResource("3_217wt")
+text_to_print = "This is the default track"
+
+[sub_resource type="Resource" id="Resource_q34ms"]
+script = ExtResource("4_a0bxs")
+track_name = "Default"
+commands = Array[Resource("res://assets/resources/interactions/commands/interaction_command.gd")]([SubResource("Resource_n8pw6")])
+
+[sub_resource type="Resource" id="Resource_hsonv"]
+script = ExtResource("3_217wt")
+text_to_print = "This is track1"
+
+[sub_resource type="Resource" id="Resource_p2puf"]
+script = ExtResource("4_a0bxs")
+track_name = "Track1"
+commands = Array[Resource("res://assets/resources/interactions/commands/interaction_command.gd")]([SubResource("Resource_hsonv")])
+
+[resource]
+script = ExtResource("1_2wh56")
+tracks = Array[ExtResource("4_a0bxs")]([ExtResource("2_l4epm"), SubResource("Resource_q34ms"), SubResource("Resource_p2puf")])

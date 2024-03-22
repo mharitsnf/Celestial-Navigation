@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b6c54usfla1jt"]
 
 [ext_resource type="PackedScene" uid="uid://bohsb8opfjfgr" path="res://assets/levels/world_test.tscn" id="1_n8kch"]
-[ext_resource type="Shader" path="res://assets/shaders/pixelize.gdshader" id="2_gyjex"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/pixelize.gdshader" id="2_gyjex"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_d8ppt"]
 viewport_path = NodePath("Main/SubViewport")
