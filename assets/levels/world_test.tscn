@@ -16,7 +16,7 @@
 radius = 792.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_oggbs"]
-radius = 1000.0
+radius = 2000.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iu5vw"]
 
@@ -40,7 +40,7 @@ environment = ExtResource("1_u0thf")
 shape = SubResource("SphereShape3D_kt8wf")
 
 [node name="GravityArea" type="Area3D" parent="PlanetaryObjects"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 gravity_space_override = 3
 gravity_point = true
@@ -71,10 +71,12 @@ current_controller = NodePath("PlayerBoat/PlayerBoatController")
 player_character_pscn = ExtResource("4_3sfcs")
 
 [node name="PlayerBoat" parent="Objects/PlayerControllerManager" instance=ExtResource("8_km3yc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 800)
+collision_mask = 2
 
 [node name="TestBox" parent="Objects" instance=ExtResource("6_u01up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 6)
+collision_mask = 2
 
 [node name="Interactable" parent="Objects/TestBox" instance=ExtResource("9_g82vr")]
 interaction = ExtResource("11_prmj7")

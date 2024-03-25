@@ -29,7 +29,7 @@ func get_x_rotation() -> float:
 	return gimbal.rotation.y
 
 func get_y_rotation() -> float:
-	return spring_arm.rotation.y
+	return spring_arm.rotation.x
 
 func copy_rotation(x_rotation: float, y_rotation: float) -> void:
 	gimbal.rotation.y = x_rotation

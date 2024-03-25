@@ -30,10 +30,11 @@ class Promise extends RefCounted:
     signal completed
 
 # ===== Remote transform =====
-func create_remote_transform(follower_name : String) -> RemoteTransform3D:
+func create_remote_transform(follower_name : String, use_rotation: bool = true) -> RemoteTransform3D:
     var remote_transform : RemoteTransform3D = RemoteTransform3D.new()
     remote_transform.name = "FollowedBy" + follower_name
     remote_transform.update_scale = false
+    remote_transform.update_rotation = use_rotation
     return remote_transform
 # ===== ===== ===== ===== =====
 

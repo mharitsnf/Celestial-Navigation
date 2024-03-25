@@ -5,7 +5,7 @@ class TargetNode extends RefCounted:
 	var remote_transform : RemoteTransform3D
 	func _init(follower : Node, _follow_target : Node3D) -> void:
 		follow_target = _follow_target
-		remote_transform = STUtil.create_remote_transform(follower.name)
+		remote_transform = STUtil.create_remote_transform(follower.name, false)
 		follow_target.add_child(remote_transform)
 
 # ===== For other to follow this node =====
