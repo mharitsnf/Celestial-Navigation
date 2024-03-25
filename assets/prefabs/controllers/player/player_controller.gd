@@ -52,6 +52,7 @@ func _get_next_interact_input() -> void:
 
 func _get_start_interact_input() -> void:
 	if is_interacting(): return
+	if is_command_running(): return
 	if Input.is_action_just_pressed("interact") and !interactions.is_empty():		
 		var top_node: Area3D = interactions.back()
 		if top_node is Interactable:
@@ -72,6 +73,9 @@ func _interact() -> void:
 	set_command_running(true)
 	await command.action(get_tree())
 	set_command_running(false)
+
+	if command.auto_next:
+		_interact()
 
 func _on_interactable_entered(area: Area3D) -> void:
 	interactions.append(area)
