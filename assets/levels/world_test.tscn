@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ooptmjpxjxo4" path="res://assets/prefabs/controllers/camera/main_camera_controller.tscn" id="8_hx6hf"]
 [ext_resource type="PackedScene" uid="uid://bky8p0lm0pm10" path="res://assets/prefabs/entities/player_boat/player_boat.tscn" id="8_km3yc"]
 [ext_resource type="PackedScene" uid="uid://cghiq2ib783rs" path="res://assets/prefabs/interactables/interactable.tscn" id="9_g82vr"]
-[ext_resource type="Resource" uid="uid://bi15hf02qwdhr" path="res://assets/resources/interactions/test_interaction.tres" id="11_prmj7"]
+[ext_resource type="Resource" uid="uid://bi15hf02qwdhr" path="res://assets/resources/interactions/box_interaction.tres" id="11_prmj7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
 radius = 792.5

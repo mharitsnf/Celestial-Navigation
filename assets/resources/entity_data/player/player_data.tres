@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bhgbfacclgdcc"]
+
+[ext_resource type="Script" path="res://assets/resources/entity_data/player/player_data.gd" id="1_j1gbh"]
+
+[resource]
+script = ExtResource("1_j1gbh")
+name = "Player Character"

@@ -48,7 +48,7 @@ func set_command_running(value: bool) -> void:
 func _get_next_interact_input() -> void:
 	if !is_interacting(): return
 	if Input.is_action_just_pressed("interact") and !is_command_running():
-		_next_interaction()
+		_interact()
 
 func _get_start_interact_input() -> void:
 	if is_interacting(): return
@@ -60,11 +60,12 @@ func _get_start_interact_input() -> void:
 
 			current_track = track
 			set_interacting(true)
-			_next_interaction()
+			_interact()
 
-func _next_interaction() -> void:
+func _interact() -> void:
 	var command: InteractionCommand = current_track.commands.pop_front()
 	if !command:
+		print("Track finished")
 		set_interacting(false)
 		return
 

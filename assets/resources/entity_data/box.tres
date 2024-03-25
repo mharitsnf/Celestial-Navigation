@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="EntityData" load_steps=2 format=3 uid="uid://c1r7qqo7u85i6"]
+
+[ext_resource type="Script" path="res://assets/resources/entity_data/entity_data.gd" id="1_muw4w"]
+
+[resource]
+script = ExtResource("1_muw4w")
+name = "The Test Box"

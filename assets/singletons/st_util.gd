@@ -5,6 +5,11 @@ const PLANET_RADIUS : float = 792.0
 func _enter_tree() -> void:
     _establish_input_connections()
 
+signal interact_pressed
+func _process(_delta: float) -> void:
+    if Input.is_action_just_pressed("interact"):
+        interact_pressed.emit()
+
 # func _ready() -> void:
 #     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
