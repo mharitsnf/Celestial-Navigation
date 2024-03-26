@@ -21,4 +21,5 @@ rotation_speed = 1.0
 spring_length = 5.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Offset/Gimbal/SpringArm3D"]
+visible = false
 mesh = SubResource("SphereMesh_p65c1")

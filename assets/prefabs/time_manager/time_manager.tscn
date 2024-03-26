@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1vjavo5saswj"]
+
+[ext_resource type="Script" path="res://assets/prefabs/time_manager/time_manager.gd" id="1_342v5"]
+[ext_resource type="PackedScene" uid="uid://36uskekn12c4" path="res://assets/prefabs/main_light/main_light.tscn" id="1_h5laa"]
+
+[node name="TimeManager" type="Node3D"]
+script = ExtResource("1_342v5")
+time_speed = 500.0
+
+[node name="Sun" parent="." instance=ExtResource("1_h5laa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3500)
+max_energy = 0.6
+sprite_scale = 80.0
+
+[node name="Moon" parent="." instance=ExtResource("1_h5laa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3500)
+max_energy = 0.1
+sprite_modulation = Color(0.439216, 0.439216, 0.439216, 1)
+sprite_scale = 40.0

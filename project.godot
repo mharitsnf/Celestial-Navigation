@@ -150,7 +150,7 @@ interact={
 [layer_names]
 
 3d_physics/layer_1="Planet"
-3d_physics/layer_2="Gravity"
+3d_physics/layer_2="Gravity and World"
 3d_physics/layer_3="Player Boat Area"
 3d_physics/layer_4="Interaction"
 

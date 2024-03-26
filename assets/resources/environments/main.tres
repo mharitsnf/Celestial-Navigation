@@ -9,7 +9,6 @@ tonemap_white = 2.0
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
-sdfgi_bounce_feedback = 0.2
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 volumetric_fog_albedo = Color(1, 0.980392, 0.878431, 1)

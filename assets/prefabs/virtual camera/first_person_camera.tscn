@@ -21,4 +21,5 @@ tween_duration = 0.5
 [node name="Offset" type="Node3D" parent="Gimbal/InnerGimbal"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Gimbal/InnerGimbal/Offset"]
+visible = false
 mesh = SubResource("SphereMesh_f6icg")

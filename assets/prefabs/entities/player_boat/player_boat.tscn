@@ -22,6 +22,7 @@ radius = 5.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2.2, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/ForFPC/test_boat/DropoffPoint" index="0"]
+visible = false
 mesh = SubResource("SphereMesh_eyc80")
 
 [node name="BoatTPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("3_228lg")]

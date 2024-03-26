@@ -45,6 +45,10 @@ func set_current_controller(value: PlayerController) -> void:
 func is_transitioning() -> bool:
 	return _transitioning
 
+func get_player_entity() -> BaseEntity:
+	if !current_controller: return null 
+	return current_controller.parent
+
 func set_transitioning(value: bool) -> void:
 	_transitioning = value
 # ========== ========== ========== ==========
