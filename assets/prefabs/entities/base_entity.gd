@@ -23,11 +23,9 @@ func _enter_tree() -> void:
 		
 	ocean = STUtil.get_only_node_in_group("ocean")
 
-func _physics_process(_delta: float) -> void:
-	_calculate_depth_to_ocean_surface()
-
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	state.transform.basis = STUtil.recalculate_basis(self)
+	_calculate_depth_to_ocean_surface(state)
 	_dampen_velocity(state)
 	_apply_buoyancy_force()
 	_limit_speed(state)
@@ -86,7 +84,7 @@ func _apply_buoyancy_force() -> void:
 		apply_central_force(global_basis.y * float_force * ProjectSettings.get_setting("physics/3d/default_gravity") * depth_from_ocean_surface)
 
 ## Calculate depth to ocean surface (linear)
-func _calculate_depth_to_ocean_surface() -> void:
+func _calculate_depth_to_ocean_surface(state: PhysicsDirectBodyState3D) -> void:
 	if !ocean:
 		push_error("Ocean is not defined")
 		return
@@ -96,7 +94,7 @@ func _calculate_depth_to_ocean_surface() -> void:
 
 	var linear_offset : Vector3 = _calculate_offset_to_ocean_target()
 	var gerstner_result : GerstnerResult = _calculate_total_gerstner(linear_offset)
-	var flat_position : Vector3 = basis.inverse() * global_position
+	var flat_position : Vector3 = state.transform.basis.inverse() * global_position
 	var water_height : float = STUtil.PLANET_RADIUS + ocean_surface_offset + gerstner_result.vertex.y
 	depth_from_ocean_surface = water_height - flat_position.y
 

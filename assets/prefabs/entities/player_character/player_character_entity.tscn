@@ -65,30 +65,26 @@ size = Vector3(0.4, 0.2, 0.5)
 radius = 3.0
 
 [node name="PlayerCharacterEntity" node_paths=PackedStringArray("normal_container", "visual_container") instance=ExtResource("1_vu730")]
-mass = 50.0
 script = ExtResource("2_lgsjv")
 speed_limit = 3.0
-move_force = 500.0
 normal_container = NodePath("CollisionShape3D")
-visual_container = NodePath("CollisionShape3D/ForFPC/Visuals")
-float_force = 75.0
+visual_container = NodePath("CollisionShape3D/Visuals")
+float_force = 2.5
 ocean_surface_offset = -1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_hh0jc")
 
-[node name="ForFPC" type="Node3D" parent="CollisionShape3D" index="0"]
-
-[node name="Visuals" type="Node3D" parent="CollisionShape3D/ForFPC" index="0"]
+[node name="Visuals" type="Node3D" parent="CollisionShape3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/ForFPC/Visuals" index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/Visuals" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_fjb07")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D/ForFPC/Visuals" index="1"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D/Visuals" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.3)
 mesh = SubResource("BoxMesh_ox2q4")
 skeleton = NodePath("")
@@ -105,7 +101,7 @@ mouse_inverted_y = false
 
 [node name="CharacterFPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("8_6hl70")]
 _offset = Vector3(0, 1.35, -1.5)
-follow_target = NodePath("../CollisionShape3D/ForFPC")
+follow_target = NodePath("..")
 
 [node name="FPCController" parent="CharacterFPC" index="1" instance=ExtResource("9_q00hg")]
 submerged_min_angle = 5.0
