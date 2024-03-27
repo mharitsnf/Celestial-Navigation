@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ooptmjpxjxo4" path="res://assets/prefabs/controllers/camera/main_camera_controller.tscn" id="8_hx6hf"]
 [ext_resource type="PackedScene" uid="uid://bky8p0lm0pm10" path="res://assets/prefabs/entities/player_boat/player_boat.tscn" id="8_km3yc"]
 [ext_resource type="PackedScene" uid="uid://cghiq2ib783rs" path="res://assets/prefabs/interactables/interactable.tscn" id="9_g82vr"]
-[ext_resource type="Resource" uid="uid://bi15hf02qwdhr" path="res://assets/resources/interactions/box_interaction.tres" id="11_prmj7"]
+[ext_resource type="Resource" uid="uid://jfpyuqqhqkq0" path="res://assets/resources/interactions/interactions/box_interaction.tres" id="12_e4nv8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
 radius = 792.5
@@ -73,9 +73,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 0)
 
 [node name="TestBox" parent="Objects" instance=ExtResource("6_u01up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 6)
+freeze_mode = 1
 
 [node name="Interactable" parent="Objects/TestBox" instance=ExtResource("9_g82vr")]
-interaction = ExtResource("11_prmj7")
+interaction = ExtResource("12_e4nv8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/TestBox/Interactable"]
 shape = SubResource("BoxShape3D_iu5vw")

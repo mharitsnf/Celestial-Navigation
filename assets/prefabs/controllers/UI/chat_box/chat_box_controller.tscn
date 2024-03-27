@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://yx82uhgjdmj0"]
+
+[ext_resource type="Script" path="res://assets/prefabs/controllers/UI/chat_box/chat_box_controller.gd" id="1_4c3pq"]
+
+[node name="ChatBoxController" type="Node"]
+script = ExtResource("1_4c3pq")

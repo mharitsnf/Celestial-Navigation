@@ -5,20 +5,22 @@ var player_boat: BoatEntity
 var player_boat_in_area: bool = false
 
 func _ready() -> void:
+	super()
 	# For testing
 	switch_state(get_child(0))
 
-func process(delta: float) -> void:
-	super(delta)
-	if is_interacting(): return
+func process(delta: float) -> bool:
+	if !super(delta): return false
 	if _current_state:
 		_current_state.process(delta)
 	_get_enter_ship_input()
+	return true
 
-func physics_process(delta: float) -> void:
-	if is_interacting(): return
+func physics_process(delta: float) -> bool:
+	if !super(delta): return false
 	if _current_state:
 		_current_state.physics_process(delta)
+	return true
 
 func switch_state(new_state: State) -> void:
 	if _current_state:

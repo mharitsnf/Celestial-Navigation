@@ -10,3 +10,6 @@ func get_current_track_resource() -> InteractionTrack:
         var res: Resource = load(t.resource_path)
         if res is InteractionTrack and res.track_name == current_track: return res
     return null
+
+func handle_track_finished() -> void:
+    pass

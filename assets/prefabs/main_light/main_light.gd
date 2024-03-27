@@ -37,4 +37,3 @@ func _adjust_energy_level() -> void:
 		ndotl = remap(ndotl, SUNSET_ANGLE, MAX_ENERGY_ANGLE, 0., 1.)
 
 		light_energy = lerp(0., max_energy, ndotl)
-		print(name, " ", light_energy)

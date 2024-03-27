@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://c563xq8a6oome"]
 
 [ext_resource type="Texture2D" uid="uid://sv2p60lnp6fn" path="res://assets/textures/UI/chat_box.png" id="1_5uv5t"]
-[ext_resource type="Script" path="res://assets/prefabs/UI/chat_box.gd" id="1_uv15x"]
 [ext_resource type="Theme" uid="uid://bjh8cqfmixnsq" path="res://assets/resources/theme/main_theme.tres" id="2_j0adr"]
+[ext_resource type="PackedScene" uid="uid://yx82uhgjdmj0" path="res://assets/prefabs/controllers/UI/chat_box/chat_box_controller.tscn" id="4_xc0jh"]
 
 [sub_resource type="Animation" id="Animation_wq6yk"]
 length = 0.001
@@ -94,19 +94,13 @@ _data = {
 "disappear": SubResource("Animation_4tvfg")
 }
 
-[node name="ChatBox" type="VBoxContainer" node_paths=PackedStringArray("speaker_label", "chat_label", "timer", "anim")]
+[node name="ChatBox" type="VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 offset_left = 576.0
 offset_top = 736.0
 offset_right = 1240.0
 offset_bottom = 884.0
 theme_override_constants/separation = 32
-script = ExtResource("1_uv15x")
-display_speed = 0.01
-speaker_label = NodePath("SpeakerContainer/VBoxContainer/HBoxContainer/Label")
-chat_label = NodePath("ChatContainer/VBoxContainer/HBoxContainer/Label")
-timer = NodePath("Timer")
-anim = NodePath("AnimationPlayer")
 
 [node name="SpeakerContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -203,3 +197,10 @@ one_shot = true
 libraries = {
 "": SubResource("AnimationLibrary_opfqh")
 }
+
+[node name="Controller" parent="." node_paths=PackedStringArray("speaker_label", "chat_label", "timer", "anim") instance=ExtResource("4_xc0jh")]
+display_speed = 0.01
+speaker_label = NodePath("../SpeakerContainer/VBoxContainer/HBoxContainer/Label")
+chat_label = NodePath("../ChatContainer/VBoxContainer/HBoxContainer/Label")
+timer = NodePath("../Timer")
+anim = NodePath("../AnimationPlayer")

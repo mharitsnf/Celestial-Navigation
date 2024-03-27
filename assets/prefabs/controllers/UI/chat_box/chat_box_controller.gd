@@ -1,4 +1,4 @@
-class_name ChatBox extends VBoxContainer
+class_name ChatBoxController extends UIController
 
 @export var display_speed: float
 @export_group("References")
@@ -9,28 +9,15 @@ class_name ChatBox extends VBoxContainer
 
 var speaker_text: String
 var chat_text: String
-
 signal show_text_finished
 
 func _enter_tree() -> void:
-    if !is_in_group("chat_box"):
-        add_to_group("chat_box")
-
     if !timer.timeout.is_connected(_on_timer_timeout):
         timer.timeout.connect(_on_timer_timeout)
 
     timer.wait_time = display_speed
-    chat_label.visible_characters = 0
 
-func show_box() -> void:
-    anim.play("appear")
-
-func hide_box() -> void:
-    anim.play("disappear")
-
-func show_text() -> void:
-    timer.start()
-
+# ========== Setters and getters ==========
 func set_display_speed(value: float) -> void:
     display_speed = value
     timer.wait_time = value
@@ -43,6 +30,23 @@ func set_chat_text(value: String) -> void:
     chat_text = value
     chat_label.text = value
     chat_label.visible_characters = 0
+# ========== ========== ========== ==========
+
+# ========== From parent ==========
+func clear() -> void:
+    set_speaker_text("")
+    set_chat_text("")
+
+func show_ui() -> void:
+    anim.play("appear")
+
+func hide_ui() -> void:
+    anim.play("disappear")
+# ========== ========== ========== ==========
+
+# ========== Show text ==========
+func show_text() -> void:
+    timer.start()
 
 func _on_timer_timeout() -> void:
     chat_label.visible_characters += 1
@@ -50,3 +54,4 @@ func _on_timer_timeout() -> void:
         show_text()
     else:
         show_text_finished.emit()
+# ========== ========== ========== ==========

@@ -4,18 +4,23 @@ class_name ChatIC extends InteractionCommand
 @export var commands: Array[ChatContentIC]
 
 func action(tree: SceneTree) -> STUtil.Promise:
-	var chat_box: ChatBox = STUtil.get_only_node_in_group("chat_box")
-	chat_box.set_speaker_text("Speaker name")
-	chat_box.show_box()
-	await tree.create_timer(.25).timeout
+	var ui_manager: UIManager = STUtil.get_only_node_in_group("ui_manager")
 
-	for c: ChatContentIC in commands:
-		await c.action(tree)
-		await STUtil.interact_pressed
+	ui_manager.switch_current_ui(UIManager.UIEnum.CHAT_BOX)
+	var controller: UIController = ui_manager.get_current_controller()
+	if controller is ChatBoxController:
+		if speaker: controller.set_speaker_text(speaker.name)
+		else: controller.set_speaker_text("Speaker Name")
+		
+		controller.show_ui()
+		await tree.create_timer(.25).timeout
+		
+		for c: ChatContentIC in commands:
+			await c.action(tree)
+			await STUtil.interact_pressed
 
-	chat_box.hide_box()
-	await chat_box.anim.animation_finished
-	chat_box.set_chat_text("")
-	chat_box.set_speaker_text("")
-	
+		controller.hide_ui()
+		await controller.anim.animation_finished
+		ui_manager.switch_current_ui(UIManager.UIEnum.NONE)
+
 	return STUtil.Promise.new()

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bohsb8opfjfgr" path="res://assets/levels/world_test.tscn" id="1_n8kch"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/pixelize.gdshader" id="2_gyjex"]
-[ext_resource type="PackedScene" uid="uid://c563xq8a6oome" path="res://assets/prefabs/UI/chat_box.tscn" id="3_shaie"]
+[ext_resource type="Script" path="res://assets/prefabs/UI/manager/ui_manager.gd" id="3_1ye6f"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_d8ppt"]
 viewport_path = NodePath("Main/SubViewport")
@@ -50,6 +50,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ChatBox" parent="CanvasLayer" instance=ExtResource("3_shaie")]
+[node name="UIManager" type="CanvasLayer" parent="."]
+script = ExtResource("3_1ye6f")
