@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bohsb8opfjfgr"]
+[gd_scene load_steps=17 format=3 uid="uid://bohsb8opfjfgr"]
 
 [ext_resource type="PackedScene" uid="uid://d1vjavo5saswj" path="res://assets/prefabs/time_manager/time_manager.tscn" id="1_tkbic"]
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_u0thf"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ooptmjpxjxo4" path="res://assets/prefabs/controllers/camera/main_camera_controller.tscn" id="8_hx6hf"]
 [ext_resource type="PackedScene" uid="uid://bky8p0lm0pm10" path="res://assets/prefabs/entities/player_boat/player_boat.tscn" id="8_km3yc"]
 [ext_resource type="PackedScene" uid="uid://cghiq2ib783rs" path="res://assets/prefabs/interactables/interactable.tscn" id="9_g82vr"]
+[ext_resource type="Script" path="res://assets/prefabs/interactables/box_interactable.gd" id="12_bh2f1"]
 [ext_resource type="Resource" uid="uid://jfpyuqqhqkq0" path="res://assets/resources/interactions/interactions/box_interaction.tres" id="12_e4nv8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
@@ -76,6 +77,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 6)
 freeze_mode = 1
 
 [node name="Interactable" parent="Objects/TestBox" instance=ExtResource("9_g82vr")]
+script = ExtResource("12_bh2f1")
 interaction = ExtResource("12_e4nv8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/TestBox/Interactable"]

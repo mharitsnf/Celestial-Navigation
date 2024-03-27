@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="Interaction" load_steps=11 format=3 uid="uid://jfpyuqqhqkq0"]
+[gd_resource type="Resource" script_class="Interaction" load_steps=16 format=3 uid="uid://jfpyuqqhqkq0"]
 
-[ext_resource type="Script" path="res://assets/resources/interactions/interaction.gd" id="1_owb1u"]
+[ext_resource type="Script" path="res://assets/resources/interactions/interactions/interaction.gd" id="1_owb1u"]
 [ext_resource type="Resource" uid="uid://ciq6syrmo8jac" path="res://assets/resources/interactions/tracks/fallback.tres" id="2_ajlga"]
 [ext_resource type="Script" path="res://assets/resources/interactions/commands/chat/chat_content_ic.gd" id="3_wx2ya"]
 [ext_resource type="Script" path="res://assets/resources/interactions/commands/chat/chat_ic.gd" id="4_u0h7n"]
@@ -28,6 +28,32 @@ script = ExtResource("6_r0jvl")
 track_name = "Start"
 commands = Array[Resource("res://assets/resources/interactions/commands/interaction_command.gd")]([SubResource("Resource_swy28")])
 
+[sub_resource type="Resource" id="Resource_jui68"]
+script = ExtResource("3_wx2ya")
+text = "Did you know?"
+auto_next = false
+
+[sub_resource type="Resource" id="Resource_kuvfg"]
+script = ExtResource("3_wx2ya")
+text = "Lots of people gets lost in the sea"
+auto_next = false
+
+[sub_resource type="Resource" id="Resource_jr5o2"]
+script = ExtResource("3_wx2ya")
+text = "But those who can read the skies can go anywhere"
+auto_next = false
+
+[sub_resource type="Resource" id="Resource_b4ng7"]
+script = ExtResource("4_u0h7n")
+speaker = ExtResource("5_sd56v")
+commands = Array[ExtResource("3_wx2ya")]([SubResource("Resource_jui68"), SubResource("Resource_kuvfg"), SubResource("Resource_jr5o2")])
+auto_next = true
+
+[sub_resource type="Resource" id="Resource_cn651"]
+script = ExtResource("6_r0jvl")
+track_name = "Second"
+commands = Array[Resource("res://assets/resources/interactions/commands/interaction_command.gd")]([SubResource("Resource_b4ng7")])
+
 [resource]
 script = ExtResource("1_owb1u")
-tracks = Array[ExtResource("6_r0jvl")]([ExtResource("2_ajlga"), SubResource("Resource_t4j1q")])
+tracks = Array[ExtResource("6_r0jvl")]([ExtResource("2_ajlga"), SubResource("Resource_t4j1q"), SubResource("Resource_cn651")])

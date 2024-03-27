@@ -2,10 +2,9 @@ class_name PlayerController extends Node
 
 @export var interaction_scanner: Area3D
 var interactions: Array
-var current_interaction: Interaction
+var current_interactable: Interactable
 var current_track: InteractionTrack
 var interacting: bool
-var command_running: bool
 
 var ui_manager: UIManager
 var manager: PlayerControllerManager
@@ -29,7 +28,6 @@ func _exit_tree() -> void:
 
 func process(_delta: float) -> bool:
 	_get_start_interact_input()
-	_get_next_interact_input()
 	return !(is_interacting() or ui_manager.has_current_ui()) # If interacting or has an active ui from other means (like opening menu), do not proceed
 
 func physics_process(_delta: float) -> bool:
@@ -45,53 +43,38 @@ func is_interacting() -> bool:
 func set_interacting(value: bool) -> void:
 	interacting = value
 
-func is_command_running() -> bool:
-	return command_running
-
-func set_command_running(value: bool) -> void:
-	command_running = value
-
-func _get_next_interact_input() -> void:
-	if !is_interacting(): return
-	if Input.is_action_just_pressed("interact") and !is_command_running():
+func _get_start_interact_input() -> void:
+	if is_interacting() or interactions.is_empty() or ui_manager.has_current_ui(): return
+	if Input.is_action_just_pressed("interact"):		
+		if !_setup_interaction(): return
 		_interact()
 
-func _get_start_interact_input() -> void:
-	if is_interacting() or is_command_running() or ui_manager.has_current_ui(): return
-	if Input.is_action_just_pressed("interact") and !interactions.is_empty():		
-		var top_node: Area3D = interactions.back()
-		if top_node is Interactable:
-			current_interaction = top_node.interaction
-			if !current_interaction:
-				_reset_interaction()
-				return
+func _setup_interaction() -> bool:
+	var top_node: Area3D = interactions.back()
+	if top_node is Interactable:
+		if !top_node.interaction: return false
+		current_interactable = top_node
+		current_track = top_node.get_current_track()
+		if !current_track:
+			_finish_interaction()
+			return false
+	return true
 
-			current_track = top_node.interaction.get_current_track_resource().duplicate()
-			if !current_track:
-				_reset_interaction()
-				return
+func _start_interaction() -> void:
+	set_interacting(true)
 
-			set_interacting(true)
-			_interact()
-
-func _reset_interaction() -> void:
-	current_interaction = null
+func _finish_interaction() -> void:
+	set_interacting(false)
+	current_interactable = null
 	current_track = null
 
 func _interact() -> void:
-	var command: InteractionCommand = current_track.commands.pop_front()
-	if !command:
-		current_interaction.handle_track_finished()
-		set_interacting(false)
-		_reset_interaction()
-		return
-
-	set_command_running(true)
-	await command.action(get_tree())
-	set_command_running(false)
-
-	if command.auto_next:
-		_interact()
+	_start_interaction()
+	for c: InteractionCommand in current_track.commands:
+		await c.action(get_tree())
+		if !c.auto_next: await STUtil.interact_pressed
+	current_interactable.handle_track_finished()
+	_finish_interaction()
 
 func _on_interactable_entered(area: Area3D) -> void:
 	interactions.append(area)
