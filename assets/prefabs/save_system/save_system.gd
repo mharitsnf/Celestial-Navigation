@@ -9,15 +9,22 @@ class LoadedNode extends RefCounted:
     func preprocess_on_init(arr: Array[LoadedNode]) -> void:
         if !data.has("on_init"): return
         for key: String in data["on_init"].keys():
-            if key.begins_with("i_"):
-                var real_target: Node = arr[data["on_init"][key]].node
-                if real_target.has_node("Controller"):
-                    if node is MainCamera: real_target = real_target.get_node("Controller").third_person_camera
-                    elif node is PlayerControllerManager: real_target = real_target.get_node("Controller")
-                data["on_init"][key] = real_target
+            if !key.begins_with("i_"): continue
+            var target: Node = arr[data["on_init"][key]].node
+            if node is MainCamera and target.has_node("Controller"):
+                var controller: PlayerController = target.get_node("Controller")
+                target = controller.third_person_camera
+            elif node is PlayerControllerManager and target.has_node("Controller"):
+                target = target.get_node("Controller")
+            data["on_init"][key] = target
+
+var transition_screen: TransitionScreen
 
 func _ready() -> void:
+    transition_screen = STUtil.get_only_node_in_group("transition_screen")
     load_game()
+    await get_tree().create_timer(.75).timeout
+    transition_screen.hide_screen()
 
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("test_save"):

@@ -16,7 +16,8 @@ class UserInterface extends RefCounted:
 
 enum UIEnum {
     NONE,
-    CHAT_BOX
+    CHAT_BOX,
+    TRANSITION,
 }
 var current_ui: UserInterface
 var ui_dict: Dictionary = {

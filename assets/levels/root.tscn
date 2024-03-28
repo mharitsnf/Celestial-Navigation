@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6c54usfla1jt"]
+[gd_scene load_steps=8 format=3 uid="uid://b6c54usfla1jt"]
 
 [ext_resource type="PackedScene" uid="uid://bohsb8opfjfgr" path="res://assets/levels/world_test.tscn" id="1_n8kch"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/pixelize.gdshader" id="2_gyjex"]
 [ext_resource type="Script" path="res://assets/prefabs/UI/manager/ui_manager.gd" id="3_1ye6f"]
 [ext_resource type="PackedScene" uid="uid://d11f84wu226j8" path="res://assets/prefabs/save_system/save_system.tscn" id="4_bncqj"]
+[ext_resource type="PackedScene" uid="uid://c0s7a0klmw3ek" path="res://assets/prefabs/UI/screens/TransitionScreen.tscn" id="4_e6h3r"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_d8ppt"]
 viewport_path = NodePath("Main/SubViewport")
@@ -11,7 +12,7 @@ viewport_path = NodePath("Main/SubViewport")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_58afh"]
 resource_local_to_scene = true
 shader = ExtResource("2_gyjex")
-shader_parameter/pixel_size = 8
+shader_parameter/pixel_size = 4
 shader_parameter/main_tex = SubResource("ViewportTexture_d8ppt")
 
 [node name="Root" type="Node"]
@@ -52,6 +53,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TransitionScreen" parent="." instance=ExtResource("4_e6h3r")]
 
 [node name="UIManager" type="CanvasLayer" parent="."]
 script = ExtResource("3_1ye6f")

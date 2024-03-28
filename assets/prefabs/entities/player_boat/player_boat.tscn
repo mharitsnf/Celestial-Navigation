@@ -19,7 +19,7 @@ radius = 5.0
 [node name="PlayerBoat" instance=ExtResource("1_ra6yq")]
 
 [node name="DropoffPoint" type="Marker3D" parent="CollisionShape3D/ForFPC/test_boat" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.7, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D/ForFPC/test_boat/DropoffPoint" index="0"]
 visible = false
