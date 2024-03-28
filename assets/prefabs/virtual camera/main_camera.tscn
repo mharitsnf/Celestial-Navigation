@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cl2oce5jkhxj8"]
+[gd_scene load_steps=3 format=3 uid="uid://cl2oce5jkhxj8"]
 
 [ext_resource type="Script" path="res://assets/prefabs/virtual camera/main_camera.gd" id="1_y0tby"]
+[ext_resource type="PackedScene" uid="uid://ooptmjpxjxo4" path="res://assets/prefabs/controllers/camera/main_camera_controller.tscn" id="2_f64be"]
 
 [node name="MainCamera" type="Camera3D"]
 script = ExtResource("1_y0tby")
 tween_duration = 0.75
+
+[node name="MainCameraController" parent="." instance=ExtResource("2_f64be")]

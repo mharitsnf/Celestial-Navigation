@@ -8,8 +8,10 @@ var character: CharacterEntity
 func _enter_tree() -> void:
     super()
     character = get_parent().get_parent()
-    tpc = STUtil.get_node_in_group_by_name(character.name + "VCs", "CharacterTPC")
-    fpc = STUtil.get_node_in_group_by_name(character.name + "VCs", "CharacterFPC")
+
+func _ready() -> void:
+    tpc = STUtil.get_node_in_group_by_name(character.name + "VCs", "TPC")
+    fpc = STUtil.get_node_in_group_by_name(character.name + "VCs", "FPC")
     main_camera = STUtil.get_only_node_in_group("main_camera")
 
 func _get_move_direction() -> Vector2:

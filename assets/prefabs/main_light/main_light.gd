@@ -27,7 +27,10 @@ func _look_at_center() -> void:
 const SUNSET_ANGLE: float = -.25
 const MAX_ENERGY_ANGLE: float = .8
 func _adjust_energy_level() -> void:
-	if !pcm: return
+	if !pcm:
+		push_warning("player_controller_manager not found. Searching again...")
+		pcm = STUtil.get_only_node_in_group("player_controller_manager")
+		return
 	var player_entity: BaseEntity = pcm.get_player_entity()
 	if player_entity:
 		var player_normal: Vector3 = player_entity.basis.y

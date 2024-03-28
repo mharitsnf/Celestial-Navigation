@@ -1,26 +1,19 @@
-[gd_scene load_steps=17 format=3 uid="uid://bohsb8opfjfgr"]
+[gd_scene load_steps=11 format=3 uid="uid://bohsb8opfjfgr"]
 
 [ext_resource type="PackedScene" uid="uid://d1vjavo5saswj" path="res://assets/prefabs/time_manager/time_manager.tscn" id="1_tkbic"]
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_u0thf"]
 [ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/ocean/ocean.tscn" id="2_dnrth"]
 [ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/star loader/star_loader.tscn" id="3_g722y"]
-[ext_resource type="PackedScene" uid="uid://c2ipvtnsysqv" path="res://assets/prefabs/entities/player_character/player_character_entity.tscn" id="4_3sfcs"]
 [ext_resource type="PackedScene" uid="uid://cjn37qac1f86p" path="res://assets/prefabs/managers/player_controller_manager/player_controller_manager.tscn" id="4_v2hc8"]
 [ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/test_box/test_box.tscn" id="6_u01up"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="7_e0eip"]
-[ext_resource type="PackedScene" uid="uid://ooptmjpxjxo4" path="res://assets/prefabs/controllers/camera/main_camera_controller.tscn" id="8_hx6hf"]
 [ext_resource type="PackedScene" uid="uid://bky8p0lm0pm10" path="res://assets/prefabs/entities/player_boat/player_boat.tscn" id="8_km3yc"]
-[ext_resource type="PackedScene" uid="uid://cghiq2ib783rs" path="res://assets/prefabs/interactables/interactable.tscn" id="9_g82vr"]
-[ext_resource type="Script" path="res://assets/prefabs/interactables/box_interactable.gd" id="12_bh2f1"]
-[ext_resource type="Resource" uid="uid://jfpyuqqhqkq0" path="res://assets/resources/interactions/interactions/box_interaction.tres" id="12_e4nv8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
 radius = 792.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_oggbs"]
 radius = 2000.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_iu5vw"]
 
 [node name="WorldTest" type="Node3D"]
 
@@ -31,14 +24,12 @@ radius = 2000.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
 environment = ExtResource("1_u0thf")
 
-[node name="PlanetaryObjects" type="Node" parent="."]
+[node name="PlanetBody" type="StaticBody3D" parent="Environment"]
 
-[node name="PlanetBody" type="StaticBody3D" parent="PlanetaryObjects"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlanetaryObjects/PlanetBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/PlanetBody"]
 shape = SubResource("SphereShape3D_kt8wf")
 
-[node name="GravityArea" type="Area3D" parent="PlanetaryObjects"]
+[node name="GravityArea" type="Area3D" parent="Environment"]
 collision_layer = 0
 collision_mask = 2
 gravity_space_override = 3
@@ -46,42 +37,32 @@ gravity_point = true
 gravity_point_center = Vector3(0, 0, 0)
 gravity_direction = Vector3(0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlanetaryObjects/GravityArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/GravityArea"]
 shape = SubResource("SphereShape3D_oggbs")
 
-[node name="Ocean" parent="PlanetaryObjects" node_paths=PackedStringArray("_target") instance=ExtResource("2_dnrth")]
+[node name="StarLoader" parent="Environment" instance=ExtResource("3_g722y")]
+
+[node name="PersistObjects" type="Node" parent="."]
+
+[node name="Ocean" parent="PersistObjects" node_paths=PackedStringArray("_target") instance=ExtResource("2_dnrth")]
 skeleton = NodePath("../..")
-_target = NodePath("../../Objects/PlayerControllerManager/PlayerBoat")
+_target = NodePath("../PlayerControllerManager/PlayerBoat")
 wave_data_1 = Vector4(0.06, 30, 1, 0)
 wave_data_2 = Vector4(0.08, 25, 0, 1)
 speed = 0.25
 
-[node name="StarLoader" parent="PlanetaryObjects" instance=ExtResource("3_g722y")]
+[node name="MainCamera" parent="PersistObjects" node_paths=PackedStringArray("follow_target") instance=ExtResource("7_e0eip")]
+follow_target = NodePath("../PlayerControllerManager/PlayerBoat/TPC")
 
-[node name="MainCamera" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("7_e0eip")]
-follow_target = NodePath("../Objects/PlayerControllerManager/PlayerBoat/BoatTPC")
+[node name="PlayerControllerManager" parent="PersistObjects" node_paths=PackedStringArray("current_controller") instance=ExtResource("4_v2hc8")]
+current_controller = NodePath("PlayerBoat/Controller")
 
-[node name="MainCameraController" parent="MainCamera" instance=ExtResource("8_hx6hf")]
-
-[node name="Objects" type="Node" parent="."]
-
-[node name="PlayerControllerManager" parent="Objects" node_paths=PackedStringArray("current_controller") instance=ExtResource("4_v2hc8")]
-current_controller = NodePath("PlayerBoat/PlayerBoatController")
-player_character_pscn = ExtResource("4_3sfcs")
-
-[node name="PlayerBoat" parent="Objects/PlayerControllerManager" instance=ExtResource("8_km3yc")]
+[node name="PlayerBoat" parent="PersistObjects/PlayerControllerManager" instance=ExtResource("8_km3yc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 0)
 
-[node name="TestBox" parent="Objects" instance=ExtResource("6_u01up")]
+[node name="TestBox" parent="PersistObjects" instance=ExtResource("6_u01up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 6)
 freeze_mode = 1
 
-[node name="Interactable" parent="Objects/TestBox" instance=ExtResource("9_g82vr")]
-script = ExtResource("12_bh2f1")
-interaction = ExtResource("12_e4nv8")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/TestBox/Interactable"]
-shape = SubResource("BoxShape3D_iu5vw")
-
-[editable path="Objects/PlayerControllerManager/PlayerBoat"]
-[editable path="Objects/PlayerControllerManager/PlayerBoat/CollisionShape3D/ForFPC/test_boat"]
+[editable path="PersistObjects/PlayerControllerManager/PlayerBoat"]
+[editable path="PersistObjects/PlayerControllerManager/PlayerBoat/CollisionShape3D/ForFPC/test_boat"]

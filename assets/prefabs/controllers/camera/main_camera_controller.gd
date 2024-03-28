@@ -10,6 +10,7 @@ func _enter_tree() -> void:
 	parent = get_parent()
 
 func _ready() -> void:
+	await get_tree().process_frame
 	available_virtual_cameras = STUtil.get_nodes_in_group(parent.get_follow_target().get_parent().name + "VCs")
 
 func _process(_delta: float) -> void:

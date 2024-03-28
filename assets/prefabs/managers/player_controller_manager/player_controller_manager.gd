@@ -4,9 +4,6 @@ var previous_controller: PlayerController
 @export var current_controller: PlayerController
 var controllers: Array[PlayerController]
 
-@export var player_character_pscn: PackedScene
-var player_character: CharacterEntity
-
 var main_camera: MainCamera
 var main_camera_controller: MainCameraController
 
@@ -17,15 +14,19 @@ signal transition_finished
 func _enter_tree() -> void:
 	if !is_in_group("player_controller_manager"):
 		add_to_group("player_controller_manager")
+	if !is_in_group("persist"):
+		add_to_group("persist")
+
+func _ready() -> void:
 	main_camera = STUtil.get_only_node_in_group("main_camera")
 	main_camera_controller = STUtil.get_only_node_in_group("main_camera_controller")
 
 func _process(delta: float) -> void:
-	if current_controller:
+	if current_controller and is_instance_valid(current_controller):
 		current_controller.process(delta)
 
 func _physics_process(delta: float) -> void:
-	if current_controller:
+	if current_controller and is_instance_valid(current_controller):
 		current_controller.physics_process(delta)
 # ========== ========== ========== ==========
 
@@ -55,6 +56,7 @@ func set_transitioning(value: bool) -> void:
 
 # ========== Enter and exit ship ==========
 func get_controller_owned_by(controller_owner: BaseEntity) -> PlayerController:
+	print(controllers)
 	for c: PlayerController in controllers:
 		if c.parent == controller_owner: return c
 	return null
@@ -89,4 +91,24 @@ func switch_controller(next_controller: PlayerController) -> void:
 	set_current_controller(next_controller)
 	set_transitioning(false)
 	transition_finished.emit()
+# ========== ========== ========== ==========
+
+# ========== Save and load state functions ==========
+func save_state() -> Dictionary:
+	return {
+		"metadata": {
+			"filename": scene_file_path,
+			"parent": get_parent().get_path(),
+		},
+		"on_init": {
+			"i_current_controller": STUtil.get_index_in_group("persist", get_current_controller().parent),
+		},
+		"on_ready": {}
+	}
+
+func on_load_init(data: Dictionary) -> void:
+	set_current_controller(data["i_current_controller"])
+
+func on_load_ready(_data: Dictionary) -> void:
+	pass
 # ========== ========== ========== ==========

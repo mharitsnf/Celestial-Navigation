@@ -36,10 +36,13 @@ func _enter_tree() -> void:
 	
 	if !is_in_group("main_camera"):
 		add_to_group("main_camera")
+	if !is_in_group("persist"):
+		add_to_group("persist")
 
 func _process(delta: float) -> void:
 	_transition(delta)
 
+# ========== Setter and getter functions ==========
 ## Returns the current follow target.
 func get_follow_target() -> VirtualCamera:
 	return follow_target
@@ -47,7 +50,9 @@ func get_follow_target() -> VirtualCamera:
 ## Sets a new follow target.
 func set_follow_target(new_target : VirtualCamera) -> void:
 	follow_target = new_target
+# ========== ========== ========== ==========
 
+# ========== Transition functions ==========
 func _change_target(new_target : VirtualCamera, use_transition : bool = true) -> void:
 	if current_target:
 		current_target.remote_transform.remote_path = NodePath("")
@@ -125,3 +130,24 @@ func _transition(delta : float) -> void:
 		)
 
 		tween_elapsed_time += delta
+# ========== ========== ========== ==========
+
+# ========== Save and load state functions ==========
+func save_state() -> Dictionary:
+	return {
+		"metadata": {
+			"filename": scene_file_path,
+			"parent": get_parent().get_path(),
+		},
+		"on_init": {
+			"i_follow_target": STUtil.get_index_in_group("persist", get_follow_target().get_parent()),
+		},
+		"on_ready": {}
+	}
+
+func on_load_init(data: Dictionary) -> void:
+	set_follow_target(data["i_follow_target"])
+
+func on_load_ready(_data: Dictionary) -> void:
+	pass
+# ========== ========== ========== ==========

@@ -64,8 +64,9 @@ size = Vector3(0.4, 0.2, 0.5)
 [sub_resource type="SphereShape3D" id="SphereShape3D_t1ygy"]
 radius = 3.0
 
-[node name="PlayerCharacterEntity" node_paths=PackedStringArray("normal_container", "visual_container") instance=ExtResource("1_vu730")]
+[node name="PlayerCharacterEntity" node_paths=PackedStringArray("tpc", "normal_container", "visual_container") instance=ExtResource("1_vu730")]
 script = ExtResource("2_lgsjv")
+tpc = NodePath("TPC")
 speed_limit = 3.0
 normal_container = NodePath("CollisionShape3D")
 visual_container = NodePath("CollisionShape3D/Visuals")
@@ -89,21 +90,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.3)
 mesh = SubResource("BoxMesh_ox2q4")
 skeleton = NodePath("")
 
-[node name="CharacterTPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("6_ev88g")]
+[node name="TPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("6_ev88g")]
 _spring_length = 7.5
 _offset = Vector3(0, 3, 0)
 follow_target = NodePath("..")
 
-[node name="VirtualCameraController" parent="CharacterTPC" index="1" instance=ExtResource("7_jkr5c")]
+[node name="VirtualCameraController" parent="TPC" index="1" instance=ExtResource("7_jkr5c")]
 submerged_min_angle = -80.0
 mouse_inverted_x = false
 mouse_inverted_y = false
 
-[node name="CharacterFPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("8_6hl70")]
+[node name="FPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("8_6hl70")]
 _offset = Vector3(0, 1.35, -1.5)
 follow_target = NodePath("..")
 
-[node name="FPCController" parent="CharacterFPC" index="1" instance=ExtResource("9_q00hg")]
+[node name="FPCController" parent="FPC" index="1" instance=ExtResource("9_q00hg")]
 submerged_min_angle = 5.0
 joypad_inverted_x = true
 joypad_inverted_y = false
@@ -122,12 +123,13 @@ collision_mask = 8
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractionScannerArea" index="0"]
 shape = SubResource("SphereShape3D_t1ygy")
 
-[node name="PlayerCharacterController" type="Node" parent="." index="5" node_paths=PackedStringArray("interaction_scanner")]
+[node name="Controller" type="Node" parent="." index="5" node_paths=PackedStringArray("third_person_camera", "interaction_scanner")]
 script = ExtResource("4_eocql")
+third_person_camera = NodePath("../TPC")
 interaction_scanner = NodePath("../InteractionScannerArea")
 
-[node name="CharacterBaseState" type="Node" parent="PlayerCharacterController" index="0"]
+[node name="CharacterBaseState" type="Node" parent="Controller" index="0"]
 script = ExtResource("5_ujw15")
 
-[connection signal="area_entered" from="PlayerBoatScannerArea" to="PlayerCharacterController" method="_on_player_boat_area_entered"]
-[connection signal="area_exited" from="PlayerBoatScannerArea" to="PlayerCharacterController" method="_on_player_boat_area_exited"]
+[connection signal="area_entered" from="PlayerBoatScannerArea" to="Controller" method="_on_player_boat_area_entered"]
+[connection signal="area_exited" from="PlayerBoatScannerArea" to="Controller" method="_on_player_boat_area_exited"]

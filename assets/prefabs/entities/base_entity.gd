@@ -18,9 +18,10 @@ var depth_from_ocean_surface : float = 0.
 
 # ========== Built-in functions ==========
 func _enter_tree() -> void:
-	if !is_in_group("entities"):
-		add_to_group("entities")
-		
+	if !is_in_group("persist"):
+		add_to_group("persist")
+
+func _ready() -> void:
 	ocean = STUtil.get_only_node_in_group("ocean")
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
@@ -32,6 +33,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 # ========== ========== ========== ==========
 
 # ========== Setters and Getters ==========
+func get_visual_container() -> Node3D:
+	return visual_container
+
 func get_normal_container() -> Node3D:
 	return normal_container
 # ========== ========== ========== ==========
@@ -161,4 +165,27 @@ func _calculate_gerstner(wave_data : Vector4, vertex : Vector3) -> GerstnerResul
 	)
 
 	return GerstnerResult.new(d_vert, Vector3.UP, d_tangent, d_binormal)
+# ========== ========== ========== ==========
+
+# ========== Save and load state functions ==========
+func save_state() -> Dictionary:
+	return {
+		"metadata": {
+			"filename": scene_file_path,
+			"parent": get_parent().get_path(),
+		},
+		"on_init": {},
+		"on_ready": {
+			"gpos_x": global_position.x,
+			"gpos_y": global_position.y,
+			"gpos_z": global_position.z,
+		}
+	}
+
+func on_load_ready(data: Dictionary) -> void:
+	global_position = Vector3(data["gpos_x"], data["gpos_y"], data["gpos_z"])
+	basis = STUtil.recalculate_basis(self)
+
+func on_load_init(_data: Dictionary) -> void:
+	pass
 # ========== ========== ========== ==========

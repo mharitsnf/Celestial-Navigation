@@ -1,5 +1,6 @@
 class_name PlayerController extends Node
 
+@export var third_person_camera: ThirdPersonCamera
 @export var interaction_scanner: Area3D
 var interactions: Array
 var current_interactable: Interactable
@@ -54,7 +55,7 @@ func _setup_interaction() -> bool:
 	if top_node is Interactable:
 		if !top_node.interaction: return false
 		current_interactable = top_node
-		current_track = top_node.get_current_track()
+		current_track = top_node.get_track()
 		if !current_track:
 			_finish_interaction()
 			return false

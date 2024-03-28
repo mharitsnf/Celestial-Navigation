@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://uxaqgf7r0l4h"]
+
+[ext_resource type="Script" path="res://assets/prefabs/interactables/box/box_interactable.gd" id="1_q8wi2"]
+[ext_resource type="Resource" uid="uid://jfpyuqqhqkq0" path="res://assets/resources/interactions/interactions/box_interaction.tres" id="2_j3nur"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_88i8c"]
+
+[node name="BoxInteractable" type="Area3D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_q8wi2")
+interaction = ExtResource("2_j3nur")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_88i8c")

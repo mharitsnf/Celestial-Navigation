@@ -32,15 +32,17 @@ func switch_state(new_state: State) -> void:
 func _get_enter_ship_input() -> void:
 	if !player_boat_in_area: return
 	if !manager.is_transitioning() and Input.is_action_just_pressed("enter_ship"):
-		var next_controller: PlayerController = manager.get_controller_owned_by(player_boat)
+		var next_controller: PlayerController = player_boat.get_node("Controller")
 		manager.switch_controller(next_controller)
 		await manager.transition_finished
 		manager.remove_child(parent)
 
 func _on_player_boat_area_entered(area:Area3D) -> void:
-	player_boat_in_area = true
-	player_boat = area.get_parent()
+	if area.get_parent() is BoatEntity:
+		player_boat_in_area = true
+		player_boat = area.get_parent()
 
-func _on_player_boat_area_exited(_area:Area3D) -> void:
-	player_boat_in_area = false
-	player_boat = null
+func _on_player_boat_area_exited(area:Area3D) -> void:
+	if area.get_parent() is BoatEntity:
+		player_boat_in_area = false
+		player_boat = null

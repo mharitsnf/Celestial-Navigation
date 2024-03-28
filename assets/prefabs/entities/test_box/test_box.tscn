@@ -1,14 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://yw5vawpt68bx"]
+[gd_scene load_steps=7 format=3 uid="uid://yw5vawpt68bx"]
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_jqiig"]
 [ext_resource type="Material" uid="uid://ywv0hfk4sxqb" path="res://assets/resources/materials/m_one_color.tres" id="2_is12c"]
+[ext_resource type="Script" path="res://assets/prefabs/entities/npc_entity.gd" id="2_qotxp"]
+[ext_resource type="PackedScene" uid="uid://uxaqgf7r0l4h" path="res://assets/prefabs/interactables/box/box_interactable.tscn" id="3_g6o4n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iakp2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_g360u"]
 material = ExtResource("2_is12c")
 
-[node name="TestBox" node_paths=PackedStringArray("normal_container", "visual_container") instance=ExtResource("1_jqiig")]
+[node name="TestBox" node_paths=PackedStringArray("interactable", "normal_container", "visual_container") instance=ExtResource("1_jqiig")]
+script = ExtResource("2_qotxp")
+interactable = NodePath("BoxInteractable")
 normal_container = NodePath("CollisionShape3D")
 visual_container = NodePath("CollisionShape3D/MeshInstance3D")
 
@@ -17,3 +21,5 @@ shape = SubResource("BoxShape3D_iakp2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" index="0"]
 mesh = SubResource("BoxMesh_g360u")
+
+[node name="BoxInteractable" parent="." index="1" instance=ExtResource("3_g6o4n")]

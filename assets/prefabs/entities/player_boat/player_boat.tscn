@@ -25,21 +25,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2.2, 0)
 visible = false
 mesh = SubResource("SphereMesh_eyc80")
 
-[node name="BoatTPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("3_228lg")]
+[node name="TPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("3_228lg")]
 _spring_length = 10.0
 _offset = Vector3(0, 2, 0)
 follow_target = NodePath("..")
 
-[node name="VirtualCameraController" parent="BoatTPC" index="1" instance=ExtResource("4_d0wvp")]
+[node name="VirtualCameraController" parent="TPC" index="1" instance=ExtResource("4_d0wvp")]
 submerged_min_angle = -80.0
 mouse_inverted_x = false
 mouse_inverted_y = false
 
-[node name="BoatFPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("4_wblk8")]
+[node name="FPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("4_wblk8")]
 _offset = Vector3(0, 2, -1)
 follow_target = NodePath("../CollisionShape3D/ForFPC")
 
-[node name="FPCController" parent="BoatFPC" index="1" instance=ExtResource("6_w0hrx")]
+[node name="FPCController" parent="FPC" index="1" instance=ExtResource("6_w0hrx")]
 joypad_inverted_x = true
 joypad_inverted_y = false
 
@@ -58,9 +58,10 @@ collision_mask = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionScannerArea" index="0"]
 shape = SubResource("SphereShape3D_jsh7c")
 
-[node name="PlayerBoatController" parent="." index="5" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("2_7ubxh")]
+[node name="Controller" parent="." index="5" node_paths=PackedStringArray("dropoff_point", "third_person_camera", "interaction_scanner") instance=ExtResource("2_7ubxh")]
 dropoff_point = NodePath("../CollisionShape3D/ForFPC/test_boat/DropoffPoint")
 player_character_pscn = ExtResource("7_o8uux")
+third_person_camera = NodePath("../TPC")
 interaction_scanner = NodePath("../InteractionScannerArea")
 
 [editable path="CollisionShape3D/ForFPC/test_boat"]

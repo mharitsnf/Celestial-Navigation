@@ -36,7 +36,7 @@ signal transition_finished
 # ===== FoV =====
 @export var min_fov: float = 30
 @export var max_fov: float = 110
-var _fov: float
+var _fov: float = 75
 
 var main_camera : MainCamera
 var previous_target : TargetNode
@@ -148,6 +148,9 @@ func set_fov(value: float) -> void:
 
 const FOV_LERP_WEIGHT: float = 5.
 func _lerp_main_camera_fov(delta: float) -> void:
+	if !main_camera or !is_instance_valid(main_camera):
+		main_camera = STUtil.get_only_node_in_group("main_camera")
+	
 	if !is_active(): return
 	main_camera.fov = lerp(main_camera.fov, _fov, delta * FOV_LERP_WEIGHT)
 # =============== =============== ===============

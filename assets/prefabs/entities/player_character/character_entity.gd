@@ -1,7 +1,6 @@
 class_name CharacterEntity extends BaseEntity
 
-func _exit_tree() -> void:
-	linear_velocity = Vector3.ZERO
+@export var tpc: ThirdPersonCamera
 
 func move(direction: Vector3) -> void:
 	apply_force(direction * move_force)
