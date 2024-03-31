@@ -27,7 +27,7 @@ mesh = SubResource("SphereMesh_eyc80")
 
 [node name="TPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("3_228lg")]
 _spring_length = 10.0
-_offset = Vector3(0, 2, 0)
+_offset = Vector3(0, 3, 0)
 follow_target = NodePath("..")
 
 [node name="VirtualCameraController" parent="TPC" index="1" instance=ExtResource("4_d0wvp")]

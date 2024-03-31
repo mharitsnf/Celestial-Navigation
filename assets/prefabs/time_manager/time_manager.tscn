@@ -9,7 +9,7 @@ time_speed = 500.0
 
 [node name="Sun" parent="." instance=ExtResource("1_h5laa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3500)
-max_energy = 0.6
+max_energy = 0.5
 sprite_scale = 80.0
 
 [node name="Moon" parent="." instance=ExtResource("1_h5laa")]

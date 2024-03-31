@@ -35,7 +35,7 @@ func _get_rotate_input() -> void:
     rotate_input = Input.get_axis("boat_right", "boat_left")
 
 func _get_exit_ship_input() -> void:
-    if !manager.is_transitioning() and Input.is_action_just_pressed("enter_ship"):
+    if manager.can_switch() and Input.is_action_just_pressed("enter_ship"):
         if !player_character: player_character = player_character_pscn.instantiate()
         var next_controller: PlayerController = player_character.get_node("Controller")
         manager.add_child(player_character)

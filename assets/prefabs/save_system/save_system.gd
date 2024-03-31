@@ -23,7 +23,7 @@ var transition_screen: TransitionScreen
 func _ready() -> void:
     transition_screen = STUtil.get_only_node_in_group("transition_screen")
     load_game()
-    await get_tree().create_timer(.75).timeout
+    await get_tree().create_timer(.75).timeout # Wait for physics to settle
     transition_screen.hide_screen()
 
 func _process(_delta: float) -> void:
@@ -85,4 +85,3 @@ func save_game() -> void:
         var json_string: String = JSON.stringify(node_data)
         save_file.store_line(json_string)
     print("Game saved!")
-    print(save_nodes)

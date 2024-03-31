@@ -68,6 +68,11 @@ func get_next_controller() -> PlayerController:
 		return c
 	return current_controller
 
+func can_switch() -> bool:
+	if is_transitioning(): return false
+	if !main_camera.get_follow_target() is ThirdPersonCamera: return false
+	return true
+
 func switch_controller(next_controller: PlayerController) -> void:
 	if is_transitioning(): return
 	if next_controller == current_controller: return

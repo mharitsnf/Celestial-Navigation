@@ -4,13 +4,13 @@
 background_mode = 1
 background_color = Color(0.105882, 0.0588235, 0.239216, 1)
 tonemap_mode = 3
-tonemap_exposure = 0.7
-tonemap_white = 2.0
+tonemap_white = 8.0
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.01
+sdfgi_energy = 0.5
+volumetric_fog_density = 0.005
 volumetric_fog_albedo = Color(1, 0.980392, 0.878431, 1)
 volumetric_fog_gi_inject = 8.0
 volumetric_fog_length = 15.0
+adjustment_brightness = 0.85

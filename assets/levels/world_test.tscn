@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bky8p0lm0pm10" path="res://assets/prefabs/entities/player_boat/player_boat.tscn" id="8_km3yc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
-radius = 792.5
+radius = 793.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_oggbs"]
 radius = 2000.0
@@ -58,11 +58,10 @@ follow_target = NodePath("../PlayerControllerManager/PlayerBoat/TPC")
 current_controller = NodePath("PlayerBoat/Controller")
 
 [node name="PlayerBoat" parent="PersistObjects/PlayerControllerManager" instance=ExtResource("8_km3yc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792, 0)
 
 [node name="TestBox" parent="PersistObjects" instance=ExtResource("6_u01up")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 800, 6)
-freeze_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792, 6)
 
 [editable path="PersistObjects/PlayerControllerManager/PlayerBoat"]
 [editable path="PersistObjects/PlayerControllerManager/PlayerBoat/CollisionShape3D/ForFPC/test_boat"]
