@@ -140,6 +140,14 @@ func _transition(delta : float) -> void:
 # =============== =============== ===============
 
 # =============== FoV API ===============
+func enter_camera() -> void:
+	pass
+
+func exit_camera() -> void:
+	pass
+# =============== =============== ===============
+
+# =============== FoV API ===============
 func get_fov() -> float:
 	return _fov
 

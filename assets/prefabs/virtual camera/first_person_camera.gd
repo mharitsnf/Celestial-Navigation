@@ -7,9 +7,11 @@ class_name FirstPersonCamera extends VirtualCamera
 @export var offset_node : Node3D # Offset placement node
 @export var gimbal : Node3D # For rotation in local Y
 @export var inner_gimbal : Node3D # For rotation in local X
+var camera_mask: CameraMask
 
 func _ready() -> void:
     super()
+    camera_mask = STUtil.get_only_node_in_group("camera_mask")
 
 func _process(delta: float) -> void:
     super(delta)
@@ -27,6 +29,18 @@ func rotate_camera(direction : Vector2, min_angle: float = min_x_angle) -> void:
         min_angle,
         max_x_angle
     )
+
+func enter_camera() -> void:
+    if !camera_mask:
+        push_warning("Camera mask is not found") 
+        return
+    camera_mask.show_mask()
+
+func exit_camera() -> void:
+    if !camera_mask:
+        push_warning("Camera mask is not found") 
+        return
+    camera_mask.hide_mask()
 
 func get_x_rotation() -> float:
     return gimbal.rotation.y

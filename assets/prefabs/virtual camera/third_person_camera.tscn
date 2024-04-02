@@ -12,6 +12,7 @@ gimbal = NodePath("Offset/Gimbal")
 spring_arm = NodePath("Offset/Gimbal/SpringArm3D")
 remote_transform_parent_for_other = NodePath("Offset/Gimbal/SpringArm3D")
 rotation_speed = 1.0
+min_fov = 75.0
 
 [node name="Offset" type="Node3D" parent="."]
 

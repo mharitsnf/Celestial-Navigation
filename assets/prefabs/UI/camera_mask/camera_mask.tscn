@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://v5c54hsyvq5g"]
+
+[ext_resource type="Shader" path="res://assets/resources/shaders/mask.gdshader" id="1_01qje"]
+[ext_resource type="Texture2D" uid="uid://esccb0ghemjn" path="res://assets/textures/camera_mask.PNG" id="2_krubv"]
+[ext_resource type="Script" path="res://assets/prefabs/UI/camera_mask/camera_mask.gd" id="3_b27n4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8c8c"]
+shader = ExtResource("1_01qje")
+shader_parameter/alpha = 1.0
+shader_parameter/mask_tex = ExtResource("2_krubv")
+
+[sub_resource type="Animation" id="Animation_jmcfi"]
+resource_name = "appear"
+length = 0.75
+step = 0.05
+
+[sub_resource type="Animation" id="Animation_rbj8u"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_3v5xs"]
+resource_name = "disappear"
+length = 0.75
+step = 0.05
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ouw8f"]
+_data = {
+"RESET": SubResource("Animation_rbj8u"),
+"appear": SubResource("Animation_jmcfi"),
+"disappear": SubResource("Animation_3v5xs")
+}
+
+[node name="CameraMask" type="ColorRect" node_paths=PackedStringArray("anim")]
+material = SubResource("ShaderMaterial_a8c8c")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -376.0
+offset_top = -216.0
+offset_right = 392.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_b27n4")
+anim = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ouw8f")
+}

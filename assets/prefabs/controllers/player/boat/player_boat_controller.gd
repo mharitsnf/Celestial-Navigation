@@ -1,7 +1,12 @@
 class_name PlayerBoatController extends PlayerController
 
+@export_group("Propeller settings")
+@export var propeller_rotation_speed: float
+@export_group("References")
 @export var dropoff_point: Marker3D
+@export var properllers: Array[MeshInstance3D]
 @export var gas_particle_parent: Node3D
+@export_group("Packed Scene")
 @export var player_character_pscn: PackedScene
 var player_character: CharacterEntity
 
@@ -21,6 +26,7 @@ func process(delta: float) -> bool:
 	_get_brake_input()
 	_get_rotate_input(delta)
 	_get_exit_ship_input()
+	_update_propeller_rotation(delta)
 	if parent is BoatEntity:
 		parent.rotate_boat(rotate_input)
 	return true
@@ -32,6 +38,7 @@ func physics_process(delta: float) -> bool:
 		parent.brake(brake_input)
 	return true
 
+# =============== Gas Particles ===============
 func is_gas_particles_active() -> bool:
 	if gas_particles.is_empty(): return false
 	return gas_particles[0].emitting
@@ -45,12 +52,24 @@ func hide_gas_particles() -> void:
 	for p: Node in gas_particles:
 		if p is GPUParticles3D:
 			p.emitting = false
+# =============== =============== ===============
 
+# =============== Propeller ===============
+func _ease_in_sine(x: float) -> float:
+	return 1. - cos((x * PI) / 2.)
+
+func _update_propeller_rotation(delta: float) -> void:
+	var move_input_scale: float = _ease_in_sine(move_input)
+	for prop: MeshInstance3D in properllers:
+		prop.rotate_object_local(Vector3.FORWARD, delta * propeller_rotation_speed * move_input_scale)
+
+# =============== Inputs ===============
 func _get_gas_input() -> void:
 	move_input = Input.get_action_strength("boat_forward")
+	# Handle particles
 	if move_input > 0 and !is_gas_particles_active():
 		show_gas_particles()
-	if move_input == 0:
+	elif move_input == 0:
 		hide_gas_particles()
 
 func _get_brake_input() -> void:
@@ -73,3 +92,4 @@ func _get_exit_ship_input() -> void:
 		player_character.global_position = dropoff_point.global_position
 
 		manager.switch_controller(next_controller)
+# =============== =============== ===============

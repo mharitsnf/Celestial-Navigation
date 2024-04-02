@@ -55,9 +55,11 @@ func set_follow_target(new_target : VirtualCamera) -> void:
 # ========== Transition functions ==========
 func _change_target(new_target : VirtualCamera, use_transition : bool = true) -> void:
 	if current_target:
+		current_target.virtual_camera.exit_camera()
 		current_target.remote_transform.remote_path = NodePath("")
 		previous_target = current_target
 	
+	new_target.enter_camera()
 	current_target = TargetVirtualCamera.new(new_target)
 
 	if use_transition:

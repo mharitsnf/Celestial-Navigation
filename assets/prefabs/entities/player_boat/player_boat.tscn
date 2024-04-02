@@ -15,7 +15,6 @@ points = PackedVector3Array(0.892473, 0.399951, 0.503279, 0.84984, 0.699932, 0.4
 radius = 5.0
 
 [node name="PlayerBoat" node_paths=PackedStringArray("normal_container", "visual_container") instance=ExtResource("1_ra6yq")]
-speed_limit = 10.0
 move_force = 2000.0
 normal_container = NodePath("CollisionShape3D")
 visual_container = NodePath("CollisionShape3D/ForFPC")
@@ -26,6 +25,9 @@ emitting = false
 
 [node name="BoatEngine2" parent="CollisionShape3D/ForFPC/Particles" index="1"]
 emitting = false
+
+[node name="Marker3D" type="Marker3D" parent="CollisionShape3D/ForFPC" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
 
 [node name="TPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("3_228lg")]
 _spring_length = 12.5
@@ -62,10 +64,13 @@ collision_mask = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionScannerArea" index="0"]
 shape = SubResource("SphereShape3D_jsh7c")
 
-[node name="Controller" parent="." index="5" node_paths=PackedStringArray("gas_particle_parent", "third_person_camera", "interaction_scanner") instance=ExtResource("2_7ubxh")]
+[node name="Controller" parent="." index="5" node_paths=PackedStringArray("dropoff_point", "properllers", "gas_particle_parent", "third_person_camera", "interaction_scanner") instance=ExtResource("2_7ubxh")]
+propeller_rotation_speed = 25.0
+dropoff_point = NodePath("../CollisionShape3D/ForFPC/Marker3D")
+properllers = [NodePath("../CollisionShape3D/ForFPC/PlayerBoatInst/PropellerL"), NodePath("../CollisionShape3D/ForFPC/PlayerBoatInst/PropellerR")]
 gas_particle_parent = NodePath("../CollisionShape3D/ForFPC/Particles")
 player_character_pscn = ExtResource("7_o8uux")
 third_person_camera = NodePath("../TPC")
 interaction_scanner = NodePath("../InteractionScannerArea")
 
-[editable path="CollisionShape3D/ForFPC/PlayerBoat"]
+[editable path="CollisionShape3D/ForFPC/PlayerBoatInst"]
