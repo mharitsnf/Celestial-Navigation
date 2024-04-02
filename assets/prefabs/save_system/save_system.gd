@@ -22,7 +22,7 @@ var transition_screen: TransitionScreen
 
 func _ready() -> void:
     transition_screen = STUtil.get_only_node_in_group("transition_screen")
-    load_game()
+    # load_game()
     await get_tree().create_timer(.75).timeout # Wait for physics to settle
     transition_screen.hide_screen()
 

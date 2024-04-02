@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://ds1eu4orjyhpy"]
+
+[sub_resource type="Curve" id="Curve_ue1h2"]
+_data = [Vector2(0, 1), 0.0, -0.105435, 0, 0, Vector2(1, 0), -2.24856, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5gb0s"]
+curve = SubResource("Curve_ue1h2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xd4eb"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_5gb0s")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x15vw"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_l8f3e"]
+material = SubResource("StandardMaterial3D_x15vw")
+radial_segments = 8
+rings = 4
+
+[node name="BoatEngine" type="GPUParticles3D"]
+amount = 16
+lifetime = 0.75
+process_material = SubResource("ParticleProcessMaterial_xd4eb")
+draw_pass_1 = SubResource("SphereMesh_l8f3e")
