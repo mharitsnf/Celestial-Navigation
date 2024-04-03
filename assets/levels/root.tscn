@@ -1,20 +1,23 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6c54usfla1jt"]
+[gd_scene load_steps=16 format=3 uid="uid://b6c54usfla1jt"]
 
 [ext_resource type="PackedScene" uid="uid://bohsb8opfjfgr" path="res://assets/levels/world_test.tscn" id="1_n8kch"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/pixelize.gdshader" id="2_gyjex"]
 [ext_resource type="Script" path="res://assets/prefabs/UI/manager/ui_manager.gd" id="3_1ye6f"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/posterization.gdshader" id="3_njsy7"]
+[ext_resource type="PackedScene" uid="uid://v5c54hsyvq5g" path="res://assets/prefabs/UI/camera_mask/camera_mask.tscn" id="3_yisfc"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/mask.gdshader" id="4_bhpxt"]
 [ext_resource type="PackedScene" uid="uid://d11f84wu226j8" path="res://assets/prefabs/save_system/save_system.tscn" id="4_bncqj"]
 [ext_resource type="PackedScene" uid="uid://c0s7a0klmw3ek" path="res://assets/prefabs/UI/screens/TransitionScreen.tscn" id="4_e6h3r"]
+[ext_resource type="Texture2D" uid="uid://esccb0ghemjn" path="res://assets/textures/camera_mask.PNG" id="5_7v5rb"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_d8ppt"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_oviw0"]
 viewport_path = NodePath("Main/SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_58afh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rjtgd"]
 resource_local_to_scene = true
 shader = ExtResource("2_gyjex")
 shader_parameter/pixel_size = 5
-shader_parameter/main_tex = SubResource("ViewportTexture_d8ppt")
+shader_parameter/main_tex = SubResource("ViewportTexture_oviw0")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wgiqr"]
 viewport_path = NodePath("Pixelize/SubViewport")
@@ -24,6 +27,13 @@ resource_local_to_scene = true
 shader = ExtResource("3_njsy7")
 shader_parameter/levels = 15.0
 shader_parameter/main_tex = SubResource("ViewportTexture_wgiqr")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_r8w1v"]
+viewport_path = NodePath("Posterize/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eij52"]
+shader = ExtResource("4_bhpxt")
+shader_parameter/mask_tex = ExtResource("5_7v5rb")
 
 [node name="Root" type="Node"]
 
@@ -57,7 +67,7 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="ColorRect" type="ColorRect" parent="Pixelize/SubViewport"]
-material = SubResource("ShaderMaterial_58afh")
+material = SubResource("ShaderMaterial_rjtgd")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -72,7 +82,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="SubViewport" type="SubViewport" parent="Posterize"]
+[node name="SubViewport" type="SubViewport" parent="Posterize" groups=["final_viewport"]]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
@@ -84,6 +94,27 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CameraMask" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="CameraMask"]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="CameraMask/SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_r8w1v")
+
+[node name="CameraMask" parent="CameraMask/SubViewport" instance=ExtResource("3_yisfc")]
+material = SubResource("ShaderMaterial_eij52")
 
 [node name="TransitionScreen" parent="." instance=ExtResource("4_e6h3r")]
 

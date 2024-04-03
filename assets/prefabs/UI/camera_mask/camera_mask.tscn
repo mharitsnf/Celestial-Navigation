@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://assets/prefabs/UI/camera_mask/camera_mask.gd" id="3_b27n4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a8c8c"]
+resource_local_to_scene = true
 shader = ExtResource("1_01qje")
-shader_parameter/alpha = 1.0
 shader_parameter/mask_tex = ExtResource("2_krubv")
 
 [sub_resource type="Animation" id="Animation_rbj8u"]

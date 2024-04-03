@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://assets/prefabs/entities/player_boat/player_boat_entity.gd" id="2_rbht2"]
 [ext_resource type="PackedScene" uid="uid://di3opcoc1bjq5" path="res://assets/models/player_boat_inst.tscn" id="3_itsa4"]
 [ext_resource type="PackedScene" uid="uid://ds1eu4orjyhpy" path="res://assets/prefabs/particles/boat_engine.tscn" id="4_rixfk"]
-[ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="5_3e5xf"]
+[ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="5_5wq2t"]
 [ext_resource type="PackedScene" uid="uid://bq08c3kmmbx62" path="res://assets/prefabs/controllers/camera/virtual_camera_controller.tscn" id="6_7ggm6"]
 [ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="7_4om71"]
 [ext_resource type="PackedScene" uid="uid://deo4jmce6xulx" path="res://assets/prefabs/controllers/camera/fpc_controller.tscn" id="8_o1kml"]
@@ -51,10 +51,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 1, -5.9)
 [node name="DropoffPoint" type="Marker3D" parent="CollisionShape3D/ForFPC" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0)
 
-[node name="TPC" parent="." index="1" instance=ExtResource("5_3e5xf")]
+[node name="TPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("5_5wq2t")]
 _spring_length = 12.0
 _offset = Vector3(0, 4, 0)
 max_x_angle = 20.0
+follow_target = NodePath("..")
 
 [node name="Controller" parent="TPC" index="1" instance=ExtResource("6_7ggm6")]
 submerged_min_angle = -60.0
@@ -84,10 +85,9 @@ collision_mask = 8
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3, 0)
 shape = SubResource("CapsuleShape3D_4nvc2")
 
-[node name="Controller" parent="." index="5" node_paths=PackedStringArray("dropoff_point", "third_person_camera", "interaction_scanner") instance=ExtResource("9_wqan3")]
+[node name="Controller" parent="." index="5" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("9_wqan3")]
 dropoff_point = NodePath("../CollisionShape3D/ForFPC/DropoffPoint")
 player_character_pscn = ExtResource("10_31xpf")
-third_person_camera = NodePath("../TPC")
 interaction_scanner = NodePath("../InteractionScanner")
 
 [editable path="CollisionShape3D/ForFPC/PlayerBoatInst"]
