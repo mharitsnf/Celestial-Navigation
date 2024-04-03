@@ -2,6 +2,7 @@ class_name MainCameraController extends Node
 
 var available_virtual_cameras: Array
 var parent: MainCamera
+var current_controller: VirtualCameraController
 
 # ========== Built-in functions ==========
 func _enter_tree() -> void:
@@ -12,7 +13,18 @@ func _ready() -> void:
 	available_virtual_cameras = STUtil.get_nodes_in_group(parent.get_follow_target().get_parent().name + "VCs")
 
 func _process(_delta: float) -> void:
+	if current_controller:
+		current_controller.rotate_joypad()
+		if current_controller is FPCController:
+			current_controller.zoom_joypad()
 	_switch_camera()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if current_controller:
+		if event is InputEventMouseMotion:
+			current_controller.rotate_mouse(event)
+		if current_controller is FPCController and event is InputEventMouseButton:
+			current_controller.zoom_mouse(event)
 # ========== ========== ========== ==========
 
 # ========== Available VCs ==========
@@ -37,4 +49,13 @@ func _switch_camera() -> void:
 		var next_camera: VirtualCamera = _get_next_virtual_camera()
 		next_camera.copy_rotation(parent.get_follow_target().get_x_rotation(), parent.get_follow_target().get_y_rotation())
 		parent.set_follow_target(next_camera)
+# ========== ========== ========== ==========
+
+# ========== Follow target changed ==========
+func _on_follow_target_changed(target: VirtualCamera) -> void:
+	if !target.has_node("Controller"):
+		push_warning("The new virtual camera ", target, " has no controller!")
+		current_controller = null
+		return
+	current_controller = target.get_node("Controller")
 # ========== ========== ========== ==========

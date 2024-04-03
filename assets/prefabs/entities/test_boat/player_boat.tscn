@@ -56,7 +56,7 @@ _spring_length = 12.0
 _offset = Vector3(0, 4, 0)
 max_x_angle = 20.0
 
-[node name="VirtualCameraController" parent="TPC" index="1" instance=ExtResource("6_7ggm6")]
+[node name="Controller" parent="TPC" index="1" instance=ExtResource("6_7ggm6")]
 submerged_min_angle = -60.0
 mouse_inverted_x = false
 mouse_inverted_y = false
@@ -64,7 +64,7 @@ mouse_inverted_y = false
 [node name="FPC" parent="." index="2" instance=ExtResource("7_4om71")]
 _offset = Vector3(0, 10, 0)
 
-[node name="FPCController" parent="FPC" index="1" instance=ExtResource("8_o1kml")]
+[node name="Controller" parent="FPC" index="1" instance=ExtResource("8_o1kml")]
 submerged_min_angle = -30.0
 joypad_inverted_x = true
 joypad_inverted_y = false

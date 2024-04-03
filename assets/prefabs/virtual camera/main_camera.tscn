@@ -8,3 +8,5 @@ script = ExtResource("1_y0tby")
 tween_duration = 0.75
 
 [node name="MainCameraController" parent="." instance=ExtResource("2_f64be")]
+
+[connection signal="follow_target_changed" from="." to="MainCameraController" method="_on_follow_target_changed"]
