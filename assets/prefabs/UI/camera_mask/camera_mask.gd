@@ -2,10 +2,6 @@ class_name CameraMask extends ColorRect
 
 @export var anim: AnimationPlayer
 
-func _enter_tree() -> void:
-    if !is_in_group("camera_mask"):
-        add_to_group("camera_mask")
-
 func _ready() -> void:
     size = Vector2(2688, 1512)
     position = Vector2(-376, -216)

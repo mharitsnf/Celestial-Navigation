@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://assets/prefabs/managers/player_controller_manager/player_controller_manager.gd" id="1_joq47"]
 
-[node name="PlayerControllerManager" type="Node"]
+[node name="PlayerControllerManager" type="Node" groups=["persist", "player_controller_manager"]]
 script = ExtResource("1_joq47")

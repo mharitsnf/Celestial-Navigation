@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://dus4k0ekmocc0"]
 
-[ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/test_boat.tscn" id="1_2w3q4"]
+[ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/player_boat.tscn" id="1_2w3q4"]
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_dg3yw"]
 [ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/ocean/ocean.tscn" id="1_rln1m"]
 [ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/star loader/star_loader.tscn" id="2_824qi"]

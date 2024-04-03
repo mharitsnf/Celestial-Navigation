@@ -17,10 +17,6 @@ var ocean : Ocean
 var depth_from_ocean_surface : float = 0.
 
 # ========== Built-in functions ==========
-func _enter_tree() -> void:
-	if !is_in_group("persist"):
-		add_to_group("persist")
-
 func _ready() -> void:
 	ocean = STUtil.get_only_node_in_group("ocean")
 

@@ -5,8 +5,6 @@ var parent: MainCamera
 
 # ========== Built-in functions ==========
 func _enter_tree() -> void:
-	if !is_in_group("main_camera_controller"):
-		add_to_group("main_camera_controller")
 	parent = get_parent()
 
 func _ready() -> void:

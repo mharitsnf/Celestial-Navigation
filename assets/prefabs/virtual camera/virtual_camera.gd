@@ -45,9 +45,6 @@ var current_target : TargetNode
 
 # =============== Built in functions ===============
 func _enter_tree() -> void:
-	if !is_in_group("virtual_cameras"):
-		add_to_group("virtual_cameras")
-	
 	if !transition_finished.is_connected(_on_transition_finished):
 		transition_finished.connect(_on_transition_finished)
 

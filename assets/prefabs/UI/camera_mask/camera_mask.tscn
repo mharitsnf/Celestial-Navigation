@@ -9,13 +9,13 @@ shader = ExtResource("1_01qje")
 shader_parameter/alpha = 1.0
 shader_parameter/mask_tex = ExtResource("2_krubv")
 
+[sub_resource type="Animation" id="Animation_rbj8u"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_jmcfi"]
 resource_name = "appear"
 length = 0.75
 step = 0.05
-
-[sub_resource type="Animation" id="Animation_rbj8u"]
-length = 0.001
 
 [sub_resource type="Animation" id="Animation_3v5xs"]
 resource_name = "disappear"
@@ -29,7 +29,7 @@ _data = {
 "disappear": SubResource("Animation_3v5xs")
 }
 
-[node name="CameraMask" type="ColorRect" node_paths=PackedStringArray("anim")]
+[node name="CameraMask" type="ColorRect" node_paths=PackedStringArray("anim") groups=["camera_mask"]]
 material = SubResource("ShaderMaterial_a8c8c")
 anchors_preset = 15
 anchor_right = 1.0

@@ -4,7 +4,7 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_f6icg"]
 
-[node name="FirstPersonCamera" type="Node3D" node_paths=PackedStringArray("offset_node", "gimbal", "inner_gimbal", "remote_transform_parent_for_other")]
+[node name="FirstPersonCamera" type="Node3D" node_paths=PackedStringArray("offset_node", "gimbal", "inner_gimbal", "remote_transform_parent_for_other") groups=["virtual_cameras"]]
 script = ExtResource("1_pxrtc")
 _offset = Vector3(0, 2, 0)
 offset_node = NodePath("Gimbal/InnerGimbal/Offset")

@@ -4,7 +4,7 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_p65c1"]
 
-[node name="ThirdPersonCamera" type="Node3D" node_paths=PackedStringArray("offset_node", "gimbal", "spring_arm", "remote_transform_parent_for_other")]
+[node name="ThirdPersonCamera" type="Node3D" node_paths=PackedStringArray("offset_node", "gimbal", "spring_arm", "remote_transform_parent_for_other") groups=["virtual_cameras"]]
 script = ExtResource("1_p87k6")
 _offset = Vector3(0, 1, 0)
 offset_node = NodePath("Offset")

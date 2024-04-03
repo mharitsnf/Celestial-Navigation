@@ -33,11 +33,6 @@ var current_vcam_index : int = 0
 func _enter_tree() -> void:
 	if !transition_finished.is_connected(_on_transition_finished):
 		transition_finished.connect(_on_transition_finished)
-	
-	if !is_in_group("main_camera"):
-		add_to_group("main_camera")
-	if !is_in_group("persist"):
-		add_to_group("persist")
 
 func _process(delta: float) -> void:
 	_transition(delta)

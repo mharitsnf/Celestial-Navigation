@@ -85,3 +85,4 @@ func save_game() -> void:
         var json_string: String = JSON.stringify(node_data)
         save_file.store_line(json_string)
     print("Game saved!")
+    print(save_nodes)

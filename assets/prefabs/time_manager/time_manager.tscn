@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://assets/prefabs/time_manager/time_manager.gd" id="1_342v5"]
 [ext_resource type="PackedScene" uid="uid://36uskekn12c4" path="res://assets/prefabs/main_light/main_light.tscn" id="1_h5laa"]
 
-[node name="TimeManager" type="Node3D"]
+[node name="TimeManager" type="Node3D" groups=["persist"]]
 script = ExtResource("1_342v5")
 time_speed = 500.0
 

@@ -9,7 +9,7 @@ size = Vector2(200, 200)
 subdivide_width = 100
 subdivide_depth = 100
 
-[node name="Ocean" type="MeshInstance3D"]
+[node name="Ocean" type="MeshInstance3D" groups=["ocean", "persist"]]
 extra_cull_margin = 16384.0
 mesh = SubResource("PlaneMesh_620a4")
 script = ExtResource("2_1l5eg")

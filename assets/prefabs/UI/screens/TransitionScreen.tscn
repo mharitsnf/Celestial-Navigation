@@ -56,7 +56,7 @@ _data = {
 "disappear": SubResource("Animation_360y2")
 }
 
-[node name="TransitionScreen" type="ColorRect" node_paths=PackedStringArray("anim")]
+[node name="TransitionScreen" type="ColorRect" node_paths=PackedStringArray("anim") groups=["transition_screen"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

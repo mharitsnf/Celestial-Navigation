@@ -5,10 +5,6 @@ var time_elapsed: float = 0.
 
 const SECONDS_PER_DAY: float = 86400.
 
-func _enter_tree() -> void:
-    if !is_in_group("persist"):
-        add_to_group("persist")
-
 func _process(delta: float) -> void:
     _calculate_time_elapsed(delta)
     _rotate_per_time()

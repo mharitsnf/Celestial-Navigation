@@ -24,10 +24,6 @@ var ui_dict: Dictionary = {
     UIEnum.CHAT_BOX: UserInterface.new(preload("res://assets/prefabs/UI/chat_box/chat_box.tscn"))
 }
 
-func _enter_tree() -> void:
-    if !is_in_group("ui_manager"):
-        add_to_group("ui_manager")
-
 func has_current_ui() -> bool:
     return current_ui != null
 

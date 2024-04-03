@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://assets/prefabs/controllers/camera/main_camera_controller.gd" id="1_aicj4"]
 
-[node name="MainCameraController" type="Node"]
+[node name="MainCameraController" type="Node" groups=["main_camera_controller"]]
 script = ExtResource("1_aicj4")

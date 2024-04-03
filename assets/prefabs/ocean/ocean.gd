@@ -20,12 +20,6 @@ var time_elapsed : float = 0.
 var shader : ShaderMaterial
 
 # ========== Built-in functions ==========
-func _enter_tree() -> void:
-	if !is_in_group("ocean"):
-		add_to_group("ocean")
-	if !is_in_group("persist"):
-		add_to_group("persist")
-
 func _ready() -> void:
 	shader = get_active_material(0)
 	_reset_initial_position_and_offset(_target)

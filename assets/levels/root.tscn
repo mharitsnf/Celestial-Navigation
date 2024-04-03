@@ -86,7 +86,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TransitionScreen" parent="." instance=ExtResource("4_e6h3r")]
-visible = false
 
-[node name="UIManager" type="CanvasLayer" parent="."]
+[node name="UIManager" type="CanvasLayer" parent="." groups=["ui_manager"]]
 script = ExtResource("3_1ye6f")

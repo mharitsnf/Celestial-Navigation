@@ -11,12 +11,6 @@ var _transitioning: bool = false
 signal transition_finished
 
 # ========== Built-in functions ==========
-func _enter_tree() -> void:
-	if !is_in_group("player_controller_manager"):
-		add_to_group("player_controller_manager")
-	if !is_in_group("persist"):
-		add_to_group("persist")
-
 func _ready() -> void:
 	main_camera = STUtil.get_only_node_in_group("main_camera")
 	main_camera_controller = STUtil.get_only_node_in_group("main_camera_controller")

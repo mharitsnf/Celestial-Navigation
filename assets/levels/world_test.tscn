@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bohsb8opfjfgr"]
+[gd_scene load_steps=12 format=3 uid="uid://bohsb8opfjfgr"]
 
 [ext_resource type="PackedScene" uid="uid://d1vjavo5saswj" path="res://assets/prefabs/time_manager/time_manager.tscn" id="1_tkbic"]
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_u0thf"]
@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/star loader/star_loader.tscn" id="3_g722y"]
 [ext_resource type="PackedScene" uid="uid://cjn37qac1f86p" path="res://assets/prefabs/managers/player_controller_manager/player_controller_manager.tscn" id="4_v2hc8"]
 [ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/test_box/test_box.tscn" id="6_u01up"]
+[ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/player_boat.tscn" id="7_03d3k"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="7_e0eip"]
-[ext_resource type="PackedScene" uid="uid://bky8p0lm0pm10" path="res://assets/prefabs/entities/player_boat/player_boat.tscn" id="8_km3yc"]
 [ext_resource type="PackedScene" uid="uid://v5c54hsyvq5g" path="res://assets/prefabs/UI/camera_mask/camera_mask.tscn" id="9_6tthl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
@@ -15,9 +15,6 @@ radius = 793.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_oggbs"]
 radius = 2000.0
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6r5gq"]
-points = PackedVector3Array(-0.443265, 0.682674, 1.11296, 0.876529, 0.416489, 0.522468, 0.84991, 0.363095, 0.498272, -0.850345, 0.697566, -2.03905, -0.619107, 0.0114679, 0.13434, 0.656888, 0, -1.77312, 0.851227, 0.691336, -2.00838, -0.705092, 0.0472315, -1.85098, 0.0332897, 0.00546945, 0.754477, 0.352603, 0.682415, 1.16476, -0.844879, 0.363418, 0.508003, -0.0701215, 0.363594, 1.39799, 0.845056, 0.310693, -1.99564, 0.641166, 0.0081788, 0.0875831, 0.821046, 0.678678, 0.467202, -0.81489, 0.682696, 0.475853, 0.463132, 0.41787, 1.23265, -0.434543, 0.363605, 1.19031, -0.641151, 0, -1.77312, -0.845662, 0.311834, -1.92243, 0.0345851, 0.686734, 1.34386, -0.376466, 0.00443138, 0.553101, 0.387378, 0.0086134, 0.542807, -0.859761, 0.468989, 0.52153, -0.733458, 0.107548, 0.141985, 0.707891, 0.0525011, -1.82224, 0.873269, 0.363801, -1.94545, -0.0716198, 0.470113, 1.42998, 0.0881274, 0.41784, 1.44644, -0.860337, 0.62703, 0.4169, -0.490964, 0.521448, 1.15081, 0.447878, 0.363464, 1.1824)
 
 [node name="WorldTest" type="Node3D"]
 
@@ -56,20 +53,14 @@ wave_data_2 = Vector4(0.08, 25, 0, 1)
 speed = 0.25
 
 [node name="MainCamera" parent="PersistObjects" node_paths=PackedStringArray("follow_target") instance=ExtResource("7_e0eip")]
+transform = Transform3D(0.551296, -0.436174, 0.711214, 0, 0.852458, 0.522796, -0.834309, -0.288216, 0.469957, 8.76981, 800, 7.93238)
 follow_target = NodePath("../PlayerControllerManager/PlayerBoat/TPC")
 
 [node name="PlayerControllerManager" parent="PersistObjects" node_paths=PackedStringArray("current_controller") instance=ExtResource("4_v2hc8")]
 current_controller = NodePath("PlayerBoat/Controller")
 
-[node name="PlayerBoat" parent="PersistObjects/PlayerControllerManager" instance=ExtResource("8_km3yc")]
+[node name="PlayerBoat" parent="PersistObjects/PlayerControllerManager" instance=ExtResource("7_03d3k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792, 0)
-
-[node name="CollisionShape3D" parent="PersistObjects/PlayerControllerManager/PlayerBoat" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
-shape = SubResource("ConvexPolygonShape3D_6r5gq")
-
-[node name="ForFPC" parent="PersistObjects/PlayerControllerManager/PlayerBoat/CollisionShape3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.200012, 0)
 
 [node name="TestBox" parent="PersistObjects" instance=ExtResource("6_u01up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31882, 792, 6)
