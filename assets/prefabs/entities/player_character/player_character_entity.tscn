@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c2ipvtnsysqv"]
+[gd_scene load_steps=26 format=3 uid="uid://c2ipvtnsysqv"]
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_vu730"]
 [ext_resource type="Script" path="res://assets/prefabs/entities/player_character/character_entity.gd" id="2_lgsjv"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_base_state.gd" id="5_ujw15"]
 [ext_resource type="PackedScene" uid="uid://bq08c3kmmbx62" path="res://assets/prefabs/controllers/camera/virtual_camera_controller.tscn" id="7_jkr5c"]
 [ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="8_6hl70"]
+[ext_resource type="PackedScene" uid="uid://ccsl3yyji70j7" path="res://assets/prefabs/controllers/camera/fpc_camera.tscn" id="8_m2ynf"]
+[ext_resource type="PackedScene" uid="uid://dve873wgmefrw" path="res://assets/prefabs/controllers/camera/fpc_sextant.tscn" id="9_kc41q"]
 [ext_resource type="PackedScene" uid="uid://deo4jmce6xulx" path="res://assets/prefabs/controllers/camera/fpc_controller.tscn" id="9_q00hg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hh0jc"]
@@ -108,6 +110,10 @@ follow_target = NodePath("..")
 submerged_min_angle = 5.0
 joypad_inverted_x = true
 joypad_inverted_y = false
+
+[node name="FPCCamera" parent="FPC" index="2" instance=ExtResource("8_m2ynf")]
+
+[node name="FPCSextant" parent="FPC" index="3" instance=ExtResource("9_kc41q")]
 
 [node name="PlayerBoatScannerArea" type="Area3D" parent="." index="3"]
 collision_layer = 0

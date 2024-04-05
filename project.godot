@@ -170,6 +170,7 @@ change_fpc_type={
 3d_physics/layer_2="Gravity and World"
 3d_physics/layer_3="Player Boat Area"
 3d_physics/layer_4="Interaction"
+3d_physics/layer_5="Sun Moon Guide"
 
 [physics]
 

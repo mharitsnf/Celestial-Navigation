@@ -24,3 +24,9 @@ max_fov = 75.0
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Gimbal/InnerGimbal/Offset"]
 visible = false
 mesh = SubResource("SphereMesh_f6icg")
+
+[node name="RayCast3D" type="RayCast3D" parent="Gimbal/InnerGimbal/Offset" groups=["first_person_raycast"]]
+target_position = Vector3(0, 0, -3800)
+collision_mask = 16
+debug_shape_custom_color = Color(1, 1, 1, 1)
+debug_shape_thickness = 5

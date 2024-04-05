@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://assets/prefabs/time_manager/time_manager.gd" id="1_342v5"]
 [ext_resource type="PackedScene" uid="uid://36uskekn12c4" path="res://assets/prefabs/planetary/main_light/main_light.tscn" id="1_h5laa"]
-[ext_resource type="PackedScene" uid="uid://5jhytay8hw5s" path="res://assets/prefabs/time_manager/sun_moon_path.tscn" id="3_6btbi"]
+[ext_resource type="PackedScene" uid="uid://cs2tven1didtk" path="res://assets/prefabs/planetary/sun_moon_guide.tscn" id="3_u8jaw"]
 
 [node name="TimeManager" type="Node3D" groups=["persist"]]
 script = ExtResource("1_342v5")
@@ -19,4 +19,4 @@ max_energy = 0.1
 sprite_modulation = Color(0.439216, 0.439216, 0.439216, 1)
 sprite_scale = 40.0
 
-[node name="SunMoonPath" parent="." instance=ExtResource("3_6btbi")]
+[node name="SunMoonGuide" parent="." instance=ExtResource("3_u8jaw")]

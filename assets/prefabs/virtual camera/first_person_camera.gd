@@ -8,6 +8,7 @@ class_name FirstPersonCamera extends VirtualCamera
 @export var gimbal : Node3D # For rotation in local Y
 @export var inner_gimbal : Node3D # For rotation in local X
 
+var type_transitioning: bool = false
 var fpc_index: int = 0
 var fpc_types: Array[Node]
 var current_fpc_type: FPCType
@@ -52,17 +53,25 @@ func copy_rotation(x_rotation: float, y_rotation: float) -> void:
 # ========== ========== ========== ==========
 
 # ========== FPC type functions ==========
+func is_type_transitioning() -> bool:
+    return type_transitioning
+
+func set_type_transitioning(value: bool) -> void:
+    type_transitioning = value
+
 func get_current_fpc_type() -> FPCType:
     return current_fpc_type
 
 func set_current_fpc_type(value: FPCType) -> void:
     if value == get_current_fpc_type(): return
     if !value: return
+    set_type_transitioning(true)
     current_fpc_type = value
     if value is FPCCamera:
-        camera_mask.to_camera_mask()
+        await camera_mask.to_camera_mask()
     elif value is FPCSextant:
-        camera_mask.to_sextant_mask()
+        await camera_mask.to_sextant_mask()
+    set_type_transitioning(false)
 
 func _reset_fpc_type() -> void:
     fpc_index = 0
