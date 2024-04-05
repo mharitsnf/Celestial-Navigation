@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bl6seajhin6ok"]
+[gd_scene load_steps=15 format=3 uid="uid://bl6seajhin6ok"]
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_s5hml"]
 [ext_resource type="Script" path="res://assets/prefabs/entities/player_boat/player_boat_entity.gd" id="2_rbht2"]
@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://bq08c3kmmbx62" path="res://assets/prefabs/controllers/camera/virtual_camera_controller.tscn" id="6_7ggm6"]
 [ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="7_4om71"]
 [ext_resource type="PackedScene" uid="uid://deo4jmce6xulx" path="res://assets/prefabs/controllers/camera/fpc_controller.tscn" id="8_o1kml"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/fpc_camera.gd" id="9_q7klh"]
 [ext_resource type="PackedScene" uid="uid://c26yw05wco6bu" path="res://assets/prefabs/controllers/player/boat/player_boat_controller.tscn" id="9_wqan3"]
 [ext_resource type="PackedScene" uid="uid://c2ipvtnsysqv" path="res://assets/prefabs/entities/player_character/player_character_entity.tscn" id="10_31xpf"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/fpc_sextant.gd" id="10_sw2ak"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2cixb"]
 points = PackedVector3Array(-0.4432, -0.0914739, -3.65871, 0.48322, -0.0826591, -3.6513, -0.303897, 7.83539, -0.246553, 3.10388, 1.01987, -2.51775, -3.06223, 1.01987, -3.81601, 0.482664, 1.92791, -5.34334, 0.0208259, -0.104903, 3.164, 1.48087, 1.99363, 3.48658, -2.08867, 1.99363, 2.1873, 0.993788, 6.53598, -0.246553, 2.29208, 1.01987, -5.11427, -2.21137, 0.908054, -5.03335, -2.89987, 0.53299, -2.19242, 0.18198, 2.15566, 4.78382, -0.280535, 3.32721, -4.62473, -0.303897, 7.83539, 0.240422, -1.76394, 4.58846, -0.246553, 2.13032, 1.99363, 2.02566, 2.94152, 0.695018, -2.02975, 0.344945, 7.67256, -0.246553, 2.94152, 1.1819, -4.1393, -1.34032, 0.752825, 2.76877, -1.1145, 1.99363, 3.97254, 0.766742, 3.33103, -4.43936, 1.23762, 0.733876, 2.9403, -1.30758, 3.0405, -4.24689, -3.06223, 1.01987, -2.19242, 0.0208259, 0.65942, 4.26988, 0.636273, -0.0735105, 2.21044, 1.80499, 4.42644, -0.246553, -0.13474, 0.357568, -4.76144, -0.589064, -0.035177, 2.48922)
@@ -72,6 +74,12 @@ follow_target = NodePath("../CollisionShape3D/ForFPC")
 submerged_min_angle = -30.0
 joypad_inverted_x = true
 joypad_inverted_y = false
+
+[node name="FPCCamera" type="Node" parent="FPC" index="2"]
+script = ExtResource("9_q7klh")
+
+[node name="FPCSextant" type="Node" parent="FPC" index="3"]
+script = ExtResource("10_sw2ak")
 
 [node name="PlayerBoatArea" type="Area3D" parent="." index="3"]
 collision_layer = 4

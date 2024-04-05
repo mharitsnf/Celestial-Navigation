@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/player_boat.tscn" id="1_2w3q4"]
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_dg3yw"]
-[ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/ocean/ocean.tscn" id="1_rln1m"]
-[ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/star loader/star_loader.tscn" id="2_824qi"]
+[ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/planetary/ocean/ocean.tscn" id="1_rln1m"]
+[ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/planetary/star loader/star_loader.tscn" id="2_824qi"]
 [ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/test_box/test_box.tscn" id="2_wkhmd"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="4_6q7yp"]
 [ext_resource type="PackedScene" uid="uid://c26yw05wco6bu" path="res://assets/prefabs/controllers/player/boat/player_boat_controller.tscn" id="5_d5tbi"]

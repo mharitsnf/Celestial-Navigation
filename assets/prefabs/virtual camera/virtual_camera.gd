@@ -1,5 +1,13 @@
 class_name VirtualCamera extends Node3D
 
+# IMPORTANT!
+# Remote transform use rotation is set to false, meaning the virtual camera's basis
+# will not calibrate to the spherical planet's basis (the up vector will always be (0,1,0)).
+# To make the virtual camera's basis calibrate, put this virtual camera as a child
+# of the follow target.
+# The follow target must be the one that is calibrating the basis.
+# For example, this works when the virtual camera's follow target is a BaseEntity, and when the
+# virtual camera is a child of the same BaseEntity.
 class TargetNode extends RefCounted:
 	var follow_target : Node3D
 	var remote_transform : RemoteTransform3D

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://0qm7kqsedaiu"]
+
+[ext_resource type="Material" uid="uid://qq3s0v8dgt3x" path="res://assets/resources/materials/m_ocean.tres" id="1_4ome2"]
+[ext_resource type="Script" path="res://assets/prefabs/planetary/ocean/ocean.gd" id="2_1l5eg"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_620a4"]
+material = ExtResource("1_4ome2")
+size = Vector2(200, 200)
+subdivide_width = 100
+subdivide_depth = 100
+
+[node name="Ocean" type="MeshInstance3D" groups=["ocean", "persist"]]
+extra_cull_margin = 16384.0
+mesh = SubResource("PlaneMesh_620a4")
+script = ExtResource("2_1l5eg")
+wave_data_1 = Vector4(0.025, 30, 0.275, 0.675)
+wave_data_2 = Vector4(0.025, 24, 0.4, 0.74)
+wave_data_3 = Vector4(0.025, 18, 0.32, 1.15)
+wave_data_4 = Vector4(0.025, 22, 0.345, 0.615)
+wave_data_5 = Vector4(0.025, 28, 0.83, 0.135)

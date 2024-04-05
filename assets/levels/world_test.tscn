@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://d1vjavo5saswj" path="res://assets/prefabs/time_manager/time_manager.tscn" id="1_tkbic"]
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_u0thf"]
-[ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/ocean/ocean.tscn" id="2_dnrth"]
-[ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/star loader/star_loader.tscn" id="3_g722y"]
+[ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/planetary/ocean/ocean.tscn" id="2_dnrth"]
+[ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/planetary/star loader/star_loader.tscn" id="3_g722y"]
 [ext_resource type="PackedScene" uid="uid://ddurdedy7tgv3" path="res://assets/models/world/planet.glb" id="3_uo0we"]
 [ext_resource type="Material" uid="uid://rhgvoh2j2wyu" path="res://assets/resources/materials/m_isa.tres" id="4_7a0xy"]
 [ext_resource type="PackedScene" uid="uid://cjn37qac1f86p" path="res://assets/prefabs/managers/player_controller_manager/player_controller_manager.tscn" id="4_v2hc8"]
@@ -79,8 +79,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792, 0)
 
 [node name="TestBox" parent="PersistObjects" instance=ExtResource("6_u01up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31882, 792, 6)
-
-[connection signal="follow_target_changed" from="PersistObjects/MainCamera" to="PersistObjects/PlayerControllerManager/PlayerBoat/FPC/Controller" method="_on_main_camera_follow_target_changed"]
 
 [editable path="Environment/PlanetBody/planet"]
 [editable path="PersistObjects/PlayerControllerManager/PlayerBoat"]

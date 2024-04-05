@@ -12,12 +12,14 @@ func _ready() -> void:
     position = Vector2(-376, -216)
 
 func to_camera_mask() -> void:
-    var tween: Tween = create_tween()
-    tween.tween_method(_set_cutoff_mask, 0., 1., .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+    var this_tween: Tween = create_tween()
+    var from: float = shader_mat.get_shader_parameter("cutoff")
+    this_tween.tween_method(_set_cutoff_mask, from, 1., .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 func to_sextant_mask() -> void:
-    var tween: Tween = create_tween()
-    tween.tween_method(_set_cutoff_mask, 1., 0., .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+    var this_tween: Tween = create_tween()
+    var from: float = shader_mat.get_shader_parameter("cutoff")
+    this_tween.tween_method(_set_cutoff_mask, from, 0., .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 func _set_cutoff_mask(value: float) -> void:
     shader_mat.set_shader_parameter("cutoff", value)
