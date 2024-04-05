@@ -80,6 +80,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792, 0)
 [node name="TestBox" parent="PersistObjects" instance=ExtResource("6_u01up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31882, 792, 6)
 
+[connection signal="follow_target_changed" from="PersistObjects/MainCamera" to="PersistObjects/PlayerControllerManager/PlayerBoat/FPC/Controller" method="_on_main_camera_follow_target_changed"]
+
 [editable path="Environment/PlanetBody/planet"]
 [editable path="PersistObjects/PlayerControllerManager/PlayerBoat"]
 [editable path="PersistObjects/PlayerControllerManager/PlayerBoat/CollisionShape3D/ForFPC/PlayerBoatInst"]

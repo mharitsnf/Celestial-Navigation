@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6c54usfla1jt"]
+[gd_scene load_steps=19 format=3 uid="uid://b6c54usfla1jt"]
 
 [ext_resource type="PackedScene" uid="uid://bohsb8opfjfgr" path="res://assets/levels/world_test.tscn" id="1_n8kch"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/pixelize.gdshader" id="2_gyjex"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d11f84wu226j8" path="res://assets/prefabs/save_system/save_system.tscn" id="4_bncqj"]
 [ext_resource type="PackedScene" uid="uid://c0s7a0klmw3ek" path="res://assets/prefabs/UI/screens/TransitionScreen.tscn" id="4_e6h3r"]
 [ext_resource type="Texture2D" uid="uid://esccb0ghemjn" path="res://assets/textures/camera_mask.PNG" id="5_7v5rb"]
+[ext_resource type="Texture2D" uid="uid://de1lsimp3xj4n" path="res://assets/textures/sextant_mask.png" id="8_gkf3r"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_oviw0"]
 viewport_path = NodePath("Main/SubViewport")
@@ -31,9 +32,28 @@ shader_parameter/main_tex = SubResource("ViewportTexture_wgiqr")
 [sub_resource type="ViewportTexture" id="ViewportTexture_r8w1v"]
 viewport_path = NodePath("Posterize/SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eij52"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b28bo"]
+noise_type = 2
+frequency = 0.0228
+fractal_octaves = 2
+fractal_lacunarity = 1.95
+fractal_gain = 0.865
+fractal_weighted_strength = 0.66
+cellular_jitter = 1.88
+domain_warp_enabled = true
+domain_warp_fractal_gain = 0.88
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g7ims"]
+noise = SubResource("FastNoiseLite_b28bo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_slcvo"]
+resource_local_to_scene = true
 shader = ExtResource("4_bhpxt")
-shader_parameter/mask_tex = ExtResource("5_7v5rb")
+shader_parameter/cutoff = 0.0
+shader_parameter/smooth_size = 0.0
+shader_parameter/camera_mask_tex = ExtResource("5_7v5rb")
+shader_parameter/sextant_mask_tex = ExtResource("8_gkf3r")
+shader_parameter/transition_noise_tex = SubResource("NoiseTexture2D_g7ims")
 
 [node name="Root" type="Node"]
 
@@ -114,7 +134,7 @@ offset_bottom = 40.0
 texture = SubResource("ViewportTexture_r8w1v")
 
 [node name="CameraMask" parent="CameraMask/SubViewport" instance=ExtResource("3_yisfc")]
-material = SubResource("ShaderMaterial_eij52")
+material = SubResource("ShaderMaterial_slcvo")
 
 [node name="TransitionScreen" parent="." instance=ExtResource("4_e6h3r")]
 

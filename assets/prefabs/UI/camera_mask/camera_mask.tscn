@@ -1,13 +1,32 @@
-[gd_scene load_steps=9 format=3 uid="uid://v5c54hsyvq5g"]
+[gd_scene load_steps=12 format=3 uid="uid://v5c54hsyvq5g"]
 
 [ext_resource type="Shader" path="res://assets/resources/shaders/mask.gdshader" id="1_01qje"]
 [ext_resource type="Texture2D" uid="uid://esccb0ghemjn" path="res://assets/textures/camera_mask.PNG" id="2_krubv"]
 [ext_resource type="Script" path="res://assets/prefabs/UI/camera_mask/camera_mask.gd" id="3_b27n4"]
+[ext_resource type="Texture2D" uid="uid://de1lsimp3xj4n" path="res://assets/textures/sextant_mask.png" id="3_pmx6s"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b28bo"]
+noise_type = 2
+frequency = 0.0228
+fractal_octaves = 2
+fractal_lacunarity = 1.95
+fractal_gain = 0.865
+fractal_weighted_strength = 0.66
+cellular_jitter = 1.88
+domain_warp_enabled = true
+domain_warp_fractal_gain = 0.88
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g7ims"]
+noise = SubResource("FastNoiseLite_b28bo")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a8c8c"]
 resource_local_to_scene = true
 shader = ExtResource("1_01qje")
-shader_parameter/mask_tex = ExtResource("2_krubv")
+shader_parameter/cutoff = 0.0
+shader_parameter/smooth_size = 0.0
+shader_parameter/camera_mask_tex = ExtResource("2_krubv")
+shader_parameter/sextant_mask_tex = ExtResource("3_pmx6s")
+shader_parameter/transition_noise_tex = SubResource("NoiseTexture2D_g7ims")
 
 [sub_resource type="Animation" id="Animation_rbj8u"]
 length = 0.001
