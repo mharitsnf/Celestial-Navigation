@@ -44,13 +44,14 @@ func _get_brake_input() -> void:
 	brake_input = Input.get_action_strength("boat_brake")
 
 const ROTATE_TO_ZERO_WEIGHT: float = 2.
-func _get_rotate_input(delta: float) -> void:
-	if parent.linear_velocity.length() > 0.:
-		var value: float = Input.get_axis("boat_right", "boat_left")
-		var rotation_scale: float = remap(parent.linear_velocity.length(), 0., parent.speed_limit, 0., 1.)
-		rotate_input = value * rotation_scale
-	else:
-		rotate_input = lerp(rotate_input, 0., delta * ROTATE_TO_ZERO_WEIGHT)
+func _get_rotate_input(_delta: float) -> void:
+	rotate_input = Input.get_axis("boat_right", "boat_left")
+	# if parent.linear_velocity.length() > 0.:
+	# 	var value: float = Input.get_axis("boat_right", "boat_left")
+	# 	var rotation_scale: float = remap(parent.linear_velocity.length(), 0., parent.speed_limit, 0., 1.)
+	# 	rotate_input = value * rotation_scale
+	# else:
+	# 	rotate_input = lerp(rotate_input, 0., delta * ROTATE_TO_ZERO_WEIGHT)
 
 func _get_exit_ship_input() -> void:
 	if manager.can_switch() and Input.is_action_just_pressed("enter_ship"):

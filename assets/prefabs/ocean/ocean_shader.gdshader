@@ -15,6 +15,9 @@ group_uniforms WaveData;
 uniform float speed = 1.;
 uniform vec4 wave_1 = vec4(.2, 10., 1., 0.);
 uniform vec4 wave_2 = vec4(.2, 10., 1., 0.);
+uniform vec4 wave_3 = vec4(.2, 10., 1., 0.);
+uniform vec4 wave_4 = vec4(.2, 10., 1., 0.);
+uniform vec4 wave_5 = vec4(.2, 10., 1., 0.);
 
 group_uniforms VisualData;
 uniform vec3 albedo : source_color;
@@ -88,6 +91,9 @@ void vertex() {
 	
 	vertex += gerstner_wave(wave_1, init_vertex, tangent, binormal);
 	vertex += gerstner_wave(wave_2, init_vertex, tangent, binormal);
+	vertex += gerstner_wave(wave_3, init_vertex, tangent, binormal);
+	vertex += gerstner_wave(wave_4, init_vertex, tangent, binormal);
+	vertex += gerstner_wave(wave_5, init_vertex, tangent, binormal);
 	
 	vertex -= movement_offset;
 	

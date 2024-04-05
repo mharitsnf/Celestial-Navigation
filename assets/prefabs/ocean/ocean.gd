@@ -8,6 +8,9 @@ class_name Ocean extends MeshInstance3D
 @export_group("Wave data")
 @export var wave_data_1 : Vector4
 @export var wave_data_2 : Vector4
+@export var wave_data_3 : Vector4
+@export var wave_data_4 : Vector4
+@export var wave_data_5 : Vector4
 @export var speed : float = 1.
 
 var default_initial_position : Vector3 = Vector3(0,STUtil.PLANET_RADIUS,0)
@@ -82,6 +85,9 @@ func _update_shader_params() -> void:
 	shader.set_shader_parameter("movement_offset", offset)
 	shader.set_shader_parameter("wave_1", wave_data_1)
 	shader.set_shader_parameter("wave_2", wave_data_2)
+	shader.set_shader_parameter("wave_3", wave_data_3)
+	shader.set_shader_parameter("wave_4", wave_data_4)
+	shader.set_shader_parameter("wave_5", wave_data_5)
 	shader.set_shader_parameter("speed", speed)
 	if mesh is PlaneMesh and mesh.size.x == mesh.size.y:
 		shader.set_shader_parameter("plane_size", mesh.size.x)

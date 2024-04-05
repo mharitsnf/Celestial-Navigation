@@ -126,6 +126,21 @@ func _calculate_total_gerstner(vertex : Vector3) -> GerstnerResult:
 	tangent += gerstner_res.tangent
 	binormal += gerstner_res.binormal
 
+	gerstner_res = _calculate_gerstner(ocean.wave_data_3, gerstner_vertex)
+	gerstner_vertex += gerstner_res.vertex
+	tangent += gerstner_res.tangent
+	binormal += gerstner_res.binormal
+
+	gerstner_res = _calculate_gerstner(ocean.wave_data_4, gerstner_vertex)
+	gerstner_vertex += gerstner_res.vertex
+	tangent += gerstner_res.tangent
+	binormal += gerstner_res.binormal
+
+	gerstner_res = _calculate_gerstner(ocean.wave_data_5, gerstner_vertex)
+	gerstner_vertex += gerstner_res.vertex
+	tangent += gerstner_res.tangent
+	binormal += gerstner_res.binormal
+
 	gerstner_vertex -= ocean.get_offset()
 	var normal : Vector3 = binormal.cross(tangent).normalized()
 	return GerstnerResult.new(gerstner_vertex, normal, tangent, binormal)

@@ -69,6 +69,7 @@ script = ExtResource("2_lgsjv")
 speed_limit = 3.0
 normal_container = NodePath("CollisionShape3D")
 visual_container = NodePath("CollisionShape3D/Visuals")
+_update_normal = false
 float_force = 2.5
 ocean_surface_offset = -1.0
 
@@ -90,7 +91,7 @@ mesh = SubResource("BoxMesh_ox2q4")
 skeleton = NodePath("")
 
 [node name="TPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("4_k7shh")]
-_offset = Vector3(0, 3, 0)
+_offset = Vector3(0, 2, 0)
 max_x_angle = 20.0
 follow_target = NodePath("..")
 
@@ -122,8 +123,9 @@ collision_mask = 8
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractionScannerArea" index="0"]
 shape = SubResource("SphereShape3D_t1ygy")
 
-[node name="Controller" type="Node" parent="." index="5" node_paths=PackedStringArray("interaction_scanner")]
+[node name="Controller" type="Node" parent="." index="5" node_paths=PackedStringArray("third_person_camera", "interaction_scanner")]
 script = ExtResource("4_eocql")
+third_person_camera = NodePath("../TPC")
 interaction_scanner = NodePath("../InteractionScannerArea")
 
 [node name="CharacterBaseState" type="Node" parent="Controller" index="0"]

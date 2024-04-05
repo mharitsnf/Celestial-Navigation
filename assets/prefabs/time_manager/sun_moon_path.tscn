@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://5jhytay8hw5s"]
+
+[ext_resource type="PackedScene" uid="uid://bf1idfrny8xxj" path="res://assets/models/planetary/sun_moon_path.glb" id="1_hxdbo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0mtw"]
+shading_mode = 0
+
+[node name="SunMoonPath" instance=ExtResource("1_hxdbo")]
+
+[node name="Circle" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_y0mtw")

@@ -21,16 +21,17 @@ height = 18.2
 [node name="PlayerBoat" node_paths=PackedStringArray("propellers", "gas_particles", "normal_container", "visual_container") instance=ExtResource("1_s5hml")]
 mass = 600.0
 script = ExtResource("2_rbht2")
-propeller_rotation_speed = 50.0
+propeller_rotation_speed = 125.0
 propeller_start_weight = 5.0
 propeller_stop_weight = 3.0
 propellers = [NodePath("CollisionShape3D/ForFPC/PlayerBoatInst/PropellerL"), NodePath("CollisionShape3D/ForFPC/PlayerBoatInst/PropellerR")]
 gas_particles = [NodePath("CollisionShape3D/ForFPC/Particles/BoatEngine"), NodePath("CollisionShape3D/ForFPC/Particles/BoatEngine2")]
-rotation_speed = 25.0
-move_force = 2000.0
+rotation_speed = 15.0
+speed_limit = 25.0
+move_force = 5000.0
 normal_container = NodePath("CollisionShape3D")
 visual_container = NodePath("CollisionShape3D/ForFPC")
-float_force = 900.0
+float_force = 600.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0.4)
@@ -55,15 +56,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0)
 _spring_length = 12.0
 _offset = Vector3(0, 4, 0)
 max_x_angle = 20.0
+min_x_angle = -20.0
 follow_target = NodePath("..")
 
 [node name="Controller" parent="TPC" index="1" instance=ExtResource("6_7ggm6")]
-submerged_min_angle = -60.0
+submerged_min_angle = -20.0
 mouse_inverted_x = false
 mouse_inverted_y = false
 
-[node name="FPC" parent="." index="2" instance=ExtResource("7_4om71")]
+[node name="FPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("7_4om71")]
 _offset = Vector3(0, 10, 0)
+follow_target = NodePath("../CollisionShape3D/ForFPC")
 
 [node name="Controller" parent="FPC" index="1" instance=ExtResource("8_o1kml")]
 submerged_min_angle = -30.0
@@ -85,9 +88,10 @@ collision_mask = 8
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3, 0)
 shape = SubResource("CapsuleShape3D_4nvc2")
 
-[node name="Controller" parent="." index="5" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("9_wqan3")]
+[node name="Controller" parent="." index="5" node_paths=PackedStringArray("dropoff_point", "third_person_camera", "interaction_scanner") instance=ExtResource("9_wqan3")]
 dropoff_point = NodePath("../CollisionShape3D/ForFPC/DropoffPoint")
 player_character_pscn = ExtResource("10_31xpf")
+third_person_camera = NodePath("../TPC")
 interaction_scanner = NodePath("../InteractionScanner")
 
 [editable path="CollisionShape3D/ForFPC/PlayerBoatInst"]

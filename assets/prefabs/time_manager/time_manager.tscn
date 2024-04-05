@@ -1,11 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1vjavo5saswj"]
+[gd_scene load_steps=4 format=3 uid="uid://d1vjavo5saswj"]
 
 [ext_resource type="Script" path="res://assets/prefabs/time_manager/time_manager.gd" id="1_342v5"]
 [ext_resource type="PackedScene" uid="uid://36uskekn12c4" path="res://assets/prefabs/main_light/main_light.tscn" id="1_h5laa"]
+[ext_resource type="PackedScene" uid="uid://5jhytay8hw5s" path="res://assets/prefabs/time_manager/sun_moon_path.tscn" id="3_6btbi"]
 
 [node name="TimeManager" type="Node3D" groups=["persist"]]
 script = ExtResource("1_342v5")
-time_speed = 500.0
+time_speed = 215.0
 
 [node name="Sun" parent="." instance=ExtResource("1_h5laa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3500)
@@ -17,3 +18,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3500)
 max_energy = 0.1
 sprite_modulation = Color(0.439216, 0.439216, 0.439216, 1)
 sprite_scale = 40.0
+
+[node name="SunMoonPath" parent="." instance=ExtResource("3_6btbi")]

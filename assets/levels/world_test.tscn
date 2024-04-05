@@ -1,16 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://bohsb8opfjfgr"]
+[gd_scene load_steps=13 format=3 uid="uid://bohsb8opfjfgr"]
 
 [ext_resource type="PackedScene" uid="uid://d1vjavo5saswj" path="res://assets/prefabs/time_manager/time_manager.tscn" id="1_tkbic"]
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_u0thf"]
 [ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/ocean/ocean.tscn" id="2_dnrth"]
 [ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/star loader/star_loader.tscn" id="3_g722y"]
+[ext_resource type="PackedScene" uid="uid://ddurdedy7tgv3" path="res://assets/models/world/planet.glb" id="3_uo0we"]
+[ext_resource type="Material" uid="uid://rhgvoh2j2wyu" path="res://assets/resources/materials/m_isa.tres" id="4_7a0xy"]
 [ext_resource type="PackedScene" uid="uid://cjn37qac1f86p" path="res://assets/prefabs/managers/player_controller_manager/player_controller_manager.tscn" id="4_v2hc8"]
 [ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/test_box/test_box.tscn" id="6_u01up"]
 [ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/player_boat.tscn" id="7_03d3k"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="7_e0eip"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
-radius = 793.0
+radius = 792.25
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_oggbs"]
 radius = 2000.0
@@ -28,6 +30,20 @@ environment = ExtResource("1_u0thf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/PlanetBody"]
 shape = SubResource("SphereShape3D_kt8wf")
+
+[node name="planet" parent="Environment/PlanetBody" instance=ExtResource("3_uo0we")]
+
+[node name="UTRock" parent="Environment/PlanetBody/planet" index="0"]
+surface_material_override/0 = ExtResource("4_7a0xy")
+
+[node name="UTRock_001" parent="Environment/PlanetBody/planet" index="1"]
+surface_material_override/0 = ExtResource("4_7a0xy")
+
+[node name="UTRock_002" parent="Environment/PlanetBody/planet" index="2"]
+surface_material_override/0 = ExtResource("4_7a0xy")
+
+[node name="UTRock_003" parent="Environment/PlanetBody/planet" index="3"]
+surface_material_override/0 = ExtResource("4_7a0xy")
 
 [node name="GravityArea" type="Area3D" parent="Environment"]
 collision_layer = 0
@@ -51,18 +67,19 @@ wave_data_1 = Vector4(0.06, 30, 1, 0)
 wave_data_2 = Vector4(0.08, 25, 0, 1)
 speed = 0.25
 
+[node name="MainCamera" parent="PersistObjects" node_paths=PackedStringArray("follow_target") instance=ExtResource("7_e0eip")]
+transform = Transform3D(0.551296, -0.436174, 0.711214, 0, 0.852458, 0.522796, -0.834309, -0.288216, 0.469957, 8.76981, 800, 7.93238)
+follow_target = NodePath("../PlayerControllerManager/PlayerBoat/TPC")
+
 [node name="PlayerControllerManager" parent="PersistObjects" node_paths=PackedStringArray("current_controller") instance=ExtResource("4_v2hc8")]
 current_controller = NodePath("PlayerBoat/Controller")
 
 [node name="PlayerBoat" parent="PersistObjects/PlayerControllerManager" instance=ExtResource("7_03d3k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792, 0)
 
-[node name="MainCamera" parent="PersistObjects" node_paths=PackedStringArray("follow_target") instance=ExtResource("7_e0eip")]
-transform = Transform3D(0.551296, -0.436174, 0.711214, 0, 0.852458, 0.522796, -0.834309, -0.288216, 0.469957, 8.76981, 800, 7.93238)
-follow_target = NodePath("../PlayerControllerManager/PlayerBoat/TPC")
-
 [node name="TestBox" parent="PersistObjects" instance=ExtResource("6_u01up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31882, 792, 6)
 
+[editable path="Environment/PlanetBody/planet"]
 [editable path="PersistObjects/PlayerControllerManager/PlayerBoat"]
 [editable path="PersistObjects/PlayerControllerManager/PlayerBoat/CollisionShape3D/ForFPC/PlayerBoatInst"]

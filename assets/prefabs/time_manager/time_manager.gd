@@ -2,6 +2,7 @@ extends Node3D
 
 @export var time_speed: float = 1.
 var time_elapsed: float = 0.
+var current_day: int = 0
 
 const SECONDS_PER_DAY: float = 86400.
 
@@ -10,6 +11,11 @@ func _process(delta: float) -> void:
     _rotate_per_time()
 
 func _calculate_time_elapsed(delta: float) -> void:
+    if time_elapsed < delta * time_speed: print("day changed")
+
+    var half_day_mark: float = fmod(time_elapsed, SECONDS_PER_DAY / 2.)
+    if half_day_mark < delta * time_speed: print("half day mark")
+
     time_elapsed += delta * time_speed
     time_elapsed = fmod(time_elapsed, SECONDS_PER_DAY)
 
