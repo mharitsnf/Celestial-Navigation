@@ -39,17 +39,19 @@ const MOUSE_ROTATION_WEIGHT: float = .001
 func _rotate_wrapper_mouse(event : InputEventMouseMotion) -> void:
     if !_is_mouse_allowed(): return
     var direction: Vector2 = event.relative * MOUSE_ROTATION_WEIGHT * rotation_speed
+    direction.x *= int(mouse_inverted_x) * 2 - 1
+    direction.y *= int(mouse_inverted_y) * 2 - 1
     _rotate(direction)
 
 const JOYPAD_ROTATION_WEIGHT: float = .01
 func _rotate_wrapper_joypad() -> void:
     if !_is_joypad_allowed(): return
     var direction: Vector2 = Input.get_vector("rotate_camera_left", "rotate_camera_right", "rotate_camera_down", "rotate_camera_up") * JOYPAD_ROTATION_WEIGHT * rotation_speed
+    direction.x *= int(joypad_inverted_x) * 2 - 1
+    direction.y *= int(joypad_inverted_y) * 2 - 1
     _rotate(direction)
 
 func _rotate(direction: Vector2) -> void:
-    direction.x *= int(mouse_inverted_x) * 2 - 1
-    direction.y *= int(mouse_inverted_y) * 2 - 1
     if use_submerged_angles and parent.get_target_group().is_submerged():
         parent.rotate_camera(direction, submerged_min_angle, submerged_max_angle)
     else:
