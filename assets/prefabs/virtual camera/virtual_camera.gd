@@ -181,7 +181,7 @@ func get_y_rotation() -> float:
 func copy_rotation(_x_rotation: float, _y_rotation: float) -> void:
 	pass
 
-func rotate_camera(_direction : Vector2, _min_angle: float = min_x_angle) -> void:
+func rotate_camera(_direction : Vector2, _min_angle: float = min_x_angle, _max_angle: float = max_x_angle) -> void:
 	pass
 
 func is_active() -> bool:
