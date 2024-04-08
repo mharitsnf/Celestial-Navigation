@@ -13,12 +13,14 @@ var fpc_index: int = 0
 var fpc_types: Array[Node]
 var current_fpc_type: FPCType
 var camera_mask: CameraMask
+var sun_moon_path: SunMoonPath
 
 # ========== Built in functions ==========
 func _ready() -> void:
     super()
     _init_fpc_type()
     camera_mask = STUtil.get_only_node_in_group("camera_mask")
+    sun_moon_path = STUtil.get_only_node_in_group("sun_moon_path")
 
 func _process(delta: float) -> void:
     super(delta)
@@ -73,8 +75,10 @@ func set_current_fpc_type(value: FPCType) -> void:
     set_type_transitioning(true)
     current_fpc_type = value
     if value is FPCCamera:
+        sun_moon_path.hide_path()
         await camera_mask.to_camera_mask()
     elif value is FPCSextant:
+        sun_moon_path.show_path()
         await camera_mask.to_sextant_mask()
     set_type_transitioning(false)
 

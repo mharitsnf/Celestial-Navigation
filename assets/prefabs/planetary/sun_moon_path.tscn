@@ -1,11 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://5jhytay8hw5s"]
+[gd_scene load_steps=8 format=3 uid="uid://5jhytay8hw5s"]
 
 [ext_resource type="PackedScene" uid="uid://bf1idfrny8xxj" path="res://assets/models/planetary/sun_moon_path.glb" id="1_hxdbo"]
+[ext_resource type="Texture2D" uid="uid://dmsvwumwtld51" path="res://assets/textures/sun_moon_path.png" id="2_an5ir"]
+[ext_resource type="Script" path="res://assets/prefabs/planetary/sun_moon_path.gd" id="2_d24up"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/sun_moon_path.gdshader" id="2_jhmmo"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0mtw"]
-shading_mode = 0
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3c3d4"]
+frequency = 0.0154
 
-[node name="SunMoonPath" instance=ExtResource("1_hxdbo")]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kt4w1"]
+seamless = true
+noise = SubResource("FastNoiseLite_3c3d4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jm3ma"]
+render_priority = 0
+shader = ExtResource("2_jhmmo")
+shader_parameter/albedo_color = Color(0.054902, 0.784314, 0.247059, 1)
+shader_parameter/alpha_scissor = 0.8
+shader_parameter/cutoff = 1.0
+shader_parameter/smooth_size = 0.05
+shader_parameter/albedo_tex = ExtResource("2_an5ir")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_kt4w1")
+
+[node name="SunMoonPath" node_paths=PackedStringArray("mesh_instance") groups=["sun_moon_path"] instance=ExtResource("1_hxdbo")]
+script = ExtResource("2_d24up")
+rotation_per_frame = 2.5
+mesh_instance = NodePath("Circle")
 
 [node name="Circle" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_y0mtw")
+surface_material_override/0 = SubResource("ShaderMaterial_jm3ma")

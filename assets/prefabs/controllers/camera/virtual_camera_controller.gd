@@ -1,5 +1,6 @@
 class_name VirtualCameraController extends Node
 
+@export var use_submerged_angles: bool = true
 @export var submerged_min_angle: float = -80
 @export var submerged_max_angle: float = 80
 @export var rotation_speed: float = 1.
@@ -49,7 +50,7 @@ func _rotate_wrapper_joypad() -> void:
 func _rotate(direction: Vector2) -> void:
     direction.x *= int(mouse_inverted_x) * 2 - 1
     direction.y *= int(mouse_inverted_y) * 2 - 1
-    if parent.get_target_group().is_submerged():
+    if use_submerged_angles and parent.get_target_group().is_submerged():
         parent.rotate_camera(direction, submerged_min_angle, submerged_max_angle)
     else:
         parent.rotate_camera(direction)
