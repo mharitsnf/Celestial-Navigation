@@ -17,6 +17,7 @@ class TargetNode extends RefCounted:
 		follow_target.add_child(remote_transform)
 
 # ===== For other to follow this node =====
+@export var target_group: BaseEntity
 @export var remote_transform_parent_for_other : Node3D
 # ===== ===== ===== ===== ===== ===== =====
 
@@ -68,6 +69,9 @@ func _process(delta: float) -> void:
 # =============== ===============  ===============
 
 # =============== Follow and transition functions ===============
+func get_target_group() -> BaseEntity:
+	return target_group
+
 ## Returns the current follow target.
 func get_follow_target() -> Node3D:
 	return follow_target

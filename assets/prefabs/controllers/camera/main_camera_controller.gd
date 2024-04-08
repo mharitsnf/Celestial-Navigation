@@ -11,7 +11,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	await get_tree().process_frame
-	available_virtual_cameras = STUtil.get_nodes_in_group(parent.get_follow_target().get_parent().name + "VCs")
+	available_virtual_cameras = STUtil.get_nodes_in_group(String(parent.get_follow_target().get_target_group().get_path()) + "/VCs")
 
 func _process(delta: float) -> void:
 	if current_controller:

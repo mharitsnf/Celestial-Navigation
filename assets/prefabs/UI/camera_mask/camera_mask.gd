@@ -11,17 +11,19 @@ func _ready() -> void:
     size = Vector2(2688, 1512)
     position = Vector2(-376, -216)
 
-func to_camera_mask() -> void:
+func to_camera_mask() -> STUtil.Promise:
     var this_tween: Tween = create_tween()
     var from: float = shader_mat.get_shader_parameter("cutoff")
     this_tween.tween_method(_set_cutoff_mask, from, 1., .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
     await this_tween.finished
+    return STUtil.Promise.new()
 
-func to_sextant_mask() -> void:
+func to_sextant_mask() -> STUtil.Promise:
     var this_tween: Tween = create_tween()
     var from: float = shader_mat.get_shader_parameter("cutoff")
     this_tween.tween_method(_set_cutoff_mask, from, 0., .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
     await this_tween.finished
+    return STUtil.Promise.new()
 
 func _set_cutoff_mask(value: float) -> void:
     shader_mat.set_shader_parameter("cutoff", value)

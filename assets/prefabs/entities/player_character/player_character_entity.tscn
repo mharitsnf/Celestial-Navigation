@@ -92,8 +92,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.3)
 mesh = SubResource("BoxMesh_ox2q4")
 skeleton = NodePath("")
 
-[node name="TPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("4_k7shh")]
+[node name="TPC" parent="." index="1" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
 _offset = Vector3(0, 2, 0)
+target_group = NodePath("..")
 max_x_angle = 20.0
 follow_target = NodePath("..")
 
@@ -102,8 +103,9 @@ submerged_min_angle = -40.0
 mouse_inverted_x = false
 mouse_inverted_y = false
 
-[node name="FPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("8_6hl70")]
+[node name="FPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_6hl70")]
 _offset = Vector3(0, 1.35, -1.5)
+target_group = NodePath("..")
 follow_target = NodePath("..")
 
 [node name="Controller" parent="FPC" index="1" instance=ExtResource("9_q00hg")]

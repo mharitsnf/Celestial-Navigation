@@ -72,7 +72,7 @@ func switch_controller(next_controller: PlayerController) -> void:
 	if next_controller == current_controller: return
 	if !main_camera.get_follow_target() is ThirdPersonCamera: return
 
-	var available_virtual_cameras: Array[Node] = STUtil.get_nodes_in_group(next_controller.parent.name + "VCs")
+	var available_virtual_cameras: Array[Node] = STUtil.get_nodes_in_group(String(next_controller.parent.get_path()) + "/VCs")
 	if available_virtual_cameras.is_empty(): return
 
 	var third_person_camera: ThirdPersonCamera

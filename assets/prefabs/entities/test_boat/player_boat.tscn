@@ -54,9 +54,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 1, -5.9)
 [node name="DropoffPoint" type="Marker3D" parent="CollisionShape3D/ForFPC" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0)
 
-[node name="TPC" parent="." index="1" node_paths=PackedStringArray("follow_target") instance=ExtResource("5_5wq2t")]
+[node name="TPC" parent="." index="1" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_5wq2t")]
 _spring_length = 12.0
 _offset = Vector3(0, 4, 0)
+target_group = NodePath("..")
 max_x_angle = 20.0
 min_x_angle = -20.0
 follow_target = NodePath("..")
@@ -66,8 +67,9 @@ submerged_min_angle = -20.0
 mouse_inverted_x = false
 mouse_inverted_y = false
 
-[node name="FPC" parent="." index="2" node_paths=PackedStringArray("follow_target") instance=ExtResource("7_4om71")]
+[node name="FPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("7_4om71")]
 _offset = Vector3(0, 10, 0)
+target_group = NodePath("..")
 follow_target = NodePath("../CollisionShape3D/ForFPC")
 
 [node name="Controller" parent="FPC" index="1" instance=ExtResource("8_o1kml")]

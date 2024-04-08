@@ -16,7 +16,7 @@ func _handle_calculate_latitude() -> void:
         
         if !raycast.is_colliding(): return
         
-        var pos: Vector3 = target_group.global_position
+        var pos: Vector3 = parent.get_follow_target().global_position
         var xz_pos: Vector3 = Vector3(pos.x, 0., pos.z)
         pos = pos.normalized()
         xz_pos = xz_pos.normalized()

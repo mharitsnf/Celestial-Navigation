@@ -17,9 +17,7 @@ var camera_mask: CameraMask
 # ========== Built in functions ==========
 func _ready() -> void:
     super()
-    fpc_types = STUtil.get_nodes_in_group(get_parent().name + "FPCTypes")
-    if fpc_types.size() > 0:
-        current_fpc_type = fpc_types[fpc_index]
+    _init_fpc_type()
     camera_mask = STUtil.get_only_node_in_group("camera_mask")
 
 func _process(delta: float) -> void:
@@ -53,6 +51,13 @@ func copy_rotation(x_rotation: float, y_rotation: float) -> void:
 # ========== ========== ========== ==========
 
 # ========== FPC type functions ==========
+func _init_fpc_type() -> void:
+    fpc_types = STUtil.get_nodes_in_group(String(get_path()) + "/FPCTypes")
+    if fpc_types.size() == 0:
+        push_warning("No FPCTypes are found!")
+        return
+    current_fpc_type = fpc_types[0]
+
 func is_type_transitioning() -> bool:
     return type_transitioning
 
