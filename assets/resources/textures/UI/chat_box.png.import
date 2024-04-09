@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://de1lsimp3xj4n"
-path="res://.godot/imported/sextant_mask.png-fb532f0e23faf8a3b42bd051b371f4f2.ctex"
+uid="uid://sv2p60lnp6fn"
+path="res://.godot/imported/chat_box.png-bdf5eb4587bc1989c90ec3c944e14bdf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/sextant_mask.png"
-dest_files=["res://.godot/imported/sextant_mask.png-fb532f0e23faf8a3b42bd051b371f4f2.ctex"]
+source_file="res://assets/resources/textures/UI/chat_box.png"
+dest_files=["res://.godot/imported/chat_box.png-bdf5eb4587bc1989c90ec3c944e14bdf.ctex"]
 
 [params]
 

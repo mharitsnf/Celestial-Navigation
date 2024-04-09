@@ -18,8 +18,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if current_controller and is_instance_valid(current_controller):
 		current_controller.process(delta)
-		var latlong: STUtil.LatLong = STUtil.get_lat_long(current_controller.parent.global_position)
-		print(floori((latlong.longitude + 22.5) / 45.))
 
 func _physics_process(delta: float) -> void:
 	if current_controller and is_instance_valid(current_controller):

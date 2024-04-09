@@ -66,8 +66,9 @@ size = Vector3(0.4, 0.2, 0.5)
 [sub_resource type="SphereShape3D" id="SphereShape3D_t1ygy"]
 radius = 3.0
 
-[node name="PlayerCharacterEntity" node_paths=PackedStringArray("normal_container", "visual_container") instance=ExtResource("1_vu730")]
+[node name="PlayerCharacterEntity" node_paths=PackedStringArray("tpc", "normal_container", "visual_container") instance=ExtResource("1_vu730")]
 script = ExtResource("2_lgsjv")
+tpc = NodePath("TPC")
 speed_limit = 3.0
 normal_container = NodePath("CollisionShape3D")
 visual_container = NodePath("CollisionShape3D/Visuals")

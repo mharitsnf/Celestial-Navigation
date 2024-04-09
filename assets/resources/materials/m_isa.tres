@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://rhgvoh2j2wyu"]
 
 [ext_resource type="Shader" path="res://assets/resources/shaders/gradient_color.gdshader" id="1_uw4or"]
-[ext_resource type="Texture2D" uid="uid://b8csj8kcewwe2" path="res://assets/textures/isa true master.png" id="2_n0row"]
+[ext_resource type="Texture2D" uid="uid://b8csj8kcewwe2" path="res://assets/resources/textures/isa true master.png" id="2_n0row"]
 
 [sub_resource type="Gradient" id="Gradient_c1oe1"]
 interpolation_mode = 1

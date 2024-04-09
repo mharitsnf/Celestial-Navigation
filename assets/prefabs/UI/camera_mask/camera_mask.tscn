@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://v5c54hsyvq5g"]
 
 [ext_resource type="Shader" path="res://assets/resources/shaders/mask.gdshader" id="1_01qje"]
-[ext_resource type="Texture2D" uid="uid://esccb0ghemjn" path="res://assets/textures/camera_mask.PNG" id="2_krubv"]
+[ext_resource type="Texture2D" uid="uid://esccb0ghemjn" path="res://assets/resources/textures/camera_mask.PNG" id="2_krubv"]
 [ext_resource type="Script" path="res://assets/prefabs/UI/camera_mask/camera_mask.gd" id="3_b27n4"]
-[ext_resource type="Texture2D" uid="uid://de1lsimp3xj4n" path="res://assets/textures/sextant_mask.png" id="3_pmx6s"]
+[ext_resource type="Texture2D" uid="uid://de1lsimp3xj4n" path="res://assets/resources/textures/sextant_mask.png" id="3_pmx6s"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b28bo"]
 noise_type = 2

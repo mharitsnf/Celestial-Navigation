@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://5jhytay8hw5s"]
 
 [ext_resource type="PackedScene" uid="uid://bf1idfrny8xxj" path="res://assets/models/planetary/sun_moon_path.glb" id="1_hxdbo"]
-[ext_resource type="Texture2D" uid="uid://dmsvwumwtld51" path="res://assets/textures/sun_moon_path.png" id="2_an5ir"]
+[ext_resource type="Texture2D" uid="uid://dmsvwumwtld51" path="res://assets/resources/textures/sun_moon_path.png" id="2_an5ir"]
 [ext_resource type="Script" path="res://assets/prefabs/planetary/sun_moon_path.gd" id="2_d24up"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/sun_moon_path.gdshader" id="2_jhmmo"]
 

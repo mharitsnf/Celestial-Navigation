@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c563xq8a6oome"]
 
-[ext_resource type="Texture2D" uid="uid://sv2p60lnp6fn" path="res://assets/textures/UI/chat_box.png" id="1_5uv5t"]
+[ext_resource type="Texture2D" uid="uid://sv2p60lnp6fn" path="res://assets/resources/textures/UI/chat_box.png" id="1_5uv5t"]
 [ext_resource type="Theme" uid="uid://bjh8cqfmixnsq" path="res://assets/resources/theme/main_theme.tres" id="2_j0adr"]
 [ext_resource type="PackedScene" uid="uid://yx82uhgjdmj0" path="res://assets/prefabs/controllers/UI/chat_box/chat_box_controller.tscn" id="4_xc0jh"]
 

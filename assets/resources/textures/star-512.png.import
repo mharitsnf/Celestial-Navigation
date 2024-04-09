@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8csj8kcewwe2"
-path.s3tc="res://.godot/imported/isa true master.png-bfe0a2afa322b13af433b75a358af2db.s3tc.ctex"
+uid="uid://ewq1grgfr4pa"
+path.s3tc="res://.godot/imported/star-512.png-5ed534ab860a3c1bb35e8c691627e0e4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/isa true master.png"
-dest_files=["res://.godot/imported/isa true master.png-bfe0a2afa322b13af433b75a358af2db.s3tc.ctex"]
+source_file="res://assets/resources/textures/star-512.png"
+dest_files=["res://.godot/imported/star-512.png-5ed534ab860a3c1bb35e8c691627e0e4.s3tc.ctex"]
 
 [params]
 

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwwdhs5wprpmw"
-path.s3tc="res://.godot/imported/uv grids.webp-eff0f8c7034984c2ee8939876311ffdc.s3tc.ctex"
+uid="uid://b8csj8kcewwe2"
+path.s3tc="res://.godot/imported/isa true master.png-336b8aa502aee121a0ca92cc3cb41192.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/uv grids.webp"
-dest_files=["res://.godot/imported/uv grids.webp-eff0f8c7034984c2ee8939876311ffdc.s3tc.ctex"]
+source_file="res://assets/resources/textures/isa true master.png"
+dest_files=["res://.godot/imported/isa true master.png-336b8aa502aee121a0ca92cc3cb41192.s3tc.ctex"]
 
 [params]
 

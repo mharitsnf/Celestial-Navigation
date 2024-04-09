@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://36uskekn12c4"]
 
 [ext_resource type="Script" path="res://assets/prefabs/planetary/main_light/main_light.gd" id="1_drbv4"]
-[ext_resource type="Texture2D" uid="uid://ewq1grgfr4pa" path="res://assets/textures/star-512.png" id="2_1n3pv"]
+[ext_resource type="Texture2D" uid="uid://ewq1grgfr4pa" path="res://assets/resources/textures/star-512.png" id="2_1n3pv"]
 
 [node name="MainLight" type="DirectionalLight3D" node_paths=PackedStringArray("sprite")]
 light_energy = 0.8
