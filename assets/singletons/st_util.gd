@@ -38,6 +38,38 @@ func create_remote_transform(follower_name : String, use_rotation: bool = true) 
     return remote_transform
 # ===== ===== ===== ===== =====
 
+# ===== Latitude and longitude =====
+class LatLong extends RefCounted:
+    var latitude: float
+    var longitude: float
+    func _init(_latitude: float, _longitude: float) -> void:
+        latitude = _latitude
+        longitude = _longitude
+
+func get_lat_long(gpos: Vector3) -> LatLong:
+    var lat: float = _calculate_latitude(gpos)
+    var lng: float = _calculate_longitude(gpos)
+    return LatLong.new(lat, lng)
+
+const MERIDIAN_DIR: Vector3 = Vector3.RIGHT
+func _calculate_longitude(gpos: Vector3) -> float:
+    var xz_dir: Vector3 = Vector3(gpos.x, 0., gpos.z).normalized()
+    var angle: float = MERIDIAN_DIR.angle_to(xz_dir)
+    var deg_angle: float = rad_to_deg(angle)
+    deg_angle = -deg_angle if xz_dir.z < 0. else deg_angle
+    return deg_angle
+
+func _calculate_latitude(gpos: Vector3) -> float:
+    var xz_pos: Vector3 = Vector3(gpos.x, 0., gpos.z)
+    gpos = gpos.normalized()
+    xz_pos = xz_pos.normalized()
+    var dot_latitude: float = abs(xz_pos.dot(gpos))
+    var latitude: float = remap(dot_latitude, 0., 1., 90., 0.)
+    latitude = latitude if gpos.y >=0 else -latitude
+    return latitude
+# ===== ===== ===== ===== =====
+
+
 # ===== Basis recalculation =====
 func recalculate_basis(target : Node3D) -> Basis:
     var new_up : Vector3 = target.global_position.normalized()

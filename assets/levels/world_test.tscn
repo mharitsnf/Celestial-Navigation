@@ -75,7 +75,7 @@ follow_target = NodePath("../PlayerControllerManager/PlayerBoat/TPC")
 current_controller = NodePath("PlayerBoat/Controller")
 
 [node name="PlayerBoat" parent="PersistObjects/PlayerControllerManager" instance=ExtResource("7_03d3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 792, 0)
 
 [node name="TestBox" parent="PersistObjects" instance=ExtResource("6_u01up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31882, 792, 6)

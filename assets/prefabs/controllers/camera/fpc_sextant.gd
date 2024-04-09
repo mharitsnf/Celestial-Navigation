@@ -18,15 +18,13 @@ func _handle_calculate_latitude() -> void:
         if !raycast.is_colliding(): return
         
         # Calculate true latitude
+        var latitude: float = STUtil.get_lat_long(parent.get_follow_target().global_position).latitude
+
+        # Calculate angle error
         var pos: Vector3 = parent.get_follow_target().global_position
         var xz_pos: Vector3 = Vector3(pos.x, 0., pos.z)
         pos = pos.normalized()
         xz_pos = xz_pos.normalized()
-        var dot_latitude: float = abs(xz_pos.dot(pos))
-        var latitude: float = remap(dot_latitude, 0., 1., 90., 0.)
-        latitude = latitude if pos.y >=0 else -latitude
-
-        # Calculate angle error
         var collision_pos: Vector3 = raycast.get_collision_point()
         var xz_collision_pos: Vector3 = Vector3(collision_pos.x, 0., collision_pos.z)
         xz_collision_pos = xz_collision_pos.normalized()
