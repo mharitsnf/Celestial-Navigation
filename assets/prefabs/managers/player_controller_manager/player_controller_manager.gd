@@ -16,11 +16,11 @@ func _ready() -> void:
 	main_camera_controller = STUtil.get_only_node_in_group("main_camera_controller")
 
 func _process(delta: float) -> void:
-	if current_controller and is_instance_valid(current_controller):
+	if !is_transitioning():
 		current_controller.process(delta)
 
 func _physics_process(delta: float) -> void:
-	if current_controller and is_instance_valid(current_controller):
+	if !is_transitioning():
 		current_controller.physics_process(delta)
 # ========== ========== ========== ==========
 
@@ -80,7 +80,7 @@ func switch_controller(next_controller: PlayerController) -> void:
 	third_person_camera = tpcs[0]
 
 	set_transitioning(true)
-	set_current_controller(null)
+	# set_current_controller(null)
 
 	main_camera_controller.set_available_virtual_cameras(available_virtual_cameras)
 	main_camera.set_follow_target(third_person_camera)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b6c54usfla1jt"]
+[gd_scene load_steps=20 format=3 uid="uid://b6c54usfla1jt"]
 
 [ext_resource type="PackedScene" uid="uid://bohsb8opfjfgr" path="res://assets/levels/world_test.tscn" id="1_n8kch"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/pixelize.gdshader" id="2_gyjex"]
@@ -9,8 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d11f84wu226j8" path="res://assets/prefabs/save_system/save_system.tscn" id="4_bncqj"]
 [ext_resource type="PackedScene" uid="uid://c0s7a0klmw3ek" path="res://assets/prefabs/UI/screens/TransitionScreen.tscn" id="4_e6h3r"]
 [ext_resource type="Texture2D" uid="uid://esccb0ghemjn" path="res://assets/resources/textures/camera_mask.PNG" id="5_7v5rb"]
-[ext_resource type="Texture2D" uid="uid://sv2p60lnp6fn" path="res://assets/resources/textures/UI/chat_box.png" id="5_e7eem"]
-[ext_resource type="Theme" uid="uid://bjh8cqfmixnsq" path="res://assets/resources/theme/main_theme.tres" id="6_bcqgr"]
+[ext_resource type="PackedScene" uid="uid://duaihjbmtuquu" path="res://assets/prefabs/UI/hud/time_hud.tscn" id="5_mtnxj"]
 [ext_resource type="Texture2D" uid="uid://de1lsimp3xj4n" path="res://assets/resources/textures/sextant_mask.png" id="8_gkf3r"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_oviw0"]
@@ -117,20 +116,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Final" type="SubViewportContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="SubViewport" type="SubViewport" parent="Final"]
-handle_input_locally = false
-size = Vector2i(1920, 1080)
-render_target_update_mode = 4
-
-[node name="Control" type="Control" parent="Final/SubViewport"]
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,91 +125,26 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="Final/SubViewport/Control"]
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 texture = SubResource("ViewportTexture_r8w1v")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Final/SubViewport/Control"]
-offset_left = 40.0
-offset_top = 32.0
-offset_right = 332.0
-offset_bottom = 134.0
-theme_override_constants/separation = 16
+[node name="TimeHUD" parent="Control" instance=ExtResource("5_mtnxj")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 356.0
+offset_bottom = 166.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Final/SubViewport/Control/HBoxContainer"]
-layout_mode = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Final/SubViewport/Control/HBoxContainer/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("5_e7eem")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-
-[node name="MarginContainer" type="MarginContainer" parent="Final/SubViewport/Control/HBoxContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Final/SubViewport/Control/HBoxContainer/MarginContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Final/SubViewport/Control/HBoxContainer/MarginContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("6_bcqgr")
-theme_override_font_sizes/font_size = 18
-text = "Meridian time"
-vertical_alignment = 1
-
-[node name="Time" type="Label" parent="Final/SubViewport/Control/HBoxContainer/MarginContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("6_bcqgr")
-theme_override_font_sizes/font_size = 48
-text = "12:12"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="Final/SubViewport/Control/HBoxContainer"]
-layout_mode = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Final/SubViewport/Control/HBoxContainer/MarginContainer2"]
-layout_mode = 2
-texture = ExtResource("5_e7eem")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-
-[node name="MarginContainer" type="MarginContainer" parent="Final/SubViewport/Control/HBoxContainer/MarginContainer2"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Final/SubViewport/Control/HBoxContainer/MarginContainer2/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Final/SubViewport/Control/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("6_bcqgr")
-theme_override_font_sizes/font_size = 18
-text = "Meridian time"
-vertical_alignment = 1
-
-[node name="Time" type="Label" parent="Final/SubViewport/Control/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("6_bcqgr")
-theme_override_font_sizes/font_size = 48
-text = "12:12"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CameraMask2" parent="Final/SubViewport/Control" instance=ExtResource("3_yisfc")]
+[node name="CameraMask2" parent="Control" instance=ExtResource("3_yisfc")]
 material = SubResource("ShaderMaterial_slcvo")
 layout_mode = 1
 
@@ -233,6 +154,6 @@ script = ExtResource("3_1ye6f")
 
 [node name="TransitionCL" type="CanvasLayer" parent="."]
 layer = 5
-visible = false
 
 [node name="TransitionScreen" parent="TransitionCL" instance=ExtResource("4_e6h3r")]
+visible = false
