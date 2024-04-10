@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dnmnd7q2xfcqy"]
+
+[ext_resource type="Shader" path="res://assets/resources/shaders/gradient_color.gdshader" id="1_i6hiq"]
+[ext_resource type="Texture2D" uid="uid://l5m8oeitn614" path="res://assets/resources/textures/sundial_tex.png" id="2_p6ss3"]
+
+[sub_resource type="Gradient" id="Gradient_c1oe1"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5nv7q"]
+gradient = SubResource("Gradient_c1oe1")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_i6hiq")
+shader_parameter/albedo_tex = ExtResource("2_p6ss3")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_5nv7q")

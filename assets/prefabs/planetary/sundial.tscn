@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://csybdl2vx35tr"]
+
+[ext_resource type="PackedScene" uid="uid://bmw8yd5ui3ie0" path="res://assets/models/planetary/sundial.glb" id="1_dhjwy"]
+[ext_resource type="Material" uid="uid://dnmnd7q2xfcqy" path="res://assets/resources/materials/m_isa_dial.tres" id="2_gjkxm"]
+[ext_resource type="Material" uid="uid://bydda33iy4oy5" path="res://assets/resources/materials/m_isa_gnomon.tres" id="2_wgdhc"]
+
+[node name="Sundial" instance=ExtResource("1_dhjwy")]
+
+[node name="Dial" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_gjkxm")
+
+[node name="Gnomon" parent="." index="1"]
+surface_material_override/0 = ExtResource("2_wgdhc")

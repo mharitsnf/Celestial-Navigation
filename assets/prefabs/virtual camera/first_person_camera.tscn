@@ -13,7 +13,7 @@ inner_gimbal = NodePath("Gimbal/InnerGimbal")
 remote_transform_parent_for_other = NodePath("Gimbal/InnerGimbal/Offset")
 rotation_speed = 1.0
 tween_duration = 0.5
-max_fov = 75.0
+max_fov = 100.0
 
 [node name="Gimbal" type="Node3D" parent="."]
 

@@ -56,4 +56,5 @@ func _on_follow_target_changed(target: VirtualCamera) -> void:
 		current_controller = null
 		return
 	current_controller = target.get_node("Controller")
+	print(current_controller.get_parent())
 # ========== ========== ========== ==========

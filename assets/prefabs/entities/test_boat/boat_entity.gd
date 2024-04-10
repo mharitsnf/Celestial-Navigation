@@ -11,7 +11,7 @@ func _adjust_damping() -> void:
 		linear_damp = 0
 
 func rotate_boat(amount : float) -> void:
-	visual_container.rotate(visual_container.basis.y, ROTATION_WEIGHT * rotation_speed * amount)
+	normal_container.rotate(normal_container.basis.y, ROTATION_WEIGHT * rotation_speed * amount)
 
 func gas(amount : float) -> void:
 	apply_force(visual_container.global_basis.z * move_force * amount)

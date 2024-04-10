@@ -38,11 +38,9 @@ func _get_enter_ship_input() -> void:
 		manager.remove_child(parent)
 
 func _on_player_boat_area_entered(area:Area3D) -> void:
-	if area.get_parent() is BoatEntity:
-		player_boat_in_area = true
-		player_boat = area.get_parent()
+	player_boat_in_area = true
+	player_boat = area.get_parent().get_parent()
 
-func _on_player_boat_area_exited(area:Area3D) -> void:
-	if area.get_parent() is BoatEntity:
-		player_boat_in_area = false
-		player_boat = null
+func _on_player_boat_area_exited(_area:Area3D) -> void:
+	player_boat_in_area = false
+	player_boat = null
