@@ -96,18 +96,3 @@ func get_next_fpc_type() -> FPCType:
     fpc_index = (fpc_index + 1) % fpc_types.size()
     return fpc_types[fpc_index]
 # ========== ========== ========== ==========
-
-# ========== Enter and exit camera ==========
-func enter_camera() -> void:
-    if !camera_mask:
-        push_warning("Camera mask is not found") 
-        return
-    camera_mask.show_mask()
-
-func exit_camera() -> void:
-    if !camera_mask:
-        push_warning("Camera mask is not found") 
-        return
-    _reset_fpc_type()
-    camera_mask.hide_mask()
-# ========== ========== ========== ==========

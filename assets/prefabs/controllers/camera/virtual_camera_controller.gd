@@ -59,6 +59,14 @@ func _rotate(direction: Vector2) -> void:
 
 # ========== ========== ========== ==========
 
+# ========== Enter and exit functions ==========
+func enter_camera() -> void:
+    pass
+
+func exit_camera() -> void:
+    pass
+# ========== ========== ========== ==========
+
 # ========== Error checks ==========
 ## Error checks for mouse input
 func _is_mouse_allowed() -> bool:

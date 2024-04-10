@@ -44,7 +44,15 @@ func _get_next_virtual_camera() -> VirtualCamera:
 
 func _switch_camera() -> void:
 	if Input.is_action_just_pressed("switch_camera"):
+		var controller: VirtualCameraController
+		if parent.get_follow_target():
+			controller = parent.get_follow_target().get_node("Controller")
+			controller.exit_camera()
+
 		var next_camera: VirtualCamera = _get_next_virtual_camera()
+		controller = next_camera.get_node("Controller")
+		controller.enter_camera()
+		
 		next_camera.copy_rotation(parent.get_follow_target().get_x_rotation(), parent.get_follow_target().get_y_rotation())
 		parent.set_follow_target(next_camera)
 # ========== ========== ========== ==========
@@ -56,5 +64,4 @@ func _on_follow_target_changed(target: VirtualCamera) -> void:
 		current_controller = null
 		return
 	current_controller = target.get_node("Controller")
-	print(current_controller.get_parent())
 # ========== ========== ========== ==========
