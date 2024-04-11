@@ -107,10 +107,9 @@ joypad_inverted_y = false
 
 [node name="FPCSextant" parent="FPC" index="3" instance=ExtResource("10_c64xa")]
 
-[node name="Controller" parent="." index="3" node_paths=PackedStringArray("dropoff_point", "third_person_camera", "interaction_scanner") instance=ExtResource("9_wqan3")]
+[node name="Controller" parent="." index="3" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("9_wqan3")]
 dropoff_point = NodePath("../CollisionShape3D/DropoffPoint")
 player_character_pscn = ExtResource("10_31xpf")
-third_person_camera = NodePath("../TPC")
 interaction_scanner = NodePath("../CollisionShape3D/InteractionScanner")
 
 [editable path="CollisionShape3D/PlayerBoatInst"]

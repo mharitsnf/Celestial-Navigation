@@ -1,6 +1,5 @@
 class_name PlayerController extends Node
 
-@export var third_person_camera: ThirdPersonCamera
 @export var interaction_scanner: Area3D
 var interactions: Array
 var current_interactable: Interactable

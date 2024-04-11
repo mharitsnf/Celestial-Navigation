@@ -29,3 +29,22 @@ func _ready() -> void:
     await latitude_measure.ready
     latitude_measure_rt.remote_path = latitude_measure.get_path()
     sundial_center.add_child.call_deferred(latitude_measure_rt)
+
+# ========== Save and load state functions ==========
+func save_state() -> Dictionary:
+    return {
+        "metadata": {
+            "filename": scene_file_path,
+            "path": get_path(),
+            "parent": get_parent().get_path(),
+        },
+        "on_init": {},
+        "on_ready": {}
+    }
+
+func on_load_init(_data: Dictionary) -> void:
+    pass
+
+func on_load_ready(_data: Dictionary) -> void:
+    pass
+# ========== ========== ========== ==========

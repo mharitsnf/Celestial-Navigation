@@ -18,6 +18,7 @@ var pcm: PlayerControllerManager
 var main_camera: MainCamera
 
 func _ready() -> void:
+	await get_tree().process_frame
 	pcm = STUtil.get_only_node_in_group("player_controller_manager")
 	main_camera = STUtil.get_only_node_in_group("main_camera")
 

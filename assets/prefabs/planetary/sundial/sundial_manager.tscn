@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://yfjjri0ylaid" path="res://assets/prefabs/planetary/sundial/latitude_measure.tscn" id="2_aw6gr"]
 [ext_resource type="Script" path="res://assets/prefabs/planetary/sundial/sundial_controller.gd" id="3_ks50t"]
 
-[node name="SundialManager" type="Node3D" node_paths=PackedStringArray("sundial_center") groups=["sundial_manager"]]
+[node name="SundialManager" type="Node3D" node_paths=PackedStringArray("sundial_center") groups=["persist", "sundial_manager"]]
 script = ExtResource("1_o1r8k")
 sundial_center = NodePath("SundialCenter")
 sundial_pscn = ExtResource("1_15vxc")
@@ -29,6 +29,5 @@ use_submerged_angles = false
 mouse_inverted_x = false
 mouse_inverted_y = false
 
-[node name="Controller" type="Node" parent="." node_paths=PackedStringArray("third_person_camera")]
+[node name="Controller" type="Node" parent="."]
 script = ExtResource("3_ks50t")
-third_person_camera = NodePath("../TPC")

@@ -5,14 +5,12 @@ var time_elapsed: float = 0.
 var current_day: int = 0
 
 var time_hud: TimeHUD
-var player_controller_manager: PlayerControllerManager
 
 const SECONDS_PER_DAY: float = 86400.
 const SECONDS_PER_LONG_ANGLE: float = 240.
 
 func _ready() -> void:
 	time_hud = STUtil.get_only_node_in_group("time_hud")
-	player_controller_manager = STUtil.get_only_node_in_group("player_controller_manager")
 
 func _process(delta: float) -> void:
 	_calculate_time_elapsed(delta)
@@ -21,15 +19,6 @@ func _process(delta: float) -> void:
 	if time_hud:
 		var meridian_time: Array = get_time()
 		time_hud.set_meridian_label_text(meridian_time[0] + ":" + meridian_time[1])
-		
-		var latlng: STUtil.LatLong = STUtil.get_lat_long(player_controller_manager.get_current_controller().parent.global_position)
-		var time_elapsed_offset: float = SECONDS_PER_LONG_ANGLE * latlng.longitude
-		var local_time_elapsed: float = time_elapsed - time_elapsed_offset
-		local_time_elapsed = SECONDS_PER_DAY + local_time_elapsed if local_time_elapsed < 0 else local_time_elapsed
-		local_time_elapsed = fmod(local_time_elapsed, SECONDS_PER_DAY)
-
-		var local_time: Array = get_time(local_time_elapsed)
-		time_hud.set_local_label_text(local_time[0] + ":" + local_time[1])
 
 func _calculate_time_elapsed(delta: float) -> void:
 	if time_elapsed < delta * time_speed: print("day changed")

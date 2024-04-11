@@ -11,13 +11,20 @@ class LoadedNode extends RefCounted:
         if !data.has("on_init"): return
         for key: String in data["on_init"].keys():
             if !key.begins_with("i_"): continue
-            var target: Node = arr[data["on_init"][key]].node
-            if node is MainCamera and target.has_node("Controller"):
-                var controller: PlayerController = target.get_node("Controller")
-                target = controller.third_person_camera
-            elif node is PlayerControllerManager and target.has_node("Controller"):
-                target = target.get_node("Controller")
-            data["on_init"][key] = target
+            # Replaces indexes (specified by "i_..." keys) with nodes
+            var other_node: Node = arr[data["on_init"][key]].node
+            
+            if node is MainCamera and other_node.has_node("Controller"):
+                var vcams: Array[Node] = other_node.get_children()
+                vcams = vcams.filter(func (n: Node) -> bool: return n is VirtualCamera and n.is_entry_camera())
+                print(vcams)
+                if !vcams.is_empty():
+                    other_node = vcams[0]
+            
+            elif node is PlayerControllerManager and other_node.has_node("Controller"):
+                other_node = other_node.get_node("Controller")
+            
+            data["on_init"][key] = other_node
 
 @export var should_load_game: bool
 var transition_screen: TransitionScreen
