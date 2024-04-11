@@ -17,7 +17,8 @@ class TargetNode extends RefCounted:
 		follow_target.add_child(remote_transform)
 
 # ===== For other to follow this node =====
-@export var target_group: BaseEntity
+@export var entry_camera: bool
+@export var target_group: Node
 @export var remote_transform_parent_for_other : Node3D
 # ===== ===== ===== ===== ===== ===== =====
 
@@ -163,6 +164,9 @@ func _lerp_main_camera_fov(delta: float) -> void:
 	if !is_active(): return
 	main_camera.fov = lerp(main_camera.fov, _fov, delta * FOV_LERP_WEIGHT)
 # =============== =============== ===============
+
+func is_entry_camera() -> bool:
+	return entry_camera
 
 func get_x_rotation() -> float:
 	return 0.

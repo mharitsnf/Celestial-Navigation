@@ -95,6 +95,7 @@ skeleton = NodePath("")
 
 [node name="TPC" parent="." index="1" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
 _offset = Vector3(0, 2, 0)
+entry_camera = true
 target_group = NodePath("..")
 max_x_angle = 20.0
 follow_target = NodePath("..")

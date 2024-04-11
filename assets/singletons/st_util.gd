@@ -83,6 +83,10 @@ func recalculate_basis(target : Node3D) -> Basis:
 # ===== ===== ===== ===== ===== =====
 
 # ===== Group nodes accessor =====
+func is_node_in_group(node: Node, group_name: String) -> bool:
+    var group: Array = get_tree().get_nodes_in_group(group_name)
+    return group.has(node)
+
 func get_nodes_in_group(group_name: String) -> Array:
     return get_tree().get_nodes_in_group(group_name)
 

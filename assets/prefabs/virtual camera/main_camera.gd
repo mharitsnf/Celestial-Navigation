@@ -54,6 +54,7 @@ func _change_target(new_target : VirtualCamera, use_transition : bool = true) ->
 		previous_target = current_target
 	
 	current_target = TargetVirtualCamera.new(new_target)
+	follow_target_changed.emit(current_target.virtual_camera)
 
 	if use_transition:
 		set_transitioning(true)
@@ -85,8 +86,6 @@ func _on_transition_finished() -> void:
 	
 	current_target.remote_transform.remote_path = get_path()
 	set_transitioning(false)
-
-	follow_target_changed.emit(current_target.virtual_camera)
 
 func _transition(delta : float) -> void:
 	if is_transitioning():
@@ -132,6 +131,7 @@ func save_state() -> Dictionary:
 	return {
 		"metadata": {
 			"filename": scene_file_path,
+			"path": get_path(),
 			"parent": get_parent().get_path(),
 		},
 		"on_init": {

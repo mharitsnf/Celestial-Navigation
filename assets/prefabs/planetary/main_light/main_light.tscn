@@ -6,7 +6,8 @@
 [node name="MainLight" type="DirectionalLight3D" node_paths=PackedStringArray("sprite")]
 light_energy = 0.8
 shadow_enabled = true
-directional_shadow_pancake_size = 0.0
+shadow_bias = 0.05
+shadow_reverse_cull_face = true
 script = ExtResource("1_drbv4")
 sprite = NodePath("Sprite3D")
 

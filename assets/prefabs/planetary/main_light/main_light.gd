@@ -1,5 +1,7 @@
 class_name MainLight extends DirectionalLight3D
 
+@export var default_max_shadow_distance: float = 100.
+@export var sundial_max_shadow_distance: float = 5.
 @export var max_energy: float = 1.
 @export var sprite_modulation: Color = Color.WHITE:
 	set(value):
@@ -13,9 +15,15 @@ class_name MainLight extends DirectionalLight3D
 @export var sprite: Sprite3D
 
 var pcm: PlayerControllerManager
+var main_camera: MainCamera
 
 func _ready() -> void:
 	pcm = STUtil.get_only_node_in_group("player_controller_manager")
+	main_camera = STUtil.get_only_node_in_group("main_camera")
+
+	# Connect signal
+	if main_camera and !main_camera.follow_target_changed.is_connected(_on_main_camera_follow_target_changed):
+		main_camera.follow_target_changed.connect(_on_main_camera_follow_target_changed)
 
 func _process(_delta: float) -> void:
 	_look_at_center()
@@ -40,3 +48,11 @@ func _adjust_energy_level() -> void:
 		ndotl = remap(ndotl, SUNSET_ANGLE, MAX_ENERGY_ANGLE, 0., 1.)
 
 		light_energy = lerp(0., max_energy, ndotl)
+
+func _on_main_camera_follow_target_changed(target: VirtualCamera) -> void:
+	if STUtil.is_node_in_group(target, "sundial_vc") and directional_shadow_max_distance != 10:
+		var tween: Tween = create_tween()
+		tween.tween_property(self, "directional_shadow_max_distance", sundial_max_shadow_distance, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	elif !STUtil.is_node_in_group(target, "sundial_vc") and directional_shadow_max_distance != 100:
+		var tween: Tween = create_tween()
+		tween.tween_property(self, "directional_shadow_max_distance", default_max_shadow_distance, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)

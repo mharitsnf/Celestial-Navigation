@@ -25,12 +25,6 @@ func _physics_process(delta: float) -> void:
 # ========== ========== ========== ==========
 
 # ========== Setter and getters ==========
-func add_controller(value: PlayerController) -> void:
-	controllers.append(value)
-
-func remove_controller(value: PlayerController) -> void:
-	controllers.erase(value)
-
 func get_current_controller() -> PlayerController:
 	return current_controller
 
@@ -49,38 +43,30 @@ func set_transitioning(value: bool) -> void:
 # ========== ========== ========== ==========
 
 # ========== Enter and exit ship ==========
-func get_controller_owned_by(controller_owner: BaseEntity) -> PlayerController:
-	for c: PlayerController in controllers:
-		if c.parent == controller_owner: return c
-	return null
-
-func get_next_controller() -> PlayerController:
-	if is_transitioning(): return current_controller
-	for c: PlayerController in controllers:
-		if c == current_controller: continue
-		return c
-	return current_controller
-
-func can_switch() -> bool:
+func is_switchable() -> bool:
 	if is_transitioning(): return false
-	if !main_camera.get_follow_target() is ThirdPersonCamera: return false
+	if !main_camera.get_follow_target().is_entry_camera(): return false
 	return true
 
 func switch_controller(next_controller: PlayerController) -> void:
-	if is_transitioning(): return
-	if next_controller == current_controller: return
-	if !main_camera.get_follow_target() is ThirdPersonCamera: return
+	if next_controller == current_controller:
+		push_warning("Current controller is the same as the next controller! Returning...")
+		return
 
 	var available_virtual_cameras: Array[Node] = STUtil.get_nodes_in_group(String(next_controller.parent.get_path()) + "/VCs")
-	if available_virtual_cameras.is_empty(): return
+	if available_virtual_cameras.is_empty():
+		push_warning("Available virtual camera is empty! Returning...")
+		return
 
 	var third_person_camera: ThirdPersonCamera
-	var tpcs: Array = available_virtual_cameras.filter(func (n: Node) -> bool: return n is ThirdPersonCamera)
-	if tpcs.is_empty(): return
+	var tpcs: Array = available_virtual_cameras.filter(func (n: Node) -> bool: return n is VirtualCamera and n.is_entry_camera())
+	if tpcs.is_empty():
+		push_warning("Entry camera is not found! Returning...")
+		return
+	
 	third_person_camera = tpcs[0]
 
 	set_transitioning(true)
-	# set_current_controller(null)
 
 	main_camera_controller.set_available_virtual_cameras(available_virtual_cameras)
 	main_camera.set_follow_target(third_person_camera)
@@ -96,6 +82,7 @@ func save_state() -> Dictionary:
 	return {
 		"metadata": {
 			"filename": scene_file_path,
+			"path": get_path(),
 			"parent": get_parent().get_path(),
 		},
 		"on_init": {

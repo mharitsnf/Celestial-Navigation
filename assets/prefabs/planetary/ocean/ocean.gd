@@ -103,6 +103,7 @@ func save_state() -> Dictionary:
 	return {
 		"metadata": {
 			"filename": scene_file_path,
+			"path": get_path(),
 			"parent": get_parent().get_path(),
 		},
 		"on_init": {

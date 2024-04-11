@@ -31,7 +31,7 @@ func switch_state(new_state: State) -> void:
 
 func _get_enter_ship_input() -> void:
 	if !player_boat_in_area: return
-	if manager.can_switch() and Input.is_action_just_pressed("enter_ship"):
+	if manager.is_switchable() and Input.is_action_just_pressed("enter_ship"):
 		var next_controller: PlayerController = player_boat.get_node("Controller")
 		manager.switch_controller(next_controller)
 		await manager.transition_finished

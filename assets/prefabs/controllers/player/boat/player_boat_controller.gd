@@ -18,6 +18,7 @@ func process(delta: float) -> bool:
 	_get_brake_input()
 	_get_rotate_input(delta)
 	_get_exit_ship_input()
+	_get_switch_sundial_controller_input()
 	if parent is PlayerBoatEntity:
 		parent.rotate_boat(rotate_input)
 		parent.rotate_propeller(move_input, delta)
@@ -46,19 +47,18 @@ func _get_brake_input() -> void:
 const ROTATE_TO_ZERO_WEIGHT: float = 2.
 func _get_rotate_input(_delta: float) -> void:
 	rotate_input = Input.get_axis("boat_right", "boat_left")
-	# if parent.linear_velocity.length() > 0.:
-	# 	var value: float = Input.get_axis("boat_right", "boat_left")
-	# 	var rotation_scale: float = remap(parent.linear_velocity.length(), 0., parent.speed_limit, 0., 1.)
-	# 	rotate_input = value * rotation_scale
-	# else:
-	# 	rotate_input = lerp(rotate_input, 0., delta * ROTATE_TO_ZERO_WEIGHT)
 
 func _get_exit_ship_input() -> void:
-	if manager.can_switch() and Input.is_action_just_pressed("enter_ship"):
+	if manager.is_switchable() and Input.is_action_just_pressed("enter_ship"):
 		if !player_character: player_character = player_character_pscn.instantiate()
 		var next_controller: PlayerController = player_character.get_node("Controller")
 		manager.add_child(player_character)
 		player_character.global_position = dropoff_point.global_position
 
 		manager.switch_controller(next_controller)
+
+func _get_switch_sundial_controller_input() -> void:
+	if manager.is_switchable() and Input.is_action_just_pressed("switch_sundial_controller"):
+		var sundial_controller: PlayerController = STUtil.get_only_node_in_group("sundial_manager").get_node("Controller")
+		manager.switch_controller(sundial_controller)
 # =============== =============== ===============

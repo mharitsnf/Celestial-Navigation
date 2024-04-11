@@ -6,6 +6,7 @@ class LoadedNode extends RefCounted:
     func _init(_node: Node, _data: Dictionary) -> void:
         node = _node
         data = _data
+    # NEEDS REWORK
     func preprocess_on_init(arr: Array[LoadedNode]) -> void:
         if !data.has("on_init"): return
         for key: String in data["on_init"].keys():

@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://iw7gs8cxd4eh"]
+
+[ext_resource type="PackedScene" uid="uid://csybdl2vx35tr" path="res://assets/prefabs/planetary/sundial/sundial.tscn" id="1_15vxc"]
+[ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="1_kh1sq"]
+[ext_resource type="Script" path="res://assets/prefabs/planetary/sundial/sundial_manager.gd" id="1_o1r8k"]
+[ext_resource type="PackedScene" uid="uid://bq08c3kmmbx62" path="res://assets/prefabs/controllers/camera/virtual_camera_controller.tscn" id="2_5fuot"]
+[ext_resource type="PackedScene" uid="uid://yfjjri0ylaid" path="res://assets/prefabs/planetary/sundial/latitude_measure.tscn" id="2_aw6gr"]
+[ext_resource type="Script" path="res://assets/prefabs/planetary/sundial/sundial_controller.gd" id="3_ks50t"]
+
+[node name="SundialManager" type="Node3D" node_paths=PackedStringArray("sundial_center") groups=["sundial_manager"]]
+script = ExtResource("1_o1r8k")
+sundial_center = NodePath("SundialCenter")
+sundial_pscn = ExtResource("1_15vxc")
+latitude_measure_pscn = ExtResource("2_aw6gr")
+
+[node name="SundialCenter" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53, 0)
+
+[node name="TPC" parent="." node_paths=PackedStringArray("target_group") groups=["sundial_vc"] instance=ExtResource("1_kh1sq")]
+_spring_length = 1.15
+_offset = Vector3(0, 0.5, 0)
+entry_camera = true
+target_group = NodePath("..")
+max_x_angle = 20.0
+min_x_angle = -40.0
+
+[node name="Controller" parent="TPC" instance=ExtResource("2_5fuot")]
+use_submerged_angles = false
+mouse_inverted_x = false
+mouse_inverted_y = false
+
+[node name="Controller" type="Node" parent="." node_paths=PackedStringArray("third_person_camera")]
+script = ExtResource("3_ks50t")
+third_person_camera = NodePath("../TPC")

@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/test_box/test_box.tscn" id="6_u01up"]
 [ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/player_boat.tscn" id="7_03d3k"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="7_e0eip"]
-[ext_resource type="PackedScene" uid="uid://csybdl2vx35tr" path="res://assets/prefabs/planetary/sundial.tscn" id="11_fein2"]
+[ext_resource type="PackedScene" uid="uid://iw7gs8cxd4eh" path="res://assets/prefabs/planetary/sundial/sundial_manager.tscn" id="10_ruhqj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
 radius = 792.25
@@ -59,37 +59,33 @@ shape = SubResource("SphereShape3D_oggbs")
 
 [node name="StarLoader" parent="Environment" instance=ExtResource("3_g722y")]
 
-[node name="PersistObjects" type="Node" parent="."]
+[node name="ObjectsContainer" type="Node" parent="." groups=["objects_container"]]
 
-[node name="Ocean" parent="PersistObjects" node_paths=PackedStringArray("_target") instance=ExtResource("2_dnrth")]
+[node name="Ocean" parent="ObjectsContainer" node_paths=PackedStringArray("_target") instance=ExtResource("2_dnrth")]
 skeleton = NodePath("../..")
 _target = NodePath("../PlayerControllerManager/PlayerBoat")
 wave_data_1 = Vector4(0.06, 30, 1, 0)
 wave_data_2 = Vector4(0.08, 25, 0, 1)
 speed = 0.25
 
-[node name="MainCamera" parent="PersistObjects" node_paths=PackedStringArray("follow_target") instance=ExtResource("7_e0eip")]
+[node name="MainCamera" parent="ObjectsContainer" node_paths=PackedStringArray("follow_target") instance=ExtResource("7_e0eip")]
 transform = Transform3D(0.551296, -0.436174, 0.711214, 0, 0.852458, 0.522796, -0.834309, -0.288216, 0.469957, 8.76981, 800, 7.93238)
 current = true
 follow_target = NodePath("../PlayerControllerManager/PlayerBoat/TPC")
 
-[node name="PlayerControllerManager" parent="PersistObjects" node_paths=PackedStringArray("current_controller") instance=ExtResource("4_v2hc8")]
+[node name="PlayerControllerManager" parent="ObjectsContainer" node_paths=PackedStringArray("current_controller") instance=ExtResource("4_v2hc8")]
 current_controller = NodePath("PlayerBoat/Controller")
 
-[node name="PlayerBoat" parent="PersistObjects/PlayerControllerManager" instance=ExtResource("7_03d3k")]
+[node name="PlayerBoat" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("7_03d3k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792, 0)
 
-[node name="SundialRT" parent="PersistObjects/PlayerControllerManager/PlayerBoat/CollisionShape3D" index="3"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 3.7, 4.6)
-remote_path = NodePath("../../../../Sundial")
+[node name="SundialManager" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("10_ruhqj")]
 
-[node name="TestBox" parent="PersistObjects" instance=ExtResource("6_u01up")]
+[node name="TestBox" parent="ObjectsContainer" instance=ExtResource("6_u01up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31882, 792, 6)
 linear_damp = 0.0
 
-[node name="Sundial" parent="PersistObjects" instance=ExtResource("11_fein2")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 795, 5)
-
 [editable path="Environment/PlanetBody/planet"]
-[editable path="PersistObjects/PlayerControllerManager/PlayerBoat"]
-[editable path="PersistObjects/PlayerControllerManager/PlayerBoat/CollisionShape3D/ForFPC/PlayerBoatInst"]
+[editable path="ObjectsContainer/PlayerControllerManager/PlayerBoat"]
+[editable path="ObjectsContainer/PlayerControllerManager/PlayerBoat/CollisionShape3D/PlayerBoatInst"]
+[editable path="ObjectsContainer/PlayerControllerManager/SundialManager"]

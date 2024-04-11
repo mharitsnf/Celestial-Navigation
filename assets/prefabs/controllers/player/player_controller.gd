@@ -9,23 +9,20 @@ var interacting: bool
 
 var ui_manager: UIManager
 var manager: PlayerControllerManager
-var parent: BaseEntity
+var parent: Node
 
 func _enter_tree() -> void:
 	parent = get_parent()
 	manager = get_parent().get_parent()
-	manager.add_controller(self)
 
-	if !interaction_scanner.area_entered.is_connected(_on_interactable_entered):
-		interaction_scanner.area_entered.connect(_on_interactable_entered)
-	if !interaction_scanner.area_exited.is_connected(_on_interactable_exited):
-		interaction_scanner.area_exited.connect(_on_interactable_exited)
+	if interaction_scanner:
+		if !interaction_scanner.area_entered.is_connected(_on_interactable_entered):
+			interaction_scanner.area_entered.connect(_on_interactable_entered)
+		if !interaction_scanner.area_exited.is_connected(_on_interactable_exited):
+			interaction_scanner.area_exited.connect(_on_interactable_exited)
 
 func _ready() -> void:
 	ui_manager = STUtil.get_only_node_in_group("ui_manager")
-
-func _exit_tree() -> void:
-	manager.remove_controller(self)
 
 func process(_delta: float) -> bool:
 	_get_start_interact_input()

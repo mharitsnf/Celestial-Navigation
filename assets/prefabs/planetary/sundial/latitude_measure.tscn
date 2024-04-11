@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://yfjjri0ylaid"]
+
+[ext_resource type="PackedScene" uid="uid://d1kka8nio1wl0" path="res://assets/models/planetary/latitude_measurement.glb" id="1_4tw1f"]
+[ext_resource type="Material" uid="uid://bydda33iy4oy5" path="res://assets/resources/materials/m_isa_gnomon.tres" id="2_20wgn"]
+
+[node name="LatitudeMeasure" instance=ExtResource("1_4tw1f")]
+
+[node name="LatitudeMeasure" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_20wgn")
