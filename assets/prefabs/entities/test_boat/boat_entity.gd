@@ -1,6 +1,6 @@
 class_name BoatEntity extends BaseEntity
 
-const ROTATION_WEIGHT : float = .0001
+const ROTATION_WEIGHT: float = .01
 @export var rotation_speed : float = 1
 
 # ========== Movement functions ==========
@@ -10,8 +10,9 @@ func _adjust_damping() -> void:
 	else:
 		linear_damp = 0
 
-func rotate_boat(amount : float) -> void:
-	normal_container.rotate(normal_container.basis.y, ROTATION_WEIGHT * rotation_speed * amount)
+func rotate_boat(amount : float, delta: float) -> void:
+	var new_rotation: float = normal_container.rotation.y + (delta * rotation_speed * amount * ROTATION_WEIGHT)
+	normal_container.rotation.y = lerp(normal_container.rotation.y, new_rotation, .75)
 
 func gas(amount : float) -> void:
 	apply_force(visual_container.global_basis.z * move_force * amount)

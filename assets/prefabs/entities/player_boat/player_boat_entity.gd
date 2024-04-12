@@ -16,7 +16,6 @@ func rotate_propeller(move_input: float, delta: float) -> void:
 		current_propeller_rotation_scale = lerp(current_propeller_rotation_scale, move_input, delta * propeller_start_weight)
 	else:
 		current_propeller_rotation_scale = lerp(current_propeller_rotation_scale, 0., delta * propeller_stop_weight)
-
 	
 	for prop: MeshInstance3D in propellers:
 			prop.rotate_object_local(Vector3.FORWARD, delta * propeller_rotation_speed * current_propeller_rotation_scale)

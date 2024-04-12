@@ -16,11 +16,11 @@ func process(delta: float) -> bool:
 	if !super(delta): return false
 	_get_gas_input()
 	_get_brake_input()
-	_get_rotate_input(delta)
+	_get_rotate_input()
 	_get_exit_ship_input()
 	_get_switch_sundial_controller_input()
 	if parent is PlayerBoatEntity:
-		parent.rotate_boat(rotate_input)
+		parent.rotate_boat(rotate_input, delta)
 		parent.rotate_propeller(move_input, delta)
 	return true
 
@@ -44,8 +44,7 @@ func _get_gas_input() -> void:
 func _get_brake_input() -> void:
 	brake_input = Input.get_action_strength("boat_brake")
 
-const ROTATE_TO_ZERO_WEIGHT: float = 2.
-func _get_rotate_input(_delta: float) -> void:
+func _get_rotate_input() -> void:
 	rotate_input = Input.get_axis("boat_right", "boat_left")
 
 func _get_exit_ship_input() -> void:

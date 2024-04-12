@@ -1,9 +1,13 @@
 class_name SundialManager extends Node3D
 
+@export var rotation_speed : float = 1
+
 @export var sundial_center: Marker3D
 @export var sundial_pscn: PackedScene
 @export var latitude_measure_pscn: PackedScene
+var measure_mesh: MeshInstance3D
 
+# ========== Built-in functions ==========
 func _ready() -> void:
     # Get containers and references to others
     var sundial_boat_position: Node3D = STUtil.get_only_node_in_group("sundial_boat_position")
@@ -24,11 +28,19 @@ func _ready() -> void:
 
     # Add latitude measure
     var latitude_measure: Node3D = latitude_measure_pscn.instantiate()
+    measure_mesh = latitude_measure.get_node("LatitudeMeasure")
     var latitude_measure_rt: RemoteTransform3D = STUtil.create_remote_transform("LatitudeMeasure")
     objects_container.add_child.call_deferred(latitude_measure)
     await latitude_measure.ready
     latitude_measure_rt.remote_path = latitude_measure.get_path()
     sundial_center.add_child.call_deferred(latitude_measure_rt)
+# ========== ========== ========== ==========
+
+# ========== Save and load state functions ==========
+func rotate_latitude_measurement(amount: float, delta: float) -> void:
+    var new_rotation: float = measure_mesh.rotation.y + (delta * rotation_speed * amount)
+    measure_mesh.rotation.y = lerp(measure_mesh.rotation.y, new_rotation, .8)
+# ========== ========== ========== ==========
 
 # ========== Save and load state functions ==========
 func save_state() -> Dictionary:
