@@ -25,8 +25,9 @@ class TargetNode extends RefCounted:
 # ===== Rotation settings =====
 @export_group("Rotation settings")
 @export var rotation_speed : float = .1
-@export var max_x_angle : float = 80.
-@export var min_x_angle : float = -80.
+@export var submerged_angle: Vector2 = Vector2(-80, 0)
+@export var default_angle: Vector2 = Vector2(-80, 80)
+var submerged: bool = false
 # ===== ===== ===== ===== ===== ===== =====
 
 # ===== Follow settings =====
@@ -165,6 +166,12 @@ func _lerp_main_camera_fov(delta: float) -> void:
 	main_camera.fov = lerp(main_camera.fov, _fov, delta * FOV_LERP_WEIGHT)
 # =============== =============== ===============
 
+func is_submerged() -> bool:
+	return submerged
+
+func set_submerged(value: bool) -> void:
+	submerged = value
+
 func is_entry_camera() -> bool:
 	return entry_camera
 
@@ -177,7 +184,7 @@ func get_y_rotation() -> float:
 func copy_rotation(_x_rotation: float, _y_rotation: float) -> void:
 	pass
 
-func rotate_camera(_direction : Vector2, _min_angle: float = min_x_angle, _max_angle: float = max_x_angle) -> void:
+func rotate_camera(_direction : Vector2) -> void:
 	pass
 
 func is_active() -> bool:

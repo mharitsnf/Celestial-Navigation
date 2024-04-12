@@ -21,8 +21,7 @@ _spring_length = 1.15
 _offset = Vector3(0, 0.5, 0)
 entry_camera = true
 target_group = NodePath("..")
-max_x_angle = 20.0
-min_x_angle = -40.0
+default_angle = Vector2(-40, 10)
 
 [node name="Controller" parent="TPC" instance=ExtResource("2_5fuot")]
 use_submerged_angles = false

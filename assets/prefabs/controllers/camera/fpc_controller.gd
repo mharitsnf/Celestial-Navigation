@@ -17,9 +17,6 @@ func _ready() -> void:
 func process(delta: float) -> void:
 	super(delta)
 	_zoom_joypad()
-	_handle_change_fpc_type()
-	if parent is FirstPersonCamera and parent.get_current_fpc_type():
-		parent.get_current_fpc_type().process(delta)
 
 func unhandled_input(event: InputEvent) -> void:
 	super(event)
@@ -42,12 +39,6 @@ func exit_camera() -> void:
 # ========== ========== ========== ==========
 
 # ========== Input functions ==========
-func _handle_change_fpc_type() -> void:
-	if parent.is_type_transitioning(): return
-	if Input.is_action_just_pressed("change_fpc_type"):
-		var next_fpc: FPCType = parent.get_next_fpc_type()
-		parent.set_current_fpc_type(next_fpc)
-
 func _zoom_joypad() -> void:
 	if !_is_joypad_allowed(): return
 	if Input.is_action_pressed("zoom_toggle"):

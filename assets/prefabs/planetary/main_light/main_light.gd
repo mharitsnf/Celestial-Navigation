@@ -18,7 +18,6 @@ var pcm: PlayerControllerManager
 var main_camera: MainCamera
 
 func _ready() -> void:
-	await get_tree().process_frame
 	pcm = STUtil.get_only_node_in_group("player_controller_manager")
 	main_camera = STUtil.get_only_node_in_group("main_camera")
 
@@ -27,20 +26,37 @@ func _ready() -> void:
 		main_camera.follow_target_changed.connect(_on_main_camera_follow_target_changed)
 
 func _process(_delta: float) -> void:
+	_refetch_main_camera()
+	_refetch_player_controller_manager()
+
 	_look_at_center()
 	_adjust_energy_level()
 
 func _look_at_center() -> void:
 	look_at(Vector3.ZERO)
 
-const SUNSET_ANGLE: float = -.25
-const MAX_ENERGY_ANGLE: float = .8
-func _adjust_energy_level() -> void:
+func _refetch_main_camera() -> void:
+	if !main_camera:
+		push_warning("main_camera is missing. Searching again...")
+		main_camera = STUtil.get_only_node_in_group("main_camera")
+		if main_camera and !main_camera.follow_target_changed.is_connected(_on_main_camera_follow_target_changed):
+			main_camera.follow_target_changed.connect(_on_main_camera_follow_target_changed)
+
+		var current_target: VirtualCamera = main_camera.get_follow_target()
+		if STUtil.is_node_in_group(current_target, "sundial_vc") and directional_shadow_max_distance != sundial_max_shadow_distance:
+			directional_shadow_max_distance = sundial_max_shadow_distance
+
+func _refetch_player_controller_manager() -> void:
 	if !pcm:
 		push_warning("player_controller_manager not found. Searching again...")
 		pcm = STUtil.get_only_node_in_group("player_controller_manager")
 		return
-	var player_entity: BaseEntity = pcm.get_player_entity()
+
+const SUNSET_ANGLE: float = -.25
+const MAX_ENERGY_ANGLE: float = .8
+func _adjust_energy_level() -> void:
+	if !pcm: return
+	var player_entity: Node3D = pcm.get_player_entity()
 	if player_entity:
 		var player_normal: Vector3 = player_entity.basis.y
 		var dir_to_light: Vector3 = (global_position - player_entity.global_position).normalized()
@@ -51,9 +67,9 @@ func _adjust_energy_level() -> void:
 		light_energy = lerp(0., max_energy, ndotl)
 
 func _on_main_camera_follow_target_changed(target: VirtualCamera) -> void:
-	if STUtil.is_node_in_group(target, "sundial_vc") and directional_shadow_max_distance != 10:
+	if STUtil.is_node_in_group(target, "sundial_vc") and directional_shadow_max_distance != sundial_max_shadow_distance:
 		var tween: Tween = create_tween()
 		tween.tween_property(self, "directional_shadow_max_distance", sundial_max_shadow_distance, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	elif !STUtil.is_node_in_group(target, "sundial_vc") and directional_shadow_max_distance != 100:
+	elif !STUtil.is_node_in_group(target, "sundial_vc") and directional_shadow_max_distance != default_max_shadow_distance:
 		var tween: Tween = create_tween()
 		tween.tween_property(self, "directional_shadow_max_distance", default_max_shadow_distance, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)

@@ -52,10 +52,9 @@ func _rotate_wrapper_joypad() -> void:
     _rotate(direction)
 
 func _rotate(direction: Vector2) -> void:
-    if use_submerged_angles and parent.get_target_group().is_submerged():
-        parent.rotate_camera(direction, submerged_min_angle, submerged_max_angle)
-    else:
-        parent.rotate_camera(direction)
+    if parent.get_target_group() is BaseEntity:
+        parent.set_submerged(parent.get_target_group().is_submerged())
+    parent.rotate_camera(direction)
 
 # ========== ========== ========== ==========
 
