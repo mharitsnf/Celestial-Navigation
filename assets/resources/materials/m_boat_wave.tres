@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://c35wddahrslm7"]
+
+[ext_resource type="Shader" path="res://assets/resources/shaders/boat_wave.gdshader" id="1_tswp2"]
+[ext_resource type="Texture2D" uid="uid://b4i45t78qg1ov" path="res://assets/resources/textures/boat_wave_tex.png" id="2_mgbtn"]
+
+[sub_resource type="Gradient" id="Gradient_c1oe1"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.562738)
+colors = PackedColorArray(0.25, 0.25, 0.25, 1, 0.9, 0.9, 0.9, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5nv7q"]
+gradient = SubResource("Gradient_c1oe1")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_tswp2")
+shader_parameter/z_disp_scale = 0.96
+shader_parameter/albedo_tex = ExtResource("2_mgbtn")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_5nv7q")

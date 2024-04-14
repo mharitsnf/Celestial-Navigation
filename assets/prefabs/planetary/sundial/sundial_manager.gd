@@ -6,6 +6,7 @@ class_name SundialManager extends Node3D
 @export var sundial_pscn: PackedScene
 @export var latitude_measure_pscn: PackedScene
 var measure_mesh: MeshInstance3D
+var dial: MeshInstance3D
 
 # ========== Built-in functions ==========
 func _ready() -> void:
@@ -20,6 +21,7 @@ func _ready() -> void:
 
     # Add sundial
     var sundial: Node3D = sundial_pscn.instantiate()
+    dial = sundial.get_node("Dial")
     var sundial_rt: RemoteTransform3D = STUtil.create_remote_transform("Sundial", false)
     objects_container.add_child.call_deferred(sundial)
     await sundial.ready
@@ -40,6 +42,12 @@ func _ready() -> void:
 func rotate_latitude_measurement(amount: float, delta: float) -> void:
     var new_rotation: float = measure_mesh.rotation.y + (delta * rotation_speed * amount)
     measure_mesh.rotation.y = lerp(measure_mesh.rotation.y, new_rotation, .8)
+
+func rotate_sundial(dir: int) -> void:
+    dial.rotation_degrees.y += dir * 15
+
+func reset_sundial_rotation() -> void:
+    dial.rotation_degrees.y = 0
 # ========== ========== ========== ==========
 
 # ========== Save and load state functions ==========

@@ -1,4 +1,4 @@
-extends Node3D
+class_name TimeManager extends Node3D
 
 @export var time_speed: float = 1.
 var time_elapsed: float = 0.

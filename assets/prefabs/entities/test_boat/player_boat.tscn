@@ -47,9 +47,11 @@ shape = SubResource("ConvexPolygonShape3D_2cixb")
 
 [node name="BoatEngine" parent="CollisionShape3D/Particles" index="0" instance=ExtResource("4_rixfk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 1, -5.9)
+emitting = false
 
 [node name="BoatEngine2" parent="CollisionShape3D/Particles" index="1" instance=ExtResource("4_rixfk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 1, -5.9)
+emitting = false
 
 [node name="DropoffPoint" type="Marker3D" parent="CollisionShape3D" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0)

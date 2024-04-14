@@ -1,6 +1,5 @@
 class_name StarLoader extends Node
 
-
 const FOLDER_PATH : String = "res://assets/starmaps/"
 const FILE_EXTENSION : String = ".smap"
 
@@ -17,13 +16,11 @@ const FILE_EXTENSION : String = ".smap"
 
 signal star_loading_finished
 
-
 func _ready() -> void:
 	await _load_main_stars()
 	if use_background_star:
 		await _load_background_stars()
 	star_loading_finished.emit()
-
 
 func _load_main_stars() -> void:
 	var starmap_file : FileAccess = FileAccess.open(FOLDER_PATH + starmap_filename + FILE_EXTENSION, FileAccess.READ)
@@ -43,7 +40,6 @@ func _load_main_stars() -> void:
 		main_star_container.add_child.call_deferred(main_star_inst)
 		await main_star_inst.ready
 		main_star_inst.load_data(data)
-
 
 func _load_background_stars() -> void:
 	for i : int in range(background_star_amount):
