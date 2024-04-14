@@ -1,5 +1,7 @@
 class_name MainLight extends DirectionalLight3D
 
+@export var default_direction: Vector3
+@export var distance_from_center: float = 3500.
 @export var default_max_shadow_distance: float = 100.
 @export var sundial_max_shadow_distance: float = 5.
 @export var max_energy: float = 1.
@@ -22,6 +24,8 @@ var star_visibility_weight: float = 0.
 func _ready() -> void:
 	pcm = STUtil.get_only_node_in_group("player_controller_manager")
 	main_camera = STUtil.get_only_node_in_group("main_camera")
+
+	position = default_direction * distance_from_center
 
 	# Connect signal
 	if main_camera and !main_camera.follow_target_changed.is_connected(_on_main_camera_follow_target_changed):

@@ -9,12 +9,12 @@ script = ExtResource("1_342v5")
 time_speed = 215.0
 
 [node name="Sun" parent="." groups=["sun"] instance=ExtResource("1_h5laa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3500, 0, 0)
+default_direction = Vector3(-1, 0, 0)
 max_energy = 0.5
 sprite_scale = 80.0
 
 [node name="Moon" parent="." instance=ExtResource("1_h5laa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3500, 0, 0)
+default_direction = Vector3(1, 0, 0)
 max_energy = 0.1
 sprite_modulation = Color(0.439216, 0.439216, 0.439216, 1)
 sprite_scale = 40.0
