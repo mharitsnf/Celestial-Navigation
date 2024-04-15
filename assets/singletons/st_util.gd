@@ -71,6 +71,15 @@ func _calculate_latitude(gpos: Vector3) -> float:
 
 
 # ===== Basis recalculation =====
+func get_basis_from_normal(old_basis: Basis, new_normal: Vector3) -> Basis:
+    new_normal = new_normal.normalized()
+
+    var quat : Quaternion = Quaternion(old_basis.y, new_normal).normalized()
+    var new_right : Vector3 = quat * old_basis.x
+    var new_fwd : Vector3 = quat * old_basis.z
+
+    return Basis(new_right, new_normal, new_fwd).orthonormalized()
+
 func recalculate_basis(target : Node3D) -> Basis:
     var new_up : Vector3 = target.global_position.normalized()
     var old_basis : Basis = target.basis

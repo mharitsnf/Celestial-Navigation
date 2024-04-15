@@ -1,16 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://bohsb8opfjfgr"]
+[gd_scene load_steps=13 format=3 uid="uid://bohsb8opfjfgr"]
 
 [ext_resource type="PackedScene" uid="uid://d1vjavo5saswj" path="res://assets/prefabs/time_manager/time_manager.tscn" id="1_tkbic"]
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_u0thf"]
 [ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/planetary/ocean/ocean.tscn" id="2_dnrth"]
 [ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/planetary/star loader/star_loader.tscn" id="3_g722y"]
-[ext_resource type="PackedScene" uid="uid://ddurdedy7tgv3" path="res://assets/models/world/planet.glb" id="3_uo0we"]
-[ext_resource type="Material" uid="uid://rhgvoh2j2wyu" path="res://assets/resources/materials/m_isa.tres" id="4_7a0xy"]
+[ext_resource type="PackedScene" uid="uid://bk3dop2klnury" path="res://assets/prefabs/planetary/planet.tscn" id="3_ncp2x"]
 [ext_resource type="PackedScene" uid="uid://cjn37qac1f86p" path="res://assets/prefabs/managers/player_controller_manager/player_controller_manager.tscn" id="4_v2hc8"]
 [ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/test_box/test_box.tscn" id="6_u01up"]
 [ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/player_boat.tscn" id="7_03d3k"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="7_e0eip"]
-[ext_resource type="PackedScene" uid="uid://nidfodnvilw5" path="res://assets/prefabs/post_processing/atmospheric_scattering_pp.tscn" id="8_1h4fy"]
 [ext_resource type="PackedScene" uid="uid://iw7gs8cxd4eh" path="res://assets/prefabs/planetary/sundial/sundial_manager.tscn" id="10_ruhqj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
@@ -33,19 +31,7 @@ environment = ExtResource("1_u0thf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/PlanetBody"]
 shape = SubResource("SphereShape3D_kt8wf")
 
-[node name="planet" parent="Environment/PlanetBody" instance=ExtResource("3_uo0we")]
-
-[node name="UTRock" parent="Environment/PlanetBody/planet" index="0"]
-surface_material_override/0 = ExtResource("4_7a0xy")
-
-[node name="UTRock_001" parent="Environment/PlanetBody/planet" index="1"]
-surface_material_override/0 = ExtResource("4_7a0xy")
-
-[node name="UTRock_002" parent="Environment/PlanetBody/planet" index="2"]
-surface_material_override/0 = ExtResource("4_7a0xy")
-
-[node name="UTRock_003" parent="Environment/PlanetBody/planet" index="3"]
-surface_material_override/0 = ExtResource("4_7a0xy")
+[node name="Planet" parent="Environment/PlanetBody" instance=ExtResource("3_ncp2x")]
 
 [node name="GravityArea" type="Area3D" parent="Environment"]
 collision_layer = 0
@@ -54,6 +40,7 @@ gravity_space_override = 3
 gravity_point = true
 gravity_point_center = Vector3(0, 0, 0)
 gravity_direction = Vector3(0, 0, 0)
+gravity = 29.4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/GravityArea"]
 shape = SubResource("SphereShape3D_oggbs")
@@ -74,8 +61,6 @@ transform = Transform3D(0.093841, 0.358905, -0.928645, 0.0115935, 0.932304, 0.36
 current = true
 follow_target = NodePath("../PlayerControllerManager/PlayerBoat/TPC")
 
-[node name="AtmosphericScatteringPP" parent="ObjectsContainer/MainCamera" instance=ExtResource("8_1h4fy")]
-
 [node name="PlayerControllerManager" parent="ObjectsContainer" node_paths=PackedStringArray("current_controller") instance=ExtResource("4_v2hc8")]
 current_controller = NodePath("PlayerBoat/Controller")
 
@@ -88,7 +73,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31882, 792, 6)
 linear_damp = 0.0
 
-[editable path="Environment/PlanetBody/planet"]
 [editable path="ObjectsContainer/PlayerControllerManager/PlayerBoat"]
 [editable path="ObjectsContainer/PlayerControllerManager/PlayerBoat/CollisionShape3D/PlayerBoatInst"]
 [editable path="ObjectsContainer/PlayerControllerManager/SundialManager"]

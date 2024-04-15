@@ -27,8 +27,9 @@ material = SubResource("ShaderMaterial_6dbm8")
 flip_faces = true
 size = Vector2(2, 2)
 
-[node name="AtmosphericScatteringPP" type="MeshInstance3D"]
-sorting_offset = -792.0
+[node name="AtmosphericScatteringPP" type="MeshInstance3D" groups=["atmosphere"]]
+sorting_offset = -850.0
+extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_8e22m")
 script = ExtResource("2_abre8")
 is_accelerated = true
@@ -38,11 +39,12 @@ atmosphere_radius = 12640.0
 optical_depth_sample_size = 10
 in_scattering_sample_size = 15
 r_density_falloff = 200.0
-r_exponent = 4.5
+r_exponent = 5.0
 r_numerator = 400.0
 r_scattering_strength = 0.015
 m_density_falloff = 200.0
+m_scattering_strength = 2.0
 density_falloff_strength = 0.15
 optical_depth_strength = 3.25
-wavelengths = Vector3(700, 530, 440)
-f_exposure = 3.5
+wavelengths = Vector3(700, 520, 440)
+f_exposure = 5.0

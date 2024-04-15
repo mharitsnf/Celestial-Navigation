@@ -6,19 +6,6 @@ uniform float levels = 10.;
 
 void fragment() {
 	ALBEDO = texture(albedo_tex, UV).rgb;
-	//vec3 color = texture(albedo_tex, UV).rgb;
-	//float grayscale = max(color.r, max(color.g, color.b));
-	//
-	//float lower = floor(grayscale * levels) / levels;
-	//float lower_diff = abs(grayscale - lower);
-//
-	//float upper = ceil(grayscale * levels) / levels;
-	//float upper_diff = abs(upper - grayscale);
-	//
-	//float level = lower_diff <= upper_diff ? lower : upper;
-	//float adjustment = level / grayscale;
-	//
-	//ALBEDO = color.rgb * adjustment;
 }
 
 void light() {

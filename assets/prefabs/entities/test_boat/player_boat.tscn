@@ -35,7 +35,7 @@ speed_limit = 25.0
 move_force = 8000.0
 normal_container = NodePath("CollisionShape3D")
 visual_container = NodePath("CollisionShape3D/PlayerBoatInst")
-float_force = 600.0
+float_force = 1500.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0.4)

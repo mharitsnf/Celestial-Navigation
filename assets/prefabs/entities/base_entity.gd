@@ -62,16 +62,15 @@ func is_submerged() -> bool:
 	return depth_from_ocean_surface > 0.
 
 func _update_collision_normal(normal : Vector3) -> void:
-	if !_update_normal: return
+	if _update_normal and is_submerged():
+		var new_up : Vector3 = normal
+		var old_basis : Basis = normal_container.basis
 
-	var new_up : Vector3 = normal
-	var old_basis : Basis = normal_container.basis
+		var quat : Quaternion = Quaternion(old_basis.y, new_up).normalized()
+		var new_right : Vector3 = quat * old_basis.x
+		var new_fwd : Vector3 = quat * old_basis.z
 
-	var quat : Quaternion = Quaternion(old_basis.y, new_up).normalized()
-	var new_right : Vector3 = quat * old_basis.x
-	var new_fwd : Vector3 = quat * old_basis.z
-
-	normal_container.basis = Basis(new_right, new_up, new_fwd).orthonormalized()
+		normal_container.basis = Basis(new_right, new_up, new_fwd).orthonormalized()
 
 func _dampen_velocity(state: PhysicsDirectBodyState3D) -> void:
 	if depth_from_ocean_surface > 0.:

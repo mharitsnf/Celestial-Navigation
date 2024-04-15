@@ -14,5 +14,6 @@ gradient = SubResource("Gradient_c1oe1")
 [resource]
 render_priority = 0
 shader = ExtResource("1_uw4or")
+shader_parameter/levels = 10.0
 shader_parameter/albedo_tex = ExtResource("2_n0row")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_5nv7q")

@@ -15,4 +15,6 @@ func _ready() -> void:
     main_camera = STUtil.get_only_node_in_group("main_camera")
 
 func _get_move_direction() -> Vector2:
-    return Input.get_vector("character_left", "character_right", "character_forward", "character_backward")
+    var move_input: Vector2 = Input.get_vector("character_left", "character_right", "character_forward", "character_backward")
+    character.set_move_input(move_input)
+    return move_input
