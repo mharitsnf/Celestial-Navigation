@@ -21,6 +21,8 @@ sprite = NodePath("Sprite3D")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 billboard = 1
+double_sided = false
+alpha_cut = 3
 texture = SubResource("GradientTexture2D_128ok")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

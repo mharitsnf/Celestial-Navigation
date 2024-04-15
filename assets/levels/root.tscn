@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://b6c54usfla1jt"]
+[gd_scene load_steps=17 format=3 uid="uid://b6c54usfla1jt"]
 
 [ext_resource type="PackedScene" uid="uid://bohsb8opfjfgr" path="res://assets/levels/world_test.tscn" id="1_n8kch"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/pixelize.gdshader" id="2_gyjex"]
 [ext_resource type="Script" path="res://assets/prefabs/UI/manager/ui_manager.gd" id="3_1ye6f"]
-[ext_resource type="Shader" path="res://assets/resources/shaders/posterization.gdshader" id="3_njsy7"]
 [ext_resource type="PackedScene" uid="uid://v5c54hsyvq5g" path="res://assets/prefabs/UI/camera_mask/camera_mask.tscn" id="3_yisfc"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/mask.gdshader" id="4_bhpxt"]
 [ext_resource type="PackedScene" uid="uid://d11f84wu226j8" path="res://assets/prefabs/save_system/save_system.tscn" id="4_bncqj"]
@@ -21,17 +20,8 @@ shader = ExtResource("2_gyjex")
 shader_parameter/pixel_size = 4
 shader_parameter/main_tex = SubResource("ViewportTexture_oviw0")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_wgiqr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_7t8o7"]
 viewport_path = NodePath("Pixelize/SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_as41s"]
-resource_local_to_scene = true
-shader = ExtResource("3_njsy7")
-shader_parameter/levels = 10.0
-shader_parameter/main_tex = SubResource("ViewportTexture_wgiqr")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_r8w1v"]
-viewport_path = NodePath("Posterize/SubViewport")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b28bo"]
 noise_type = 2
@@ -59,7 +49,6 @@ shader_parameter/transition_noise_tex = SubResource("NoiseTexture2D_g7ims")
 [node name="Root" type="Node"]
 
 [node name="SaveSystem" parent="." instance=ExtResource("4_bncqj")]
-should_load_game = true
 
 [node name="Main" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -96,27 +85,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Posterize" type="SubViewportContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="SubViewport" type="SubViewport" parent="Posterize" groups=["final_viewport"]]
-handle_input_locally = false
-size = Vector2i(1920, 1080)
-render_target_update_mode = 4
-
-[node name="ColorRect" type="ColorRect" parent="Posterize/SubViewport"]
-material = SubResource("ShaderMaterial_as41s")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -131,7 +99,7 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
-texture = SubResource("ViewportTexture_r8w1v")
+texture = SubResource("ViewportTexture_7t8o7")
 
 [node name="TimeHUD" parent="Control" instance=ExtResource("5_mtnxj")]
 layout_mode = 0
