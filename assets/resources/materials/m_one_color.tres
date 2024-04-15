@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://ywv0hfk4sxqb"]
 
-[ext_resource type="Shader" path="res://assets/resources/shaders/gradient_color.gdshader" id="1_8wpiq"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="1_8wpiq"]
 
 [sub_resource type="Gradient" id="Gradient_un6gn"]
 offsets = PackedFloat32Array(0)

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_vu730"]
 [ext_resource type="Script" path="res://assets/prefabs/entities/player_character/character_entity.gd" id="2_lgsjv"]
-[ext_resource type="Shader" path="res://assets/resources/shaders/gradient_color.gdshader" id="3_ip4xm"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="3_ip4xm"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/player_character_controller.gd" id="4_eocql"]
 [ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="4_k7shh"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_base_state.gd" id="5_ujw15"]

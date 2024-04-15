@@ -1,6 +1,8 @@
 shader_type spatial;
 //render_mode cull_disabled;
 
+uniform float posterize_levels = 10.;
+
 group_uniforms PlanetAndPlayerData;
 uniform float planet_radius = 1000.;
 uniform vec3 target_world_position;
@@ -130,6 +132,21 @@ float linear_depth(float value, vec2 screen_uv, mat4 inv_pro_mat) {
 	return -view.z;
 }
 
+vec3 posterize(vec3 color) {
+	float grayscale = max(color.r, max(color.g, color.b));
+	
+	float lower = floor(grayscale * posterize_levels) / posterize_levels;
+	float lower_diff = abs(grayscale - lower);
+
+	float upper = ceil(grayscale * posterize_levels) / posterize_levels;
+	float upper_diff = abs(upper - grayscale);
+	
+	float level = lower_diff <= upper_diff ? lower : upper;
+	float adjustment = level / grayscale;
+	
+	return color.rgb * adjustment;
+}
+
 
 void fragment() {
 	// === SETUP
@@ -153,10 +170,16 @@ void fragment() {
 	float fresnel_val = fresnel(5., NORMAL, VIEW);
 	vec3 surface_color = mix(albedo, albedo2, fresnel_val);
 	
+	vec3 final_color = mix(edge_color, surface_color, final_z_dif);
+	
 	ALBEDO = mix(edge_color, surface_color, final_z_dif);
 	METALLIC = metallic;
 	ROUGHNESS = roughness;
 	NORMAL_MAP = normal;
+	//ALBEDO = posterize(final_color);	
+	//METALLIC = posterize(vec3(metallic)).x;
+	//ROUGHNESS = posterize(vec3(roughness)).x;
+	NORMAL_MAP = posterize(vec3(normal));
 }
 
 void light() {

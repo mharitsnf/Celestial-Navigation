@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bydda33iy4oy5"]
 
-[ext_resource type="Shader" path="res://assets/resources/shaders/gradient_color.gdshader" id="1_eqo3a"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="1_eqo3a"]
 [ext_resource type="Texture2D" uid="uid://b8csj8kcewwe2" path="res://assets/resources/textures/isa true master.png" id="2_uwmcb"]
 
 [sub_resource type="Gradient" id="Gradient_c1oe1"]

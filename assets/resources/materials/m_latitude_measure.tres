@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://c2j7ec3bp0omt"]
 
-[ext_resource type="Shader" path="res://assets/resources/shaders/gradient_color.gdshader" id="1_py8y8"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="1_py8y8"]
 [ext_resource type="Texture2D" uid="uid://6kaxy20omafx" path="res://assets/resources/textures/latitude_measure.png" id="2_x4gn2"]
 
 [sub_resource type="Gradient" id="Gradient_c1oe1"]

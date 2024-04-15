@@ -17,7 +17,7 @@ viewport_path = NodePath("Main/SubViewport")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rjtgd"]
 resource_local_to_scene = true
 shader = ExtResource("2_gyjex")
-shader_parameter/pixel_size = 4
+shader_parameter/pixel_size = 6
 shader_parameter/main_tex = SubResource("ViewportTexture_oviw0")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7t8o7"]
