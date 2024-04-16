@@ -1,5 +1,6 @@
 class_name PlayerController extends Node
 
+# Interactions
 @export var interaction_scanner: Area3D
 var interactions: Array
 var current_interactable: Interactable
@@ -10,6 +11,7 @@ var ui_manager: UIManager
 var manager: PlayerControllerManager
 var parent: Node
 
+# ========== Built ins ==========
 func _enter_tree() -> void:
 	parent = get_parent()
 	manager = get_parent().get_parent()
@@ -29,17 +31,28 @@ func process(_delta: float) -> bool:
 
 func physics_process(_delta: float) -> bool:
 	return true
+# ========== ========== ========== ==========
 
+# ========== State functions ==========
+func enter_controller() -> void:
+	pass
+
+func exit_controller() -> void:
+	pass
+# ========== ========== ========== ==========
+
+# ========== Setters and getters ==========
 func is_active() -> bool:
 	return manager.get_current_controller() == self
 
-# ========== Interaction functions ==========
 func is_interacting() -> bool:
 	return interacting
 
 func set_interacting(value: bool) -> void:
 	interacting = value
+# ========== ========== ========== ==========
 
+# ========== Interaction functions ==========
 func _get_start_interact_input() -> void:
 	if is_interacting() or interactions.is_empty() or ui_manager.has_current_ui(): return
 	if Input.is_action_just_pressed("interact"):		

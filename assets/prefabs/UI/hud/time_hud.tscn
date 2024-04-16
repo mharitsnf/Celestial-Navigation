@@ -1,24 +1,54 @@
-[gd_scene load_steps=4 format=3 uid="uid://duaihjbmtuquu"]
+[gd_scene load_steps=7 format=3 uid="uid://duaihjbmtuquu"]
 
 [ext_resource type="Script" path="res://assets/prefabs/UI/hud/time_hud.gd" id="1_2omxq"]
 [ext_resource type="Texture2D" uid="uid://sv2p60lnp6fn" path="res://assets/resources/textures/UI/chat_box.png" id="1_bobpm"]
 [ext_resource type="Theme" uid="uid://bjh8cqfmixnsq" path="res://assets/resources/theme/main_theme.tres" id="2_mmnyw"]
 
-[node name="TimeHUD" type="HBoxContainer" node_paths=PackedStringArray("meridian_label", "local_label") groups=["time_hud"]]
-anchors_preset = -1
-anchor_left = 0.033
-anchor_top = 0.059
-anchor_right = 0.033
-anchor_bottom = 0.059
-offset_left = 0.639999
-offset_top = 0.279995
-offset_right = 292.64
-offset_bottom = 102.28
+[sub_resource type="Animation" id="Animation_ed045"]
+resource_name = "show"
+length = 0.75
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -64)]
+}
+
+[sub_resource type="Animation" id="Animation_8lxog"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xmuw1"]
+_data = {
+"RESET": SubResource("Animation_8lxog"),
+"show": SubResource("Animation_ed045")
+}
+
+[node name="TimeHUD" type="HBoxContainer" node_paths=PackedStringArray("meridian_label") groups=["time_hud"]]
+offset_right = 138.0
+offset_bottom = 102.0
 mouse_filter = 2
 theme_override_constants/separation = 16
 script = ExtResource("1_2omxq")
 meridian_label = NodePath("MarginContainer/MarginContainer/VBoxContainer/Time")
-local_label = NodePath("MarginContainer2/MarginContainer/VBoxContainer/Time")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -56,38 +86,7 @@ text = "12:12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
-layout_mode = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer2"]
-layout_mode = 2
-texture = ExtResource("1_bobpm")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_mmnyw")
-theme_override_font_sizes/font_size = 18
-text = "Local time"
-vertical_alignment = 1
-
-[node name="Time" type="Label" parent="MarginContainer2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_mmnyw")
-theme_override_font_sizes/font_size = 48
-text = "12:12"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xmuw1")
+}

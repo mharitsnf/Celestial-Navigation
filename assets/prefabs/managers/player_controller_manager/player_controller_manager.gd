@@ -58,21 +58,24 @@ func switch_controller(next_controller: PlayerController) -> void:
 		push_warning("Available virtual camera is empty! Returning...")
 		return
 
-	var third_person_camera: ThirdPersonCamera
-	var tpcs: Array = available_virtual_cameras.filter(func (n: Node) -> bool: return n is VirtualCamera and n.is_entry_camera())
-	if tpcs.is_empty():
+	var entry_camera: VirtualCamera
+	var vcs: Array = available_virtual_cameras.filter(func (n: Node) -> bool: return n is VirtualCamera and n.is_entry_camera())
+	if vcs.is_empty():
 		push_warning("Entry camera is not found! Returning...")
 		return
 	
-	third_person_camera = tpcs[0]
+	entry_camera = vcs[0]
 
 	set_transitioning(true)
-
+	
+	get_current_controller().exit_controller()
 	main_camera_controller.set_available_virtual_cameras(available_virtual_cameras)
-	main_camera.set_follow_target(third_person_camera)
+	main_camera.set_follow_target(entry_camera)
+	next_controller.enter_controller()
 	await main_camera.transition_finished
 
 	set_current_controller(next_controller)
+
 	set_transitioning(false)
 	transition_finished.emit()
 # ========== ========== ========== ==========

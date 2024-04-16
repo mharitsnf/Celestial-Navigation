@@ -23,8 +23,8 @@ func _limit_speed(state: PhysicsDirectBodyState3D) -> void:
 		new_vel.y = flat_vel.y
 		state.linear_velocity = basis * new_vel
 
-	if _move_input == Vector2.ZERO and is_grounded() and state.linear_velocity.length() > .01:
-		state.linear_velocity = lerp(state.linear_velocity, Vector3.ZERO, .35)
+	if _move_input == Vector2.ZERO and is_on_slope():
+		state.linear_velocity *= 1. - slope_drag
 
 func set_move_input(value: Vector2) -> void:
 	_move_input = value
