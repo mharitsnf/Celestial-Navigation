@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://ciqx1toooil80"
-path="res://.godot/imported/PixelifySans-Regular.ttf-80745c316bafadeaab0c836836a9e13e.fontdata"
+uid="uid://dgre2jpbyytp8"
+path="res://.godot/imported/Sono-SemiBold.ttf-fa92ae8eec4011ed6ba5dad82d813672.fontdata"
 
 [deps]
 
-source_file="res://assets/resources/fonts/PixelifySans-Regular.ttf"
-dest_files=["res://.godot/imported/PixelifySans-Regular.ttf-80745c316bafadeaab0c836836a9e13e.fontdata"]
+source_file="res://assets/resources/fonts/sono/Sono-SemiBold.ttf"
+dest_files=["res://.godot/imported/Sono-SemiBold.ttf-fa92ae8eec4011ed6ba5dad82d813672.fontdata"]
 
 [params]
 

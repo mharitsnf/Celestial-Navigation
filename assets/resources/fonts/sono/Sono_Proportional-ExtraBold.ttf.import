@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://3pkrybqxqf6p"
-path="res://.godot/imported/PixelifySans-Medium.ttf-930257cdd6131d1f66e6fcb1a385752c.fontdata"
+uid="uid://cp6rdnbdaydke"
+path="res://.godot/imported/Sono_Proportional-ExtraBold.ttf-2ca48d730b4175c90bcda1c9a7ca28de.fontdata"
 
 [deps]
 
-source_file="res://assets/resources/fonts/PixelifySans-Medium.ttf"
-dest_files=["res://.godot/imported/PixelifySans-Medium.ttf-930257cdd6131d1f66e6fcb1a385752c.fontdata"]
+source_file="res://assets/resources/fonts/sono/Sono_Proportional-ExtraBold.ttf"
+dest_files=["res://.godot/imported/Sono_Proportional-ExtraBold.ttf-2ca48d730b4175c90bcda1c9a7ca28de.fontdata"]
 
 [params]
 

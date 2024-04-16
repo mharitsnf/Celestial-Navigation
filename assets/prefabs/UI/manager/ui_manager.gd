@@ -1,5 +1,8 @@
 class_name UIManager extends CanvasLayer
 
+# UIs are different than HUDs in that they interrupt player controls.
+# Examples of UIs are chat boxes, menu (e.g., see quests, settings, etc.) 
+
 class UserInterface extends RefCounted:
     var pscn: PackedScene
     var controller: UIController
@@ -17,7 +20,6 @@ class UserInterface extends RefCounted:
 enum UIEnum {
     NONE,
     CHAT_BOX,
-    TRANSITION,
 }
 var current_ui: UserInterface
 var ui_dict: Dictionary = {
@@ -38,7 +40,7 @@ func _remove_current_ui() -> void:
         push_error("There is no current UI.")
         return
     remove_child(current_ui.get_instance())
-    current_ui.get_controller().clear()
+    current_ui.get_controller().exit_ui()
     current_ui = null
 
 func switch_current_ui(new_ui_enum: UIEnum) -> void:
@@ -49,4 +51,5 @@ func switch_current_ui(new_ui_enum: UIEnum) -> void:
         var new_ui: UserInterface = ui_dict[new_ui_enum]
         if !new_ui.get_instance(): new_ui.create_instance()
         current_ui = new_ui
+        current_ui.get_controller().enter_ui()
         add_child(current_ui.get_instance())

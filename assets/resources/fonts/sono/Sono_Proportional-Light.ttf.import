@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dqp0we5bdedpp"
-path="res://.godot/imported/PixelifySans-Bold.ttf-6880f3d334dbf7cb808ae31b12071c89.fontdata"
+uid="uid://bub4oaaeaj011"
+path="res://.godot/imported/Sono_Proportional-Light.ttf-a75393d7cd9edd073456e5ad0abca73f.fontdata"
 
 [deps]
 
-source_file="res://assets/resources/fonts/PixelifySans-Bold.ttf"
-dest_files=["res://.godot/imported/PixelifySans-Bold.ttf-6880f3d334dbf7cb808ae31b12071c89.fontdata"]
+source_file="res://assets/resources/fonts/sono/Sono_Proportional-Light.ttf"
+dest_files=["res://.godot/imported/Sono_Proportional-Light.ttf-a75393d7cd9edd073456e5ad0abca73f.fontdata"]
 
 [params]
 

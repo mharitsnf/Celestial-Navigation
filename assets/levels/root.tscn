@@ -49,7 +49,6 @@ shader_parameter/transition_noise_tex = SubResource("NoiseTexture2D_g7ims")
 [node name="Root" type="Node"]
 
 [node name="SaveSystem" parent="." instance=ExtResource("4_bncqj")]
-should_load_game = true
 
 [node name="Main" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -109,10 +108,6 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -128.0
-offset_top = -120.0
-offset_right = 10.0
-offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -126,6 +121,5 @@ script = ExtResource("3_1ye6f")
 
 [node name="TransitionCL" type="CanvasLayer" parent="."]
 layer = 5
-visible = false
 
 [node name="TransitionScreen" parent="TransitionCL" instance=ExtResource("4_e6h3r")]
