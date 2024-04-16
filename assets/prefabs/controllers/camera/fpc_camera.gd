@@ -1,4 +1,4 @@
-class_name FPCCamera extends FPCType
+class_name FPCCamera extends FPCFunction
 
 # ========== Built in functions ==========
 func process(_delta: float) -> void:

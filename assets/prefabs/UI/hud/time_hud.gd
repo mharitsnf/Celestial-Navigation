@@ -27,8 +27,8 @@ func show_hud() -> void:
     visible = true
     var tween: Tween = create_tween()
     tween.set_parallel()
-    tween.tween_property(self, "position", initial_pos + slide_offset, .75).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-    tween.tween_property(self, "modulate", Color(1.,1.,1.,1.), .75).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+    tween.tween_property(self, "position", initial_pos + slide_offset, .2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+    tween.tween_property(self, "modulate", Color(1.,1.,1.,1.), .2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
     await tween.finished
     set_transitioning(false)
 
@@ -37,8 +37,8 @@ func hide_hud() -> void:
     set_transitioning(true)
     var tween: Tween = create_tween()
     tween.set_parallel()
-    tween.tween_property(self, "position", initial_pos, .75).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-    tween.tween_property(self, "modulate", Color(1.,1.,1.,0.), .75).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+    tween.tween_property(self, "position", initial_pos, .2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+    tween.tween_property(self, "modulate", Color(1.,1.,1.,0.), .2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
     await tween.finished
     visible = false
     set_transitioning(false)

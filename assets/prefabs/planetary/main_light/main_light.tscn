@@ -7,13 +7,13 @@
 light_energy = 0.8
 shadow_enabled = true
 shadow_bias = 0.05
-shadow_reverse_cull_face = true
+shadow_normal_bias = 7.0
 script = ExtResource("1_drbv4")
 sprite = NodePath("Sprite3D")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 0, 0, 0)
+cast_shadow = 0
 billboard = 1
-double_sided = false
 alpha_cut = 1
 texture = ExtResource("2_1n3pv")

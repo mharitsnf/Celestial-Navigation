@@ -17,6 +17,8 @@ func _ready() -> void:
 func process(delta: float) -> void:
 	super(delta)
 	_zoom_joypad()
+	if parent.get_current_function():
+		parent.get_current_function().process(delta)
 
 func unhandled_input(event: InputEvent) -> void:
 	super(event)

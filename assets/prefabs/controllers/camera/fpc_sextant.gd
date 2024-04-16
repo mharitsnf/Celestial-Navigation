@@ -1,4 +1,4 @@
-class_name FPCSextant extends FPCType
+class_name FPCSextant extends FPCFunction
 
 @export var error_range: float = 3.
 var raycast: RayCast3D

@@ -8,6 +8,10 @@ class_name FirstPersonCamera extends VirtualCamera
 @export var gimbal : Node3D # For rotation in local Y
 @export var inner_gimbal : Node3D # For rotation in local X
 
+var fpc_functions: Array[FPCFunction]
+var current_function: FPCFunction
+var current_function_index: int = 0
+
 var camera_mask: CameraMask
 var sun_moon_path: SunMoonPath
 
@@ -17,9 +21,27 @@ func _ready() -> void:
     camera_mask = STUtil.get_only_node_in_group("camera_mask")
     sun_moon_path = STUtil.get_only_node_in_group("sun_moon_path")
 
+    if !fpc_functions.is_empty():
+        current_function = fpc_functions[current_function_index]
+
 func _process(delta: float) -> void:
     super(delta)
     _lerp_gimbal_position(delta)
+# ========== ========== ========== ==========
+
+# ========== FPC function settings ==========
+func next_function() -> void:
+    current_function_index = (current_function_index + 1) % fpc_functions.size()
+    current_function = fpc_functions[current_function_index]
+
+func get_current_function() -> FPCFunction:
+    return current_function
+
+func add_function(value: FPCFunction) -> void:
+    fpc_functions.append(value)
+
+func remove_function(value: FPCFunction) -> void:
+    fpc_functions.erase(value)
 # ========== ========== ========== ==========
 
 # ========== Rotation settings ==========
