@@ -22,6 +22,7 @@ uniform vec4 wave_4 = vec4(.2, 10., 1., 0.);
 uniform vec4 wave_5 = vec4(.2, 10., 1., 0.);
 
 group_uniforms VisualData;
+uniform sampler2D water_tex : filter_nearest;
 uniform vec3 albedo : source_color;
 uniform vec3 albedo2 : source_color;
 uniform float metallic : hint_range(0.0, 1.0, 0.001) = 0.;
@@ -42,7 +43,6 @@ group_uniforms LightData;
 uniform sampler2D color_ramp;
 
 uniform sampler2D depth_texture : source_color, hint_depth_texture;
-
 
 vec3 gerstner_wave (vec4 wave, vec3 vertex, inout vec3 tangent, inout vec3 binormal) {
 	float steepness = wave.x;
@@ -168,7 +168,8 @@ void fragment() {
 	
 	// === COLOR
 	float fresnel_val = fresnel(5., NORMAL, VIEW);
-	vec3 surface_color = mix(albedo, albedo2, fresnel_val);
+	float color_mask = texture(water_tex, scaled_uv * 15.).x;
+	vec3 surface_color = mix(albedo, albedo2, color_mask);
 	
 	vec3 final_color = mix(edge_color, surface_color, final_z_dif);
 	
@@ -179,7 +180,7 @@ void fragment() {
 	//ALBEDO = posterize(final_color);	
 	//METALLIC = posterize(vec3(metallic)).x;
 	//ROUGHNESS = posterize(vec3(roughness)).x;
-	NORMAL_MAP = posterize(vec3(normal));
+	//NORMAL_MAP = posterize(vec3(normal));
 }
 
 void light() {

@@ -25,5 +25,113 @@ surface_material_override/0 = ExtResource("2_auw8o")
 [node name="UTRock_005" parent="." index="5"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_012" parent="." index="6"]
+[node name="Cylinder_001" parent="." index="6"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_002" parent="." index="7"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_003" parent="." index="8"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_004" parent="." index="9"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_005" parent="." index="10"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_006" parent="." index="11"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_007" parent="." index="12"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_008" parent="." index="13"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_009" parent="." index="14"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_010" parent="." index="15"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_011" parent="." index="16"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_012" parent="." index="17"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_013" parent="." index="18"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_014" parent="." index="19"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_015" parent="." index="20"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_016" parent="." index="21"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_017" parent="." index="22"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_018" parent="." index="23"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_019" parent="." index="24"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_020" parent="." index="25"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_021" parent="." index="26"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_022" parent="." index="27"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_023" parent="." index="28"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_024" parent="." index="29"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_025" parent="." index="30"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_026" parent="." index="31"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_027" parent="." index="32"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_028" parent="." index="33"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_029" parent="." index="34"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_030" parent="." index="35"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_031" parent="." index="36"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_032" parent="." index="37"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_033" parent="." index="38"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_034" parent="." index="39"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_035" parent="." index="40"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_036" parent="." index="41"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_037" parent="." index="42"]
 surface_material_override/0 = ExtResource("2_auw8o")

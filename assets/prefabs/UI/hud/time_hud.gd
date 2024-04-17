@@ -4,10 +4,10 @@ class_name TimeHUD extends HBoxContainer
 @export var slide_offset: Vector2 = Vector2(0., -64.)
 
 var transitioning: bool = false
-var initial_pos: Vector2
+var initial_pos: Vector2 = Vector2(869., 963.)
 
 func _ready() -> void:
-    initial_pos = position
+    position = initial_pos
     modulate.a = 0
     visible = false
 
@@ -25,6 +25,7 @@ func show_hud() -> void:
     if is_transitioning(): return
     set_transitioning(true)
     visible = true
+    await get_tree().create_timer(.55).timeout
     var tween: Tween = create_tween()
     tween.set_parallel()
     tween.tween_property(self, "position", initial_pos + slide_offset, .2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
@@ -35,6 +36,7 @@ func show_hud() -> void:
 func hide_hud() -> void:
     if is_transitioning(): return
     set_transitioning(true)
+    await get_tree().create_timer(.55).timeout
     var tween: Tween = create_tween()
     tween.set_parallel()
     tween.tween_property(self, "position", initial_pos, .2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)

@@ -18,7 +18,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53, 0)
 
 [node name="TPC" parent="." node_paths=PackedStringArray("target_group") groups=["sundial_vc"] instance=ExtResource("1_kh1sq")]
 _spring_length = 1.0
-_offset = Vector3(0, 0.6, 0)
+_offset = Vector3(0, 0.45, 0)
 entry_camera = true
 target_group = NodePath("..")
 default_angle = Vector2(-40, 10)

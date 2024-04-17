@@ -1,5 +1,29 @@
 class_name PlayerControllerManager extends Node
 
+# class PlayerObject extends RefCounted:
+# 	var pscn: PackedScene
+# 	var controller: PlayerController
+# 	var instance: Control = null
+# 	func _init(_pscn: PackedScene) -> void:
+# 		pscn = _pscn
+# 	func create_instance() -> void:
+# 		instance = pscn.instantiate()
+# 		controller = instance.get_node("Controller")
+# 	func get_controller() -> PlayerController:
+# 		return controller
+# 	func get_instance() -> Control:
+# 		return instance
+
+# enum PlayerObjectEnum {
+# 	NONE, BOAT, CHARACTER, SUNDIAL
+# }
+# var current_player_object: PlayerObject
+# var player_object_dict: Dictionary = {
+# 	PlayerObjectEnum.BOAT: null,
+# 	PlayerObjectEnum.CHARACTER: null,
+# 	PlayerObjectEnum.SUNDIAL: null,
+# }
+
 var previous_controller: PlayerController
 @export var current_controller: PlayerController
 var controllers: Array[PlayerController]

@@ -17,7 +17,7 @@ viewport_path = NodePath("Main/SubViewport")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rjtgd"]
 resource_local_to_scene = true
 shader = ExtResource("2_gyjex")
-shader_parameter/pixel_size = 6
+shader_parameter/pixel_size = 4
 shader_parameter/main_tex = SubResource("ViewportTexture_oviw0")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7t8o7"]
@@ -49,7 +49,6 @@ shader_parameter/transition_noise_tex = SubResource("NoiseTexture2D_g7ims")
 [node name="Root" type="Node"]
 
 [node name="SaveSystem" parent="." instance=ExtResource("4_bncqj")]
-should_load_game = true
 
 [node name="Main" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -96,9 +95,12 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("ViewportTexture_7t8o7")
 
