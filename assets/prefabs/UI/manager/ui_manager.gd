@@ -26,6 +26,10 @@ var ui_dict: Dictionary = {
     UIEnum.CHAT_BOX: UserInterface.new(preload("res://assets/prefabs/UI/chat_box/chat_box.tscn"))
 }
 
+func _process(delta: float) -> void:
+    if current_ui and get_current_controller():
+        get_current_controller().process(delta)
+
 func has_current_ui() -> bool:
     return current_ui != null
 

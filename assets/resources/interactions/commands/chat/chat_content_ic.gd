@@ -9,5 +9,4 @@ func action(_tree: SceneTree) -> STUtil.Promise:
         controller.set_chat_text(text)
         controller.show_text()
         await controller.show_text_finished
-        await STUtil.interact_pressed
     return STUtil.Promise.new()

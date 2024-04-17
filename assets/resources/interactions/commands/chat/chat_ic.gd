@@ -14,15 +14,13 @@ func action(tree: SceneTree) -> STUtil.Promise:
 		
 		controller.show_ui()
 		await controller.animation_finished
-		# await tree.create_timer(.25).timeout
 		
 		for c: ChatContentIC in commands:
 			await c.action(tree)
-			await STUtil.interact_pressed
+			await controller.interact_pressed
 
 		controller.hide_ui()
 		await controller.animation_finished
-		# await controller.anim.animation_finished
 		ui_manager.switch_current_ui(UIManager.UIEnum.NONE)
 
 	return STUtil.Promise.new()

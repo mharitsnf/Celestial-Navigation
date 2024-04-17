@@ -9,7 +9,6 @@ offset_left = 576.0
 offset_top = 736.0
 offset_right = 1248.0
 offset_bottom = 902.0
-scale = Vector2(1, 0.7)
 theme_override_constants/separation = 32
 
 [node name="SpeakerContainer" type="MarginContainer" parent="."]

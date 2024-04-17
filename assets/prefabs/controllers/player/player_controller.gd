@@ -60,12 +60,16 @@ func _get_start_interact_input() -> void:
 		_interact()
 
 func _setup_interaction() -> bool:
+	# Get the top interaction
 	var top_node: Area3D = interactions.back()
 	if top_node is Interactable:
-		if !top_node.interaction: return false
+		if !top_node.interaction:
+			push_error("No interaction data was found!")
+			return false
 		current_interactable = top_node
 		current_track = top_node.get_track()
 		if !current_track:
+			push_error("Interaction track not found!")
 			_finish_interaction()
 			return false
 	return true
@@ -82,7 +86,9 @@ func _interact() -> void:
 	_start_interaction()
 	for c: InteractionCommand in current_track.commands:
 		await c.action(get_tree())
-		if !c.auto_next: await STUtil.interact_pressed
+		if !c.auto_next:
+			await ui_manager.get_current_controller().interact_pressed
+			# await STUtil.interact_pressed
 	current_interactable.handle_track_finished()
 	_finish_interaction()
 

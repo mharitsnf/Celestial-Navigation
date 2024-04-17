@@ -1,7 +1,6 @@
 class_name ChatBoxController extends UIController
 
 @export var slide_offset: Vector2 = Vector2(0.,-80.)
-@export var hidden_scale: Vector2 = Vector2(0., .75)
 @export var display_speed: float
 @export_group("References")
 @export var speaker_label: Label
@@ -19,7 +18,6 @@ func _enter_tree() -> void:
 
     parent.modulate.a = 0
     parent.position = INITIAL_POSITION
-    parent.scale = hidden_scale
 
     timer.wait_time = display_speed
 
@@ -48,7 +46,6 @@ func show_ui() -> void:
     tween.set_parallel()
     tween.tween_property(parent, "position", INITIAL_POSITION + slide_offset, animation_speed).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
     tween.tween_property(parent, "modulate", Color(1.,1.,1.,1.), animation_speed).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-    tween.tween_property(parent, "scale", Vector2(1.,1.), animation_speed).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
     await tween.finished
     animation_finished.emit()
 
@@ -57,7 +54,6 @@ func hide_ui() -> void:
     tween.set_parallel()
     tween.tween_property(parent, "position", INITIAL_POSITION, animation_speed).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
     tween.tween_property(parent, "modulate", Color(1.,1.,1.,0.), animation_speed).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-    tween.tween_property(parent, "scale", hidden_scale, animation_speed).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
     await tween.finished
     animation_finished.emit()
 # ========== ========== ========== ==========
