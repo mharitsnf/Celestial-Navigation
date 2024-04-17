@@ -74,10 +74,10 @@ radius = 3.0
 [node name="PlayerCharacterEntity" node_paths=PackedStringArray("ground_checker", "normal_container", "visual_container") instance=ExtResource("1_vu730")]
 physics_material_override = SubResource("PhysicsMaterial_7v1cr")
 script = ExtResource("2_lgsjv")
-water_damping = 5.0
-ground_damping = 5.0
+water_damping = 1.0
+ground_damping = 1.0
 air_damping = 0.75
-slope_drag = 0.1
+flat_drag = 0.1
 max_slope_angle = 0.5
 submerged_speed_limit = 3.0
 ground_checker = NodePath("GroundChecker")
@@ -161,6 +161,7 @@ jump_force = 15.0
 
 [node name="Fall" type="Node" parent="Controller" index="2"]
 script = ExtResource("11_uwajx")
+coyote_time = 0.1
 
 [connection signal="area_entered" from="PlayerBoatScannerArea" to="Controller" method="_on_player_boat_area_entered"]
 [connection signal="area_exited" from="PlayerBoatScannerArea" to="Controller" method="_on_player_boat_area_exited"]

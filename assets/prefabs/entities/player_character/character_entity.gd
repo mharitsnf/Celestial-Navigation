@@ -4,7 +4,7 @@ class_name CharacterEntity extends BaseEntity
 @export var water_damping: float 
 @export var ground_damping: float 
 @export var air_damping: float 
-@export_range(0., 1., 0.01) var slope_drag: float = .75
+@export_range(0., 1., 0.01) var flat_drag: float = .75
 @export var max_slope_angle: float = 50.
 @export var submerged_speed_limit: float = 3.
 @export_group("References")
@@ -18,13 +18,18 @@ func _limit_speed(state: PhysicsDirectBodyState3D) -> void:
 	var flat_vel : Vector3 = basis.inverse() * state.linear_velocity
 	var xz_vel : Vector3 = Vector3(flat_vel.x, 0, flat_vel.z)
 	
-	if xz_vel.length() > limit:
-		var new_vel : Vector3 = xz_vel.normalized() * limit
-		new_vel.y = flat_vel.y
-		state.linear_velocity = basis * new_vel
+	var new_vel: Vector3 = flat_vel
+	
+	if _move_input == Vector2.ZERO:
+		if !is_on_slope():
+			new_vel *= 1. - flat_drag
+			new_vel.y = flat_vel.y
 
-	if _move_input == Vector2.ZERO and is_on_slope():
-		state.linear_velocity *= 1. - slope_drag
+	if xz_vel.length() > limit:
+		new_vel = xz_vel.normalized() * limit
+		new_vel.y = flat_vel.y
+	
+	state.linear_velocity = basis * new_vel
 
 func set_move_input(value: Vector2) -> void:
 	_move_input = value

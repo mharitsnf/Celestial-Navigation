@@ -39,7 +39,6 @@ func get_previous_state() -> State:
 func process(delta: float) -> bool:
 	if !super(delta): return false
 	if _current_state:
-		print(_current_state)
 		_current_state.process(delta)
 	_get_enter_ship_input()
 	return true
