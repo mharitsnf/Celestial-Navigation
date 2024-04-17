@@ -35,6 +35,9 @@ func get_ground_checker() -> RayCast3D:
 func is_grounded() -> bool:
 	return ground_checker.is_colliding()
 
+func get_ground_normal() -> Vector3:
+	return ground_checker.get_collision_normal()
+
 func is_on_slope() -> bool:
 	if !ground_checker.is_colliding(): return false
 

@@ -1,13 +1,14 @@
 extends CharacterBaseState
 
+
 func process(delta: float) -> void:
     super(delta)
+    _update_linear_damp()
     if _handle_jump(): return
     if _handle_fall(): return
 
 func _handle_fall() -> bool:
-    var flat_vel: Vector3 = character.basis.inverse() * character.linear_velocity
-    if flat_vel.y < 0:
+    if !character.is_grounded() and !character.is_submerged():
         parent.switch_state(parent.States.FALL)
         return true
     return false
@@ -18,5 +19,8 @@ func _handle_jump() -> bool:
         return true
     return false
 
-func enter_state() -> void:
+func _update_linear_damp() -> void:
     character.linear_damp = character.water_damping if character.is_submerged() else character.ground_damping
+
+func enter_state() -> void:
+    _update_linear_damp()

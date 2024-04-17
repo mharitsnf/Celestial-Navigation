@@ -1,5 +1,6 @@
 class_name PlayerCharacterController extends PlayerController
 
+var _previous_state: State
 var _current_state: State
 var player_boat: BoatEntity
 var player_boat_in_area: bool = false
@@ -29,9 +30,16 @@ func _init_states() -> void:
 func _get_state(key: States) -> State:
 	return states[key]
 
+func get_current_state() -> State:
+	return _current_state
+
+func get_previous_state() -> State:
+	return _previous_state
+
 func process(delta: float) -> bool:
 	if !super(delta): return false
 	if _current_state:
+		print(_current_state)
 		_current_state.process(delta)
 	_get_enter_ship_input()
 	return true
@@ -47,6 +55,7 @@ func switch_state(new_state_key: States) -> void:
 
 	if _current_state:
 		_current_state.exit_state()
+		_previous_state = _current_state
 	
 	_current_state = new_state
 	_current_state.enter_state()

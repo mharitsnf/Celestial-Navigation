@@ -4,7 +4,7 @@
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_u0thf"]
 [ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/planetary/ocean/ocean.tscn" id="2_dnrth"]
 [ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/planetary/star loader/star_loader.tscn" id="3_g722y"]
-[ext_resource type="PackedScene" uid="uid://bk3dop2klnury" path="res://assets/prefabs/planetary/planet.tscn" id="3_ncp2x"]
+[ext_resource type="PackedScene" uid="uid://dinmkv0vr8al0" path="res://assets/prefabs/planetary/planet.tscn" id="3_ncp2x"]
 [ext_resource type="PackedScene" uid="uid://cjn37qac1f86p" path="res://assets/prefabs/managers/player_controller_manager/player_controller_manager.tscn" id="4_v2hc8"]
 [ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/test_box/test_box.tscn" id="6_u01up"]
 [ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/test_boat/player_boat.tscn" id="7_03d3k"]

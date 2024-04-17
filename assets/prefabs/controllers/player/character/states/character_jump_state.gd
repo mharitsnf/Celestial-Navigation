@@ -1,7 +1,6 @@
 extends CharacterBaseState
 
 @export var jump_force: float = 30
-@export var ground_checker: RayCast3D
 
 const IGNORE_FRAME_COUNT: int = 5
 var frame_count: int = 0
@@ -14,13 +13,14 @@ func process(delta: float) -> void:
 
 func _handle_fall() -> bool:
     var flat_vel: Vector3 = character.basis.inverse() * character.linear_velocity
-    if flat_vel.y < 0 and frame_count > IGNORE_FRAME_COUNT:
+    if flat_vel.y < 0.02 and frame_count > IGNORE_FRAME_COUNT:
         parent.switch_state(parent.States.FALL)
         return true
     return false
 
 func _handle_grounded() -> bool:
-    if character.is_grounded() and frame_count > IGNORE_FRAME_COUNT:
+    var flat_vel: Vector3 = character.basis.inverse() * character.linear_velocity
+    if character.is_grounded() and flat_vel.y < 0.02 and frame_count > IGNORE_FRAME_COUNT:
         parent.switch_state(parent.States.GROUNDED)
         return true
     return false

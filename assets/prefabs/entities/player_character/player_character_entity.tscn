@@ -74,8 +74,8 @@ radius = 3.0
 [node name="PlayerCharacterEntity" node_paths=PackedStringArray("ground_checker", "normal_container", "visual_container") instance=ExtResource("1_vu730")]
 physics_material_override = SubResource("PhysicsMaterial_7v1cr")
 script = ExtResource("2_lgsjv")
-water_damping = 8.0
-ground_damping = 8.0
+water_damping = 5.0
+ground_damping = 5.0
 air_damping = 0.75
 slope_drag = 0.1
 max_slope_angle = 0.5
@@ -105,7 +105,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.3)
 mesh = SubResource("BoxMesh_ox2q4")
 skeleton = NodePath("")
 
-[node name="TPC" parent="." index="1" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
+[node name="GroundChecker" type="RayCast3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, -1.2, 0)
+collision_mask = 2
+debug_shape_thickness = 5
+
+[node name="TPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
 _offset = Vector3(0, 2, 0)
 entry_camera = true
 target_group = NodePath("..")
@@ -117,7 +123,7 @@ submerged_min_angle = -40.0
 mouse_inverted_x = false
 mouse_inverted_y = false
 
-[node name="FPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_6hl70")]
+[node name="FPC" parent="." index="3" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_6hl70")]
 _offset = Vector3(0, 1.35, -1.5)
 target_group = NodePath("..")
 submerged_angle = Vector2(0, 80)
@@ -128,23 +134,19 @@ submerged_min_angle = 5.0
 joypad_inverted_x = true
 joypad_inverted_y = false
 
-[node name="PlayerBoatScannerArea" type="Area3D" parent="." index="3"]
+[node name="PlayerBoatScannerArea" type="Area3D" parent="." index="4"]
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBoatScannerArea" index="0"]
 shape = SubResource("SphereShape3D_t1ygy")
 
-[node name="InteractionScannerArea" type="Area3D" parent="." index="4"]
+[node name="InteractionScannerArea" type="Area3D" parent="." index="5"]
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractionScannerArea" index="0"]
 shape = SubResource("SphereShape3D_t1ygy")
-
-[node name="GroundChecker" type="RayCast3D" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-collision_mask = 2
 
 [node name="Controller" type="Node" parent="." index="6" node_paths=PackedStringArray("interaction_scanner")]
 script = ExtResource("4_eocql")
@@ -153,14 +155,12 @@ interaction_scanner = NodePath("../InteractionScannerArea")
 [node name="Grounded" type="Node" parent="Controller" index="0"]
 script = ExtResource("9_tuho6")
 
-[node name="Jump" type="Node" parent="Controller" index="1" node_paths=PackedStringArray("ground_checker")]
+[node name="Jump" type="Node" parent="Controller" index="1"]
 script = ExtResource("10_qhwc7")
 jump_force = 15.0
-ground_checker = NodePath("../../GroundChecker")
 
-[node name="Fall" type="Node" parent="Controller" index="2" node_paths=PackedStringArray("ground_checker")]
+[node name="Fall" type="Node" parent="Controller" index="2"]
 script = ExtResource("11_uwajx")
-ground_checker = NodePath("../../GroundChecker")
 
 [connection signal="area_entered" from="PlayerBoatScannerArea" to="Controller" method="_on_player_boat_area_entered"]
 [connection signal="area_exited" from="PlayerBoatScannerArea" to="Controller" method="_on_player_boat_area_exited"]
