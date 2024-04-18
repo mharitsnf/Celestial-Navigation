@@ -62,7 +62,7 @@ func save_state() -> Dictionary:
         "on_ready": {}
     }
 
-func on_load_init(_data: Dictionary) -> void:
+func on_preprocess(_data: Dictionary) -> void:
     pass
 
 func on_load_ready(_data: Dictionary) -> void:

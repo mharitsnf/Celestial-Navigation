@@ -169,7 +169,7 @@ void fragment() {
 	// === COLOR
 	float fresnel_val = fresnel(5., NORMAL, VIEW);
 	float color_mask = texture(water_tex, scaled_uv * 15.).x;
-	vec3 surface_color = mix(albedo, albedo2, color_mask);
+	vec3 surface_color = mix(albedo, albedo2, fresnel_val);
 	
 	vec3 final_color = mix(edge_color, surface_color, final_z_dif);
 	

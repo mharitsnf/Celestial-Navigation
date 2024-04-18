@@ -193,10 +193,10 @@ func save_state() -> Dictionary:
 		}
 	}
 
+func on_preprocess(_data: Dictionary) -> void:
+	pass
+
 func on_load_ready(data: Dictionary) -> void:
 	global_position = Vector3(data["gpos_x"], data["gpos_y"], data["gpos_z"])
 	basis = STUtil.recalculate_basis(self)
-
-func on_load_init(_data: Dictionary) -> void:
-	pass
 # ========== ========== ========== ==========

@@ -49,15 +49,18 @@ func _get_rotate_input() -> void:
 
 func _get_exit_ship_input() -> void:
 	if manager.is_switchable() and Input.is_action_just_pressed("enter_ship"):
-		if !player_character: player_character = player_character_pscn.instantiate()
-		var next_controller: PlayerController = player_character.get_node("Controller")
-		manager.add_child(player_character)
-		player_character.global_position = dropoff_point.global_position
+		manager.set_spawn_position(dropoff_point.global_position)
+		manager.switch_current_player_object(manager.PlayerObjectEnum.CHARACTER)
+		# if !player_character: player_character = player_character_pscn.instantiate()
+		# var next_controller: PlayerController = player_character.get_node("Controller")
+		# manager.add_child(player_character)
+		# player_character.global_position = dropoff_point.global_position
 
-		manager.switch_controller(next_controller)
+		# manager.switch_controller(next_controller)
 
 func _get_switch_sundial_controller_input() -> void:
 	if manager.is_switchable() and Input.is_action_just_pressed("switch_sundial_controller"):
-		var sundial_controller: PlayerController = STUtil.get_only_node_in_group("sundial_manager").get_node("Controller")
-		manager.switch_controller(sundial_controller)
+		manager.switch_current_player_object(manager.PlayerObjectEnum.SUNDIAL)
+		# var sundial_controller: PlayerController = STUtil.get_only_node_in_group("sundial_manager").get_node("Controller")
+		# manager.switch_controller(sundial_controller)
 # =============== =============== ===============

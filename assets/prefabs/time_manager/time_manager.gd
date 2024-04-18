@@ -65,7 +65,7 @@ func save_state() -> Dictionary:
 		"on_ready": {}
 	}
 
-func on_load_init(data: Dictionary) -> void:
+func on_preprocess(data: Dictionary) -> void:
 	time_elapsed = data["time_elapsed"]
 	time_speed = data["time_speed"]
 

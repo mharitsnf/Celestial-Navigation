@@ -62,10 +62,12 @@ func switch_state(new_state_key: States) -> void:
 func _get_enter_ship_input() -> void:
 	if !player_boat_in_area: return
 	if manager.is_switchable() and Input.is_action_just_pressed("enter_ship"):
-		var next_controller: PlayerController = player_boat.get_node("Controller")
-		manager.switch_controller(next_controller)
-		await manager.transition_finished
-		manager.remove_child(parent)
+		manager.set_should_unmount(true)
+		manager.switch_current_player_object(manager.PlayerObjectEnum.BOAT)
+		# var next_controller: PlayerController = player_boat.get_node("Controller")
+		# manager.switch_controller(next_controller)
+		# await manager.transition_finished
+		# manager.remove_child(parent)
 
 func _on_player_boat_area_entered(area:Area3D) -> void:
 	player_boat_in_area = true

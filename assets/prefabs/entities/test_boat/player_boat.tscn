@@ -111,6 +111,8 @@ joypad_inverted_y = false
 [node name="Controller" parent="." index="3" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("9_wqan3")]
 dropoff_point = NodePath("../CollisionShape3D/DropoffPoint")
 player_character_pscn = ExtResource("10_31xpf")
+should_setup_first_transform = true
+first_position = Vector3(0, 792, 0)
 interaction_scanner = NodePath("../CollisionShape3D/InteractionScanner")
 
 [editable path="CollisionShape3D/PlayerBoatInst"]

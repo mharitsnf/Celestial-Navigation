@@ -135,13 +135,16 @@ func save_state() -> Dictionary:
 			"parent": get_parent().get_path(),
 		},
 		"on_init": {
+			# Finds the parent of the current virtual camera, set that to follow target
 			"i_follow_target": STUtil.get_index_in_group("persist", get_follow_target().get_parent()),
 		},
 		"on_ready": {}
 	}
 
-func on_load_init(data: Dictionary) -> void:
-	set_follow_target(data["i_follow_target"])
+func on_preprocess(data: Dictionary) -> void:
+	var vcam_parent: Node = data["i_follow_target"]
+	var vcams: Array[Node] = vcam_parent.get_children().filter(func (n: Node) -> bool: return n is VirtualCamera and n.is_entry_camera())
+	if !vcams.is_empty(): set_follow_target(vcams[0])
 
 func on_load_ready(_data: Dictionary) -> void:
 	pass

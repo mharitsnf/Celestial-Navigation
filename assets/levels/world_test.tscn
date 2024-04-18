@@ -61,8 +61,12 @@ transform = Transform3D(0.093841, 0.358905, -0.928645, 0.0115935, 0.932304, 0.36
 current = true
 follow_target = NodePath("../PlayerControllerManager/PlayerBoat/TPC")
 
-[node name="PlayerControllerManager" parent="ObjectsContainer" node_paths=PackedStringArray("current_controller") instance=ExtResource("4_v2hc8")]
-current_controller = NodePath("PlayerBoat/Controller")
+[node name="PlayerControllerManager" parent="ObjectsContainer" instance=ExtResource("4_v2hc8")]
+should_instantiate_dict = {
+1: true,
+2: false,
+3: true
+}
 
 [node name="PlayerBoat" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("7_03d3k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792, 0)

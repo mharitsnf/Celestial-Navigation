@@ -1,7 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=11 format=3 uid="uid://qq3s0v8dgt3x"]
+[gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://qq3s0v8dgt3x"]
 
 [ext_resource type="Shader" path="res://assets/prefabs/planetary/ocean/ocean_shader.gdshader" id="1_hfygk"]
-[ext_resource type="Texture2D" uid="uid://c7v6leepb3ta7" path="res://assets/resources/textures/water_tex.png" id="2_m62pt"]
 
 [sub_resource type="Gradient" id="Gradient_ppngf"]
 interpolation_mode = 2
@@ -45,7 +44,7 @@ shader_parameter/target_world_position = Vector3(0, 792, 0)
 shader_parameter/target_up = Vector3(0, 1, 0)
 shader_parameter/target_right = Vector3(1, 0, 0)
 shader_parameter/target_fwd = Vector3(0, 0, 1)
-shader_parameter/cpu_time = 72.3751
+shader_parameter/cpu_time = 8.6407
 shader_parameter/movement_offset = Vector3(0, 0, 0)
 shader_parameter/plane_size = 200.0
 shader_parameter/speed = 1.0
@@ -59,7 +58,6 @@ shader_parameter/albedo2 = Color(0.333333, 0.760784, 0.886275, 1)
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 0.02
 shader_parameter/movement_offset_scale = 1.0
-shader_parameter/water_tex = ExtResource("2_m62pt")
 shader_parameter/texture_normal = SubResource("NoiseTexture2D_d17wf")
 shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_tnjn4")
 shader_parameter/edge_scale = 0.6

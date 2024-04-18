@@ -112,7 +112,7 @@ func save_state() -> Dictionary:
 		"on_ready": {}
 	}
 
-func on_load_init(data: Dictionary) -> void:
+func on_preprocess(data: Dictionary) -> void:
 	set_target(data["i_target"])
 
 func on_load_ready(_data: Dictionary) -> void:

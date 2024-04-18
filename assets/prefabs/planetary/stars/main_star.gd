@@ -15,7 +15,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	_init_sun()
-	sprite.modulate.a = lerp(0., 1., sun.get_star_visibility_weight())
+	if sun:
+		sprite.modulate.a = lerp(0., 1., sun.get_star_visibility_weight())
 
 func _init_sun() -> void:
 	if !sun:

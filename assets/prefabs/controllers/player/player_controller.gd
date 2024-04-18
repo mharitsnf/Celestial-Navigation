@@ -1,6 +1,12 @@
 class_name PlayerController extends Node
 
 # Interactions
+@export_group("First setup")
+@export var should_setup_first_transform: bool = false
+@export var first_position: Vector3
+@export var first_rotation: Vector3
+var first_setup_done: bool = false
+@export_group("Interactions")
 @export var interaction_scanner: Area3D
 var interactions: Array
 var current_interactable: Interactable
@@ -34,6 +40,13 @@ func physics_process(_delta: float) -> bool:
 # ========== ========== ========== ==========
 
 # ========== State functions ==========
+func first_setup() -> void:
+	if should_setup_first_transform:
+		if parent is Node3D:
+			parent.global_position = first_position
+			parent.rotation_degrees = first_rotation
+	first_setup_done = true
+
 func enter_controller() -> void:
 	pass
 

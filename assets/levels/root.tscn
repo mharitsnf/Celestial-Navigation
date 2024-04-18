@@ -49,6 +49,7 @@ shader_parameter/transition_noise_tex = SubResource("NoiseTexture2D_g7ims")
 [node name="Root" type="Node"]
 
 [node name="SaveSystem" parent="." instance=ExtResource("4_bncqj")]
+should_load_game = true
 
 [node name="Main" type="SubViewportContainer" parent="."]
 anchors_preset = 15

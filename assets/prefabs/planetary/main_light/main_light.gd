@@ -63,8 +63,8 @@ const SUNSET_ANGLE: float = -.25
 const MAX_ENERGY_ANGLE: float = .8
 func _adjust_energy_level() -> void:
 	if !pcm: return
-	var player_entity: Node3D = pcm.get_player_entity()
-	if player_entity:
+	var player_entity: Node = pcm.get_current_player_object()
+	if player_entity and player_entity is Node3D:
 		var player_normal: Vector3 = player_entity.basis.y
 		var dir_to_light: Vector3 = (global_position - player_entity.global_position).normalized()
 		var ndotl: float = player_normal.dot(dir_to_light)
@@ -76,8 +76,8 @@ func _adjust_energy_level() -> void:
 const MAX_STAR_VISIBILITY_ANGLE: float = .05
 func _adjust_star_visibility() -> void:
 	if !pcm: return
-	var player_entity: Node3D = pcm.get_player_entity()
-	if player_entity:
+	var player_entity: Node = pcm.get_current_player_object()
+	if player_entity and player_entity is Node3D:
 		var player_normal: Vector3 = player_entity.basis.y
 		var dir_to_light: Vector3 = (global_position - player_entity.global_position).normalized()
 		var ndotl: float = player_normal.dot(dir_to_light)
