@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6g3r4w66au3q"]
+
+[ext_resource type="PackedScene" uid="uid://b2oeyexbmfft" path="res://assets/models/model.glb" id="1_7rly6"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="2_xywnv"]
+[ext_resource type="Texture2D" uid="uid://bjplfq8xgj0t4" path="res://assets/models/model_0.png" id="3_ok3ai"]
+
+[sub_resource type="Gradient" id="Gradient_dddn1"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.506631)
+colors = PackedColorArray(0.25, 0.25, 0.25, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4521y"]
+gradient = SubResource("Gradient_dddn1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q41uq"]
+render_priority = 0
+shader = ExtResource("2_xywnv")
+shader_parameter/_roughness = 1.0
+shader_parameter/_metallic = 0.0
+shader_parameter/posterize_levels = 10.0
+shader_parameter/albedo_tex = ExtResource("3_ok3ai")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_4521y")
+
+[node name="WalkingMushroom" instance=ExtResource("1_7rly6")]
+
+[node name="cylinder" parent="Node/Root/Body" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_q41uq")
+
+[node name="cylinder2" parent="Node/Root/Body" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_q41uq")
+
+[node name="cylinder3" parent="Node/Root/RFeet" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_q41uq")
+
+[node name="cylinder4" parent="Node/Root/RFeet/RKnee" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_q41uq")
+
+[node name="cylinder5" parent="Node/Root/RFeet/RKnee" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_q41uq")
+
+[node name="cylinder6" parent="Node/Root/LFeet" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_q41uq")
+
+[node name="cylinder7" parent="Node/Root/LFeet/LKnee" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_q41uq")
+
+[node name="cylinder8" parent="Node/Root/LFeet/LKnee" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_q41uq")

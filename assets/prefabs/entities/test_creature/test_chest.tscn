@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://djyf531tvn115"]
+
+[ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_ck7xg"]
+[ext_resource type="PackedScene" uid="uid://c6g3r4w66au3q" path="res://assets/prefabs/entities/walking_mushroom.tscn" id="2_3ag56"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c0rdi"]
+size = Vector3(0.94104, 1.55864, 0.934814)
+
+[node name="TestChest" node_paths=PackedStringArray("normal_container") instance=ExtResource("1_ck7xg")]
+normal_container = NodePath("CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000305176, 0.781567, -0.000854492)
+shape = SubResource("BoxShape3D_c0rdi")
+
+[node name="WalkingMushroom" parent="." index="1" instance=ExtResource("2_3ag56")]

@@ -1,14 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://c563xq8a6oome"]
 
-[ext_resource type="Texture2D" uid="uid://sv2p60lnp6fn" path="res://assets/resources/textures/UI/chat_box.png" id="1_5uv5t"]
+[ext_resource type="Texture2D" uid="uid://b7m7wad7u2d7h" path="res://assets/resources/textures/border-1.png" id="1_vmhap"]
 [ext_resource type="Theme" uid="uid://bjh8cqfmixnsq" path="res://assets/resources/theme/main_theme.tres" id="2_j0adr"]
 [ext_resource type="PackedScene" uid="uid://yx82uhgjdmj0" path="res://assets/prefabs/controllers/UI/chat_box/chat_box_controller.tscn" id="4_xc0jh"]
 
 [node name="ChatBox" type="VBoxContainer"]
-offset_left = 576.0
-offset_top = 736.0
-offset_right = 1248.0
-offset_bottom = 902.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -336.0
+offset_top = -208.0
+offset_right = 336.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_constants/separation = 32
 
 [node name="SpeakerContainer" type="MarginContainer" parent="."]
@@ -16,12 +23,14 @@ layout_mode = 2
 size_flags_horizontal = 0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="SpeakerContainer"]
+texture_filter = 1
 layout_mode = 2
-texture = ExtResource("1_5uv5t")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+texture = ExtResource("1_vmhap")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
 
 [node name="MarginContainer" type="MarginContainer" parent="SpeakerContainer"]
 layout_mode = 2
@@ -43,12 +52,14 @@ layout_mode = 2
 size_flags_horizontal = 0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ChatContainer"]
+texture_filter = 1
 layout_mode = 2
-texture = ExtResource("1_5uv5t")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+texture = ExtResource("1_vmhap")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
 
 [node name="MarginContainer" type="MarginContainer" parent="ChatContainer"]
 layout_mode = 2

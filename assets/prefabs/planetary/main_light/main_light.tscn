@@ -5,11 +5,13 @@
 
 [node name="MainLight" type="DirectionalLight3D" node_paths=PackedStringArray("sprite")]
 light_energy = 0.8
-light_volumetric_fog_energy = 10000.0
+light_volumetric_fog_energy = 1000.0
 shadow_enabled = true
 shadow_bias = 0.05
-shadow_normal_bias = 7.0
+shadow_normal_bias = 8.0
+directional_shadow_fade_start = 0.5
 script = ExtResource("1_drbv4")
+sundial_max_shadow_distance = 10.0
 sprite = NodePath("Sprite3D")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

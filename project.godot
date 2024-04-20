@@ -43,6 +43,28 @@ project/assembly_name="CelestialNavigation"
 
 enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/input_helper/plugin.cfg")
 
+[importer_defaults]
+
+texture={
+"compress/channel_pack": 0,
+"compress/hdr_compression": 1,
+"compress/high_quality": false,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d/compress_to": 0,
+"mipmaps/generate": true,
+"mipmaps/limit": -1,
+"process/fix_alpha_border": true,
+"process/hdr_as_srgb": false,
+"process/hdr_clamp_exposure": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"process/size_limit": 0,
+"roughness/mode": 0,
+"roughness/src_normal": ""
+}
+
 [input]
 
 boat_forward={
@@ -229,7 +251,7 @@ character_jump={
 
 [rendering]
 
-lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
-lights_and_shadows/directional_shadow/soft_shadow_filter_quality.mobile=3
+textures/canvas_textures/default_texture_filter=0
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality.mobile=4
 lights_and_shadows/directional_shadow/16_bits=false
-anti_aliasing/quality/use_debanding=true

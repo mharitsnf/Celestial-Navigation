@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c2ipvtnsysqv"]
+[gd_scene load_steps=28 format=3 uid="uid://c2ipvtnsysqv"]
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_vu730"]
 [ext_resource type="Script" path="res://assets/prefabs/entities/player_character/character_entity.gd" id="2_lgsjv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/player_character_controller.gd" id="4_eocql"]
 [ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="4_k7shh"]
 [ext_resource type="PackedScene" uid="uid://bq08c3kmmbx62" path="res://assets/prefabs/controllers/camera/virtual_camera_controller.tscn" id="7_jkr5c"]
+[ext_resource type="PackedScene" uid="uid://ccsl3yyji70j7" path="res://assets/prefabs/controllers/camera/fpc_camera.tscn" id="7_minjh"]
 [ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="8_6hl70"]
 [ext_resource type="PackedScene" uid="uid://deo4jmce6xulx" path="res://assets/prefabs/controllers/camera/fpc_controller.tscn" id="9_q00hg"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_grounded_state.gd" id="9_tuho6"]
@@ -35,7 +36,9 @@ gradient = SubResource("Gradient_5tmf5")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8d0gp"]
 render_priority = 0
 shader = ExtResource("3_ip4xm")
-shader_parameter/levels = 10.0
+shader_parameter/_roughness = null
+shader_parameter/_metallic = null
+shader_parameter/posterize_levels = 10.0
 shader_parameter/albedo_tex = SubResource("GradientTexture1D_xyrmt")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_yhso2")
 
@@ -60,7 +63,9 @@ gradient = SubResource("Gradient_d48qg")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wuhai"]
 render_priority = 0
 shader = ExtResource("3_ip4xm")
-shader_parameter/levels = 10.0
+shader_parameter/_roughness = null
+shader_parameter/_metallic = null
+shader_parameter/posterize_levels = 10.0
 shader_parameter/albedo_tex = SubResource("GradientTexture1D_gn8bl")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_iogyt")
 
@@ -129,7 +134,9 @@ target_group = NodePath("..")
 submerged_angle = Vector2(0, 80)
 follow_target = NodePath("..")
 
-[node name="Controller" parent="FPC" index="1" instance=ExtResource("9_q00hg")]
+[node name="FPCCamera" parent="FPC" index="0" instance=ExtResource("7_minjh")]
+
+[node name="Controller" parent="FPC" index="2" instance=ExtResource("9_q00hg")]
 submerged_min_angle = 5.0
 joypad_inverted_x = true
 joypad_inverted_y = false

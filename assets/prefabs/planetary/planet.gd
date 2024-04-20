@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var target_material: Material
+
 func _ready() -> void:
     for c: Node in get_children():
         if c is MeshInstance3D:
@@ -10,6 +12,7 @@ func _ready() -> void:
                 body.set_collision_layer_value(2, true)
                 body.set_collision_mask_value(1, false)
                 body.set_collision_mask_value(2, true)
+            c.material_override = target_material
 
 func _get_all_children(out : Array, node : Node, object_type : Variant = null) -> void:
     for child: Node in node.get_children():

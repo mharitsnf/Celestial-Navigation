@@ -4,7 +4,7 @@ class_name Ocean extends MeshInstance3D
 @export var _target : Node3D:
 	set(value):
 		_target = value
-		_reset_initial_position_and_offset(value)
+		if value is BaseEntity: _reset_initial_position_and_offset(value)
 @export_group("Wave data")
 @export var wave_data_1 : Vector4
 @export var wave_data_2 : Vector4
@@ -25,7 +25,7 @@ var shader : ShaderMaterial
 # ========== Built-in functions ==========
 func _ready() -> void:
 	shader = get_active_material(0)
-	_reset_initial_position_and_offset(_target)
+	if _target is BaseEntity: _reset_initial_position_and_offset(_target)
 
 func _process(delta: float) -> void:
 	time_elapsed += delta

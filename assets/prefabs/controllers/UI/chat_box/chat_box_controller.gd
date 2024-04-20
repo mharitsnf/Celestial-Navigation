@@ -7,7 +7,7 @@ class_name ChatBoxController extends UIController
 @export var chat_label: Label
 @export var timer: Timer
 
-const INITIAL_POSITION: Vector2 = Vector2(576, 736)
+const INITIAL_POSITION: Vector2 = Vector2(304, 512)
 var speaker_text: String
 var chat_text: String
 signal show_text_finished

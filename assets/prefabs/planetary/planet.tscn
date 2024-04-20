@@ -6,6 +6,7 @@
 
 [node name="Planet" instance=ExtResource("1_r3qix")]
 script = ExtResource("2_h6omt")
+target_material = ExtResource("2_auw8o")
 
 [node name="UTRock" parent="." index="0"]
 surface_material_override/0 = ExtResource("2_auw8o")
@@ -91,47 +92,350 @@ surface_material_override/0 = ExtResource("2_auw8o")
 [node name="Cylinder_022" parent="." index="27"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_023" parent="." index="28"]
+[node name="Cylinder_133" parent="." index="28"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_024" parent="." index="29"]
+[node name="Cylinder_023" parent="." index="29"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_025" parent="." index="30"]
+[node name="Cylinder_024" parent="." index="30"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_026" parent="." index="31"]
+[node name="Cylinder_025" parent="." index="31"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_027" parent="." index="32"]
+[node name="Cylinder_026" parent="." index="32"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_028" parent="." index="33"]
+[node name="Cylinder_027" parent="." index="33"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_029" parent="." index="34"]
+[node name="Cylinder_028" parent="." index="34"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_030" parent="." index="35"]
+[node name="Cylinder_029" parent="." index="35"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_031" parent="." index="36"]
+[node name="Cylinder_030" parent="." index="36"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_032" parent="." index="37"]
+[node name="Cylinder_031" parent="." index="37"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_033" parent="." index="38"]
+[node name="Cylinder_032" parent="." index="38"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_034" parent="." index="39"]
+[node name="Cylinder_033" parent="." index="39"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_035" parent="." index="40"]
+[node name="Cylinder_034" parent="." index="40"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_036" parent="." index="41"]
+[node name="Cylinder_035" parent="." index="41"]
 surface_material_override/0 = ExtResource("2_auw8o")
 
-[node name="Cylinder_037" parent="." index="42"]
+[node name="Cylinder_036" parent="." index="42"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_037" parent="." index="43"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_038" parent="." index="44"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_039" parent="." index="45"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_040" parent="." index="46"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_041" parent="." index="47"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_042" parent="." index="48"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_043" parent="." index="49"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_044" parent="." index="50"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_045" parent="." index="51"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_046" parent="." index="52"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_047" parent="." index="53"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_048" parent="." index="54"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_049" parent="." index="55"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_050" parent="." index="56"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_051" parent="." index="57"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_052" parent="." index="58"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_053" parent="." index="59"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_054" parent="." index="60"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_055" parent="." index="61"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_056" parent="." index="62"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_057" parent="." index="63"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_058" parent="." index="64"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_059" parent="." index="65"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_060" parent="." index="66"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_061" parent="." index="67"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_062" parent="." index="68"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_063" parent="." index="69"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_064" parent="." index="70"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_065" parent="." index="71"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_066" parent="." index="72"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_067" parent="." index="73"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_068" parent="." index="74"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_069" parent="." index="75"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_070" parent="." index="76"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_071" parent="." index="77"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_072" parent="." index="78"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_073" parent="." index="79"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_074" parent="." index="80"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_075" parent="." index="81"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_076" parent="." index="82"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_077" parent="." index="83"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_078" parent="." index="84"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_079" parent="." index="85"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_080" parent="." index="86"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_081" parent="." index="87"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_082" parent="." index="88"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_083" parent="." index="89"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_084" parent="." index="90"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_085" parent="." index="91"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_086" parent="." index="92"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_087" parent="." index="93"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_088" parent="." index="94"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_089" parent="." index="95"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_090" parent="." index="96"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_091" parent="." index="97"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_092" parent="." index="98"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_093" parent="." index="99"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_094" parent="." index="100"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_095" parent="." index="101"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_096" parent="." index="102"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_097" parent="." index="103"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_098" parent="." index="104"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_099" parent="." index="105"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_100" parent="." index="106"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_101" parent="." index="107"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_102" parent="." index="108"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_103" parent="." index="109"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_104" parent="." index="110"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_105" parent="." index="111"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_106" parent="." index="112"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_107" parent="." index="113"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_108" parent="." index="114"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_109" parent="." index="115"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_110" parent="." index="116"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_111" parent="." index="117"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_112" parent="." index="118"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_113" parent="." index="119"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_114" parent="." index="120"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_115" parent="." index="121"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_116" parent="." index="122"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_117" parent="." index="123"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_118" parent="." index="124"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_119" parent="." index="125"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_120" parent="." index="126"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_121" parent="." index="127"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_122" parent="." index="128"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_123" parent="." index="129"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_124" parent="." index="130"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_125" parent="." index="131"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_126" parent="." index="132"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_127" parent="." index="133"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_128" parent="." index="134"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_129" parent="." index="135"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_130" parent="." index="136"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_131" parent="." index="137"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_132" parent="." index="138"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_134" parent="." index="139"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_135" parent="." index="140"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_136" parent="." index="141"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_137" parent="." index="142"]
+surface_material_override/0 = ExtResource("2_auw8o")
+
+[node name="Cylinder_138" parent="." index="143"]
 surface_material_override/0 = ExtResource("2_auw8o")

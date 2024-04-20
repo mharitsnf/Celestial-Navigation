@@ -4,7 +4,7 @@ class_name TimeHUD extends HBoxContainer
 @export var slide_offset: Vector2 = Vector2(0., -64.)
 
 var transitioning: bool = false
-var initial_pos: Vector2 = Vector2(869., 963.)
+var initial_pos: Vector2 = Vector2(869., 963)
 
 func _ready() -> void:
     position = initial_pos

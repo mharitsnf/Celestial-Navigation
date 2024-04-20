@@ -5,7 +5,7 @@
 
 [sub_resource type="Gradient" id="Gradient_c1oe1"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.562738)
+offsets = PackedFloat32Array(0, 0.502488)
 colors = PackedColorArray(0.25, 0.25, 0.25, 1, 0.9, 0.9, 0.9, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_5nv7q"]
@@ -14,6 +14,8 @@ gradient = SubResource("Gradient_c1oe1")
 [resource]
 render_priority = 0
 shader = ExtResource("1_uw4or")
-shader_parameter/levels = 10.0
+shader_parameter/_roughness = 1.0
+shader_parameter/_metallic = 0.2
+shader_parameter/posterize_levels = 4.0
 shader_parameter/albedo_tex = ExtResource("2_n0row")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_5nv7q")
