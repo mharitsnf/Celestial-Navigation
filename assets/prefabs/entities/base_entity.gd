@@ -100,13 +100,13 @@ func _calculate_depth_to_ocean_surface(state: PhysicsDirectBodyState3D) -> void:
 	_update_collision_normal(gerstner_result.normal)
 
 func _calculate_offset_to_ocean_target() -> Vector3:
-	var ocean_target : Node3D = ocean.get_target()
-	if ocean_target == self:
-		return Vector3.ZERO
+	# var ocean_target : Node3D = ocean.get_target()
+	# if ocean_target == self:
+	# 	return Vector3.ZERO
 
-	var ocean_target_basis : Basis = ocean_target.basis
+	var ocean_target_basis : Basis = ocean.get_target_basis()
 	var my_lin_pos : Vector3 = ocean_target_basis.inverse() * global_position
-	var ocean_target_lin_pos : Vector3 = ocean_target_basis.inverse() * ocean_target.global_position
+	var ocean_target_lin_pos : Vector3 = ocean_target_basis.inverse() * ocean.get_target_position()
 	var vertex : Vector3 = my_lin_pos - ocean_target_lin_pos
 	return Vector3(vertex.x, 0, vertex.z)
 

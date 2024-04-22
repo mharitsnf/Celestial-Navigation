@@ -11,6 +11,8 @@ class_name Ocean extends MeshInstance3D
 @export var speed : float = 1.
 
 var target_world_pos: Vector3
+var target_basis: Basis
+var transitioning: bool = false
 
 var default_initial_position : Vector3 = Vector3(0,STUtil.PLANET_RADIUS,0)
 ## Flat initial position
@@ -29,6 +31,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	time_elapsed += delta
 	_calculate_offset(delta)
+	_update_target_transform()
 	_update_shader_params()
 # ========== ========== ========== ========== ==========
 
@@ -50,8 +53,22 @@ func set_target(new_target : Node3D) -> void:
 func get_offset() -> Vector3:
 	return offset
 
-func _update_target_world_position() -> void:
-	if _target: target_world_pos = _target.global_position
+func get_target_basis() -> Basis:
+	return target_basis
+
+func get_target_position() -> Vector3:
+	return target_world_pos
+
+func is_transitioning() -> bool:
+	return transitioning
+
+func set_transitioning(value: bool) -> void:
+	transitioning = value
+
+func _update_target_transform() -> void:
+	if _target and !is_transitioning():
+		target_world_pos = _target.global_position
+		target_basis = _target.basis
 
 func switch_target(new_target : Node3D) -> void:
 	if !new_target.is_inside_tree():
@@ -59,15 +76,20 @@ func switch_target(new_target : Node3D) -> void:
 	
 	if new_target:
 		if _target:
-			pass
-			# var target_flat_pos: Vector3 = _target.basis.inverse() * _target.global_position
-			# target_flat_pos.y = 0
-			# var new_target_flat_pos: Vector3 = new_target.basis.inverse() * new_target.global_position
-			# new_target_flat_pos.y = 0
-			# var offset_to_new_target: Vector3 = new_target_flat_pos - target_flat_pos
-			# var tween: Tween = create_tween()
-			# tween.tween_property(self, "offset", offset + offset_to_new_target, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-			# # offset += offset_to_new_target
+			set_transitioning(true)
+			var flat_target_pos: Vector3 = _target.basis.inverse() * _target.global_position
+			flat_target_pos.y = 0
+			var flat_new_target_pos: Vector3 = _target.basis.inverse() * new_target.global_position
+			flat_new_target_pos.y = 0
+			print(flat_target_pos, " ", flat_new_target_pos)
+			var to_new_pos: Vector3 = flat_new_target_pos - flat_target_pos
+			var tween: Tween = create_tween()
+			tween.set_parallel()
+			tween.tween_property(self, "offset", offset + to_new_pos, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+			tween.tween_property(self, "target_world_pos", new_target.global_position, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+			tween.tween_property(self, "target_basis", new_target.basis, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+			await tween.finished
+			set_transitioning(false)
 		else:
 			initial_basis = _target.basis.inverse()
 			initial_position = initial_basis * _target.global_position
@@ -79,18 +101,8 @@ func switch_target(new_target : Node3D) -> void:
 
 	_target = new_target
 
-	# if new_target:
-	# 	initial_basis = _target.basis.inverse()
-	# 	initial_position = initial_basis * _target.global_position
-	# 	initial_position.y = 0
-	# else:
-	# 	initial_basis = Basis.IDENTITY
-	# 	initial_position = default_initial_position
-	
-	# offset = Vector3.ZERO
-
 func _calculate_offset(delta: float) -> void:
-	if !_target: return
+	if !_target or is_transitioning(): return
 	if _target is RigidBody3D:
 		var flat_vel: Vector3 = _target.basis.inverse() * _target.linear_velocity
 		var xz_vel: Vector3 = Vector3(flat_vel.x, 0, flat_vel.z)
@@ -116,10 +128,10 @@ func _update_shader_params() -> void:
 	if mesh is PlaneMesh and mesh.size.x == mesh.size.y:
 		shader.set_shader_parameter("plane_size", mesh.size.x)
 	if _target and is_instance_valid(_target):
-		shader.set_shader_parameter("target_world_position", _target.global_position)
-		shader.set_shader_parameter("target_up", _target.basis.y)
-		shader.set_shader_parameter("target_right", _target.basis.x)
-		shader.set_shader_parameter("target_fwd", _target.basis.z)
+		shader.set_shader_parameter("target_world_position", _target.global_position if !is_transitioning() else target_world_pos)
+		shader.set_shader_parameter("target_up", _target.basis.y if !is_transitioning() else target_basis.y)
+		shader.set_shader_parameter("target_right", _target.basis.x if !is_transitioning() else target_basis.x)
+		shader.set_shader_parameter("target_fwd", _target.basis.z if !is_transitioning() else target_basis.z)
 # ========== ========== ========== ========== ==========
 	
 # ========== Save and load state functions ==========
