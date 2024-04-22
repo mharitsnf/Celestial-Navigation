@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cmska6gpmfwts"
-path="res://.godot/imported/boat_wave.glb-3f47193fc8b5513bd4ec68c1bc7f51e7.scn"
+uid="uid://6h1yq1pft7vq"
+path="res://.godot/imported/wooden_sign.glb-08f4f75c7120f23b7662d4f58c511817.scn"
 
 [deps]
 
-source_file="res://assets/models/boat_wave.glb"
-dest_files=["res://.godot/imported/boat_wave.glb-3f47193fc8b5513bd4ec68c1bc7f51e7.scn"]
+source_file="res://assets/models/wooden_sign/wooden_sign.glb"
+dest_files=["res://.godot/imported/wooden_sign.glb-08f4f75c7120f23b7662d4f58c511817.scn"]
 
 [params]
 

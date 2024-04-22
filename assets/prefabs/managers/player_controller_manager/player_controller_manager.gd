@@ -27,13 +27,14 @@ enum PlayerObjectEnum {
 	PlayerObjectEnum.SUNDIAL: false
 }
 var player_object_dict: Dictionary = {
-	PlayerObjectEnum.BOAT: PlayerObject.new(preload("res://assets/prefabs/entities/test_boat/player_boat.tscn")),
+	PlayerObjectEnum.BOAT: PlayerObject.new(preload("res://assets/prefabs/entities/player_boat/player_boat.tscn")),
 	PlayerObjectEnum.CHARACTER: PlayerObject.new(preload("res://assets/prefabs/entities/player_character/player_character_entity.tscn")),
 	PlayerObjectEnum.SUNDIAL: PlayerObject.new(preload("res://assets/prefabs/planetary/sundial/sundial_manager.tscn"))
 
 }
 var current_player_object: PlayerObject
 
+var ocean: Ocean
 var main_camera: MainCamera
 var main_camera_controller: MainCameraController
 var _transitioning: bool = false
@@ -43,6 +44,7 @@ signal transition_finished
 func _ready() -> void:
 	await get_tree().process_frame
 	_setup_objects()
+	ocean = STUtil.get_only_node_in_group("ocean")
 	_setup_cameras()
 	if !has_current_player_object():
 		_init_player_object(PlayerObjectEnum.BOAT)
@@ -152,6 +154,7 @@ func switch_current_player_object(new_enum: PlayerObjectEnum) -> void:
 	if get_current_player_controller(): get_current_player_controller().exit_controller()
 	main_camera_controller.set_available_virtual_cameras(available_virtual_cameras)
 	main_camera.set_follow_target(entry_camera)
+	ocean.switch_target(new_player_object.get_instance())
 	new_player_object.get_controller().enter_controller()
 	await main_camera.transition_finished
 	

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://di3opcoc1bjq5"]
 
-[ext_resource type="PackedScene" uid="uid://sbc4tnw04eas" path="res://assets/models/player_boat.glb" id="1_hfunt"]
+[ext_resource type="PackedScene" uid="uid://sbc4tnw04eas" path="res://assets/models/player_boat/player_boat.glb" id="1_hfunt"]
 [ext_resource type="Material" uid="uid://rhgvoh2j2wyu" path="res://assets/resources/materials/m_isa.tres" id="2_dli85"]
 
 [node name="PlayerBoatInst" instance=ExtResource("1_hfunt")]

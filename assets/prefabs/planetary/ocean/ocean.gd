@@ -1,10 +1,7 @@
 @tool
 class_name Ocean extends MeshInstance3D
 
-@export var _target : Node3D:
-	set(value):
-		_target = value
-		if value is BaseEntity: _reset_initial_position_and_offset(value)
+@export var _target : Node3D
 @export_group("Wave data")
 @export var wave_data_1 : Vector4
 @export var wave_data_2 : Vector4
@@ -12,6 +9,8 @@ class_name Ocean extends MeshInstance3D
 @export var wave_data_4 : Vector4
 @export var wave_data_5 : Vector4
 @export var speed : float = 1.
+
+var target_world_pos: Vector3
 
 var default_initial_position : Vector3 = Vector3(0,STUtil.PLANET_RADIUS,0)
 ## Flat initial position
@@ -25,7 +24,7 @@ var shader : ShaderMaterial
 # ========== Built-in functions ==========
 func _ready() -> void:
 	shader = get_active_material(0)
-	if _target is BaseEntity: _reset_initial_position_and_offset(_target)
+	switch_target(_target)
 
 func _process(delta: float) -> void:
 	time_elapsed += delta
@@ -51,19 +50,44 @@ func set_target(new_target : Node3D) -> void:
 func get_offset() -> Vector3:
 	return offset
 
-func _reset_initial_position_and_offset(new_target : Node3D) -> void:
+func _update_target_world_position() -> void:
+	if _target: target_world_pos = _target.global_position
+
+func switch_target(new_target : Node3D) -> void:
 	if !new_target.is_inside_tree():
 		await new_target.tree_entered
 	
 	if new_target:
-		initial_basis = _target.basis.inverse()
-		initial_position = initial_basis * _target.global_position
-		initial_position.y = 0
+		if _target:
+			pass
+			# var target_flat_pos: Vector3 = _target.basis.inverse() * _target.global_position
+			# target_flat_pos.y = 0
+			# var new_target_flat_pos: Vector3 = new_target.basis.inverse() * new_target.global_position
+			# new_target_flat_pos.y = 0
+			# var offset_to_new_target: Vector3 = new_target_flat_pos - target_flat_pos
+			# var tween: Tween = create_tween()
+			# tween.tween_property(self, "offset", offset + offset_to_new_target, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+			# # offset += offset_to_new_target
+		else:
+			initial_basis = _target.basis.inverse()
+			initial_position = initial_basis * _target.global_position
+			initial_position.y = 0
+			offset = Vector3.ZERO
 	else:
 		initial_basis = Basis.IDENTITY
 		initial_position = default_initial_position
+
+	_target = new_target
+
+	# if new_target:
+	# 	initial_basis = _target.basis.inverse()
+	# 	initial_position = initial_basis * _target.global_position
+	# 	initial_position.y = 0
+	# else:
+	# 	initial_basis = Basis.IDENTITY
+	# 	initial_position = default_initial_position
 	
-	offset = Vector3.ZERO
+	# offset = Vector3.ZERO
 
 func _calculate_offset(delta: float) -> void:
 	if !_target: return
@@ -113,7 +137,7 @@ func save_state() -> Dictionary:
 	}
 
 func on_preprocess(data: Dictionary) -> void:
-	set_target(data["i_target"])
+	switch_target(data["i_target"])
 
 func on_load_ready(_data: Dictionary) -> void:
 	pass

@@ -2,17 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnlkwqq010a5f"
-path="res://.godot/imported/test_cube_0.png-823b3766de1e04d8fb21e873476374b2.ctex"
+uid="uid://e6qgdjo6p065"
+path="res://.godot/imported/sign_tex.png-f76c361fb56e9389f838d52706ceb93f.ctex"
 metadata={
 "vram_texture": false
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://assets/models/test_cube_0.png"
-dest_files=["res://.godot/imported/test_cube_0.png-823b3766de1e04d8fb21e873476374b2.ctex"]
+source_file="res://assets/models/wooden_sign/sign_tex.png"
+dest_files=["res://.godot/imported/sign_tex.png-f76c361fb56e9389f838d52706ceb93f.ctex"]
 
 [params]
 
