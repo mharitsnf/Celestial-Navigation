@@ -152,11 +152,16 @@ func switch_current_player_object(new_enum: PlayerObjectEnum) -> void:
 
 	set_transitioning(true)
 	if get_current_player_controller(): get_current_player_controller().exit_controller()
+
 	main_camera_controller.set_available_virtual_cameras(available_virtual_cameras)
+	entry_camera.copy_rotation(main_camera.get_follow_target().get_x_rotation(), main_camera.get_follow_target().get_y_rotation())
 	main_camera.set_follow_target(entry_camera)
-	if new_player_object.get_instance() is RigidBody3D:
+
+	if new_player_object.get_instance() is RigidBody3D and ocean.get_target() != new_player_object.get_instance():
 		ocean.switch_target(new_player_object.get_instance())
+
 	new_player_object.get_controller().enter_controller()
+	
 	await main_camera.transition_finished
 	
 	_remove_current_player_object(_should_unmount)

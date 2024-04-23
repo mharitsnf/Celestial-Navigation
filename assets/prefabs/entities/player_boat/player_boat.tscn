@@ -79,8 +79,8 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3, 
 shape = SubResource("CapsuleShape3D_4nvc2")
 
 [node name="TPC" parent="." index="1" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_5wq2t")]
-_spring_length = 12.5
-_offset = Vector3(0, 4, 0)
+_spring_length = 15.0
+_offset = Vector3(0, 5, 0)
 entry_camera = true
 target_group = NodePath("..")
 submerged_angle = Vector2(-15, 20)

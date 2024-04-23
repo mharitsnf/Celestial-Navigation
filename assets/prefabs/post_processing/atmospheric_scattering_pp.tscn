@@ -28,14 +28,13 @@ flip_faces = true
 size = Vector2(2, 2)
 
 [node name="AtmosphericScatteringPP" type="MeshInstance3D" groups=["atmosphere"]]
-sorting_offset = -850.0
+sorting_offset = -1000.0
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_8e22m")
 script = ExtResource("2_abre8")
 is_accelerated = true
 od_tex_filename = "testing"
-planet_radius = 790.0
-atmosphere_radius = 12640.0
+atmosphere_radius = 16000.0
 optical_depth_sample_size = 10
 in_scattering_sample_size = 15
 r_density_falloff = 200.0

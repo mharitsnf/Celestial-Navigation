@@ -9,6 +9,7 @@ light_volumetric_fog_energy = 1000.0
 shadow_enabled = true
 shadow_bias = 0.05
 shadow_normal_bias = 8.0
+directional_shadow_blend_splits = true
 script = ExtResource("1_drbv4")
 sundial_max_shadow_distance = 10.0
 sprite = NodePath("Sprite3D")

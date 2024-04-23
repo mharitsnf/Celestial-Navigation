@@ -13,11 +13,6 @@ extends MeshInstance3D
 		if shader: shader.set_shader_parameter("optical_depth_texture", od_tex)
 
 @export_group("Radiuses")
-@export var planet_radius : float:
-	set(value):
-		planet_radius = value
-		if shader: shader.set_shader_parameter("planet_radius", planet_radius)
-
 @export var atmosphere_radius : float:
 	set(value):
 		atmosphere_radius = value
@@ -128,8 +123,8 @@ func _setup_shader_parameters() -> void:
 	shader.set_shader_parameter("is_accelerated", is_accelerated)
 	shader.set_shader_parameter("optical_depth_texture", od_tex)
 	# Radiuses
-	shader.set_shader_parameter("planet_radius", planet_radius)
-	shader.set_shader_parameter("atmosphere_radius", atmosphere_radius)
+	shader.set_shader_parameter("planet_radius", STUtil.PLANET_RADIUS)
+	shader.set_shader_parameter("atmosphere_radius", STUtil.PLANET_RADIUS * 16.)
 	# Rayleigh
 	shader.set_shader_parameter("r_density_falloff", r_density_falloff)
 	shader.set_shader_parameter("r_scattering_coefficients", r_coeffs)

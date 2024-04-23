@@ -26,6 +26,7 @@ var shader : ShaderMaterial
 # ========== Built-in functions ==========
 func _ready() -> void:
 	shader = get_active_material(0)
+	shader.set_shader_parameter("planet_radius", STUtil.PLANET_RADIUS)
 	switch_target(_target)
 
 func _process(delta: float) -> void:
@@ -149,7 +150,8 @@ func save_state() -> Dictionary:
 	}
 
 func on_preprocess(data: Dictionary) -> void:
-	switch_target(data["i_target"])
+	set_target(data["i_target"])
+	# switch_target(data["i_target"])
 
 func on_load_ready(_data: Dictionary) -> void:
 	pass

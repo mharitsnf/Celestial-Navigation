@@ -117,7 +117,8 @@ collision_mask = 2
 debug_shape_thickness = 5
 
 [node name="TPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
-_offset = Vector3(0, 2, 0)
+_spring_length = 8.0
+_offset = Vector3(0, 2.5, 0)
 entry_camera = true
 target_group = NodePath("..")
 submerged_angle = Vector2(-30, 15)
@@ -129,7 +130,7 @@ mouse_inverted_x = false
 mouse_inverted_y = false
 
 [node name="FPC" parent="." index="3" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_6hl70")]
-_offset = Vector3(0, 1.35, -1.5)
+_offset = Vector3(0, 1.5, -1.5)
 target_group = NodePath("..")
 submerged_angle = Vector2(0, 80)
 follow_target = NodePath("..")

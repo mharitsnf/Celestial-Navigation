@@ -1,6 +1,6 @@
 extends Node
 
-const PLANET_RADIUS : float = 792.0
+const PLANET_RADIUS : float = 990.33
 
 func _enter_tree() -> void:
     _establish_input_connections()

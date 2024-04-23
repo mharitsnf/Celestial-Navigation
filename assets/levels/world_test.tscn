@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bohsb8opfjfgr"]
+[gd_scene load_steps=13 format=3 uid="uid://bohsb8opfjfgr"]
 
 [ext_resource type="PackedScene" uid="uid://d1vjavo5saswj" path="res://assets/prefabs/time_manager/time_manager.tscn" id="1_tkbic"]
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_u0thf"]
@@ -10,32 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/player_boat/player_boat.tscn" id="7_03d3k"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="7_e0eip"]
 [ext_resource type="PackedScene" uid="uid://iw7gs8cxd4eh" path="res://assets/prefabs/planetary/sundial/sundial_manager.tscn" id="10_ruhqj"]
-[ext_resource type="PackedScene" uid="uid://6h1yq1pft7vq" path="res://assets/models/wooden_sign/wooden_sign.glb" id="12_g8cjb"]
-[ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="13_a0gpl"]
-[ext_resource type="Texture2D" uid="uid://e6qgdjo6p065" path="res://assets/models/wooden_sign/sign_tex.png" id="14_e7te8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
-radius = 792.25
+radius = 991.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_oggbs"]
 radius = 2000.0
-
-[sub_resource type="Gradient" id="Gradient_mtudx"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.501326)
-colors = PackedColorArray(0.25, 0.25, 0.25, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_g0ayv"]
-gradient = SubResource("Gradient_mtudx")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ds40q"]
-render_priority = 0
-shader = ExtResource("13_a0gpl")
-shader_parameter/_roughness = 1.0
-shader_parameter/_metallic = null
-shader_parameter/posterize_levels = 10.0
-shader_parameter/albedo_tex = ExtResource("14_e7te8")
-shader_parameter/color_ramp = SubResource("GradientTexture1D_g0ayv")
 
 [node name="WorldTest" type="Node3D"]
 
@@ -89,21 +69,14 @@ should_instantiate_dict = {
 }
 
 [node name="PlayerBoat" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("7_03d3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 792, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 990, 0)
 
 [node name="SundialManager" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("10_ruhqj")]
 
 [node name="TestBox" parent="ObjectsContainer" instance=ExtResource("6_u01up")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31882, 792, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.319, 990, 6)
 linear_damp = 0.0
-
-[node name="wooden_sign" parent="ObjectsContainer" instance=ExtResource("12_g8cjb")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 793.158, 4.11955e-08, 1.5)
-
-[node name="Sign" parent="ObjectsContainer/wooden_sign" index="0"]
-surface_material_override/0 = SubResource("ShaderMaterial_ds40q")
 
 [editable path="ObjectsContainer/PlayerControllerManager/PlayerBoat"]
 [editable path="ObjectsContainer/PlayerControllerManager/PlayerBoat/CollisionShape3D/PlayerBoatInst"]
 [editable path="ObjectsContainer/PlayerControllerManager/SundialManager"]
-[editable path="ObjectsContainer/wooden_sign"]
