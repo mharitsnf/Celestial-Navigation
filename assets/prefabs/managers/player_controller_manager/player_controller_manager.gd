@@ -50,11 +50,11 @@ func _ready() -> void:
 		_init_player_object(PlayerObjectEnum.BOAT)
 
 func _process(delta: float) -> void:
-	if has_current_player_object() and get_current_player_controller():
+	if has_current_player_object() and get_current_player_controller() and !is_transitioning():
 		get_current_player_controller().process(delta)
 
 func _physics_process(delta: float) -> void:
-	if has_current_player_object() and get_current_player_controller():
+	if has_current_player_object() and get_current_player_controller() and !is_transitioning():
 		get_current_player_controller().physics_process(delta)
 # =============================================
 

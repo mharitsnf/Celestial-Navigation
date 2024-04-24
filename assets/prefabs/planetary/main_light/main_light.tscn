@@ -10,7 +10,9 @@ shadow_enabled = true
 shadow_bias = 0.05
 shadow_normal_bias = 8.0
 directional_shadow_blend_splits = true
+directional_shadow_max_distance = 200.0
 script = ExtResource("1_drbv4")
+default_max_shadow_distance = 200.0
 sundial_max_shadow_distance = 10.0
 sprite = NodePath("Sprite3D")
 
