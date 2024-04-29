@@ -23,8 +23,8 @@ func _ready() -> void:
 # ========== ========== ========== ==========
 
 # ========== For the manager ==========
-func process(_delta: float) -> void:
-    _rotate_wrapper_joypad()
+func process(delta: float) -> void:
+    _rotate_wrapper_joypad(delta)
 
 func unhandled_input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
@@ -44,9 +44,9 @@ func _rotate_wrapper_mouse(event : InputEventMouseMotion) -> void:
     _rotate(direction)
 
 const JOYPAD_ROTATION_WEIGHT: float = .01
-func _rotate_wrapper_joypad() -> void:
+func _rotate_wrapper_joypad(delta: float) -> void:
     if !_is_joypad_allowed(): return
-    var direction: Vector2 = Input.get_vector("rotate_camera_left", "rotate_camera_right", "rotate_camera_down", "rotate_camera_up") * JOYPAD_ROTATION_WEIGHT * rotation_speed
+    var direction: Vector2 = Input.get_vector("rotate_camera_left", "rotate_camera_right", "rotate_camera_down", "rotate_camera_up") * delta * rotation_speed
     direction.x *= int(joypad_inverted_x) * 2 - 1
     direction.y *= int(joypad_inverted_y) * 2 - 1
     _rotate(direction)

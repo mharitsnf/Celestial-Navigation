@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bohsb8opfjfgr"]
+[gd_scene load_steps=20 format=3 uid="uid://bohsb8opfjfgr"]
 
 [ext_resource type="PackedScene" uid="uid://d1vjavo5saswj" path="res://assets/prefabs/time_manager/time_manager.tscn" id="1_tkbic"]
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_u0thf"]
@@ -9,13 +9,34 @@
 [ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/placeholders/test_box/test_box.tscn" id="6_u01up"]
 [ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/player_boat/player_boat.tscn" id="7_03d3k"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="7_e0eip"]
+[ext_resource type="PackedScene" uid="uid://c2ipvtnsysqv" path="res://assets/prefabs/entities/player_character/player_character_entity.tscn" id="8_dt4hu"]
 [ext_resource type="PackedScene" uid="uid://iw7gs8cxd4eh" path="res://assets/prefabs/planetary/sundial/sundial_manager.tscn" id="10_ruhqj"]
+[ext_resource type="PackedScene" uid="uid://ciarxdka1d6pe" path="res://assets/models/tree.glb" id="11_qfqnt"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="12_d4t2w"]
+[ext_resource type="Texture2D" uid="uid://pm438yqhk3jj" path="res://assets/models/tree_tex.png" id="13_pd3et"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
 radius = 991.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_oggbs"]
 radius = 2000.0
+
+[sub_resource type="Gradient" id="Gradient_5msyg"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.50505)
+colors = PackedColorArray(0.25, 0.25, 0.25, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e24jf"]
+gradient = SubResource("Gradient_5msyg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n2pdp"]
+render_priority = 0
+shader = ExtResource("12_d4t2w")
+shader_parameter/_roughness = 1.0
+shader_parameter/_metallic = null
+shader_parameter/posterize_levels = 10.0
+shader_parameter/albedo_tex = ExtResource("13_pd3et")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_e24jf")
 
 [node name="WorldTest" type="Node3D"]
 
@@ -51,15 +72,15 @@ shape = SubResource("SphereShape3D_oggbs")
 
 [node name="Ocean" parent="ObjectsContainer" node_paths=PackedStringArray("_target") instance=ExtResource("2_dnrth")]
 skeleton = NodePath("../..")
-_target = NodePath("../PlayerControllerManager/PlayerBoat")
+_target = NodePath("../PlayerControllerManager/PlayerCharacterEntity")
 wave_data_1 = Vector4(0.06, 30, 1, 0)
 wave_data_2 = Vector4(0.08, 25, 0, 1)
 speed = 0.25
 
 [node name="MainCamera" parent="ObjectsContainer" node_paths=PackedStringArray("follow_target") instance=ExtResource("7_e0eip")]
-transform = Transform3D(0.093841, 0.358905, -0.928645, 0.0115935, 0.932304, 0.36149, 0.99552, -0.0446889, 0.0833274, -14.687, 800, 7.93238)
+transform = Transform3D(0.195642, 0.0661669, -0.978441, 0.0115935, 0.997495, 0.0697736, 0.980607, -0.0249942, 0.194385, -9.98607, 994.951, 5.25897)
 current = true
-follow_target = NodePath("../PlayerControllerManager/PlayerBoat/TPC")
+follow_target = NodePath("../PlayerControllerManager/PlayerCharacterEntity/TPC")
 
 [node name="PlayerControllerManager" parent="ObjectsContainer" instance=ExtResource("4_v2hc8")]
 should_instantiate_dict = {
@@ -68,8 +89,11 @@ should_instantiate_dict = {
 3: true
 }
 
+[node name="PlayerCharacterEntity" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("8_dt4hu")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 995.19, 48.0468, -65.4147)
+
 [node name="PlayerBoat" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("7_03d3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 990, 0)
+transform = Transform3D(-4.37114e-08, 1, 0, -0.108104, -4.72535e-09, -0.99414, -0.99414, -4.34552e-08, 0.108104, 990, 0, -6.76178)
 
 [node name="SundialManager" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("10_ruhqj")]
 
@@ -77,6 +101,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 990, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.319, 990, 6)
 linear_damp = 0.0
 
+[node name="tree" parent="ObjectsContainer" instance=ExtResource("11_qfqnt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.12192, 990.95, 8.48234)
+
+[node name="Cylinder" parent="ObjectsContainer/tree" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_n2pdp")
+
+[editable path="ObjectsContainer/PlayerControllerManager/PlayerCharacterEntity"]
 [editable path="ObjectsContainer/PlayerControllerManager/PlayerBoat"]
 [editable path="ObjectsContainer/PlayerControllerManager/PlayerBoat/CollisionShape3D/PlayerBoatInst"]
 [editable path="ObjectsContainer/PlayerControllerManager/SundialManager"]
+[editable path="ObjectsContainer/tree"]

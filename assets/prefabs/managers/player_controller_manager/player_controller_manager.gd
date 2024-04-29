@@ -47,7 +47,7 @@ func _ready() -> void:
 	ocean = STUtil.get_only_node_in_group("ocean")
 	_setup_cameras()
 	if !has_current_player_object():
-		_init_player_object(PlayerObjectEnum.BOAT)
+		_init_player_object(PlayerObjectEnum.CHARACTER)
 
 func _process(delta: float) -> void:
 	if has_current_player_object() and get_current_player_controller() and !is_transitioning():
@@ -131,7 +131,7 @@ func switch_current_player_object(new_enum: PlayerObjectEnum) -> void:
 
 	var new_player_object: PlayerObject = player_object_dict[new_enum]
 	if !new_player_object.get_instance(): new_player_object.create_instance()
-	if new_player_object.get_instance().get_parent() != self:
+	if !new_player_object.get_instance().is_inside_tree():
 		add_child(new_player_object.get_instance())
 		if new_player_object.get_instance() is Node3D and _spawn_position != Vector3.ZERO:
 			new_player_object.get_instance().global_position = _spawn_position

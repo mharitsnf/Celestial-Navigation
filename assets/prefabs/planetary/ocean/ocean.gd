@@ -82,7 +82,7 @@ func switch_target(new_target : Node3D) -> void:
 			flat_target_pos.y = 0
 			var flat_new_target_pos: Vector3 = _target.basis.inverse() * new_target.global_position
 			flat_new_target_pos.y = 0
-			print(flat_target_pos, " ", flat_new_target_pos)
+			# print(flat_target_pos, " ", flat_new_target_pos)
 			var to_new_pos: Vector3 = flat_new_target_pos - flat_target_pos
 			var tween: Tween = create_tween()
 			tween.set_parallel()

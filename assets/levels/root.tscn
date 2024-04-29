@@ -46,10 +46,11 @@ grow_vertical = 2
 
 [node name="SubViewport" type="SubViewport" parent="Main" groups=["final_viewport"]]
 handle_input_locally = false
+screen_space_aa = 1
 use_debanding = true
+use_occlusion_culling = true
 scaling_3d_mode = 2
-scaling_3d_scale = 0.67
-fsr_sharpness = 2.0
+fsr_sharpness = 1.8
 positional_shadow_atlas_16_bits = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
