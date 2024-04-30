@@ -13,10 +13,11 @@ func _ready() -> void:
 	await get_tree().process_frame
 	available_virtual_cameras = STUtil.get_nodes_in_group(String(parent.get_follow_target().get_target_group().get_path()) + "/VCs")
 
-func _process(delta: float) -> void:
-	if current_controller:
-		current_controller.process(delta)
-	_switch_camera()
+func _process(_delta: float) -> void:
+	pass
+	# if current_controller:
+	# 	current_controller.process(delta)
+	# _switch_camera()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_controller:

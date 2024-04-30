@@ -4,7 +4,6 @@ const FOLDER_PATH : String = "res://assets/starmaps/"
 const FILE_EXTENSION : String = ".smap"
 
 @export var starmap_filename : String
-@export var distance_from_center : float
 @export_group("Main star settings")
 @export var main_star_scene : PackedScene
 @export var main_star_container : Node3D
@@ -34,7 +33,7 @@ func _load_main_stars() -> void:
 			continue
 		
 		var data : Dictionary = json.get_data()
-		data['distance_from_center'] = distance_from_center
+		data['distance_from_center'] = (STUtil.PLANET_RADIUS * 3.7)
         
 		var main_star_inst : MainStar = main_star_scene.instantiate()
 		main_star_container.add_child.call_deferred(main_star_inst)
@@ -47,4 +46,4 @@ func _load_background_stars() -> void:
 		var star_inst : Node3D = background_star_scene.instantiate()
 		background_star_container.add_child.call_deferred(star_inst)
 		await star_inst.ready
-		star_inst.global_position = dir * distance_from_center
+		star_inst.global_position = dir * (STUtil.PLANET_RADIUS * 3.7)

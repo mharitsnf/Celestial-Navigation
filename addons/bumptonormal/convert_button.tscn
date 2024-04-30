@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpp7m5f7gy33y"]
+
+[ext_resource type="Script" path="res://addons/bumptonormal/convert_button.gd" id="1_vttqp"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_vttqp")
+
+[node name="Spacer" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.33
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Convert bump to normal map"
+
+[node name="Spacer2" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.33
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

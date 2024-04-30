@@ -1,4 +1,5 @@
 shader_type spatial;
+//render_mode depth_draw_never;
 //render_mode cull_disabled;
 
 uniform float posterize_levels = 10.;

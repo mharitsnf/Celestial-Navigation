@@ -46,6 +46,8 @@ func _ready() -> void:
 	_setup_objects()
 	ocean = STUtil.get_only_node_in_group("ocean")
 	_setup_cameras()
+	
+	# Determine who's the first controllable entity
 	if !has_current_player_object():
 		_init_player_object(PlayerObjectEnum.CHARACTER)
 
@@ -142,20 +144,20 @@ func switch_current_player_object(new_enum: PlayerObjectEnum) -> void:
 		remove_child(new_player_object.get_instance())
 		return
 
-	var entry_camera: VirtualCamera
-	var vcs: Array = available_virtual_cameras.filter(func (n: Node) -> bool: return n is VirtualCamera and n.is_entry_camera())
-	if vcs.is_empty():
-		push_warning("Entry camera is not found! Returning...")
-		remove_child(new_player_object.get_instance())
-		return
-	entry_camera = vcs[0]
+	# var entry_camera: VirtualCamera
+	# var vcs: Array = available_virtual_cameras.filter(func (n: Node) -> bool: return n is VirtualCamera and n.is_entry_camera())
+	# if vcs.is_empty():
+	# 	push_warning("Entry camera is not found! Returning...")
+	# 	remove_child(new_player_object.get_instance())
+	# 	return
+	# entry_camera = vcs[0]
 
 	set_transitioning(true)
 	if get_current_player_controller(): get_current_player_controller().exit_controller()
 
-	main_camera_controller.set_available_virtual_cameras(available_virtual_cameras)
-	entry_camera.copy_rotation(main_camera.get_follow_target().get_x_rotation(), main_camera.get_follow_target().get_y_rotation())
-	main_camera.set_follow_target(entry_camera)
+	# main_camera_controller.set_available_virtual_cameras(available_virtual_cameras)
+	# entry_camera.copy_rotation(main_camera.get_follow_target().get_x_rotation(), main_camera.get_follow_target().get_y_rotation())
+	# main_camera.set_follow_target(entry_camera)
 
 	if new_player_object.get_instance() is RigidBody3D and ocean.get_target() != new_player_object.get_instance():
 		ocean.switch_target(new_player_object.get_instance())
@@ -188,9 +190,6 @@ func save_state() -> Dictionary:
 
 func on_preprocess(data: Dictionary) -> void:
 	_init_player_object(data["current_player_object_enum"])
-
-# func on_load_init(data: Dictionary) -> void:
-# 	_init_player_object(data["current_player_object_enum"])
 
 func on_load_ready(_data: Dictionary) -> void:
 	pass

@@ -22,6 +22,7 @@ func _ready() -> void:
 
 # ========== State functions ==========
 func enter_controller() -> void:
+    super()
     time_hud.show_hud()
 
 func exit_controller() -> void:
@@ -48,6 +49,4 @@ func _get_reset_sundial_rotation_input() -> void:
 func _get_switch_to_boat_input() -> void:
     if manager.is_switchable() and Input.is_action_just_pressed("switch_sundial_controller"):
         manager.switch_current_player_object(manager.PlayerObjectEnum.BOAT)
-        # var next_controller: PlayerController = boat_controller.get_node("Controller")
-        # manager.switch_controller(next_controller)
 # ========== ========== ========== ==========

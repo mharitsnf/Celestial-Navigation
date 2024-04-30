@@ -1,65 +1,53 @@
-[gd_scene load_steps=7 format=3 uid="uid://duaihjbmtuquu"]
+[gd_scene load_steps=5 format=3 uid="uid://duaihjbmtuquu"]
 
 [ext_resource type="Script" path="res://assets/prefabs/UI/hud/time_hud.gd" id="1_2omxq"]
-[ext_resource type="Texture2D" uid="uid://sv2p60lnp6fn" path="res://assets/resources/textures/UI/chat_box.png" id="1_bobpm"]
 [ext_resource type="Theme" uid="uid://bjh8cqfmixnsq" path="res://assets/resources/theme/main_theme.tres" id="2_mmnyw"]
-
-[sub_resource type="Animation" id="Animation_8lxog"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_ed045"]
-resource_name = "show"
-length = 0.75
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.75),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -64)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xmuw1"]
-_data = {
-"RESET": SubResource("Animation_8lxog"),
-"show": SubResource("Animation_ed045")
-}
+[ext_resource type="Texture2D" uid="uid://b2jok5dgu2ski" path="res://assets/resources/textures/UI/HUDBox.png" id="3_tlmcs"]
+[ext_resource type="Texture2D" uid="uid://dagvowin2k046" path="res://assets/resources/textures/UI/house_icon.svg" id="4_7bnov"]
 
 [node name="TimeHUD" type="HBoxContainer" node_paths=PackedStringArray("meridian_label") groups=["time_hud"]]
-offset_right = 182.0
-offset_bottom = 117.0
+offset_right = 212.0
+offset_bottom = 76.0
 mouse_filter = 2
+theme = ExtResource("2_mmnyw")
 theme_override_constants/separation = 16
 script = ExtResource("1_2omxq")
 meridian_label = NodePath("MarginContainer/MarginContainer/VBoxContainer/Time")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="MarginContainer2"]
+layout_mode = 2
+texture = ExtResource("3_tlmcs")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/MarginContainer3"]
+layout_mode = 2
+texture = ExtResource("4_7bnov")
+expand_mode = 3
+stretch_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
 layout_mode = 2
-texture = ExtResource("1_bobpm")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+texture = ExtResource("3_tlmcs")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -70,23 +58,9 @@ theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_mmnyw")
-theme_override_font_sizes/font_size = 18
-text = "Meridian time"
-vertical_alignment = 1
+size_flags_vertical = 0
 
 [node name="Time" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("2_mmnyw")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "12:12"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_xmuw1")
-}

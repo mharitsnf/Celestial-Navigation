@@ -2,11 +2,15 @@ class_name MainCamera extends Camera3D
 
 class TargetVirtualCamera extends RefCounted:
 	var virtual_camera : VirtualCamera
+	var controller: VirtualCameraController
 	var remote_transform : RemoteTransform3D
 	func _init(_virtual_camera : VirtualCamera) -> void:
 		virtual_camera = _virtual_camera
+		controller = _virtual_camera.get_node("Controller")
 		remote_transform = STUtil.create_remote_transform("MainCamera")
 		virtual_camera.remote_transform_parent_for_other.add_child(remote_transform)
+	func get_controller() -> VirtualCameraController:
+		return controller
 
 @export var tween_duration : float = 1.
 
@@ -35,6 +39,8 @@ func _enter_tree() -> void:
 		transition_finished.connect(_on_transition_finished)
 
 func _process(delta: float) -> void:
+	if current_target and current_target.get_controller():
+		current_target.get_controller().process(delta)
 	_transition(delta)
 
 # ========== Setter and getter functions ==========

@@ -7,7 +7,6 @@
 [node name="StarLoader" type="Node" node_paths=PackedStringArray("main_star_container", "background_star_container")]
 script = ExtResource("1_kr82w")
 starmap_filename = "starmap_ver1"
-distance_from_center = 3700.0
 main_star_scene = ExtResource("2_0bluc")
 main_star_container = NodePath("MainStarContainer")
 background_star_scene = ExtResource("3_osk2d")

@@ -14,7 +14,7 @@ gradient = SubResource("Gradient_c1oe1")
 [resource]
 render_priority = 0
 shader = ExtResource("1_i6hiq")
-shader_parameter/_roughness = null
+shader_parameter/_roughness = 1.0
 shader_parameter/_metallic = null
 shader_parameter/posterize_levels = 10.0
 shader_parameter/albedo_tex = ExtResource("2_p6ss3")
