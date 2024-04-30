@@ -43,6 +43,10 @@ func _process(delta: float) -> void:
 		current_target.get_controller().process(delta)
 	_transition(delta)
 
+func _unhandled_input(event: InputEvent) -> void:
+	if current_target and current_target.get_controller():
+		current_target.get_controller().unhandled_input(event)
+
 # ========== Setter and getter functions ==========
 ## Returns the current follow target.
 func get_follow_target() -> VirtualCamera:

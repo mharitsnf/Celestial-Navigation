@@ -15,6 +15,7 @@ var interacting: bool
 
 var main_camera: MainCamera
 var available_virtual_cameras: Array[Node]
+var all_virtual_cameras: Array[Node]
 var entry_cam: VirtualCamera
 var entry_index: int = 0
 var camera_index: int = 0
@@ -68,19 +69,12 @@ func _setup_camera() -> void:
 	main_camera = STUtil.get_only_node_in_group("main_camera")
 
 	# find all cameras for this controller
-	available_virtual_cameras = STUtil.get_nodes_in_group(String(parent.get_path()) + "/VCs")
+	all_virtual_cameras = STUtil.get_nodes_in_group(String(parent.get_path()) + "/VCs")
+	available_virtual_cameras = STUtil.get_nodes_in_group(String(parent.get_path()) + "/SwitchableVCs")
 
 	# find the entry camera
-	var entry_cameras: Array[Node] = available_virtual_cameras.filter(
-		func(c: Node) -> bool:
-			if c is VirtualCamera:
-				return c.is_entry_camera()
-			return false
-	)
-	# Make sure entry camera is not empty
-	assert(!entry_cameras.is_empty())
-	if !entry_cameras.is_empty():
-		entry_cam = entry_cameras[0]
+	entry_cam = STUtil.get_only_node_in_group(String(parent.get_path()) + "/EntryVC")
+	assert(entry_cam)
 
 	# find the entry index
 	if entry_cam:

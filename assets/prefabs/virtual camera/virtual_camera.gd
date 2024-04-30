@@ -17,6 +17,7 @@ class TargetNode extends RefCounted:
 		follow_target.add_child(remote_transform)
 
 # ===== For other to follow this node =====
+@export var switchable_camera: bool = true
 @export var entry_camera: bool
 @export var target_group: Node
 @export var remote_transform_parent_for_other : Node3D
@@ -171,6 +172,9 @@ func is_submerged() -> bool:
 
 func set_submerged(value: bool) -> void:
 	submerged = value
+
+func is_switchable_camera() -> bool:
+	return switchable_camera
 
 func is_entry_camera() -> bool:
 	return entry_camera
