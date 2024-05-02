@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ewq1grgfr4pa" path="res://assets/resources/textures/star-512.png" id="1_hmre6"]
 
 [node name="BackgroundStar" type="Sprite3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 cast_shadow = 0
 modulate = Color(0.33, 0.33, 0.33, 1)
 billboard = 1

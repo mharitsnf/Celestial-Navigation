@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://cl2oce5jkhxj8"]
 
 [ext_resource type="Script" path="res://assets/prefabs/virtual camera/main_camera.gd" id="1_y0tby"]
+[ext_resource type="PackedScene" uid="uid://djw6fcoihlmn4" path="res://assets/prefabs/post_processing/outline_pp.tscn" id="2_5qjii"]
 [ext_resource type="PackedScene" uid="uid://nidfodnvilw5" path="res://assets/prefabs/post_processing/atmospheric_scattering_pp.tscn" id="3_i6nit"]
-[ext_resource type="PackedScene" uid="uid://djw6fcoihlmn4" path="res://assets/prefabs/post_processing/outline_pp.tscn" id="4_deti1"]
 
 [node name="MainCamera" type="Camera3D" groups=["main_camera", "persist"]]
 script = ExtResource("1_y0tby")
 tween_duration = 0.75
 
-[node name="AtmosphericScatteringPP" parent="." instance=ExtResource("3_i6nit")]
+[node name="OutlinePP" parent="." instance=ExtResource("2_5qjii")]
 
-[node name="OutlinePP" parent="." instance=ExtResource("4_deti1")]
+[node name="AtmosphericScatteringPP" parent="." instance=ExtResource("3_i6nit")]

@@ -2,7 +2,6 @@ shader_type spatial;
 
 uniform sampler2D albedo_tex : filter_nearest;
 uniform sampler2D normal_tex;
-uniform sampler2D bump_tex;
 uniform sampler2D color_ramp;
 uniform float _roughness: hint_range(0.0, 1.0, 0.01) = 1.;
 uniform float _metallic: hint_range(0.0, 1.0, 0.01);

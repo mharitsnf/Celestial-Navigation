@@ -1,6 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://ywv0hfk4sxqb"]
 
 [ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="1_8wpiq"]
+[ext_resource type="Gradient" uid="uid://brm1w7c27pbwj" path="res://assets/resources/textures/light_gradient.tres" id="2_kimpn"]
 
 [sub_resource type="Gradient" id="Gradient_un6gn"]
 offsets = PackedFloat32Array(0)
@@ -9,13 +10,8 @@ colors = PackedColorArray(0.41662, 0.74, 0.2294, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_hiaxk"]
 gradient = SubResource("Gradient_un6gn")
 
-[sub_resource type="Gradient" id="Gradient_6a7fj"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.510274)
-colors = PackedColorArray(0.25, 0.25, 0.25, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_3j1i2"]
-gradient = SubResource("Gradient_6a7fj")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_agxus"]
+gradient = ExtResource("2_kimpn")
 
 [resource]
 render_priority = 0
@@ -24,4 +20,4 @@ shader_parameter/_roughness = 1.0
 shader_parameter/_metallic = null
 shader_parameter/posterize_levels = 10.0
 shader_parameter/albedo_tex = SubResource("GradientTexture1D_hiaxk")
-shader_parameter/color_ramp = SubResource("GradientTexture1D_3j1i2")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_agxus")

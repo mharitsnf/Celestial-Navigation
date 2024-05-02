@@ -1,10 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://c2ipvtnsysqv"]
+[gd_scene load_steps=27 format=3 uid="uid://c2ipvtnsysqv"]
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_vu730"]
 [ext_resource type="Script" path="res://assets/prefabs/entities/player_character/character_entity.gd" id="2_lgsjv"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="3_ip4xm"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/player_character_controller.gd" id="4_eocql"]
 [ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="4_k7shh"]
+[ext_resource type="Gradient" uid="uid://brm1w7c27pbwj" path="res://assets/resources/textures/light_gradient.tres" id="4_r3w2b"]
 [ext_resource type="PackedScene" uid="uid://bq08c3kmmbx62" path="res://assets/prefabs/controllers/camera/virtual_camera_controller.tscn" id="7_jkr5c"]
 [ext_resource type="PackedScene" uid="uid://ccsl3yyji70j7" path="res://assets/prefabs/controllers/camera/fpc_camera.tscn" id="7_minjh"]
 [ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="8_6hl70"]
@@ -25,22 +26,17 @@ colors = PackedColorArray(0.0588235, 0.372549, 0.419608, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_xyrmt"]
 gradient = SubResource("Gradient_qntnh")
 
-[sub_resource type="Gradient" id="Gradient_5tmf5"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.512411)
-colors = PackedColorArray(0.25, 0.25, 0.25, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_yhso2"]
-gradient = SubResource("Gradient_5tmf5")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t52l8"]
+gradient = ExtResource("4_r3w2b")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8d0gp"]
 render_priority = 0
 shader = ExtResource("3_ip4xm")
-shader_parameter/_roughness = null
+shader_parameter/_roughness = 1.0
 shader_parameter/_metallic = null
 shader_parameter/posterize_levels = 10.0
 shader_parameter/albedo_tex = SubResource("GradientTexture1D_xyrmt")
-shader_parameter/color_ramp = SubResource("GradientTexture1D_yhso2")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_t52l8")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_fjb07"]
 material = SubResource("ShaderMaterial_8d0gp")
@@ -52,22 +48,17 @@ colors = PackedColorArray(0.0431373, 0.109804, 0.180392, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gn8bl"]
 gradient = SubResource("Gradient_n5phq")
 
-[sub_resource type="Gradient" id="Gradient_d48qg"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.512411)
-colors = PackedColorArray(0.25, 0.25, 0.25, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_iogyt"]
-gradient = SubResource("Gradient_d48qg")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_iq8wh"]
+gradient = ExtResource("4_r3w2b")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wuhai"]
 render_priority = 0
 shader = ExtResource("3_ip4xm")
-shader_parameter/_roughness = null
+shader_parameter/_roughness = 1.0
 shader_parameter/_metallic = null
 shader_parameter/posterize_levels = 10.0
 shader_parameter/albedo_tex = SubResource("GradientTexture1D_gn8bl")
-shader_parameter/color_ramp = SubResource("GradientTexture1D_iogyt")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_iq8wh")
 
 [sub_resource type="BoxMesh" id="BoxMesh_ox2q4"]
 material = SubResource("ShaderMaterial_wuhai")

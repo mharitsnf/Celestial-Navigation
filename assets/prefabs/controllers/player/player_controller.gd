@@ -46,7 +46,7 @@ func process(_delta: float) -> bool:
 	return !(is_interacting() or ui_manager.has_current_ui()) # If interacting or has an active ui from other means (like opening menu), do not proceed
 
 func physics_process(_delta: float) -> bool:
-	return true
+	return !(is_interacting() or ui_manager.has_current_ui())
 # ========== ========== ========== ==========
 
 # ========== State functions ==========
@@ -85,7 +85,6 @@ func _setup_camera() -> void:
 	_reset_camera_index()
 
 func _enter_entry_camera() -> void:
-	print(entry_cam)
 	_reset_camera_index()
 	entry_cam.copy_rotation(main_camera.get_follow_target().get_x_rotation(), main_camera.get_follow_target().get_y_rotation())
 	main_camera.set_follow_target(entry_cam)
@@ -132,7 +131,7 @@ func set_interacting(value: bool) -> void:
 # ========== Interaction functions ==========
 func _get_start_interact_input() -> void:
 	if is_interacting() or interactions.is_empty() or ui_manager.has_current_ui(): return
-	if Input.is_action_just_pressed("interact"):		
+	if Input.is_action_just_pressed("interact"):
 		if !_setup_interaction(): return
 		_interact()
 
@@ -162,6 +161,7 @@ func _finish_interaction() -> void:
 func _interact() -> void:
 	_start_interaction()
 	for c: InteractionCommand in current_track.commands:
+		print(c)
 		await c.action(get_tree())
 		if !c.auto_next:
 			await ui_manager.get_current_controller().interact_pressed

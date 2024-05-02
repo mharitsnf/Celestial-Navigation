@@ -1,14 +1,10 @@
 [gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://qq3s0v8dgt3x"]
 
 [ext_resource type="Shader" path="res://assets/prefabs/planetary/ocean/ocean_shader.gdshader" id="1_hfygk"]
+[ext_resource type="Gradient" uid="uid://brm1w7c27pbwj" path="res://assets/resources/textures/light_gradient.tres" id="2_jytv1"]
 
-[sub_resource type="Gradient" id="Gradient_ppngf"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.231343, 0.574144, 0.825095)
-colors = PackedColorArray(0.05, 0.05, 0.05, 1, 0.3, 0.3, 0.3, 1, 0.6, 0.6, 0.6, 1, 0.9, 0.9, 0.9, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_38q81"]
-gradient = SubResource("Gradient_ppngf")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ldcef"]
+gradient = ExtResource("2_jytv1")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_exxv3"]
 frequency = 0.1
@@ -40,11 +36,11 @@ render_priority = 0
 shader = ExtResource("1_hfygk")
 shader_parameter/posterize_levels = 10.0
 shader_parameter/planet_radius = 1485.6
-shader_parameter/target_world_position = Vector3(1487.09, 7.62239, -23.5917)
+shader_parameter/target_world_position = Vector3(1487.23, 10.4945, -22.9874)
 shader_parameter/target_up = Vector3(1, -4.37114e-08, 0)
 shader_parameter/target_right = Vector3(-4.37114e-08, -1, 0)
 shader_parameter/target_fwd = Vector3(0, 0, 1)
-shader_parameter/cpu_time = 2.79141
+shader_parameter/cpu_time = 1.58909
 shader_parameter/movement_offset = Vector3(0, 0, 0)
 shader_parameter/plane_size = 500.0
 shader_parameter/speed = 0.25
@@ -66,4 +62,4 @@ shader_parameter/far = 100.0
 shader_parameter/edge_color = Color(1, 1, 1, 1)
 shader_parameter/edge_noise_scale = 1.0
 shader_parameter/edge_noise_texture = SubResource("NoiseTexture2D_8ry6f")
-shader_parameter/color_ramp = SubResource("GradientTexture1D_38q81")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_ldcef")

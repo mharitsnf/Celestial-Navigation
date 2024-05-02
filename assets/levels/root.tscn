@@ -1,14 +1,66 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6c54usfla1jt"]
+[gd_scene load_steps=27 format=3 uid="uid://b6c54usfla1jt"]
 
 [ext_resource type="PackedScene" uid="uid://bohsb8opfjfgr" path="res://assets/levels/world_test.tscn" id="1_n8kch"]
 [ext_resource type="Script" path="res://assets/prefabs/UI/manager/ui_manager.gd" id="3_1ye6f"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/kuwahara/kuwahara_1.gdshader" id="3_fdjca"]
 [ext_resource type="PackedScene" uid="uid://v5c54hsyvq5g" path="res://assets/prefabs/UI/camera_mask/camera_mask.tscn" id="3_yisfc"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/mask.gdshader" id="4_bhpxt"]
 [ext_resource type="PackedScene" uid="uid://d11f84wu226j8" path="res://assets/prefabs/save_system/save_system.tscn" id="4_bncqj"]
 [ext_resource type="PackedScene" uid="uid://c0s7a0klmw3ek" path="res://assets/prefabs/UI/screens/TransitionScreen.tscn" id="4_e6h3r"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/kuwahara/kuwahara_2.gdshader" id="4_jtngu"]
 [ext_resource type="Texture2D" uid="uid://esccb0ghemjn" path="res://assets/resources/textures/camera_mask.PNG" id="5_7v5rb"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/kuwahara/kuwahara_3.gdshader" id="5_hx2ft"]
 [ext_resource type="PackedScene" uid="uid://duaihjbmtuquu" path="res://assets/prefabs/UI/hud/time_hud.tscn" id="5_mtnxj"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/kuwahara/kuwahara_4.gdshader" id="6_s5m2l"]
 [ext_resource type="Texture2D" uid="uid://de1lsimp3xj4n" path="res://assets/resources/textures/sextant_mask.png" id="8_gkf3r"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wow5l"]
+viewport_path = NodePath("Main/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_34fqm"]
+resource_local_to_scene = true
+shader = ExtResource("3_fdjca")
+shader_parameter/channel_0 = SubResource("ViewportTexture_wow5l")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bkwbr"]
+viewport_path = NodePath("KWH1/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2utn7"]
+resource_local_to_scene = true
+shader = ExtResource("4_jtngu")
+shader_parameter/blur_amount = 8
+shader_parameter/blur_iterations = 8
+shader_parameter/blur_quality = 2
+shader_parameter/channel_0 = SubResource("ViewportTexture_bkwbr")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sg41y"]
+viewport_path = NodePath("Main/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a2sf3"]
+viewport_path = NodePath("KWH1/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xu1to"]
+resource_local_to_scene = true
+shader = ExtResource("5_hx2ft")
+shader_parameter/kuwahara_level = 0.0
+shader_parameter/radius = 6.0
+shader_parameter/q = 12.0
+shader_parameter/alpha = 5.0
+shader_parameter/channel_0 = SubResource("ViewportTexture_sg41y")
+shader_parameter/channel_1 = SubResource("ViewportTexture_a2sf3")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4kpq6"]
+viewport_path = NodePath("KWH2/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_x7eh1"]
+viewport_path = NodePath("KWH3/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k56qo"]
+resource_local_to_scene = true
+shader = ExtResource("6_s5m2l")
+shader_parameter/sigma = -3.0
+shader_parameter/channel_0 = SubResource("ViewportTexture_4kpq6")
+shader_parameter/channel_1 = SubResource("ViewportTexture_x7eh1")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b28bo"]
 noise_type = 2
@@ -44,18 +96,101 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="Main" groups=["final_viewport"]]
+[node name="SubViewport" type="SubViewport" parent="Main"]
 handle_input_locally = false
-msaa_3d = 1
-use_debanding = true
-use_occlusion_culling = true
-scaling_3d_mode = 2
-fsr_sharpness = 1.8
+msaa_3d = 2
+screen_space_aa = 1
+scaling_3d_mode = 1
+scaling_3d_scale = 0.55
 positional_shadow_atlas_16_bits = false
-size = Vector2i(1920, 1080)
+size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
 [node name="WorldTest" parent="Main/SubViewport" instance=ExtResource("1_n8kch")]
+
+[node name="KWH1" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="KWH1"]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="KWH1/SubViewport"]
+material = SubResource("ShaderMaterial_34fqm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KWH2" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="KWH2"]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="KWH2/SubViewport"]
+material = SubResource("ShaderMaterial_2utn7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KWH3" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="KWH3"]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="KWH3/SubViewport"]
+material = SubResource("ShaderMaterial_xu1to")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KWH4" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="KWH4" groups=["final_viewport"]]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="KWH4/SubViewport"]
+material = SubResource("ShaderMaterial_k56qo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -73,12 +208,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -106.0
-offset_top = -76.0
-offset_right = 106.0
+offset_left = -123.0
+offset_top = -97.0
+offset_right = 123.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
+initial_pos = Vector2(517, 623)
 
 [node name="CameraMask2" parent="Control" instance=ExtResource("3_yisfc")]
 material = SubResource("ShaderMaterial_slcvo")

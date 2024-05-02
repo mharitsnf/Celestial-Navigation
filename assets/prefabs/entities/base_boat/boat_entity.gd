@@ -17,7 +17,7 @@ func rotate_boat(amount : float, delta: float) -> void:
 func gas(amount : float) -> void:
 	apply_force(visual_container.global_basis.z * move_force * amount)
 
-const BRAKE_POWER: float = 2.
+const BRAKE_POWER: float = .75
 func brake(amount : float) -> void:
 	var flat_vel : Vector3 = basis.inverse() * linear_velocity
 	var xz_vel : Vector3 = Vector3(flat_vel.x, 0, flat_vel.z)

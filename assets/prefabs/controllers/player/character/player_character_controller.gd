@@ -44,7 +44,8 @@ func process(delta: float) -> bool:
 	return true
 
 func physics_process(delta: float) -> bool:
-	if !super(delta): return false
+	if !super(delta):
+		return false
 	if _current_state:
 		_current_state.physics_process(delta)
 	return true
