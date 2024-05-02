@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b6c54usfla1jt"]
+[gd_scene load_steps=32 format=3 uid="uid://b6c54usfla1jt"]
 
 [ext_resource type="PackedScene" uid="uid://bohsb8opfjfgr" path="res://assets/levels/world_test.tscn" id="1_n8kch"]
 [ext_resource type="Script" path="res://assets/prefabs/UI/manager/ui_manager.gd" id="3_1ye6f"]
@@ -12,6 +12,7 @@
 [ext_resource type="Shader" path="res://assets/resources/shaders/kuwahara/kuwahara_3.gdshader" id="5_hx2ft"]
 [ext_resource type="PackedScene" uid="uid://duaihjbmtuquu" path="res://assets/prefabs/UI/hud/time_hud.tscn" id="5_mtnxj"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/kuwahara/kuwahara_4.gdshader" id="6_s5m2l"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/grain.gdshader" id="7_tp18k"]
 [ext_resource type="Texture2D" uid="uid://de1lsimp3xj4n" path="res://assets/resources/textures/sextant_mask.png" id="8_gkf3r"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wow5l"]
@@ -28,9 +29,9 @@ viewport_path = NodePath("KWH1/SubViewport")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2utn7"]
 resource_local_to_scene = true
 shader = ExtResource("4_jtngu")
-shader_parameter/blur_amount = 8
+shader_parameter/blur_amount = 16
 shader_parameter/blur_iterations = 8
-shader_parameter/blur_quality = 2
+shader_parameter/blur_quality = 4
 shader_parameter/channel_0 = SubResource("ViewportTexture_bkwbr")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_sg41y"]
@@ -43,7 +44,7 @@ viewport_path = NodePath("KWH1/SubViewport")
 resource_local_to_scene = true
 shader = ExtResource("5_hx2ft")
 shader_parameter/kuwahara_level = 0.0
-shader_parameter/radius = 6.0
+shader_parameter/radius = 4.0
 shader_parameter/q = 12.0
 shader_parameter/alpha = 5.0
 shader_parameter/channel_0 = SubResource("ViewportTexture_sg41y")
@@ -58,9 +59,31 @@ viewport_path = NodePath("KWH3/SubViewport")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k56qo"]
 resource_local_to_scene = true
 shader = ExtResource("6_s5m2l")
-shader_parameter/sigma = -3.0
+shader_parameter/sigma = -2.0
 shader_parameter/channel_0 = SubResource("ViewportTexture_4kpq6")
 shader_parameter/channel_1 = SubResource("ViewportTexture_x7eh1")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kir81"]
+viewport_path = NodePath("KWH4/SubViewport")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1uclg"]
+frequency = 0.5
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qqtjl"]
+width = 1920
+height = 1080
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_1uclg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ucn5v"]
+resource_local_to_scene = true
+shader = ExtResource("7_tp18k")
+shader_parameter/noise_amount = 0.1
+shader_parameter/enabled = true
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_qqtjl")
+shader_parameter/main_tex = SubResource("ViewportTexture_kir81")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b28bo"]
 noise_type = 2
@@ -192,7 +215,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Grain" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="Grain" groups=["final_viewport"]]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="Grain/SubViewport"]
+material = SubResource("ShaderMaterial_ucn5v")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Control" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -230,5 +275,6 @@ script = ExtResource("3_1ye6f")
 
 [node name="TransitionCL" type="CanvasLayer" parent="."]
 layer = 5
+visible = false
 
 [node name="TransitionScreen" parent="TransitionCL" instance=ExtResource("4_e6h3r")]

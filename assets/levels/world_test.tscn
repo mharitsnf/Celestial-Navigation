@@ -74,7 +74,7 @@ wave_data_2 = Vector4(0.08, 25, 0, 1)
 speed = 0.25
 
 [node name="MainCamera" parent="ObjectsContainer" node_paths=PackedStringArray("follow_target") instance=ExtResource("7_e0eip")]
-transform = Transform3D(0.11476, 0.991879, 0.0548327, -0.974542, 0.123113, -0.187381, -0.19261, -0.0319328, 0.980756, 1488.05, 0.204, 4.278)
+transform = Transform3D(0.105962, 0.993443, 0.042933, -0.904217, 0.114229, -0.411514, -0.41372, 0.00478416, 0.910392, 1488.05, 0.204, 4.278)
 current = true
 far = 6000.0
 follow_target = NodePath("../PlayerControllerManager/PlayerCharacterEntity/TPC")
