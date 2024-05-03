@@ -52,6 +52,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func get_follow_target() -> VirtualCamera:
 	return follow_target
 
+func get_previous_follow_target() -> VirtualCamera:
+	return previous_target.virtual_camera
+
 ## Sets a new follow target.
 func set_follow_target(new_target : VirtualCamera) -> void:
 	follow_target = new_target

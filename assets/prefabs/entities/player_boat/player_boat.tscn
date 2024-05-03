@@ -88,13 +88,20 @@ default_angle = Vector2(-15, 20)
 follow_target = NodePath("..")
 
 [node name="Controller" parent="TPC" index="1" instance=ExtResource("6_7ggm6")]
-use_submerged_angles = false
-submerged_min_angle = -15.0
-submerged_max_angle = 30.0
 mouse_inverted_x = false
 mouse_inverted_y = false
 
-[node name="FPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("7_4om71")]
+[node name="ChatTPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_5wq2t")]
+single_group_name = "ChatVC"
+switchable_camera = false
+target_group = NodePath("..")
+follow_target = NodePath("..")
+
+[node name="Controller" parent="ChatTPC" index="1" instance=ExtResource("6_7ggm6")]
+mouse_inverted_x = false
+mouse_inverted_y = false
+
+[node name="FPC" parent="." index="3" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("7_4om71")]
 _offset = Vector3(0, 10, 0)
 target_group = NodePath("..")
 submerged_angle = Vector2(-20, 80)
@@ -104,11 +111,10 @@ follow_target = NodePath("../CollisionShape3D")
 [node name="FPCCamera" parent="FPC" index="1" instance=ExtResource("8_k2oyu")]
 
 [node name="Controller" parent="FPC" index="2" instance=ExtResource("8_o1kml")]
-submerged_min_angle = -30.0
 joypad_inverted_x = true
 joypad_inverted_y = false
 
-[node name="Controller" parent="." index="3" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("9_wqan3")]
+[node name="Controller" parent="." index="4" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("9_wqan3")]
 dropoff_point = NodePath("../CollisionShape3D/DropoffPoint")
 player_character_pscn = ExtResource("10_31xpf")
 should_setup_first_transform = true

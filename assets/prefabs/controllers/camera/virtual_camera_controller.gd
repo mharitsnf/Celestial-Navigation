@@ -1,8 +1,5 @@
 class_name VirtualCameraController extends Node
 
-@export var use_submerged_angles: bool = true
-@export var submerged_min_angle: float = -80
-@export var submerged_max_angle: float = 80
 @export var rotation_speed: float = 1.
 @export_group("Joypad direction")
 @export var joypad_inverted_x: bool
@@ -15,12 +12,6 @@ var parent: VirtualCamera
 # ========== Built-in functions ==========
 func _enter_tree() -> void:
     parent = get_parent()
-    if !parent.is_in_group(String(parent.get_target_group().get_path()) + "/VCs"):
-        parent.add_to_group(String(parent.get_target_group().get_path()) + "/VCs")
-    if parent.is_entry_camera() and !parent.is_in_group(String(parent.get_target_group().get_path()) + "/EntryVC"):
-        parent.add_to_group(String(parent.get_target_group().get_path()) + "/EntryVC")
-    if parent.is_switchable_camera() and !parent.is_in_group(String(parent.get_target_group().get_path()) + "/SwitchableVCs"):
-        parent.add_to_group(String(parent.get_target_group().get_path()) + "/SwitchableVCs")
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

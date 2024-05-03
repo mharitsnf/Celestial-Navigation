@@ -42,7 +42,7 @@ func _ready() -> void:
 
 func process(_delta: float) -> bool:
 	_get_start_interact_input()
-	_switch_camera()
+	_get_switch_camera_input()
 	return !(is_interacting() or ui_manager.has_current_ui()) # If interacting or has an active ui from other means (like opening menu), do not proceed
 
 func physics_process(_delta: float) -> bool:
@@ -101,19 +101,26 @@ func _get_next_virtual_camera() -> VirtualCamera:
 	var next_vc: VirtualCamera = available_virtual_cameras[camera_index]
 	return next_vc
 
-func _switch_camera() -> void:
+func _get_switch_camera_input() -> void:
 	if Input.is_action_just_pressed("switch_camera"):
-		var controller: VirtualCameraController
-		if main_camera.get_follow_target():
-			controller = main_camera.get_follow_target().get_node("Controller")
-			controller.exit_camera()
-
 		var next_camera: VirtualCamera = _get_next_virtual_camera()
-		controller = next_camera.get_node("Controller")
-		controller.enter_camera()
-		
-		next_camera.copy_rotation(main_camera.get_follow_target().get_x_rotation(), main_camera.get_follow_target().get_y_rotation())
-		main_camera.set_follow_target(next_camera)
+		_switch_camera(next_camera)
+
+func _switch_camera(next_camera: VirtualCamera) -> void:
+	if !next_camera:
+		push_error("No next camera provided!")
+		return
+	
+	var controller: VirtualCameraController
+	if main_camera.get_follow_target():
+		controller = main_camera.get_follow_target().get_node("Controller")
+		controller.exit_camera()
+
+	controller = next_camera.get_node("Controller")
+	controller.enter_camera()
+	
+	next_camera.copy_rotation(main_camera.get_follow_target().get_x_rotation(), main_camera.get_follow_target().get_y_rotation())
+	main_camera.set_follow_target(next_camera)
 
 # ========== ========== ========== 
 
@@ -151,21 +158,22 @@ func _setup_interaction() -> bool:
 	return true
 
 func _start_interaction() -> void:
+	var chat_cam: VirtualCamera = STUtil.get_only_node_in_group(String(parent.get_path()) + "/ChatVC")
+	_switch_camera(chat_cam)
 	set_interacting(true)
 
 func _finish_interaction() -> void:
 	set_interacting(false)
 	current_interactable = null
 	current_track = null
+	_switch_camera(main_camera.get_previous_follow_target())
 
 func _interact() -> void:
 	_start_interaction()
 	for c: InteractionCommand in current_track.commands:
-		print(c)
 		await c.action(get_tree())
 		if !c.auto_next:
 			await ui_manager.get_current_controller().interact_pressed
-			# await STUtil.interact_pressed
 	current_interactable.handle_track_finished()
 	_finish_interaction()
 

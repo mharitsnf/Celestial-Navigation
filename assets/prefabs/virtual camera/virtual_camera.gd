@@ -16,15 +16,16 @@ class TargetNode extends RefCounted:
 		remote_transform = STUtil.create_remote_transform(follower.name, false)
 		follow_target.add_child(remote_transform)
 
-# ===== For other to follow this node =====
+# ===== Grouping settings =====
+@export var single_group_name: String = ""
 @export var switchable_camera: bool = true
 @export var entry_camera: bool
 @export var target_group: Node
-@export var remote_transform_parent_for_other : Node3D
 # ===== ===== ===== ===== ===== ===== =====
 
 # ===== Rotation settings =====
-@export_group("Rotation settings")
+@export_group("Rotation and follow settings")
+@export var remote_transform_parent_for_other : Node3D
 @export var rotation_speed : float = .1
 @export var submerged_angle: Vector2 = Vector2(-80, 0)
 @export var default_angle: Vector2 = Vector2(-80, 80)
@@ -48,7 +49,7 @@ signal transition_finished
 # ===== FoV =====
 @export var min_fov: float = 30
 @export var max_fov: float = 110
-var _fov: float = 75
+@export var _fov: float = 75
 
 var main_camera : MainCamera
 var previous_target : TargetNode
@@ -60,11 +61,21 @@ func _enter_tree() -> void:
 	if !transition_finished.is_connected(_on_transition_finished):
 		transition_finished.connect(_on_transition_finished)
 
+	if !is_in_group(String(get_target_group().get_path()) + "/VCs"):
+		add_to_group(String(get_target_group().get_path()) + "/VCs")
+	if is_entry_camera() and !is_in_group(String(get_target_group().get_path()) + "/EntryVC"):
+		add_to_group(String(get_target_group().get_path()) + "/EntryVC")
+	if is_switchable_camera() and !is_in_group(String(get_target_group().get_path()) + "/SwitchableVCs"):
+		add_to_group(String(get_target_group().get_path()) + "/SwitchableVCs")
+	if !single_group_name.is_empty() and !is_in_group(String(get_target_group().get_path()) + "/" + single_group_name):
+		print(String(get_target_group().get_path()) + "/" + single_group_name)
+		add_to_group(String(get_target_group().get_path()) + "/" + single_group_name)
+
 	main_camera = STUtil.get_only_node_in_group("main_camera")
 
-func _ready() -> void:
-	if main_camera:
-		_fov = main_camera.fov
+# func _ready() -> void:
+# 	if main_camera:
+# 		_fov = main_camera.fov
 
 func _process(delta: float) -> void:
 	_lerp_main_camera_fov(delta)
