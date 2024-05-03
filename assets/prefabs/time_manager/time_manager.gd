@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_calculate_time_elapsed(delta)
-	_rotate_per_time()
+	_rotate_per_time(delta)
 
 	if time_hud:
 		var meridian_time: Array = get_time()
@@ -29,7 +29,7 @@ func _calculate_time_elapsed(delta: float) -> void:
 	time_elapsed += delta * time_speed
 	time_elapsed = fmod(time_elapsed, SECONDS_PER_DAY)
 
-func _rotate_per_time() -> void:
+func _rotate_per_time(_delta: float) -> void:
 	rotation_degrees.y = remap(time_elapsed, 0., SECONDS_PER_DAY, 360, 0)
 
 func get_local_time() -> Array:

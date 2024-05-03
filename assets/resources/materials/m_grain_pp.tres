@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dq86rwx1owyye"]
+
+[ext_resource type="Shader" path="res://assets/resources/shaders/grain.gdshader" id="1_sab38"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kir81"]
+viewport_path = NodePath("KWH4/SubViewport")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1uclg"]
+frequency = 0.5
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qqtjl"]
+width = 1920
+height = 1080
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_1uclg")
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_sab38")
+shader_parameter/noise_amount = 1.0
+shader_parameter/blend_opacity = 0.3
+shader_parameter/enabled = true
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_qqtjl")
+shader_parameter/main_tex = SubResource("ViewportTexture_kir81")

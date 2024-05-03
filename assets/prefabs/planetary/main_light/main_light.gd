@@ -88,10 +88,24 @@ func _adjust_star_visibility() -> void:
 func get_star_visibility_weight() -> float:
 	return star_visibility_weight
 
+const DEFAULT_SHADOW_BIAS: float = .1
+const DEFAULT_SHADOW_NORMAL_BIAS: float = 2.
+const DEFAULT_SHADOW_BLUR: float = 3.
+
+const SUNDIAL_SHADOW_BIAS: float = .1
+const SUNDIAL_SHADOW_NORMAL_BIAS: float = 10.
+const SUNDIAL_SHADOW_BLUR: float = .5
+
 func _on_main_camera_follow_target_changed(target: VirtualCamera) -> void:
-	if STUtil.is_node_in_group(target, "sundial_vc") and directional_shadow_max_distance != sundial_max_shadow_distance:
+	if STUtil.is_node_in_group(target, "sundial_vc"):
 		var tween: Tween = create_tween()
 		tween.tween_property(self, "directional_shadow_max_distance", sundial_max_shadow_distance, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	elif !STUtil.is_node_in_group(target, "sundial_vc") and directional_shadow_max_distance != default_max_shadow_distance:
+		tween.tween_property(self, "shadow_blur", SUNDIAL_SHADOW_BLUR, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(self, "shadow_bias", SUNDIAL_SHADOW_BIAS, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(self, "shadow_normal_bias", SUNDIAL_SHADOW_NORMAL_BIAS, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	elif !STUtil.is_node_in_group(target, "sundial_vc"):
 		var tween: Tween = create_tween()
 		tween.tween_property(self, "directional_shadow_max_distance", default_max_shadow_distance, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(self, "shadow_blur", DEFAULT_SHADOW_BLUR, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(self, "shadow_bias", DEFAULT_SHADOW_BIAS, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(self, "shadow_normal_bias", DEFAULT_SHADOW_NORMAL_BIAS, .75).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)

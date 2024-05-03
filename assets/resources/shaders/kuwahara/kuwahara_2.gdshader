@@ -1,5 +1,6 @@
 shader_type canvas_item;
 
+uniform sampler2D blrd_tex; // blurred tex
 uniform sampler2D channel_0;
 uniform int blur_amount = 16;
 uniform int blur_iterations = 16;
@@ -28,7 +29,8 @@ float normpdf(in float x, in float sigma) {
 
 void fragment() {
 	vec3 c = texture(channel_0, UV).rgb;
-	vec3 sum = texture_xorgaussian(channel_0, UV, SCREEN_PIXEL_SIZE, float(blur_amount), blur_iterations, blur_quality).rgb;
+	vec3 sum = texture(blrd_tex, UV).rgb;
+	//vec3 sum = texture_xorgaussian(channel_0, UV, SCREEN_PIXEL_SIZE, float(blur_amount), blur_iterations, blur_quality).rgb;
 	
 	float lambda1 = 0.5 * (sum.y + sum.x + sqrt(sum.y*sum.y - 2.0*sum.x*sum.y + sum.x*sum.x + 4.0*sum.z*sum.z));
 	float lambda2 = 0.5 * (sum.y + sum.x - sqrt(sum.y*sum.y - 2.0*sum.x*sum.y + sum.x*sum.x + 4.0*sum.z*sum.z));

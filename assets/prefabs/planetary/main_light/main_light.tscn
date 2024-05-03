@@ -7,12 +7,9 @@
 light_energy = 0.8
 light_volumetric_fog_energy = 1000.0
 shadow_enabled = true
-shadow_bias = 0.005
-shadow_normal_bias = 8.0
-shadow_opacity = 0.9
+shadow_opacity = 0.75
 shadow_blur = 3.0
 directional_shadow_blend_splits = true
-directional_shadow_max_distance = 200.0
 script = ExtResource("1_drbv4")
 default_max_shadow_distance = 200.0
 sundial_max_shadow_distance = 10.0
