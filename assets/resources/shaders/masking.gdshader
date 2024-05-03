@@ -10,7 +10,8 @@ void fragment() {
 	vec4 white_col = texture(white_tex, UV);
 	vec4 black_col = texture(black_tex, UV);
 	float mask = texture(mask_tex, UV).x;
-	float transition_weight = smoothstep(cutoff, cutoff + smooth_size, mask);
+	float inv_cutoff = 1. - cutoff;
+	float transition_weight = smoothstep(inv_cutoff, inv_cutoff + smooth_size, mask);
 	COLOR = mix(black_col, white_col, transition_weight);
 	//COLOR = vec4(vec3(transition_weight), 1.);
 }

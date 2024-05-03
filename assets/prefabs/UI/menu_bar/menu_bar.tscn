@@ -1,82 +1,49 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccrt071yecucd"]
+[gd_scene load_steps=3 format=3 uid="uid://ccrt071yecucd"]
 
-[ext_resource type="PackedScene" uid="uid://bmq0wm77grmqt" path="res://assets/prefabs/UI/menu_icon/menu_icon.tscn" id="1_1eh38"]
-[ext_resource type="Script" path="res://assets/prefabs/UI/menu_bar/menu_bar.gd" id="1_u4bhs"]
-[ext_resource type="Shader" path="res://assets/resources/shaders/menu_icon_bg.gdshader" id="3_u15jb"]
-[ext_resource type="Texture2D" uid="uid://bgon7q72v5gsl" path="res://assets/resources/textures/UI/HUDBoxFull.png" id="4_t3312"]
-[ext_resource type="Texture2D" uid="uid://b2jok5dgu2ski" path="res://assets/resources/textures/UI/HUDBox.png" id="5_40pbm"]
+[ext_resource type="Texture2D" uid="uid://8e4kmhhkj8jv" path="res://assets/resources/textures/UI/main_menu_bg.png" id="2_myh6y"]
+[ext_resource type="PackedScene" uid="uid://d4etiolvk4kwu" path="res://assets/prefabs/UI/main_menu_button/main_menu_button.tscn" id="3_wrson"]
 
-[sub_resource type="Gradient" id="Gradient_i4lvu"]
+[node name="MenuBar" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_7n26o"]
-gradient = SubResource("Gradient_i4lvu")
-width = 256
-height = 256
-fill_from = Vector2(1, 1)
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -720.0
+offset_right = 450.0
+grow_vertical = 0
+texture = ExtResource("2_myh6y")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uu2oi"]
-resource_local_to_scene = true
-shader = ExtResource("3_u15jb")
-shader_parameter/cutoff = 0.0
-shader_parameter/smooth_size = 0.0
-shader_parameter/white_tex = ExtResource("5_40pbm")
-shader_parameter/black_tex = ExtResource("4_t3312")
-shader_parameter/mask_tex = SubResource("GradientTexture2D_7n26o")
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+offset_right = 200.0
+grow_vertical = 0
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_blopy"]
-resource_local_to_scene = true
-shader = ExtResource("3_u15jb")
-shader_parameter/cutoff = 0.0
-shader_parameter/smooth_size = 0.0
-shader_parameter/white_tex = ExtResource("5_40pbm")
-shader_parameter/black_tex = ExtResource("4_t3312")
-shader_parameter/mask_tex = SubResource("GradientTexture2D_7n26o")
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_57qa5"]
-resource_local_to_scene = true
-shader = ExtResource("3_u15jb")
-shader_parameter/cutoff = 0.0
-shader_parameter/smooth_size = 0.0
-shader_parameter/white_tex = ExtResource("5_40pbm")
-shader_parameter/black_tex = ExtResource("4_t3312")
-shader_parameter/mask_tex = SubResource("GradientTexture2D_7n26o")
-
-[node name="MenuBar" type="HBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/separation = 24
-script = ExtResource("1_u4bhs")
-
-[node name="MenuIcon" parent="." instance=ExtResource("1_1eh38")]
+[node name="MainMenuButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_wrson")]
 layout_mode = 2
 
-[node name="NinePatchRect" parent="MenuIcon" index="0"]
-material = SubResource("ShaderMaterial_uu2oi")
-
-[node name="Label" parent="MenuIcon/MarginContainer/HBoxContainer/Control" index="0"]
-offset_right = 78.0
-text = "Globe"
-
-[node name="MenuIcon2" parent="." instance=ExtResource("1_1eh38")]
+[node name="MainMenuButton2" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_wrson")]
 layout_mode = 2
 
-[node name="NinePatchRect" parent="MenuIcon2" index="0"]
-material = SubResource("ShaderMaterial_blopy")
-
-[node name="Label" parent="MenuIcon2/MarginContainer/HBoxContainer/Control" index="0"]
-offset_right = 98.0
-text = "Journal"
-
-[node name="MenuIcon3" parent="." instance=ExtResource("1_1eh38")]
+[node name="MainMenuButton3" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_wrson")]
 layout_mode = 2
 
-[node name="NinePatchRect" parent="MenuIcon3" index="0"]
-material = SubResource("ShaderMaterial_57qa5")
-
-[node name="Label" parent="MenuIcon3/MarginContainer/HBoxContainer/Control" index="0"]
-offset_right = 116.0
-text = "Settings"
-
-[editable path="MenuIcon"]
-[editable path="MenuIcon2"]
-[editable path="MenuIcon3"]
+[node name="Controller" type="Node" parent="."]

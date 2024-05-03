@@ -1,8 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://c563xq8a6oome"]
+[gd_scene load_steps=12 format=3 uid="uid://c563xq8a6oome"]
 
-[ext_resource type="Texture2D" uid="uid://b2jok5dgu2ski" path="res://assets/resources/textures/UI/HUDBox.png" id="1_7a4sn"]
+[ext_resource type="Texture2D" uid="uid://8lcd0m8klsbk" path="res://assets/resources/textures/UI/chatbox_bg.png" id="1_tl5ij"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/masking.gdshader" id="1_tw20i"]
 [ext_resource type="Theme" uid="uid://bjh8cqfmixnsq" path="res://assets/resources/theme/main_theme.tres" id="2_j0adr"]
+[ext_resource type="FontFile" uid="uid://b7cro64kt10dm" path="res://assets/resources/fonts/proza_libre/ProzaLibre-ExtraBold.ttf" id="3_10juf"]
 [ext_resource type="PackedScene" uid="uid://yx82uhgjdmj0" path="res://assets/prefabs/controllers/UI/chat_box/chat_box_controller.tscn" id="4_xc0jh"]
+
+[sub_resource type="Gradient" id="Gradient_j5s1b"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yrejk"]
+gradient = SubResource("Gradient_j5s1b")
+
+[sub_resource type="Gradient" id="Gradient_wsfql"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0.1, 0.5, 0.9)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3wcj8"]
+gradient = SubResource("Gradient_wsfql")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71eki"]
+shader = ExtResource("1_tw20i")
+shader_parameter/cutoff = 0.0
+shader_parameter/smooth_size = 0.1
+shader_parameter/white_tex = ExtResource("1_tl5ij")
+shader_parameter/black_tex = SubResource("GradientTexture1D_yrejk")
+shader_parameter/mask_tex = SubResource("GradientTexture1D_3wcj8")
+
+[sub_resource type="FontVariation" id="FontVariation_g3nbe"]
+base_font = ExtResource("3_10juf")
+spacing_glyph = 1
 
 [node name="ChatBox" type="VBoxContainer"]
 anchors_preset = 7
@@ -10,84 +40,72 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -352.0
-offset_top = -238.0
-offset_right = 352.0
+offset_left = -448.0
+offset_top = -166.0
+offset_right = 448.0
+offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 0
-size_flags_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 32
 alignment = 2
 
-[node name="SpeakerContainer" type="MarginContainer" parent="."]
+[node name="ChatContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="SpeakerContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="ChatContainer"]
 texture_filter = 1
+material = SubResource("ShaderMaterial_71eki")
+custom_minimum_size = Vector2(450, 142)
 layout_mode = 2
-texture = ExtResource("1_7a4sn")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+texture = ExtResource("1_tl5ij")
+patch_margin_left = 149
+patch_margin_top = 4
+patch_margin_right = 149
+patch_margin_bottom = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="SpeakerContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ChatContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 24
 
-[node name="Label" type="Label" parent="SpeakerContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ChatContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="SpeakerLabel" type="Label" parent="ChatContainer/MarginContainer/VBoxContainer"]
 texture_filter = 2
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 theme = ExtResource("2_j0adr")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = SubResource("FontVariation_g3nbe")
+theme_override_font_sizes/font_size = 16
 text = "Speaker Name"
-vertical_alignment = 2
+horizontal_alignment = 1
 
-[node name="ChatContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="NinePatchRect" type="NinePatchRect" parent="ChatContainer"]
-texture_filter = 1
-layout_mode = 2
-texture = ExtResource("1_7a4sn")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="MarginContainer" type="MarginContainer" parent="ChatContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="Label" type="Label" parent="ChatContainer/MarginContainer"]
+[node name="ChatLabel" type="Label" parent="ChatContainer/MarginContainer/VBoxContainer"]
 texture_filter = 2
 custom_minimum_size = Vector2(640, 0)
 layout_mode = 2
+size_flags_vertical = 1
 theme = ExtResource("2_j0adr")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 16
 text = "Since you're a full-blown treasure hunter, I have something that might be interesting to you"
-vertical_alignment = 1
 autowrap_mode = 3
-max_lines_visible = 4
-visible_characters = 0
-visible_ratio = 0.0
+max_lines_visible = 2
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Controller" parent="." node_paths=PackedStringArray("speaker_label", "chat_label", "timer", "parent") instance=ExtResource("4_xc0jh")]
-initial_position = Vector2(288, 482)
+[node name="Controller" parent="." node_paths=PackedStringArray("npr", "text_container", "speaker_label", "chat_label", "timer", "parent") instance=ExtResource("4_xc0jh")]
+initial_position = Vector2(192, 554)
 display_speed = 0.01
-speaker_label = NodePath("../SpeakerContainer/MarginContainer/Label")
-chat_label = NodePath("../ChatContainer/MarginContainer/Label")
+npr = NodePath("../ChatContainer/NinePatchRect")
+text_container = NodePath("../ChatContainer/MarginContainer")
+speaker_label = NodePath("../ChatContainer/MarginContainer/VBoxContainer/SpeakerLabel")
+chat_label = NodePath("../ChatContainer/MarginContainer/VBoxContainer/ChatLabel")
 timer = NodePath("../Timer")
 parent = NodePath("..")

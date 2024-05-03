@@ -10,12 +10,6 @@ func process(_delta: float) -> void:
     if Input.is_action_just_pressed("interact"):
         interact_pressed.emit()
 
-func enter_ui() -> void:
-    pass
-
-func exit_ui() -> void:
-    pass
-
 func show_ui() -> void:
     pass
 

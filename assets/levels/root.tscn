@@ -257,6 +257,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Control" type="Control" parent="KWH4/SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TimeHUD" parent="KWH4/SubViewport/Control" instance=ExtResource("5_mtnxj")]
+layout_mode = 0
+anchors_preset = 0
+
+[node name="CameraMask2" parent="KWH4/SubViewport/Control" instance=ExtResource("3_yisfc")]
+visible = false
+material = SubResource("ShaderMaterial_slcvo")
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="UIManager" type="CanvasLayer" parent="KWH4/SubViewport" groups=["ui_manager"]]
+layer = 4
+script = ExtResource("3_1ye6f")
+
 [node name="Grain" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -278,45 +304,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="TimeHUD" parent="Control" instance=ExtResource("5_mtnxj")]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -78.0
-offset_top = -64.0
-offset_right = 78.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 0
-initial_pos = Vector2(562, 656)
-
-[node name="CameraMask2" parent="Control" instance=ExtResource("3_yisfc")]
-visible = false
-material = SubResource("ShaderMaterial_slcvo")
-layout_mode = 1
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-
-[node name="UIManager" type="CanvasLayer" parent="." groups=["ui_manager"]]
-layer = 4
-script = ExtResource("3_1ye6f")
-
 [node name="TransitionCL" type="CanvasLayer" parent="."]
 layer = 5
-visible = false
 
 [node name="TransitionScreen" parent="TransitionCL" instance=ExtResource("4_e6h3r")]
+visible = false
