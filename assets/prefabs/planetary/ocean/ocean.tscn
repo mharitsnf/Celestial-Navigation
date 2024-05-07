@@ -5,7 +5,7 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_620a4"]
 material = ExtResource("1_4ome2")
-size = Vector2(500, 500)
+size = Vector2(1000, 1000)
 subdivide_width = 100
 subdivide_depth = 100
 

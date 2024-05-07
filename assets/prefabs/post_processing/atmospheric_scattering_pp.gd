@@ -13,10 +13,18 @@ extends MeshInstance3D
 		if shader: shader.set_shader_parameter("optical_depth_texture", od_tex)
 
 @export_group("Radiuses")
-@export var atmosphere_radius : float:
+var _planet_radius: float = STUtil.PLANET_RADIUS
+@export var planet_radius_scale : float = 0.:
 	set(value):
-		atmosphere_radius = value
-		if shader: shader.set_shader_parameter("atmosphere_radius", atmosphere_radius)
+		planet_radius_scale = value
+		_planet_radius = (STUtil.PLANET_RADIUS - (STUtil.PLANET_RADIUS * planet_radius_scale / 100.))
+		if shader: shader.set_shader_parameter("atmosphere_radius", _planet_radius * planet_to_atmosphere_scale)
+
+@export var planet_to_atmosphere_scale : float = 16.:
+	set(value):
+		planet_to_atmosphere_scale = value
+		_planet_radius = (STUtil.PLANET_RADIUS - (STUtil.PLANET_RADIUS * planet_radius_scale / 100.))
+		if shader: shader.set_shader_parameter("atmosphere_radius", _planet_radius * planet_to_atmosphere_scale)
 
 @export_group("Sample Sizes")
 @export var optical_depth_sample_size : int:
@@ -123,8 +131,8 @@ func _setup_shader_parameters() -> void:
 	shader.set_shader_parameter("is_accelerated", is_accelerated)
 	shader.set_shader_parameter("optical_depth_texture", od_tex)
 	# Radiuses
-	shader.set_shader_parameter("planet_radius", STUtil.PLANET_RADIUS)
-	shader.set_shader_parameter("atmosphere_radius", STUtil.PLANET_RADIUS * 16.)
+	shader.set_shader_parameter("planet_radius", _planet_radius)
+	shader.set_shader_parameter("atmosphere_radius", _planet_radius * planet_to_atmosphere_scale)
 	# Rayleigh
 	shader.set_shader_parameter("r_density_falloff", r_density_falloff)
 	shader.set_shader_parameter("r_scattering_coefficients", r_coeffs)
