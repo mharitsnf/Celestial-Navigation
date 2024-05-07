@@ -6,8 +6,11 @@ var fall_duration: float = 0
 
 func process(delta: float) -> void:
     if _handle_jump(): return
-    if _handle_grounded(): return
     fall_duration += delta
+
+# Happens regardless the character is active or not
+func _process(_delta: float) -> void:
+    if _handle_grounded(): return
 
 func _handle_grounded() -> bool:
     if character.is_grounded() or character.is_submerged():

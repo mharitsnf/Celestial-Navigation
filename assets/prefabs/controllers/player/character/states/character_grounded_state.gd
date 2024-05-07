@@ -3,6 +3,9 @@ extends PlayerCharacterState
 func process(_delta: float) -> void:
 	_update_linear_damp()
 	if _handle_jump(): return
+
+# Happens regardless the character is active or not
+func _process(_delta: float) -> void:
 	if _handle_fall(): return
 
 func _handle_fall() -> bool:
