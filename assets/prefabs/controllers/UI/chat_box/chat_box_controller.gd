@@ -55,6 +55,7 @@ func set_chat_text(value: String) -> void:
 
 # ========== From parent ==========
 func show_ui() -> void:
+    animating = true
     var tween: Tween = create_tween()
     tween.set_parallel()
     tween.tween_property(parent, "position", initial_position + slide_offset, animation_speed).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
@@ -62,8 +63,10 @@ func show_ui() -> void:
     tween.tween_method(_set_cutoff_value, current_cutoff, 1., animation_speed).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
     await tween.finished
     animation_finished.emit()
+    animating = false
 
 func hide_ui() -> void:
+    animating = true
     var tween: Tween = create_tween()
     tween.set_parallel()
     tween.tween_property(parent, "position", initial_position, animation_speed).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
@@ -71,6 +74,7 @@ func hide_ui() -> void:
     tween.tween_method(_set_cutoff_value, current_cutoff, 0., animation_speed).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
     await tween.finished
     animation_finished.emit()
+    animating = false
 # ========== ========== ========== ==========
 
 # ========== Show text ==========

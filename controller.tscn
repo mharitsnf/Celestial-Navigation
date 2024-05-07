@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bglct5r1qfmfr"]
+
+[ext_resource type="Script" path="res://assets/prefabs/controllers/UI/menu_bar/menu_bar_controller.gd" id="1_5s07d"]
+
+[node name="Controller" type="Node"]
+script = ExtResource("1_5s07d")
