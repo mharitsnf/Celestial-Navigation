@@ -87,7 +87,7 @@ should_instantiate_dict = {
 }
 
 [node name="PlayerCharacterEntity" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("8_dt4hu")]
-transform = Transform3D(0.020657, 0.999392, 0.0281042, -0.999755, 0.0208707, -0.00733181, -0.0079139, -0.0279458, 0.999578, 1487.49, 28.9295, -39.568)
+transform = Transform3D(0.020657, 0.999392, 0.0281042, -0.999755, 0.0208707, -0.00733181, -0.0079139, -0.0279458, 0.999578, 1487.48, 30.3312, -38.6596)
 
 [node name="PlayerBoat" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("7_03d3k")]
 transform = Transform3D(-4.37114e-08, 1, 0, -0.301106, -1.31617e-08, -0.953591, -0.953591, -4.16828e-08, 0.301106, 1485.6, -2.33962, -2.86078)

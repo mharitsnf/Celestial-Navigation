@@ -34,6 +34,9 @@ func _limit_speed(state: PhysicsDirectBodyState3D) -> void:
 func set_move_input(value: Vector2) -> void:
 	_move_input = value
 
+func get_move_input() -> Vector2:
+	return _move_input
+
 func get_ground_checker() -> RayCast3D:
 	return ground_checker
 

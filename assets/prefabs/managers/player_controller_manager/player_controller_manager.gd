@@ -52,12 +52,12 @@ func _ready() -> void:
 		_init_player_object(PlayerObjectEnum.CHARACTER)
 
 func _process(delta: float) -> void:
-	if has_current_player_object() and get_current_player_controller() and !is_transitioning():
-		get_current_player_controller().process(delta)
+	if has_current_player_object() and get_current_controller() and !is_transitioning():
+		get_current_controller().process(delta)
 
 func _physics_process(delta: float) -> void:
-	if has_current_player_object() and get_current_player_controller() and !is_transitioning():
-		get_current_player_controller().physics_process(delta)
+	if has_current_player_object() and get_current_controller() and !is_transitioning():
+		get_current_controller().physics_process(delta)
 # =============================================
 
 # ========== Setups ==========
@@ -85,16 +85,16 @@ func _setup_objects() -> void:
 func has_current_player_object() -> bool:
 	return current_player_object != null
 
-func get_current_player_object_enum() -> PlayerObjectEnum:
+func get_current_player_enum() -> PlayerObjectEnum:
 	if !has_current_player_object(): return PlayerObjectEnum.NONE
 	var items: Array = player_object_dict.values().filter(func(_po: PlayerObject) -> bool: return _po == current_player_object)
 	if items.is_empty(): return PlayerObjectEnum.NONE
 	return player_object_dict.find_key(items[0])
 
-func get_current_player_object() -> Node:
+func get_current_instance() -> Node:
 	return current_player_object.get_instance()
 
-func get_current_player_controller() -> PlayerController:
+func get_current_controller() -> PlayerController:
 	return current_player_object.get_controller()
 # =============================================
 
@@ -145,7 +145,7 @@ func switch_current_player_object(new_enum: PlayerObjectEnum) -> void:
 		return
 
 	set_transitioning(true)
-	if get_current_player_controller(): get_current_player_controller().exit_controller()
+	if get_current_controller(): get_current_controller().exit_controller()
 
 	if new_player_object.get_instance() is RigidBody3D and ocean.get_target() != new_player_object.get_instance():
 		ocean.switch_target(new_player_object.get_instance())
@@ -171,7 +171,7 @@ func save_state() -> Dictionary:
 			"parent": get_parent().get_path(),
 		},
 		"on_init": {
-			"current_player_object_enum": get_current_player_object_enum()
+			"current_player_object_enum": get_current_player_enum()
 		},
 		"on_ready": {}
 	}

@@ -1,11 +1,6 @@
 class_name PlayerController extends Node
 
 # Interactions
-@export_group("First setup")
-@export var should_setup_first_transform: bool = false
-@export var first_position: Vector3
-@export var first_rotation: Vector3
-var first_setup_done: bool = false
 @export_group("Interactions")
 @export var interaction_scanner: Area3D
 var interactions: Array
@@ -45,22 +40,21 @@ func process(_delta: float) -> bool:
 	_get_switch_camera_input()
 	return !(is_interacting() or ui_manager.has_current_ui()) # If interacting or has an active ui from other means (like opening menu), do not proceed
 
+func _process(delta: float) -> void:
+	_handle_idle(delta)
+
 func physics_process(_delta: float) -> bool:
 	return !(is_interacting() or ui_manager.has_current_ui())
 # ========== ========== ========== ==========
 
-# ========== State functions ==========
-func first_setup() -> void:
-	if should_setup_first_transform:
-		if parent is Node3D:
-			parent.global_position = first_position
-			parent.rotation_degrees = first_rotation
-	first_setup_done = true
-
+# ========== PlayerCharacterState functions ==========
 func enter_controller() -> void:
 	_enter_entry_camera()
 
 func exit_controller() -> void:
+	pass
+
+func _handle_idle(_delta: float) -> void:
 	pass
 # ========== ========== ========== ==========
 
@@ -126,6 +120,7 @@ func _switch_camera(next_camera: VirtualCamera) -> void:
 
 # ========== Setters and getters ==========
 func is_active() -> bool:
+	if is_interacting() or ui_manager.has_current_ui(): return false
 	return manager.get_current_controller() == self
 
 func is_interacting() -> bool:
@@ -137,7 +132,11 @@ func set_interacting(value: bool) -> void:
 
 # ========== Interaction functions ==========
 func _get_start_interact_input() -> void:
-	if is_interacting() or interactions.is_empty() or ui_manager.has_current_ui() or main_camera.is_transitioning(): return
+	if is_interacting(): return
+	if interactions.is_empty(): return
+	if ui_manager.has_current_ui(): return
+	if main_camera.is_transitioning(): return
+	
 	if Input.is_action_just_pressed("interact"):
 		if !_setup_interaction(): return
 		_interact()

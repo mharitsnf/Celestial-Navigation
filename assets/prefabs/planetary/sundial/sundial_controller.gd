@@ -20,7 +20,7 @@ func _ready() -> void:
     boat_controller = STUtil.get_only_node_in_group("player_boat")
     time_hud = STUtil.get_only_node_in_group("time_hud")
 
-# ========== State functions ==========
+# ========== PlayerCharacterState functions ==========
 func enter_controller() -> void:
     super()
     time_hud.show_hud()

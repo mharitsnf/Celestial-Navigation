@@ -21,8 +21,9 @@ func process(delta: float) -> bool:
 	_get_switch_sundial_controller_input()
 	return true
 
+# For handling idle and independent conditions
 func _process(delta: float) -> void:
-	_handle_idle(delta)
+	super(delta)
 	_handle_gas_particles()
 	if parent is PlayerBoatEntity:
 		parent.rotate_boat(rotate_input, delta)
@@ -45,7 +46,7 @@ func _handle_gas_particles() -> void:
 
 const STOP_WEIGHT: float = 10.
 func _handle_idle(delta: float) -> void:
-	if manager.get_current_player_controller() != self:
+	if !is_active():
 		move_input = lerp(move_input, 0., delta * STOP_WEIGHT)
 		rotate_input = lerp(rotate_input, 0., delta * STOP_WEIGHT)
 

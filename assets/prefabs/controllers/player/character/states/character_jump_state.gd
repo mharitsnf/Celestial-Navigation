@@ -1,12 +1,11 @@
-extends CharacterBaseState
+extends PlayerCharacterState
 
 @export var jump_force: float = 30
 
 const IGNORE_FRAME_COUNT: int = 5
 var frame_count: int = 0
 
-func process(delta: float) -> void:
-    super(delta)
+func process(_delta: float) -> void:
     if _handle_grounded(): return
     if _handle_fall(): return
     frame_count += 1

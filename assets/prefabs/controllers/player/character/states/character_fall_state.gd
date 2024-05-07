@@ -1,11 +1,10 @@
-extends CharacterBaseState
+extends PlayerCharacterState
 
 @export var coyote_time: float = .25
 
 var fall_duration: float = 0
 
 func process(delta: float) -> void:
-    super(delta)
     if _handle_jump(): return
     if _handle_grounded(): return
     fall_duration += delta
