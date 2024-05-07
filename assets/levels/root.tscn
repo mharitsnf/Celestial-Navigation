@@ -267,6 +267,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="TimeHUD" parent="KWH4/SubViewport/Control" instance=ExtResource("5_mtnxj")]
+visible = false
 layout_mode = 0
 anchors_preset = 0
 anchor_top = 0.0
@@ -278,6 +279,7 @@ offset_bottom = 78.0
 grow_vertical = 1
 
 [node name="CameraMask2" parent="KWH4/SubViewport/Control" instance=ExtResource("3_yisfc")]
+visible = false
 material = SubResource("ShaderMaterial_slcvo")
 layout_mode = 1
 offset_left = 0.0
@@ -314,3 +316,4 @@ grow_vertical = 2
 layer = 5
 
 [node name="TransitionScreen" parent="TransitionCL" instance=ExtResource("4_e6h3r")]
+visible = false

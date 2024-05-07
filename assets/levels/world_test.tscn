@@ -4,16 +4,16 @@
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_u0thf"]
 [ext_resource type="PackedScene" uid="uid://0qm7kqsedaiu" path="res://assets/prefabs/planetary/ocean/ocean.tscn" id="2_dnrth"]
 [ext_resource type="PackedScene" uid="uid://dr167mcbnpy7p" path="res://assets/prefabs/planetary/star loader/star_loader.tscn" id="3_g722y"]
-[ext_resource type="PackedScene" uid="uid://dinmkv0vr8al0" path="res://assets/prefabs/planetary/planet.tscn" id="3_ncp2x"]
+[ext_resource type="PackedScene" uid="uid://dinmkv0vr8al0" path="res://assets/prefabs/planetary/planet/planet.tscn" id="3_okhpu"]
 [ext_resource type="PackedScene" uid="uid://cjn37qac1f86p" path="res://assets/prefabs/managers/player_controller_manager/player_controller_manager.tscn" id="4_v2hc8"]
 [ext_resource type="PackedScene" uid="uid://yw5vawpt68bx" path="res://assets/prefabs/entities/placeholders/test_box/test_box.tscn" id="6_u01up"]
 [ext_resource type="PackedScene" uid="uid://bl6seajhin6ok" path="res://assets/prefabs/entities/player_boat/player_boat.tscn" id="7_03d3k"]
 [ext_resource type="PackedScene" uid="uid://cl2oce5jkhxj8" path="res://assets/prefabs/virtual camera/main_camera.tscn" id="7_e0eip"]
 [ext_resource type="PackedScene" uid="uid://c2ipvtnsysqv" path="res://assets/prefabs/entities/player_character/player_character_entity.tscn" id="8_dt4hu"]
 [ext_resource type="PackedScene" uid="uid://iw7gs8cxd4eh" path="res://assets/prefabs/planetary/sundial/sundial_manager.tscn" id="10_ruhqj"]
-[ext_resource type="PackedScene" uid="uid://ciarxdka1d6pe" path="res://assets/models/tree.glb" id="11_qfqnt"]
+[ext_resource type="PackedScene" uid="uid://ciarxdka1d6pe" path="res://assets/models/tree/tree.glb" id="12_t2nhm"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="13_u5a0a"]
-[ext_resource type="Texture2D" uid="uid://c2k58j22oamvv" path="res://assets/models/tree_tex.png" id="14_ljuvw"]
+[ext_resource type="Texture2D" uid="uid://c2k58j22oamvv" path="res://assets/models/tree/tree_tex.png" id="14_0oty3"]
 [ext_resource type="Gradient" uid="uid://brm1w7c27pbwj" path="res://assets/resources/textures/light_gradient.tres" id="15_0d30j"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
@@ -31,7 +31,7 @@ shader = ExtResource("13_u5a0a")
 shader_parameter/_roughness = 1.0
 shader_parameter/_metallic = null
 shader_parameter/posterize_levels = 10.0
-shader_parameter/albedo_tex = ExtResource("14_ljuvw")
+shader_parameter/albedo_tex = ExtResource("14_0oty3")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_rgul3")
 
 [node name="WorldTest" type="Node3D"]
@@ -48,7 +48,7 @@ environment = ExtResource("1_u0thf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/PlanetBody"]
 shape = SubResource("SphereShape3D_kt8wf")
 
-[node name="Planet" parent="Environment/PlanetBody" instance=ExtResource("3_ncp2x")]
+[node name="Planet" parent="Environment/PlanetBody" instance=ExtResource("3_okhpu")]
 
 [node name="GravityArea" type="Area3D" parent="Environment"]
 collision_layer = 0
@@ -87,7 +87,7 @@ should_instantiate_dict = {
 }
 
 [node name="PlayerCharacterEntity" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("8_dt4hu")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 1487.23, 10.4945, -22.9874)
+transform = Transform3D(0.020657, 0.999392, 0.0281042, -0.999755, 0.0208707, -0.00733181, -0.0079139, -0.0279458, 0.999578, 1487.49, 28.9295, -39.568)
 
 [node name="PlayerBoat" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("7_03d3k")]
 transform = Transform3D(-4.37114e-08, 1, 0, -0.301106, -1.31617e-08, -0.953591, -0.953591, -4.16828e-08, 0.301106, 1485.6, -2.33962, -2.86078)
@@ -95,11 +95,11 @@ transform = Transform3D(-4.37114e-08, 1, 0, -0.301106, -1.31617e-08, -0.953591, 
 [node name="ShipSundialManager" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("10_ruhqj")]
 
 [node name="TestBox" parent="ObjectsContainer" instance=ExtResource("6_u01up")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1487.83, 9.02684, -11.2863)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1486.76, 11.0391, -12.4794)
 linear_damp = 0.0
 
-[node name="tree" parent="ObjectsContainer" instance=ExtResource("11_qfqnt")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 1486.21, 8.66636, -17.1)
+[node name="tree" parent="ObjectsContainer" instance=ExtResource("12_t2nhm")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 1486.16, 11.0491, -16.8871)
 
 [node name="Cylinder" parent="ObjectsContainer/tree" index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_ca640")

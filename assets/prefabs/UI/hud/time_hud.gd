@@ -15,11 +15,11 @@ const SHOWN_SEPARATION: int = 24
 const HIDDEN_SEPARATION: int = 0
 
 func _ready() -> void:
+    visible = false
     position = initial_pos
     modulate.a = 0
     label_container.custom_minimum_size = HIDDEN_LABEL_SIZE
     hbox.add_theme_constant_override("separation", HIDDEN_SEPARATION)
-    visible = false
 
 func set_meridian_label_text(value: String) -> void:
     if !meridian_label: return

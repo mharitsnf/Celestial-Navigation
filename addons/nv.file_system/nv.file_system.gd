@@ -39,12 +39,19 @@ var split_container: SplitContainer
 var tool_button: Button
 var submenu_item: PopupMenu
 
+var file_system_visible: bool
+
 
 func _enter_tree() -> void:
 	## ------- CUSTOMIZE SHORTCUT ------- ##
 	var shortcut := InputEventKey.new()
 	shortcut.alt_pressed = true
 	shortcut.keycode = KEY_S
+
+	var toggle_filesystem := InputEventKey.new()
+	toggle_filesystem.ctrl_pressed = true
+	toggle_filesystem.command_or_control_autoremap = true
+	toggle_filesystem.keycode = KEY_SPACE
 	## ------- CUSTOMIZE SHORTCUT ------- ##
 	
 	# add switch / toggle to control FileSystem docking position
@@ -54,7 +61,12 @@ func _enter_tree() -> void:
 			0,
 			shortcut.get_keycode_with_modifiers()
 	)
-	submenu_item.index_pressed.connect(switch_file_system_dock)
+	submenu_item.add_item(
+			"Toggle File System",
+			1,
+			toggle_filesystem.get_keycode_with_modifiers()
+	)
+	submenu_item.index_pressed.connect(_handle_tool_item_pressed)
 	
 	add_tool_submenu_item(TITLE, submenu_item)
 	
@@ -120,7 +132,20 @@ func _exit_tree() -> void:
 		item.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 
-func switch_file_system_dock(_value = null) -> void:
+func _handle_tool_item_pressed(value: int) -> void:
+	match value:
+		0: switch_file_system_dock()
+		1: _toggle_file_system_visibility()
+
+func _toggle_file_system_visibility() -> void:
+	if file_system_visible:
+		hide_bottom_panel()
+		file_system_visible = false
+	else:
+		make_bottom_panel_item_visible(file_system)
+		file_system_visible = true
+
+func switch_file_system_dock() -> void:
 	if _processing:
 		return
 	
@@ -176,4 +201,6 @@ func switch_file_system_dock(_value = null) -> void:
 	for item in box_container.get_children():
 		item.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	
+	file_system_visible = true
+
 	_processing = false

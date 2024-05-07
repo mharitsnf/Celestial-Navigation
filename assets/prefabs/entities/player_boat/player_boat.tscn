@@ -92,10 +92,13 @@ mouse_inverted_x = false
 mouse_inverted_y = false
 
 [node name="ChatTPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_5wq2t")]
+_spring_length = 15.0
+_offset = Vector3(0, 3, 0)
 single_group_name = "ChatVC"
 switchable_camera = false
 target_group = NodePath("..")
 follow_target = NodePath("..")
+_fov = 45.0
 
 [node name="Controller" parent="ChatTPC" index="1" instance=ExtResource("6_7ggm6")]
 mouse_inverted_x = false

@@ -38,6 +38,7 @@ func get_previous_state() -> State:
 
 func process(delta: float) -> bool:
 	if !super(delta): return false
+	print(_current_state)
 	if _current_state:
 		_current_state.process(delta)
 	_get_enter_ship_input()
@@ -59,6 +60,10 @@ func switch_state(new_state_key: States) -> void:
 	
 	_current_state = new_state
 	_current_state.enter_state()
+
+# Override from PlayerController
+func _get_start_interact_input() -> void:
+	super()
 
 func _get_enter_ship_input() -> void:
 	if !player_boat_in_area: return

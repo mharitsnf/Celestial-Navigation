@@ -31,7 +31,6 @@ gdscript/warnings/redundant_await=0
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/mode=2
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=2
 
@@ -41,7 +40,7 @@ project/assembly_name="CelestialNavigation"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/bumptonormal/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/nv.file_system/plugin.cfg", "res://addons/snappy/plugin.cfg")
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/bumptonormal/plugin.cfg", "res://addons/extra_snaps/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/nv.file_system/plugin.cfg")
 
 [importer_defaults]
 

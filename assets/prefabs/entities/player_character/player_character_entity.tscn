@@ -131,6 +131,7 @@ min_fov = 30.0
 _fov = 45.0
 
 [node name="Controller" parent="ChatTPC" index="1" instance=ExtResource("7_jkr5c")]
+can_rotate = false
 mouse_inverted_x = false
 mouse_inverted_y = false
 

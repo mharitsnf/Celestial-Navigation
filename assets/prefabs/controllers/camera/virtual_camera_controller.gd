@@ -1,5 +1,6 @@
 class_name VirtualCameraController extends Node
 
+@export var can_rotate: bool = true
 @export var rotation_speed: float = 1.
 @export_group("Joypad direction")
 @export var joypad_inverted_x: bool
@@ -32,6 +33,7 @@ func unhandled_input(event: InputEvent) -> void:
 # ========== Input functions ==========
 const MOUSE_ROTATION_WEIGHT: float = .001
 func _rotate_wrapper_mouse(event : InputEventMouseMotion) -> void:
+    if !can_rotate: return
     if !_is_mouse_allowed(): return
     var direction: Vector2 = event.relative * MOUSE_ROTATION_WEIGHT * rotation_speed
     direction.x *= int(mouse_inverted_x) * 2 - 1
@@ -40,6 +42,7 @@ func _rotate_wrapper_mouse(event : InputEventMouseMotion) -> void:
 
 const JOYPAD_ROTATION_WEIGHT: float = .01
 func _rotate_wrapper_joypad(delta: float) -> void:
+    if !can_rotate: return
     if !_is_joypad_allowed(): return
     var direction: Vector2 = Input.get_vector("rotate_camera_left", "rotate_camera_right", "rotate_camera_down", "rotate_camera_up") * delta * rotation_speed
     direction.x *= int(joypad_inverted_x) * 2 - 1

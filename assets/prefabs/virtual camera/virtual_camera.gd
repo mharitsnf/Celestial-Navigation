@@ -16,7 +16,12 @@ class TargetNode extends RefCounted:
 		remote_transform = STUtil.create_remote_transform(follower.name, false)
 		follow_target.add_child(remote_transform)
 
+## Others will be following this virtual camera through a [RemoteTransform3D] node.
+## That [RemoteTransform3D] node will be placed as a children of the node assigned to this property.
+@export var remote_transform_parent_for_other : Node3D
+
 # ===== Grouping settings =====
+@export_group("Grouping settings")
 @export var single_group_name: String = ""
 @export var switchable_camera: bool = true
 @export var entry_camera: bool
@@ -24,8 +29,7 @@ class TargetNode extends RefCounted:
 # ===== ===== ===== ===== ===== ===== =====
 
 # ===== Rotation settings =====
-@export_group("Rotation and follow settings")
-@export var remote_transform_parent_for_other : Node3D
+@export_group("Rotation settings")
 @export var rotation_speed : float = .1
 @export var submerged_angle: Vector2 = Vector2(-80, 0)
 @export var default_angle: Vector2 = Vector2(-80, 80)
@@ -41,12 +45,14 @@ var submerged: bool = false
 		follow_target = value
 		_change_target(follow_target)
 
+@export_group("Transition settings")
 @export var tween_duration : float = .75
 var transitioning : bool = false
 var tween_elapsed_time : float = 0.
 signal transition_finished
 
 # ===== FoV =====
+@export_group("FoV settings")
 @export var min_fov: float = 30
 @export var max_fov: float = 110
 @export var _fov: float = 75
@@ -72,10 +78,6 @@ func _enter_tree() -> void:
 		add_to_group(String(get_target_group().get_path()) + "/" + single_group_name)
 
 	main_camera = STUtil.get_only_node_in_group("main_camera")
-
-# func _ready() -> void:
-# 	if main_camera:
-# 		_fov = main_camera.fov
 
 func _process(delta: float) -> void:
 	_lerp_main_camera_fov(delta)

@@ -12,12 +12,12 @@ class_name ThirdPersonCamera extends VirtualCamera
 func _process(delta: float) -> void:
 	super(delta)
 	_lerp_spring_length(delta)
-	_lerp_height_offset(delta)
+	_lerp_offset(delta)
 
 func _lerp_spring_length(delta: float) -> void:
 	spring_arm.spring_length = lerp(spring_arm.spring_length, _spring_length, lerp_weight * delta)
 
-func _lerp_height_offset(delta: float) -> void:
+func _lerp_offset(delta: float) -> void:
 	offset_node.position = lerp(offset_node.position, _offset, lerp_weight * delta)
 
 func rotate_camera(direction : Vector2) -> void:

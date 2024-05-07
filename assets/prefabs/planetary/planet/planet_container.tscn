@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://4k2626ruha0r"]
+
+[ext_resource type="PackedScene" uid="uid://dinmkv0vr8al0" path="res://assets/prefabs/planetary/planet/planet.tscn" id="1_nxaxk"]
+
+[node name="PlanetContainer" type="Node3D"]
+
+[node name="Planet" parent="." instance=ExtResource("1_nxaxk")]

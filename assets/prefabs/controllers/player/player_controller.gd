@@ -137,7 +137,7 @@ func set_interacting(value: bool) -> void:
 
 # ========== Interaction functions ==========
 func _get_start_interact_input() -> void:
-	if is_interacting() or interactions.is_empty() or ui_manager.has_current_ui(): return
+	if is_interacting() or interactions.is_empty() or ui_manager.has_current_ui() or main_camera.is_transitioning(): return
 	if Input.is_action_just_pressed("interact"):
 		if !_setup_interaction(): return
 		_interact()
@@ -163,10 +163,10 @@ func _start_interaction() -> void:
 	set_interacting(true)
 
 func _finish_interaction() -> void:
-	set_interacting(false)
 	current_interactable = null
 	current_track = null
 	_switch_camera(main_camera.get_previous_follow_target())
+	set_interacting(false)
 
 func _interact() -> void:
 	_start_interaction()
