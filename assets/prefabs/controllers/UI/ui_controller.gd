@@ -15,6 +15,12 @@ func process(_delta: float) -> void:
 func is_animating() -> bool:
     return animating
 
+func before_exit_tree() -> STUtil.Promise:
+    return STUtil.Promise.new()
+
+func _reset_animation() -> void:
+    pass
+
 func show_ui() -> void:
     pass
 

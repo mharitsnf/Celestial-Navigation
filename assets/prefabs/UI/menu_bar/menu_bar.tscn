@@ -54,6 +54,7 @@ layout_mode = 2
 button_title = "Settings"
 
 [node name="Controller" parent="." node_paths=PackedStringArray("texture_rect", "button_container", "parent") instance=ExtResource("3_jpiet")]
+appear_to_focus_delay = 0.05
 texture_rect = NodePath("../TextureRect")
 button_container = NodePath("../TextureRect/MarginContainer/ButtonContainer")
 parent = NodePath("..")

@@ -3,30 +3,59 @@ class_name MenuBarController extends UIController
 @export var appear_to_focus_delay: float = .1
 @export var texture_rect: TextureRect
 @export var button_container: VBoxContainer
-var main_menu_buttons: Array[Node]
+
+var active_button: MainMenuButton = null
+
+# ==============================
+# region Lifecycle Functions
+
+func _ready() -> void:
+    for c: Node in button_container.get_children():
+        (c as MainMenuButton).focus_entered.connect(_on_main_menu_button_focus_entered.bind(c as MainMenuButton))
 
 func _enter_tree() -> void:
-    # Wait for parent to be ready
+    # During first initialization, wait for the above _ready function to run first.
     if !parent.is_node_ready():
         await parent.ready
     
+    # Reset animation
+    _reset_animation()
+
     # Emulate pressing menu button
-    await get_tree().create_timer(1.).timeout
     show_ui()
     await animation_finished
     
-    # Populate button
-    if main_menu_buttons.is_empty():
-        main_menu_buttons = button_container.get_children()
-    if main_menu_buttons.is_empty():
-        push_error("No menu button available.")
-        return
-    
     # Delay to focus
-    await get_tree().create_timer(appear_to_focus_delay).timeout
+    # await get_tree().create_timer(appear_to_focus_delay).timeout
     
     # Grab focus
-    (main_menu_buttons[0] as MainMenuButton).grab_focus()
+    (button_container.get_children()[0] as MainMenuButton).grab_focus()
+
+func before_exit_tree() -> STUtil.Promise:
+    # Stop active button from focusing
+    active_button.release_focus()
+    await active_button.animation_finished
+    active_button = null
+
+    # Hide the UI
+    hide_ui()
+    await animation_finished
+    
+    # Return
+    return STUtil.Promise.new()
+
+# ==============================
+# region Events
+
+func _on_main_menu_button_focus_entered(button: MainMenuButton) -> void:
+    active_button = button
+
+# ==============================
+# region Animation
+
+func _reset_animation() -> void:
+    texture_rect.position = Vector2.ZERO + Vector2(-32., 0.)
+    texture_rect.modulate = Color(1.,1.,1.,0.)
 
 func show_ui() -> void:
     animating = true

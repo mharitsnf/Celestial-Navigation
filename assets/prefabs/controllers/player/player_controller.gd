@@ -1,5 +1,7 @@
 class_name PlayerController extends Node
 
+# region Variables
+
 # Interactions
 @export_group("Interactions")
 @export var interaction_scanner: Area3D
@@ -19,6 +21,7 @@ var ui_manager: UIManager
 var manager: PlayerControllerManager
 var parent: Node
 
+# region Lifecycle
 # ========== Built ins ==========
 func _enter_tree() -> void:
 	parent = get_parent()
@@ -36,6 +39,7 @@ func _ready() -> void:
 	_setup_camera()
 
 func process(_delta: float) -> bool:
+	_get_toggle_main_menu_input()
 	_get_start_interact_input()
 	_get_switch_camera_input()
 	return !(is_interacting() or ui_manager.has_current_ui()) # If interacting or has an active ui from other means (like opening menu), do not proceed
@@ -47,8 +51,10 @@ func physics_process(_delta: float) -> bool:
 	return !(is_interacting() or ui_manager.has_current_ui())
 # ========== ========== ========== ==========
 
+
 # ========== PlayerCharacterState functions ==========
 func enter_controller() -> void:
+	_reset_camera_index()
 	_enter_entry_camera()
 
 func exit_controller() -> void:
@@ -57,6 +63,8 @@ func exit_controller() -> void:
 func _handle_idle(_delta: float) -> void:
 	pass
 # ========== ========== ========== ==========
+
+# region Camera 
 
 # ========== Camera ==========
 func _setup_camera() -> void:
@@ -79,7 +87,6 @@ func _setup_camera() -> void:
 	_reset_camera_index()
 
 func _enter_entry_camera() -> void:
-	_reset_camera_index()
 	entry_cam.copy_rotation(main_camera.get_follow_target().get_x_rotation(), main_camera.get_follow_target().get_y_rotation())
 	main_camera.set_follow_target(entry_cam)
 
@@ -122,6 +129,8 @@ func _switch_camera(next_camera: VirtualCamera) -> void:
 
 # ========== ========== ========== 
 
+# region State setter and getters
+
 # ========== Setters and getters ==========
 func is_active() -> bool:
 	if is_interacting() or ui_manager.has_current_ui(): return false
@@ -134,7 +143,19 @@ func set_interacting(value: bool) -> void:
 	interacting = value
 # ========== ========== ========== ==========
 
+# region Interaction
+
 # ========== Interaction functions ==========
+func _get_toggle_main_menu_input() -> void:
+	if is_interacting(): return
+	if main_camera.is_transitioning(): return
+
+	if Input.is_action_just_pressed("toggle_main_menu"):
+		if ui_manager.current_ui_key_equals(ui_manager.UIEnum.NONE):
+			ui_manager.switch_current_ui(ui_manager.UIEnum.MAIN_MENU)
+		else:
+			ui_manager.switch_current_ui(ui_manager.UIEnum.NONE)
+
 func _get_start_interact_input() -> void:
 	if is_interacting(): return
 	if interactions.is_empty(): return
@@ -161,9 +182,9 @@ func _setup_interaction() -> bool:
 	return true
 
 func _start_interaction() -> void:
+	set_interacting(true)
 	var chat_cam: VirtualCamera = STUtil.get_only_node_in_group(String(parent.get_path()) + "/ChatVC")
 	_switch_camera(chat_cam)
-	set_interacting(true)
 
 func _finish_interaction() -> void:
 	current_interactable = null

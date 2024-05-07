@@ -13,6 +13,8 @@ class_name MainMenuButton extends Button
 var shader: ShaderMaterial
 var current_cutoff: float = 0.;
 
+signal animation_finished
+
 func _ready() -> void:
 	shader = npr.material
 	label.text = button_title
@@ -35,9 +37,13 @@ func animate_selected() -> void:
 	tween.set_parallel(true)
 	tween.tween_property(margin_container, "theme_override_constants/margin_left", 16, .25).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_method(_set_shader_cutoff, current_cutoff, 1., .35).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	await tween.finished
+	animation_finished.emit()
 
 func animate_unselected() -> void:
 	var tween: Tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(margin_container, "theme_override_constants/margin_left", 0, .25).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_method(_set_shader_cutoff, current_cutoff, 0., .35).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	await tween.finished
+	animation_finished.emit()
