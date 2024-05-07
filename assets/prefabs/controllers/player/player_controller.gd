@@ -105,6 +105,10 @@ func _switch_camera(next_camera: VirtualCamera) -> void:
 		push_error("No next camera provided!")
 		return
 	
+	if next_camera == main_camera.get_follow_target():
+		push_warning("This camera is already active.")
+		return
+
 	var controller: VirtualCameraController
 	if main_camera.get_follow_target():
 		controller = main_camera.get_follow_target().get_node("Controller")

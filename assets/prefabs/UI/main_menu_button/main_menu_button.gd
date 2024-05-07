@@ -15,8 +15,6 @@ var current_cutoff: float = 0.;
 
 func _ready() -> void:
 	shader = npr.material
-	await get_tree().create_timer(1.).timeout
-	animate_selected()
 
 func _set_shader_cutoff(value: float) -> void:
 	if shader:
