@@ -135,7 +135,20 @@ can_rotate = false
 mouse_inverted_x = false
 mouse_inverted_y = false
 
-[node name="FPC" parent="." index="4" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_6hl70")]
+[node name="MenuTPC" parent="." index="4" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
+_spring_length = 8.0
+_offset = Vector3(0, 1.5, 0)
+single_group_name = "MenuVC"
+switchable_camera = false
+target_group = NodePath("..")
+follow_target = NodePath("..")
+min_fov = 30.0
+_fov = 45.0
+
+[node name="Controller" parent="MenuTPC" index="1" instance=ExtResource("7_jkr5c")]
+can_rotate = false
+
+[node name="FPC" parent="." index="5" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_6hl70")]
 _offset = Vector3(0, 1.5, -1.5)
 target_group = NodePath("..")
 submerged_angle = Vector2(0, 80)
@@ -147,21 +160,21 @@ follow_target = NodePath("..")
 joypad_inverted_x = true
 joypad_inverted_y = false
 
-[node name="PlayerBoatScannerArea" type="Area3D" parent="." index="5"]
+[node name="PlayerBoatScannerArea" type="Area3D" parent="." index="6"]
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBoatScannerArea" index="0"]
 shape = SubResource("SphereShape3D_t1ygy")
 
-[node name="InteractionScannerArea" type="Area3D" parent="." index="6"]
+[node name="InteractionScannerArea" type="Area3D" parent="." index="7"]
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractionScannerArea" index="0"]
 shape = SubResource("SphereShape3D_t1ygy")
 
-[node name="Controller" type="Node" parent="." index="7" node_paths=PackedStringArray("interaction_scanner")]
+[node name="Controller" type="Node" parent="." index="8" node_paths=PackedStringArray("interaction_scanner")]
 script = ExtResource("4_eocql")
 interaction_scanner = NodePath("../InteractionScannerArea")
 

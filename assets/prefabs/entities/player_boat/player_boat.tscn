@@ -98,6 +98,7 @@ single_group_name = "ChatVC"
 switchable_camera = false
 target_group = NodePath("..")
 follow_target = NodePath("..")
+min_fov = 30.0
 _fov = 45.0
 
 [node name="Controller" parent="ChatTPC" index="1" instance=ExtResource("6_7ggm6")]
@@ -117,7 +118,20 @@ follow_target = NodePath("../CollisionShape3D")
 joypad_inverted_x = true
 joypad_inverted_y = false
 
-[node name="Controller" parent="." index="4" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("9_wqan3")]
+[node name="MenuTPC" parent="." index="4" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_5wq2t")]
+_spring_length = 15.0
+_offset = Vector3(0, 3, 0)
+single_group_name = "MenuVC"
+switchable_camera = false
+target_group = NodePath("..")
+follow_target = NodePath("..")
+min_fov = 30.0
+_fov = 45.0
+
+[node name="Controller" parent="MenuTPC" index="1" instance=ExtResource("6_7ggm6")]
+can_rotate = false
+
+[node name="Controller" parent="." index="5" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("9_wqan3")]
 dropoff_point = NodePath("../CollisionShape3D/DropoffPoint")
 player_character_pscn = ExtResource("10_31xpf")
 interaction_scanner = NodePath("../CollisionShape3D/InteractionScanner")

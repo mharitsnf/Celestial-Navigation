@@ -103,6 +103,9 @@ func _get_next_virtual_camera() -> VirtualCamera:
 	return next_vc
 
 func _get_switch_camera_input() -> void:
+	if !_is_input_allowed(): return
+	if ui_manager.has_current_ui(): return
+
 	if Input.is_action_just_pressed("switch_camera"):
 		var next_camera: VirtualCamera = _get_next_virtual_camera()
 		_switch_camera(next_camera)
@@ -132,6 +135,11 @@ func _switch_camera(next_camera: VirtualCamera) -> void:
 # region State setter and getters
 
 # ========== Setters and getters ==========
+func _is_input_allowed() -> bool:
+	if is_interacting(): return false
+	if main_camera.is_transitioning(): return false
+	return true
+
 func is_active() -> bool:
 	if is_interacting() or ui_manager.has_current_ui(): return false
 	return manager.get_current_controller() == self
@@ -147,26 +155,33 @@ func set_interacting(value: bool) -> void:
 
 # ========== Interaction functions ==========
 func _get_toggle_main_menu_input() -> void:
-	if is_interacting(): return
-	if main_camera.is_transitioning(): return
+	if !_is_input_allowed(): return
 
 	if Input.is_action_just_pressed("toggle_main_menu"):
-		if ui_manager.current_ui_key_equals(ui_manager.UIEnum.NONE):
-			ui_manager.switch_current_ui(ui_manager.UIEnum.MAIN_MENU)
-		else:
-			ui_manager.switch_current_ui(ui_manager.UIEnum.NONE)
+		match ui_manager.get_current_ui_key():
+			ui_manager.UIEnum.NONE:
+				var mm_cam: VirtualCamera = STUtil.get_only_node_in_group(String(parent.get_path()) + "/MenuVC")
+				_switch_camera(mm_cam)
+				ui_manager.switch_current_ui(ui_manager.UIEnum.MAIN_MENU)
+			
+			ui_manager.UIEnum.MAIN_MENU:
+				_switch_camera(entry_cam)
+				ui_manager.switch_current_ui(ui_manager.UIEnum.NONE)
 
 func _get_start_interact_input() -> void:
-	if is_interacting(): return
-	if interactions.is_empty(): return
+	if !_is_input_allowed(): return
 	if ui_manager.has_current_ui(): return
-	if main_camera.is_transitioning(): return
 	
 	if Input.is_action_just_pressed("interact"):
 		if !_setup_interaction(): return
 		_interact()
 
 func _setup_interaction() -> bool:
+	# See interactions
+	if interactions.is_empty():
+		push_warning("Nothing to interact to")
+		return false
+	
 	# Get the top interaction
 	var top_node: Area3D = interactions.back()
 	if top_node is Interactable:
@@ -189,7 +204,7 @@ func _start_interaction() -> void:
 func _finish_interaction() -> void:
 	current_interactable = null
 	current_track = null
-	_switch_camera(main_camera.get_previous_follow_target())
+	_switch_camera(entry_cam)
 	set_interacting(false)
 
 func _interact() -> void:

@@ -45,6 +45,10 @@ func current_ui_key_equals(value: UIEnum) -> bool:
         else: return false
     return current_ui.get_key() == value
 
+func get_current_ui_key() -> UIEnum:
+    if !current_ui: return UIEnum.NONE
+    return current_ui.get_key() as UIEnum
+
 func get_current_controller() -> UIController:
     return current_ui.get_controller()
 
