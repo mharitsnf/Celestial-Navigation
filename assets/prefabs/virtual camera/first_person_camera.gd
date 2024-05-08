@@ -17,7 +17,6 @@ var sun_moon_path: SunMoonPath
 
 # ========== Built in functions ==========
 func _ready() -> void:
-    # super()
     camera_mask = STUtil.get_only_node_in_group("camera_mask")
     sun_moon_path = STUtil.get_only_node_in_group("sun_moon_path")
 

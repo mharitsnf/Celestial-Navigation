@@ -150,10 +150,19 @@ offset = Vector3(-1, 0, 0)
 reference_node = NodePath("../../CollisionShape3D/Visuals")
 
 [node name="FPC" parent="." index="5" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_6hl70")]
+lerp_weight = 10.0
 _offset = Vector3(0, 1.5, -1.5)
 target_group = NodePath("..")
+single_group_name = ""
+switchable_camera = true
+entry_camera = false
+copy_rotation_on_enter = true
 submerged_angle = Vector2(0, 80)
+default_angle = Vector2(-80, 80)
 follow_target = NodePath("..")
+min_fov = 30.0
+max_fov = 110.0
+_fov = 75.0
 
 [node name="FPCCamera" parent="FPC" index="0" instance=ExtResource("8_0n5lc")]
 

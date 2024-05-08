@@ -69,6 +69,7 @@ var current_target : TargetNode
 # ===== ===== ===== ===== =====
 
 # =============== Built in functions ===============
+
 func _enter_tree() -> void:
 	if !transition_finished.is_connected(_on_transition_finished):
 		transition_finished.connect(_on_transition_finished)

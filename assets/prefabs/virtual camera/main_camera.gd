@@ -22,6 +22,7 @@ class TargetVirtualCamera extends RefCounted:
 		follow_target = value
 		_change_target(follow_target)
 
+var trans_fov: float = fov
 var transitioning : bool = false
 var tween_elapsed_time : float = 0.
 signal transition_finished
@@ -37,7 +38,11 @@ var current_vcam_index : int = 0
 func _process(delta: float) -> void:
 	if current_target and current_target.get_controller():
 		current_target.get_controller().process(delta)
+	
 	_transition(delta)
+	
+	# Smooth out fov transition
+	fov = lerp(fov, trans_fov, delta * .5)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_target and current_target.get_controller():
@@ -102,7 +107,7 @@ func _transition(delta : float) -> void:
 		if tween_elapsed_time > tween_duration or !previous_target or !current_target:
 			transition_finished.emit()
 			return
-		
+
 		global_position = Tween.interpolate_value(
 			previous_target.remote_transform.global_position,
 			current_target.remote_transform.global_position - previous_target.remote_transform.global_position,
@@ -123,7 +128,7 @@ func _transition(delta : float) -> void:
 			Tween.EASE_IN_OUT
 		)
 
-		fov = Tween.interpolate_value(
+		trans_fov = Tween.interpolate_value(
 			previous_target.virtual_camera.get_fov(),
 			current_target.virtual_camera.get_fov() - previous_target.virtual_camera.get_fov(),
 			tween_elapsed_time,

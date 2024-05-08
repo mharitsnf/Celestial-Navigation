@@ -83,6 +83,17 @@ should_instantiate_dict = null
 [node name="PlayerCharacterEntity" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("8_dt4hu")]
 transform = Transform3D(0.0282905, 0.999437, 0.018038, -0.97906, 0.0240654, 0.202145, 0.201597, -0.0233791, 0.979189, 1487.53, 33.198, -34.1873)
 
+[node name="FPC" parent="ObjectsContainer/PlayerControllerManager/PlayerCharacterEntity" index="5"]
+lerp_weight = 10.0
+single_group_name = ""
+switchable_camera = true
+entry_camera = false
+copy_rotation_on_enter = true
+default_angle = Vector2(-80, 80)
+min_fov = 30.0
+max_fov = 110.0
+_fov = 75.0
+
 [node name="TestBox" parent="ObjectsContainer" instance=ExtResource("6_u01up")]
 transform = Transform3D(0.00974593, 0.999739, 0.0206788, -0.999633, 0.00921812, 0.0254678, 0.0252705, -0.0209194, 0.999462, 1486.72, 14.4838, -32.51)
 linear_damp = 0.0
