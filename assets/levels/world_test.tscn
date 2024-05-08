@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bohsb8opfjfgr"]
+[gd_scene load_steps=19 format=3 uid="uid://bohsb8opfjfgr"]
 
 [ext_resource type="PackedScene" uid="uid://d1vjavo5saswj" path="res://assets/prefabs/time_manager/time_manager.tscn" id="1_tkbic"]
 [ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_u0thf"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ciarxdka1d6pe" path="res://assets/models/tree/tree.glb" id="12_t2nhm"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="13_u5a0a"]
 [ext_resource type="Texture2D" uid="uid://c2k58j22oamvv" path="res://assets/models/tree/tree_tex.png" id="14_0oty3"]
+[ext_resource type="PackedScene" uid="uid://bo1lbm36txpsy" path="res://assets/prefabs/virtual camera/group_camera_target.tscn" id="14_j8nrg"]
 [ext_resource type="Gradient" uid="uid://brm1w7c27pbwj" path="res://assets/resources/textures/light_gradient.tres" id="15_0d30j"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kt8wf"]
@@ -78,21 +79,9 @@ far = 6000.0
 follow_target = NodePath("../PlayerControllerManager/PlayerCharacterEntity/TPC")
 
 [node name="PlayerControllerManager" parent="ObjectsContainer" instance=ExtResource("4_v2hc8")]
-should_instantiate_dict = null
 
 [node name="PlayerCharacterEntity" parent="ObjectsContainer/PlayerControllerManager" instance=ExtResource("8_dt4hu")]
 transform = Transform3D(0.0282905, 0.999437, 0.018038, -0.97906, 0.0240654, 0.202145, 0.201597, -0.0233791, 0.979189, 1487.53, 33.198, -34.1873)
-
-[node name="FPC" parent="ObjectsContainer/PlayerControllerManager/PlayerCharacterEntity" index="5"]
-lerp_weight = 10.0
-single_group_name = ""
-switchable_camera = true
-entry_camera = false
-copy_rotation_on_enter = true
-default_angle = Vector2(-80, 80)
-min_fov = 30.0
-max_fov = 110.0
-_fov = 75.0
 
 [node name="TestBox" parent="ObjectsContainer" instance=ExtResource("6_u01up")]
 transform = Transform3D(0.00974593, 0.999739, 0.0206788, -0.999633, 0.00921812, 0.0254678, 0.0252705, -0.0209194, 0.999462, 1486.72, 14.4838, -32.51)
@@ -104,5 +93,8 @@ transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 1486.1
 [node name="Cylinder" parent="ObjectsContainer/tree" index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_ca640")
 
+[node name="GroupCameraTarget" parent="ObjectsContainer" instance=ExtResource("14_j8nrg")]
+
 [editable path="ObjectsContainer/PlayerControllerManager/PlayerCharacterEntity"]
 [editable path="ObjectsContainer/tree"]
+[editable path="ObjectsContainer/GroupCameraTarget"]

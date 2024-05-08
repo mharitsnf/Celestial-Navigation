@@ -120,21 +120,7 @@ follow_target = NodePath("..")
 script = ExtResource("6_2nw3f")
 joypad_inverted_y = true
 
-[node name="ChatTPC" parent="." index="3" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
-_spring_length = 8.0
-_offset = Vector3(0, 1.5, 0)
-target_group = NodePath("..")
-single_group_name = "ChatVC"
-switchable_camera = false
-submerged_angle = Vector2(-30, 15)
-follow_target = NodePath("..")
-_fov = 45.0
-
-[node name="Controller" type="Node" parent="ChatTPC" index="1"]
-script = ExtResource("6_2nw3f")
-can_rotate = false
-
-[node name="MenuTPC" parent="." index="4" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
+[node name="MenuTPC" parent="." index="3" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
 _spring_length = 8.0
 _offset = Vector3(0, 1.5, 0)
 target_group = NodePath("..")
@@ -149,20 +135,11 @@ script = ExtResource("7_ycbtt")
 offset = Vector3(-1, 0, 0)
 reference_node = NodePath("../../CollisionShape3D/Visuals")
 
-[node name="FPC" parent="." index="5" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_6hl70")]
-lerp_weight = 10.0
+[node name="FPC" parent="." index="4" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_6hl70")]
 _offset = Vector3(0, 1.5, -1.5)
 target_group = NodePath("..")
-single_group_name = ""
-switchable_camera = true
-entry_camera = false
-copy_rotation_on_enter = true
 submerged_angle = Vector2(0, 80)
-default_angle = Vector2(-80, 80)
 follow_target = NodePath("..")
-min_fov = 30.0
-max_fov = 110.0
-_fov = 75.0
 
 [node name="FPCCamera" parent="FPC" index="0" instance=ExtResource("8_0n5lc")]
 
@@ -172,21 +149,21 @@ joypad_inverted_x = true
 mouse_inverted_x = true
 mouse_inverted_y = true
 
-[node name="PlayerBoatScannerArea" type="Area3D" parent="." index="6"]
+[node name="PlayerBoatScannerArea" type="Area3D" parent="." index="5"]
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBoatScannerArea" index="0"]
 shape = SubResource("SphereShape3D_t1ygy")
 
-[node name="InteractionScannerArea" type="Area3D" parent="." index="7"]
+[node name="InteractionScannerArea" type="Area3D" parent="." index="6"]
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractionScannerArea" index="0"]
 shape = SubResource("SphereShape3D_t1ygy")
 
-[node name="Controller" type="Node" parent="." index="8" node_paths=PackedStringArray("interaction_scanner")]
+[node name="Controller" type="Node" parent="." index="7" node_paths=PackedStringArray("interaction_scanner")]
 script = ExtResource("4_eocql")
 interaction_scanner = NodePath("../InteractionScannerArea")
 

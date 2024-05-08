@@ -3,10 +3,10 @@ class_name PlayerControllerManager extends Node
 class PlayerObject extends RefCounted:
 	var pscn: PackedScene
 	var controller: PlayerController
-	var instance: Node = null
+	var instance: Node3D = null
 	func _init(_pscn: PackedScene) -> void:
 		pscn = _pscn
-	func set_existing_instance(_instance: Node) -> void:
+	func set_existing_instance(_instance: Node3D) -> void:
 		instance = _instance
 		controller = instance.get_node("Controller")
 	func create_instance() -> void:
@@ -15,7 +15,7 @@ class PlayerObject extends RefCounted:
 		controller = instance.get_node("Controller")
 	func get_controller() -> PlayerController:
 		return controller
-	func get_instance() -> Node:
+	func get_instance() -> Node3D:
 		return instance
 
 # ==============================
@@ -38,10 +38,12 @@ var current_player_object: PlayerObject
 
 # ==============================
 # Game related variables
+var group_cam_target_pscn: PackedScene = preload("res://assets/prefabs/virtual camera/group_camera_target.tscn")
 var ocean: Ocean
 var main_camera: MainCamera
 var _transitioning: bool = false
 signal transition_finished
+signal player_object_changed(instance: Node3D, controller: PlayerController)
 
 # ========== Built in functions ==========
 func _ready() -> void:
@@ -53,6 +55,12 @@ func _ready() -> void:
 	# Determine who's the first controllable entity
 	if !has_current_player_object():
 		_init_player_object(PlayerObjectEnum.CHARACTER)
+	
+	# Add group camera target
+	# var objects_container: Node = STUtil.get_only_node_in_group("objects_container")
+	# var gct: GroupCameraTarget = group_cam_target_pscn.instantiate()
+	# gct.player_controller_manager = self
+	# objects_container.add_child.call_deferred(gct)
 
 func _process(delta: float) -> void:
 	if has_current_player_object() and get_current_controller() and !is_transitioning():
@@ -92,7 +100,7 @@ func get_current_player_enum() -> PlayerObjectEnum:
 	if items.is_empty(): return PlayerObjectEnum.NONE
 	return player_object_dict.find_key(items[0])
 
-func get_current_instance() -> Node:
+func get_current_instance() -> Node3D:
 	return current_player_object.get_instance()
 
 func get_current_controller() -> PlayerController:
@@ -157,6 +165,7 @@ func switch_current_player_object(new_enum: PlayerObjectEnum) -> void:
 	
 	_remove_current_player_object(_should_unmount)
 	current_player_object = new_player_object
+	player_object_changed.emit(current_player_object.get_instance(), current_player_object.get_controller())
 	
 	set_transitioning(false)
 	set_spawn_position(Vector3.ZERO)

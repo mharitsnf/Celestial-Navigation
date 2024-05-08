@@ -9,6 +9,8 @@ var interactions: Array
 var current_interactable: Interactable
 var current_track: InteractionTrack
 var interacting: bool
+signal interaction_started(owner: Node3D)
+signal interaction_finished(owner: Node3D)
 
 var main_camera: MainCamera
 var available_virtual_cameras: Array[Node]
@@ -116,19 +118,20 @@ func _switch_camera(next_camera: VirtualCamera) -> void:
 		return
 	
 	if next_camera == main_camera.get_follow_target():
-		push_warning("This camera is already active.")
+		push_warning("Switching to the same camera: this camera is already active.")
 		return
 
-	var controller: VirtualCameraController
-	if main_camera.get_follow_target():
-		controller = main_camera.get_follow_target().get_node("Controller")
+	var controller: VirtualCameraController = main_camera.get_follow_target_controller()
+	if controller:
 		controller.exit_camera()
 
-	controller = next_camera.get_node("Controller")
-	controller.enter_camera()
+	if next_camera.has_node("Controller"):
+		controller = next_camera.get_node("Controller")
+		controller.enter_camera()
 	
 	if next_camera.copy_rotation_on_enter:
 		next_camera.copy_rotation(main_camera.get_follow_target().get_x_rotation(), main_camera.get_follow_target().get_y_rotation())
+	
 	main_camera.set_follow_target(next_camera)
 
 # ========== ========== ========== 
@@ -199,13 +202,18 @@ func _setup_interaction() -> bool:
 
 func _start_interaction() -> void:
 	set_interacting(true)
-	var chat_cam: VirtualCamera = STUtil.get_only_node_in_group(String(parent.get_path()) + "/ChatVC")
+	interaction_started.emit(current_interactable)
+
+	var chat_cam: VirtualCamera = STUtil.get_only_node_in_group("/ChatVC")
 	_switch_camera(chat_cam)
 
 func _finish_interaction() -> void:
+	interaction_finished.emit(current_interactable)
+
 	current_interactable = null
 	current_track = null
 	_switch_camera(entry_cam)
+
 	set_interacting(false)
 
 func _interact() -> void:

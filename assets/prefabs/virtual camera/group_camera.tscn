@@ -1,13 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dldox1cp5e6jc"]
+[gd_scene load_steps=3 format=3 uid="uid://dldox1cp5e6jc"]
 
 [ext_resource type="Script" path="res://assets/prefabs/virtual camera/group_camera.gd" id="1_2hfjc"]
 
-[node name="GroupCamera" type="Node3D" node_paths=PackedStringArray("offset", "rotation_node", "remote_transform_parent_for_other")]
+[sub_resource type="PrismMesh" id="PrismMesh_yho66"]
+
+[node name="GroupCamera" type="Node3D" node_paths=PackedStringArray("remote_transform_parent_for_other")]
 script = ExtResource("1_2hfjc")
-offset = NodePath("Offset")
-rotation_node = NodePath("Offset/RotationNode")
-remote_transform_parent_for_other = NodePath("Offset/RotationNode")
+remote_transform_parent_for_other = NodePath(".")
+switchable_camera = false
+copy_rotation_on_enter = false
 
-[node name="Offset" type="Node3D" parent="."]
-
-[node name="RotationNode" type="Node3D" parent="Offset"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, -0.5)
+mesh = SubResource("PrismMesh_yho66")

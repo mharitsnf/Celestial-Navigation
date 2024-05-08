@@ -16,9 +16,9 @@ class_name VirtualCamera extends Node3D
 class TargetNode extends RefCounted:
 	var follow_target : Node3D
 	var remote_transform : RemoteTransform3D
-	func _init(follower : Node, _follow_target : Node3D) -> void:
+	func _init(follower : Node, _follow_target : Node3D, _use_rotation: bool = false) -> void:
 		follow_target = _follow_target
-		remote_transform = STUtil.create_remote_transform(follower.name, false)
+		remote_transform = STUtil.create_remote_transform(follower.name, _use_rotation)
 		follow_target.add_child(remote_transform)
 
 ## Others will be following this virtual camera through a [RemoteTransform3D] node.
@@ -27,6 +27,7 @@ class TargetNode extends RefCounted:
 
 # ===== Grouping settings =====
 @export_group("Grouping settings")
+@export var independent_group: bool = false
 @export var target_group: Node
 @export var single_group_name: String = ""
 @export var switchable_camera: bool = true
@@ -74,14 +75,12 @@ func _enter_tree() -> void:
 	if !transition_finished.is_connected(_on_transition_finished):
 		transition_finished.connect(_on_transition_finished)
 
-	if !is_in_group(String(get_target_group().get_path()) + "/VCs"):
-		add_to_group(String(get_target_group().get_path()) + "/VCs")
-	if is_entry_camera() and !is_in_group(String(get_target_group().get_path()) + "/EntryVC"):
-		add_to_group(String(get_target_group().get_path()) + "/EntryVC")
-	if is_switchable_camera() and !is_in_group(String(get_target_group().get_path()) + "/SwitchableVCs"):
-		add_to_group(String(get_target_group().get_path()) + "/SwitchableVCs")
-	if !single_group_name.is_empty() and !is_in_group(String(get_target_group().get_path()) + "/" + single_group_name):
-		add_to_group(String(get_target_group().get_path()) + "/" + single_group_name)
+	var group_path: String = String(get_target_group().get_path()) if !independent_group else ""
+
+	if !is_in_group(group_path + "/VCs"): add_to_group(group_path + "/VCs")
+	if is_entry_camera() and !is_in_group(group_path + "/EntryVC"): add_to_group(group_path + "/EntryVC")
+	if is_switchable_camera() and !is_in_group(group_path + "/SwitchableVCs"): add_to_group(group_path + "/SwitchableVCs")
+	if !single_group_name.is_empty() and !is_in_group(group_path + "/" + single_group_name): add_to_group(group_path + "/" + single_group_name)
 
 	main_camera = STUtil.get_only_node_in_group("main_camera")
 
@@ -208,6 +207,12 @@ func copy_rotation(_x_rotation: float, _y_rotation: float) -> void:
 	pass
 
 func rotate_camera(_direction : Vector2) -> void:
+	pass
+
+func set_camera_rotation(_up_rotation: float, _right_rotation: float) -> void:
+	pass
+
+func set_camera_look_at(_direction: Vector3) -> void:
 	pass
 
 func is_active() -> bool:

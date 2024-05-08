@@ -75,4 +75,11 @@ func copy_rotation(x_rotation: float, y_rotation: float) -> void:
         min_angle,
         max_angle
     )
+
+func set_camera_rotation(up_rotation: float, right_rotation: float) -> void:
+    y_gimbal.rotation.y = up_rotation 
+    x_gimbal.rotation.x = right_rotation
+
+func set_camera_look_at(direction: Vector3) -> void:
+    y_gimbal.look_at(Vector3.UP, direction)
 # ========== ========== ========== ==========

@@ -42,3 +42,10 @@ func copy_rotation(x_rotation: float, y_rotation: float) -> void:
 	var min_angle: float = default_angle.x if !is_submerged() else submerged_angle.x
 	var max_angle: float = default_angle.y if !is_submerged() else submerged_angle.y
 	spring_arm.rotation_degrees.x = clamp(spring_arm.rotation_degrees.x, min_angle, max_angle)
+
+func set_camera_rotation(up_rotation: float, right_rotation: float) -> void:
+	y_gimbal.rotation.y = up_rotation 
+	spring_arm.rotation.x = right_rotation
+
+func set_camera_look_at(direction: Vector3) -> void:
+	y_gimbal.look_at(Vector3.UP, direction)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo1lbm36txpsy"]
+
+[ext_resource type="Script" path="res://assets/prefabs/virtual camera/group_camera_target.gd" id="1_7noki"]
+[ext_resource type="Script" path="res://assets/prefabs/virtual camera/virtual_camera.gd" id="2_2vaam"]
+
+[node name="GroupCameraTarget" type="Node3D" node_paths=PackedStringArray("rotation_target")]
+script = ExtResource("1_7noki")
+follow_offset = Vector3(0, 3, 0)
+look_at_offset = Vector3(0, 0.5, 0)
+rotation_target = NodePath("Visual")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="VCam" type="Node3D" parent="Visual" node_paths=PackedStringArray("remote_transform_parent_for_other")]
+script = ExtResource("2_2vaam")
+remote_transform_parent_for_other = NodePath(".")
+independent_group = true
+single_group_name = "ChatVC"
+switchable_camera = false
+copy_rotation_on_enter = false

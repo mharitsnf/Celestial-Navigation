@@ -6,7 +6,7 @@ class TargetVirtualCamera extends RefCounted:
 	var remote_transform : RemoteTransform3D
 	func _init(_virtual_camera : VirtualCamera) -> void:
 		virtual_camera = _virtual_camera
-		controller = _virtual_camera.get_node("Controller")
+		if _virtual_camera.has_node("Controller"): controller = _virtual_camera.get_node("Controller")
 		remote_transform = STUtil.create_remote_transform("MainCamera")
 		virtual_camera.remote_transform_parent_for_other.add_child(remote_transform)
 	func get_controller() -> VirtualCameraController:
@@ -52,6 +52,10 @@ func _unhandled_input(event: InputEvent) -> void:
 ## Returns the current follow target.
 func get_follow_target() -> VirtualCamera:
 	return follow_target
+
+func get_follow_target_controller() -> VirtualCameraController:
+	if !current_target: return null
+	return current_target.get_controller()
 
 func get_previous_follow_target() -> VirtualCamera:
 	return previous_target.virtual_camera
