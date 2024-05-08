@@ -18,6 +18,8 @@ class PlayerObject extends RefCounted:
 	func get_instance() -> Node:
 		return instance
 
+# ==============================
+# Player Object related variables
 enum PlayerObjectEnum {
 	NONE, BOAT, CHARACTER, SUNDIAL
 }
@@ -34,6 +36,8 @@ var player_object_dict: Dictionary = {
 }
 var current_player_object: PlayerObject
 
+# ==============================
+# Game related variables
 var ocean: Ocean
 var main_camera: MainCamera
 var main_camera_controller: MainCameraController
@@ -42,7 +46,7 @@ signal transition_finished
 
 # ========== Built in functions ==========
 func _ready() -> void:
-	await get_tree().process_frame
+	# await get_tree().process_frame
 	_setup_objects()
 	ocean = STUtil.get_only_node_in_group("ocean")
 	_setup_cameras()
@@ -68,17 +72,16 @@ func _setup_cameras() -> void:
 	main_camera = STUtil.get_only_node_in_group("main_camera")
 	main_camera_controller = STUtil.get_only_node_in_group("main_camera_controller")
 
-# Instantiate player objects if it should instantiate
+## Instantiate player objects if it should instantiate.
 func _setup_objects() -> void:
 	# Find if we have existing child of player object. If so, add the instance to the dict.
 	for child: Node in get_children():
 		var existing_po: Array = player_object_dict.values().filter(func(_po: PlayerObject) -> bool: return _po.pscn.resource_path == child.scene_file_path)
 		if existing_po.is_empty(): continue
-		if existing_po[0] is PlayerObject:
-			existing_po[0].set_existing_instance(child)
+		(existing_po[0] as PlayerObject).set_existing_instance(child)
 
-	for key: PlayerObjectEnum in should_instantiate_dict.keys():
-		if should_instantiate_dict[key]: player_object_dict[key].create_instance()
+	for po: PlayerObject in player_object_dict.values():
+		po.create_instance()
 # =============================================
 
 # ========== Setter and getters ==========
