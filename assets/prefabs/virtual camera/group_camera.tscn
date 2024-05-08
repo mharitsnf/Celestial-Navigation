@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dldox1cp5e6jc"]
+
+[ext_resource type="Script" path="res://assets/prefabs/virtual camera/group_camera.gd" id="1_2hfjc"]
+
+[node name="GroupCamera" type="Node3D" node_paths=PackedStringArray("offset", "rotation_node", "remote_transform_parent_for_other")]
+script = ExtResource("1_2hfjc")
+offset = NodePath("Offset")
+rotation_node = NodePath("Offset/RotationNode")
+remote_transform_parent_for_other = NodePath("Offset/RotationNode")
+
+[node name="Offset" type="Node3D" parent="."]
+
+[node name="RotationNode" type="Node3D" parent="Offset"]

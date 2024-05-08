@@ -40,7 +40,6 @@ var current_player_object: PlayerObject
 # Game related variables
 var ocean: Ocean
 var main_camera: MainCamera
-var main_camera_controller: MainCameraController
 var _transitioning: bool = false
 signal transition_finished
 
@@ -70,7 +69,6 @@ func _init_player_object(po_enum: PlayerObjectEnum) -> void:
 
 func _setup_cameras() -> void:
 	main_camera = STUtil.get_only_node_in_group("main_camera")
-	main_camera_controller = STUtil.get_only_node_in_group("main_camera_controller")
 
 ## Instantiate player objects if it should instantiate.
 func _setup_objects() -> void:

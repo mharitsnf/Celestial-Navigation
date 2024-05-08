@@ -11,3 +11,5 @@ tween_duration = 0.75
 [node name="OutlinePP" parent="." instance=ExtResource("2_5qjii")]
 
 [node name="AtmosphericScatteringPP" parent="." instance=ExtResource("3_i6nit")]
+
+[connection signal="transition_finished" from="." to="." method="_on_transition_finished"]

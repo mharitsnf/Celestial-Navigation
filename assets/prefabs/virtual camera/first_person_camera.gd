@@ -26,7 +26,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
     super(delta)
-    _lerp_gimbal_position(delta)
+    _lerp_offset(delta)
 # ========== ========== ========== ==========
 
 # ========== FPC function settings ==========
@@ -45,7 +45,7 @@ func remove_function(value: FPCFunction) -> void:
 # ========== ========== ========== ==========
 
 # ========== Rotation settings ==========
-func _lerp_gimbal_position(delta: float) -> void:
+func _lerp_offset(delta: float) -> void:
     offset_node.position = lerp(offset_node.position, _offset, lerp_weight * delta)
 
 func rotate_camera(direction : Vector2) -> void:

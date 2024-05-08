@@ -34,10 +34,6 @@ var current_target : TargetVirtualCamera = null
 # For testing
 var current_vcam_index : int = 0
 
-func _enter_tree() -> void:
-	if !transition_finished.is_connected(_on_transition_finished):
-		transition_finished.connect(_on_transition_finished)
-
 func _process(delta: float) -> void:
 	if current_target and current_target.get_controller():
 		current_target.get_controller().process(delta)

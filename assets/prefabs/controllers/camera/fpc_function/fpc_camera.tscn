@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ccsl3yyji70j7"]
 
-[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/fpc_camera.gd" id="1_b8fuu"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/fpc_function/fpc_camera.gd" id="1_b8fuu"]
 
 [node name="FPCCamera" type="Node"]
 script = ExtResource("1_b8fuu")

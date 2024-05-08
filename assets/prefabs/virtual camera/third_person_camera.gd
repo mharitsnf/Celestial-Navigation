@@ -11,15 +11,18 @@ class_name ThirdPersonCamera extends VirtualCamera
 
 func _process(delta: float) -> void:
 	super(delta)
-	_lerp_spring_length(delta)
 	_lerp_offset(delta)
+	_lerp_spring_length(delta)
 
+## Interpolate spring arm length
 func _lerp_spring_length(delta: float) -> void:
 	spring_arm.spring_length = lerp(spring_arm.spring_length, _spring_length, lerp_weight * delta)
 
+## Interpolate spring arm offset
 func _lerp_offset(delta: float) -> void:
 	offset_node.position = lerp(offset_node.position, _offset, lerp_weight * delta)
 
+## Rotate the camera along specific directions.
 func rotate_camera(direction : Vector2) -> void:
 	gimbal.rotate_object_local(Vector3.UP, direction.x * rotation_speed)
 	spring_arm.rotate_object_local(Vector3.RIGHT, direction.y * rotation_speed)

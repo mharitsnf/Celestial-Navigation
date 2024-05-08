@@ -1,5 +1,10 @@
 class_name VirtualCamera extends Node3D
 
+# DOCS
+# The main functionalities of the virtual cameras are the following and rotating functions.
+# Follow target -> The camera will automatically follow the target, as well as adjusting its basis with the target.
+# Should the camera have another following or rotating logic, the logic should be implemented by extending this class.
+
 # IMPORTANT!
 # Remote transform use rotation is set to false, meaning the virtual camera's basis
 # will not calibrate to the spherical planet's basis (the up vector will always be (0,1,0)).
@@ -22,14 +27,15 @@ class TargetNode extends RefCounted:
 
 # ===== Grouping settings =====
 @export_group("Grouping settings")
+@export var target_group: Node
 @export var single_group_name: String = ""
 @export var switchable_camera: bool = true
 @export var entry_camera: bool
-@export var target_group: Node
 # ===== ===== ===== ===== ===== ===== =====
 
 # ===== Rotation settings =====
 @export_group("Rotation settings")
+@export var copy_rotation_on_enter: bool = true
 @export var rotation_speed : float = .1
 @export var submerged_angle: Vector2 = Vector2(-80, 0)
 @export var default_angle: Vector2 = Vector2(-80, 80)
@@ -74,7 +80,6 @@ func _enter_tree() -> void:
 	if is_switchable_camera() and !is_in_group(String(get_target_group().get_path()) + "/SwitchableVCs"):
 		add_to_group(String(get_target_group().get_path()) + "/SwitchableVCs")
 	if !single_group_name.is_empty() and !is_in_group(String(get_target_group().get_path()) + "/" + single_group_name):
-		print(String(get_target_group().get_path()) + "/" + single_group_name)
 		add_to_group(String(get_target_group().get_path()) + "/" + single_group_name)
 
 	main_camera = STUtil.get_only_node_in_group("main_camera")

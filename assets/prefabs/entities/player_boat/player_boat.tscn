@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://di3opcoc1bjq5" path="res://assets/models/player_boat/player_boat_inst.tscn" id="3_itsa4"]
 [ext_resource type="PackedScene" uid="uid://ds1eu4orjyhpy" path="res://assets/prefabs/particles/boat_engine.tscn" id="4_rixfk"]
 [ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="5_5wq2t"]
-[ext_resource type="PackedScene" uid="uid://bq08c3kmmbx62" path="res://assets/prefabs/controllers/camera/virtual_camera_controller.tscn" id="6_7ggm6"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/player_vc_controller.gd" id="6_rjn0y"]
 [ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="7_4om71"]
-[ext_resource type="PackedScene" uid="uid://ccsl3yyji70j7" path="res://assets/prefabs/controllers/camera/fpc_camera.tscn" id="8_k2oyu"]
-[ext_resource type="PackedScene" uid="uid://deo4jmce6xulx" path="res://assets/prefabs/controllers/camera/fpc_controller.tscn" id="8_o1kml"]
+[ext_resource type="PackedScene" uid="uid://ccsl3yyji70j7" path="res://assets/prefabs/controllers/camera/fpc_function/fpc_camera.tscn" id="8_k2oyu"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/fpc_controller.gd" id="8_t2aea"]
 [ext_resource type="PackedScene" uid="uid://c26yw05wco6bu" path="res://assets/prefabs/controllers/player/boat/player_boat_controller.tscn" id="9_wqan3"]
 [ext_resource type="PackedScene" uid="uid://c2ipvtnsysqv" path="res://assets/prefabs/entities/player_character/player_character_entity.tscn" id="10_31xpf"]
 
@@ -81,31 +81,42 @@ shape = SubResource("CapsuleShape3D_4nvc2")
 [node name="TPC" parent="." index="1" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_5wq2t")]
 _spring_length = 15.0
 _offset = Vector3(0, 5, 0)
-entry_camera = true
 target_group = NodePath("..")
+entry_camera = true
 submerged_angle = Vector2(-15, 20)
 default_angle = Vector2(-15, 20)
 follow_target = NodePath("..")
 
-[node name="Controller" parent="TPC" index="1" instance=ExtResource("6_7ggm6")]
-mouse_inverted_x = false
-mouse_inverted_y = false
+[node name="Controller" type="Node" parent="TPC" index="1"]
+script = ExtResource("6_rjn0y")
 
 [node name="ChatTPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_5wq2t")]
 _spring_length = 15.0
 _offset = Vector3(0, 3, 0)
+target_group = NodePath("..")
 single_group_name = "ChatVC"
 switchable_camera = false
-target_group = NodePath("..")
 follow_target = NodePath("..")
-min_fov = 30.0
 _fov = 45.0
 
-[node name="Controller" parent="ChatTPC" index="1" instance=ExtResource("6_7ggm6")]
-mouse_inverted_x = false
-mouse_inverted_y = false
+[node name="Controller" type="Node" parent="ChatTPC" index="1"]
+script = ExtResource("6_rjn0y")
+can_rotate = false
 
-[node name="FPC" parent="." index="3" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("7_4om71")]
+[node name="MenuTPC" parent="." index="3" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_5wq2t")]
+_spring_length = 15.0
+_offset = Vector3(0, 3, 0)
+target_group = NodePath("..")
+single_group_name = "MenuVC"
+switchable_camera = false
+follow_target = NodePath("..")
+_fov = 45.0
+
+[node name="Controller" type="Node" parent="MenuTPC" index="1"]
+script = ExtResource("6_rjn0y")
+can_rotate = false
+
+[node name="FPC" parent="." index="4" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("7_4om71")]
 _offset = Vector3(0, 10, 0)
 target_group = NodePath("..")
 submerged_angle = Vector2(-20, 80)
@@ -114,22 +125,8 @@ follow_target = NodePath("../CollisionShape3D")
 
 [node name="FPCCamera" parent="FPC" index="1" instance=ExtResource("8_k2oyu")]
 
-[node name="Controller" parent="FPC" index="2" instance=ExtResource("8_o1kml")]
-joypad_inverted_x = true
-joypad_inverted_y = false
-
-[node name="MenuTPC" parent="." index="4" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_5wq2t")]
-_spring_length = 15.0
-_offset = Vector3(0, 3, 0)
-single_group_name = "MenuVC"
-switchable_camera = false
-target_group = NodePath("..")
-follow_target = NodePath("..")
-min_fov = 30.0
-_fov = 45.0
-
-[node name="Controller" parent="MenuTPC" index="1" instance=ExtResource("6_7ggm6")]
-can_rotate = false
+[node name="Controller" type="Node" parent="FPC" index="2"]
+script = ExtResource("8_t2aea")
 
 [node name="Controller" parent="." index="5" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("9_wqan3")]
 dropoff_point = NodePath("../CollisionShape3D/DropoffPoint")

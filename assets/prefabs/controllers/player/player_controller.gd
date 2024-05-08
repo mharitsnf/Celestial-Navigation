@@ -127,7 +127,8 @@ func _switch_camera(next_camera: VirtualCamera) -> void:
 	controller = next_camera.get_node("Controller")
 	controller.enter_camera()
 	
-	next_camera.copy_rotation(main_camera.get_follow_target().get_x_rotation(), main_camera.get_follow_target().get_y_rotation())
+	if next_camera.copy_rotation_on_enter:
+		next_camera.copy_rotation(main_camera.get_follow_target().get_x_rotation(), main_camera.get_follow_target().get_y_rotation())
 	main_camera.set_follow_target(next_camera)
 
 # ========== ========== ========== 

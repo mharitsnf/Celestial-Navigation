@@ -1,4 +1,4 @@
-class_name FPCController extends VirtualCameraController
+class_name FPCController extends PlayerVCController
 
 @export var zoom_speed: float = 1.
 var zoom_amount: float = 0.

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dve873wgmefrw"]
 
-[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/fpc_sextant.gd" id="1_dsw5x"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/fpc_function/fpc_sextant.gd" id="1_dsw5x"]
 
 [node name="FPCSextant" type="Node"]
 script = ExtResource("1_dsw5x")

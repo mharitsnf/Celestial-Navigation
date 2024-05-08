@@ -4,7 +4,8 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_p65c1"]
 
-[node name="ThirdPersonCamera" type="Node3D" node_paths=PackedStringArray("offset_node", "gimbal", "spring_arm", "remote_transform_parent_for_other") groups=["virtual_cameras"]]
+[node name="ThirdPersonCamera" type="Node3D" node_paths=PackedStringArray("offset_node", "gimbal", "spring_arm", "remote_transform_parent_for_other")]
+editor_description = "Basis that follows the planet origin is transformed here"
 script = ExtResource("1_p87k6")
 _offset = Vector3(0, 1, 0)
 offset_node = NodePath("Offset")
@@ -12,9 +13,9 @@ gimbal = NodePath("Offset/Gimbal")
 spring_arm = NodePath("Offset/Gimbal/SpringArm3D")
 remote_transform_parent_for_other = NodePath("Offset/Gimbal/SpringArm3D")
 rotation_speed = 1.0
-min_fov = 75.0
 
 [node name="Offset" type="Node3D" parent="."]
+editor_description = "Offsetting in local position is applied to this node"
 
 [node name="Gimbal" type="Node3D" parent="Offset"]
 
