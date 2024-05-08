@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c2ipvtnsysqv"]
+[gd_scene load_steps=28 format=3 uid="uid://c2ipvtnsysqv"]
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_vu730"]
 [ext_resource type="Script" path="res://assets/prefabs/entities/player_character/character_entity.gd" id="2_lgsjv"]
@@ -6,10 +6,11 @@
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/player_character_controller.gd" id="4_eocql"]
 [ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="4_k7shh"]
 [ext_resource type="Gradient" uid="uid://brm1w7c27pbwj" path="res://assets/resources/textures/light_gradient.tres" id="4_r3w2b"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/player_vc_controller.gd" id="6_bomfs"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/player_vcc.gd" id="6_2nw3f"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/look_from_front_controller.gd" id="7_ycbtt"]
 [ext_resource type="PackedScene" uid="uid://ccsl3yyji70j7" path="res://assets/prefabs/controllers/camera/fpc_function/fpc_camera.tscn" id="8_0n5lc"]
 [ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="8_6hl70"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/fpc_controller.gd" id="8_lf2io"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/first_person_vcc.gd" id="9_lyn7w"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_grounded_state.gd" id="9_tuho6"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_jump_state.gd" id="10_qhwc7"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_fall_state.gd" id="11_uwajx"]
@@ -116,7 +117,7 @@ submerged_angle = Vector2(-30, 15)
 follow_target = NodePath("..")
 
 [node name="Controller" type="Node" parent="TPC" index="1"]
-script = ExtResource("6_bomfs")
+script = ExtResource("6_2nw3f")
 joypad_inverted_y = true
 
 [node name="ChatTPC" parent="." index="3" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
@@ -130,7 +131,7 @@ follow_target = NodePath("..")
 _fov = 45.0
 
 [node name="Controller" type="Node" parent="ChatTPC" index="1"]
-script = ExtResource("6_bomfs")
+script = ExtResource("6_2nw3f")
 can_rotate = false
 
 [node name="MenuTPC" parent="." index="4" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
@@ -143,9 +144,10 @@ copy_rotation_on_enter = false
 follow_target = NodePath("..")
 _fov = 45.0
 
-[node name="Controller" type="Node" parent="MenuTPC" index="1"]
-script = ExtResource("6_bomfs")
-can_rotate = false
+[node name="Controller" type="Node" parent="MenuTPC" index="1" node_paths=PackedStringArray("reference_node")]
+script = ExtResource("7_ycbtt")
+offset = Vector3(-1, 0, 0)
+reference_node = NodePath("../../CollisionShape3D/Visuals")
 
 [node name="FPC" parent="." index="5" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_6hl70")]
 _offset = Vector3(0, 1.5, -1.5)
@@ -156,7 +158,7 @@ follow_target = NodePath("..")
 [node name="FPCCamera" parent="FPC" index="0" instance=ExtResource("8_0n5lc")]
 
 [node name="Controller" type="Node" parent="FPC" index="2"]
-script = ExtResource("8_lf2io")
+script = ExtResource("9_lyn7w")
 joypad_inverted_x = true
 mouse_inverted_x = true
 mouse_inverted_y = true

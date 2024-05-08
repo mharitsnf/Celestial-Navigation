@@ -1,4 +1,4 @@
-class_name PlayerVCController extends VirtualCameraController
+class_name PlayerVCC extends VirtualCameraController
 
 @export var can_rotate: bool = true
 @export var rotation_speed: float = 1.

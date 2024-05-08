@@ -4,27 +4,27 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_f6icg"]
 
-[node name="FirstPersonCamera" type="Node3D" node_paths=PackedStringArray("offset_node", "gimbal", "inner_gimbal", "remote_transform_parent_for_other") groups=["virtual_cameras"]]
+[node name="FirstPersonCamera" type="Node3D" node_paths=PackedStringArray("y_gimbal", "x_gimbal", "offset_node", "remote_transform_parent_for_other") groups=["virtual_cameras"]]
 script = ExtResource("1_pxrtc")
 _offset = Vector3(0, 2, 0)
-offset_node = NodePath("Gimbal/InnerGimbal/Offset")
-gimbal = NodePath("Gimbal")
-inner_gimbal = NodePath("Gimbal/InnerGimbal")
-remote_transform_parent_for_other = NodePath("Gimbal/InnerGimbal/Offset")
+y_gimbal = NodePath("YGimbal")
+x_gimbal = NodePath("YGimbal/XGimbal")
+offset_node = NodePath("YGimbal/XGimbal/Offset")
+remote_transform_parent_for_other = NodePath("YGimbal/XGimbal/Offset")
 rotation_speed = 1.0
 tween_duration = 0.5
 
-[node name="Gimbal" type="Node3D" parent="."]
+[node name="YGimbal" type="Node3D" parent="."]
 
-[node name="InnerGimbal" type="Node3D" parent="Gimbal"]
+[node name="XGimbal" type="Node3D" parent="YGimbal"]
 
-[node name="Offset" type="Node3D" parent="Gimbal/InnerGimbal"]
+[node name="Offset" type="Node3D" parent="YGimbal/XGimbal"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Gimbal/InnerGimbal/Offset"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="YGimbal/XGimbal/Offset"]
 visible = false
 mesh = SubResource("SphereMesh_f6icg")
 
-[node name="RayCast3D" type="RayCast3D" parent="Gimbal/InnerGimbal/Offset" groups=["first_person_raycast"]]
+[node name="RayCast3D" type="RayCast3D" parent="YGimbal/XGimbal/Offset" groups=["first_person_raycast"]]
 target_position = Vector3(0, 0, -3800)
 collision_mask = 16
 debug_shape_custom_color = Color(1, 1, 1, 1)

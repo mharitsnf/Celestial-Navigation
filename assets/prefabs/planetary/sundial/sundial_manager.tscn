@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://csybdl2vx35tr" path="res://assets/prefabs/planetary/sundial/sundial.tscn" id="2_agxqs"]
 [ext_resource type="Script" path="res://assets/prefabs/planetary/sundial/sundial_controller.gd" id="3_ks50t"]
 [ext_resource type="PackedScene" uid="uid://yfjjri0ylaid" path="res://assets/prefabs/planetary/sundial/latitude_measure.tscn" id="3_qcfit"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/player_vc_controller.gd" id="5_rbc50"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/player_vcc.gd" id="5_rbc50"]
 
 [node name="SundialManager" type="Node3D" node_paths=PackedStringArray("sundial_center") groups=["persist", "sundial_manager"]]
 script = ExtResource("1_o1r8k")

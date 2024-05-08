@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://di3opcoc1bjq5" path="res://assets/models/player_boat/player_boat_inst.tscn" id="3_itsa4"]
 [ext_resource type="PackedScene" uid="uid://ds1eu4orjyhpy" path="res://assets/prefabs/particles/boat_engine.tscn" id="4_rixfk"]
 [ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="5_5wq2t"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/player_vc_controller.gd" id="6_rjn0y"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/player_vcc.gd" id="6_rjn0y"]
 [ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="7_4om71"]
 [ext_resource type="PackedScene" uid="uid://ccsl3yyji70j7" path="res://assets/prefabs/controllers/camera/fpc_function/fpc_camera.tscn" id="8_k2oyu"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/fpc_controller.gd" id="8_t2aea"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/first_person_vcc.gd" id="8_t2aea"]
 [ext_resource type="PackedScene" uid="uid://c26yw05wco6bu" path="res://assets/prefabs/controllers/player/boat/player_boat_controller.tscn" id="9_wqan3"]
 [ext_resource type="PackedScene" uid="uid://c2ipvtnsysqv" path="res://assets/prefabs/entities/player_character/player_character_entity.tscn" id="10_31xpf"]
 

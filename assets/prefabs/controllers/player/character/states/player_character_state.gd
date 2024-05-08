@@ -33,7 +33,7 @@ func exit_state() -> void:
 # ==================================================
 
 func _handle_move_and_rotate(delta: float) -> void:
-    var ref: Node3D = fpc.gimbal if fpc.is_active() else tpc.gimbal
+    var ref: Node3D = fpc.y_gimbal if fpc.is_active() else tpc.y_gimbal
 
     var move_dir: Vector3
     var used_basis: Basis

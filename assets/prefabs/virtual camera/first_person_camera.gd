@@ -4,9 +4,9 @@ class_name FirstPersonCamera extends VirtualCamera
 @export var lerp_weight : float = 10
 @export var _offset : Vector3
 @export_group("References")
+@export var y_gimbal : Node3D # For rotation in local Y
+@export var x_gimbal : Node3D # For rotation in local X
 @export var offset_node : Node3D # Offset placement node
-@export var gimbal : Node3D # For rotation in local Y
-@export var inner_gimbal : Node3D # For rotation in local X
 
 var fpc_functions: Array[FPCFunction]
 var current_function: FPCFunction
@@ -50,29 +50,29 @@ func _lerp_offset(delta: float) -> void:
 
 func rotate_camera(direction : Vector2) -> void:
     direction *= -1.
-    gimbal.rotate_object_local(Vector3.UP, direction.x * rotation_speed)
-    inner_gimbal.rotate_object_local(Vector3.RIGHT, direction.y * rotation_speed)
+    y_gimbal.rotate_object_local(Vector3.UP, direction.x * rotation_speed)
+    x_gimbal.rotate_object_local(Vector3.RIGHT, direction.y * rotation_speed)
     var min_angle: float = default_angle.x if !is_submerged() else submerged_angle.x
     var max_angle: float = default_angle.y if !is_submerged() else submerged_angle.y
-    inner_gimbal.rotation_degrees.x = clamp(
-        inner_gimbal.rotation_degrees.x,
+    x_gimbal.rotation_degrees.x = clamp(
+        x_gimbal.rotation_degrees.x,
         min_angle,
         max_angle
     )
 
 func get_x_rotation() -> float:
-    return gimbal.rotation.y
+    return y_gimbal.rotation.y
 
 func get_y_rotation() -> float:
-    return inner_gimbal.rotation.y
+    return x_gimbal.rotation.y
 
 func copy_rotation(x_rotation: float, y_rotation: float) -> void:
-    gimbal.rotation.y = x_rotation
-    inner_gimbal.rotation.x = y_rotation
+    y_gimbal.rotation.y = x_rotation
+    x_gimbal.rotation.x = y_rotation
     var min_angle: float = default_angle.x if !is_submerged() else submerged_angle.x
     var max_angle: float = default_angle.y if !is_submerged() else submerged_angle.y
-    inner_gimbal.rotation_degrees.x = clamp(
-        inner_gimbal.rotation_degrees.x,
+    x_gimbal.rotation_degrees.x = clamp(
+        x_gimbal.rotation_degrees.x,
         min_angle,
         max_angle
     )

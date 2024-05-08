@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://deo4jmce6xulx"]
-
-[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/fpc_controller.gd" id="1_tsicg"]
-
-[node name="Controller" type="Node"]
-script = ExtResource("1_tsicg")
-joypad_inverted_y = true
-mouse_inverted_x = true
-mouse_inverted_y = true
