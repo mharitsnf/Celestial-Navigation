@@ -71,13 +71,14 @@ radius = 3.0
 [node name="PlayerCharacterEntity" node_paths=PackedStringArray("ground_checker", "normal_container", "visual_container") instance=ExtResource("1_krv3m")]
 physics_material_override = SubResource("PhysicsMaterial_7v1cr")
 script = ExtResource("2_3j4gu")
+sprint_speed_limit = 10.0
 air_damping = 0.75
 jump_force = 15.0
 ground_damping = 1.0
 water_damping = 1.0
 flat_drag = 0.1
 max_slope_angle = 0.5
-submerged_speed_limit = 3.0
+submerged_speed_limit = 5.0
 ground_checker = NodePath("GroundChecker")
 speed_limit = 7.0
 move_force = 30.0

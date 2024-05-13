@@ -31,9 +31,13 @@ func physics_process(delta: float) -> void:
 func exit_state() -> void:
 	pass
 # ==================================================
-
 func _handle_move_and_rotate(delta: float) -> void:
-	var ref: Node3D = fpc.y_gimbal if fpc.is_active() else tpc.y_gimbal
+	var vc: VirtualCamera = main_camera.get_follow_target()
+	if not "y_gimbal" in vc:
+		push_warning("No y_gimbal node in virtual camera.")
+		return
+
+	var ref: Node3D = vc['y_gimbal']
 
 	var move_dir: Vector3
 	var used_basis: Basis

@@ -63,13 +63,12 @@ func switch_state(new_state_key: States) -> void:
 const STOP_WEIGHT: float = 10.
 func _handle_idle(_delta: float) -> void:
 	if is_active(): return
-	if parent is CharacterEntity:
-		parent.set_move_input(Vector2.ZERO)
+	(parent as CharacterEntity).set_move_input(Vector2.ZERO)
 
 func _get_move_direction() -> void:
 	var move_input: Vector2 = Input.get_vector("character_left", "character_right", "character_forward", "character_backward")
-	if parent is CharacterEntity:
-		parent.set_move_input(move_input)
+	(parent as CharacterEntity).set_move_input(move_input)
+	(parent as DuckEntity).set_sprinting(Input.is_action_pressed("character_sprint"))
 
 # Override from PlayerController
 func _get_start_interact_input() -> void:
