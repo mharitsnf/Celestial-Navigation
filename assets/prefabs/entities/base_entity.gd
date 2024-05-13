@@ -1,6 +1,6 @@
 class_name BaseEntity extends RigidBody3D
 
-@export_group("Movement")
+@export_group("Horizontal Movement")
 @export var speed_limit : float = 20
 @export var move_force : float = 1
 @export_group("Local References")

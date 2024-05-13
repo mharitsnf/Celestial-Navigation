@@ -30,9 +30,8 @@ enum PlayerObjectEnum {
 }
 var player_object_dict: Dictionary = {
 	PlayerObjectEnum.BOAT: PlayerObject.new(preload("res://assets/prefabs/entities/player_boat/player_boat.tscn")),
-	PlayerObjectEnum.CHARACTER: PlayerObject.new(preload("res://assets/prefabs/entities/player_character/player_character_entity.tscn")),
+	PlayerObjectEnum.CHARACTER: PlayerObject.new(preload("res://assets/prefabs/entities/characters/duck/player_character_entity.tscn")),
 	PlayerObjectEnum.SUNDIAL: PlayerObject.new(preload("res://assets/prefabs/planetary/sundial/sundial_manager.tscn"))
-
 }
 var current_player_object: PlayerObject
 

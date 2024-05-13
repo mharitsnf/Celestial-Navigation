@@ -1,9 +1,11 @@
 class_name CharacterEntity extends BaseEntity
 
-@export_group("Movement")
-@export var water_damping: float 
-@export var ground_damping: float 
+@export_group("Vertical Movement")
 @export var air_damping: float 
+@export var jump_force: float = 15. 
+@export_group("Horizontal Movement")
+@export var ground_damping: float 
+@export var water_damping: float 
 @export_range(0., 1., 0.01) var flat_drag: float = .75
 @export var max_slope_angle: float = 50.
 @export var submerged_speed_limit: float = 3.
@@ -54,6 +56,9 @@ func is_on_slope() -> bool:
 
 func move(direction: Vector3) -> void:
 	apply_force(direction * move_force)
+
+func jump() -> void:
+	apply_central_impulse(basis.y * jump_force)
 
 const VISUAL_CONTAINER_ROTATION_WEIGHT: float = 5.
 func rotate_visual_container(look_dir: Vector3, delta: float) -> void:

@@ -5,7 +5,7 @@ var fpc: FirstPersonCamera
 var main_camera: MainCamera
 
 var parent: PlayerCharacterController
-var character: CharacterEntity
+var character: DuckEntity
 
 var raw_move_dir: Vector2
 

@@ -13,12 +13,15 @@ func _process(_delta: float) -> void:
     if _handle_grounded(): return
 
 func _handle_grounded() -> bool:
+    if parent.get_current_state() != self: return false
     if character.is_grounded() or character.is_submerged():
         parent.switch_state(parent.States.GROUNDED)
         return true
     return false
 
 func _handle_jump() -> bool:
+    # Coyote jump only possible if the previous state is grounded
+    if parent.get_previous_state() != parent.get_state(parent.States.GROUNDED): return false
     if fall_duration < coyote_time and Input.is_action_just_pressed("character_jump"):
         parent.switch_state(parent.States.JUMP)
         return true

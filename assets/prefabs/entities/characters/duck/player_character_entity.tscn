@@ -1,19 +1,19 @@
 [gd_scene load_steps=28 format=3 uid="uid://c2ipvtnsysqv"]
 
-[ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_vu730"]
-[ext_resource type="Script" path="res://assets/prefabs/entities/player_character/character_entity.gd" id="2_lgsjv"]
-[ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="3_ip4xm"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/player_character_controller.gd" id="4_eocql"]
-[ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="4_k7shh"]
-[ext_resource type="Gradient" uid="uid://brm1w7c27pbwj" path="res://assets/resources/textures/light_gradient.tres" id="4_r3w2b"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/player_vcc.gd" id="6_2nw3f"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/look_from_front_controller.gd" id="7_ycbtt"]
-[ext_resource type="PackedScene" uid="uid://ccsl3yyji70j7" path="res://assets/prefabs/controllers/camera/fpc_function/fpc_camera.tscn" id="8_0n5lc"]
-[ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="8_6hl70"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/first_person_vcc.gd" id="9_lyn7w"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_grounded_state.gd" id="9_tuho6"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_jump_state.gd" id="10_qhwc7"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_fall_state.gd" id="11_uwajx"]
+[ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_krv3m"]
+[ext_resource type="Script" path="res://assets/prefabs/entities/characters/duck/duck_entity.gd" id="2_3j4gu"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/toon_shader.gdshader" id="3_gmg8e"]
+[ext_resource type="Gradient" uid="uid://brm1w7c27pbwj" path="res://assets/resources/textures/light_gradient.tres" id="4_2gj4f"]
+[ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="5_6h6e7"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/player_vcc.gd" id="6_8rbs4"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/look_from_front_controller.gd" id="7_xldjt"]
+[ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="8_ppiac"]
+[ext_resource type="PackedScene" uid="uid://ccsl3yyji70j7" path="res://assets/prefabs/controllers/camera/fpc_function/fpc_camera.tscn" id="9_mw7os"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/first_person_vcc.gd" id="10_y603f"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/player_character_controller.gd" id="11_cke8w"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_grounded_state.gd" id="12_dmord"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_jump_state.gd" id="13_mcaeo"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_fall_state.gd" id="14_e6tnp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7v1cr"]
 friction = 0.0
@@ -28,11 +28,11 @@ colors = PackedColorArray(0.0588235, 0.372549, 0.419608, 1)
 gradient = SubResource("Gradient_qntnh")
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_t52l8"]
-gradient = ExtResource("4_r3w2b")
+gradient = ExtResource("4_2gj4f")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8d0gp"]
 render_priority = 0
-shader = ExtResource("3_ip4xm")
+shader = ExtResource("3_gmg8e")
 shader_parameter/_roughness = 1.0
 shader_parameter/_metallic = null
 shader_parameter/posterize_levels = 10.0
@@ -50,11 +50,11 @@ colors = PackedColorArray(0.0431373, 0.109804, 0.180392, 1)
 gradient = SubResource("Gradient_n5phq")
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_iq8wh"]
-gradient = ExtResource("4_r3w2b")
+gradient = ExtResource("4_2gj4f")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wuhai"]
 render_priority = 0
-shader = ExtResource("3_ip4xm")
+shader = ExtResource("3_gmg8e")
 shader_parameter/_roughness = 1.0
 shader_parameter/_metallic = null
 shader_parameter/posterize_levels = 10.0
@@ -68,12 +68,13 @@ size = Vector3(0.4, 0.2, 0.5)
 [sub_resource type="SphereShape3D" id="SphereShape3D_t1ygy"]
 radius = 3.0
 
-[node name="PlayerCharacterEntity" node_paths=PackedStringArray("ground_checker", "normal_container", "visual_container") instance=ExtResource("1_vu730")]
+[node name="PlayerCharacterEntity" node_paths=PackedStringArray("ground_checker", "normal_container", "visual_container") instance=ExtResource("1_krv3m")]
 physics_material_override = SubResource("PhysicsMaterial_7v1cr")
-script = ExtResource("2_lgsjv")
-water_damping = 1.0
-ground_damping = 1.0
+script = ExtResource("2_3j4gu")
 air_damping = 0.75
+jump_force = 15.0
+ground_damping = 1.0
+water_damping = 1.0
 flat_drag = 0.1
 max_slope_angle = 0.5
 submerged_speed_limit = 3.0
@@ -108,7 +109,7 @@ target_position = Vector3(0, -1.2, 0)
 collision_mask = 2
 debug_shape_thickness = 5
 
-[node name="TPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
+[node name="TPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_6h6e7")]
 _spring_length = 8.0
 _offset = Vector3(0, 2.5, 0)
 target_group = NodePath("..")
@@ -117,10 +118,10 @@ submerged_angle = Vector2(-30, 15)
 follow_target = NodePath("..")
 
 [node name="Controller" type="Node" parent="TPC" index="1"]
-script = ExtResource("6_2nw3f")
+script = ExtResource("6_8rbs4")
 joypad_inverted_y = true
 
-[node name="MenuTPC" parent="." index="3" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("4_k7shh")]
+[node name="MenuTPC" parent="." index="3" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_6h6e7")]
 _spring_length = 8.0
 _offset = Vector3(0, 1.5, 0)
 target_group = NodePath("..")
@@ -131,20 +132,20 @@ follow_target = NodePath("..")
 _fov = 45.0
 
 [node name="Controller" type="Node" parent="MenuTPC" index="1" node_paths=PackedStringArray("reference_node")]
-script = ExtResource("7_ycbtt")
+script = ExtResource("7_xldjt")
 offset = Vector3(-1, 0, 0)
 reference_node = NodePath("../../CollisionShape3D/Visuals")
 
-[node name="FPC" parent="." index="4" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_6hl70")]
+[node name="FPC" parent="." index="4" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_ppiac")]
 _offset = Vector3(0, 1.5, -1.5)
 target_group = NodePath("..")
 submerged_angle = Vector2(0, 80)
 follow_target = NodePath("..")
 
-[node name="FPCCamera" parent="FPC" index="0" instance=ExtResource("8_0n5lc")]
+[node name="FPCCamera" parent="FPC" index="0" instance=ExtResource("9_mw7os")]
 
 [node name="Controller" type="Node" parent="FPC" index="2"]
-script = ExtResource("9_lyn7w")
+script = ExtResource("10_y603f")
 joypad_inverted_x = true
 mouse_inverted_x = true
 mouse_inverted_y = true
@@ -164,18 +165,17 @@ collision_mask = 8
 shape = SubResource("SphereShape3D_t1ygy")
 
 [node name="Controller" type="Node" parent="." index="7" node_paths=PackedStringArray("interaction_scanner")]
-script = ExtResource("4_eocql")
+script = ExtResource("11_cke8w")
 interaction_scanner = NodePath("../InteractionScannerArea")
 
 [node name="Grounded" type="Node" parent="Controller" index="0"]
-script = ExtResource("9_tuho6")
+script = ExtResource("12_dmord")
 
 [node name="Jump" type="Node" parent="Controller" index="1"]
-script = ExtResource("10_qhwc7")
-jump_force = 15.0
+script = ExtResource("13_mcaeo")
 
 [node name="Fall" type="Node" parent="Controller" index="2"]
-script = ExtResource("11_uwajx")
+script = ExtResource("14_e6tnp")
 coyote_time = 0.1
 
 [connection signal="area_entered" from="PlayerBoatScannerArea" to="Controller" method="_on_player_boat_area_entered"]

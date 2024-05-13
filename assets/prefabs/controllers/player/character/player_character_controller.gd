@@ -27,7 +27,7 @@ func _init_states() -> void:
 	states[States.JUMP] = get_node("Jump")
 	states[States.FALL] = get_node("Fall")
 
-func _get_state(key: States) -> PlayerCharacterState:
+func get_state(key: States) -> PlayerCharacterState:
 	return states[key]
 
 func get_current_state() -> PlayerCharacterState:
@@ -45,14 +45,13 @@ func process(delta: float) -> bool:
 	return true
 
 func physics_process(delta: float) -> bool:
-	if !super(delta):
-		return false
+	if !super(delta): return false
 	if _current_state:
 		_current_state.physics_process(delta)
 	return true
 
 func switch_state(new_state_key: States) -> void:
-	var new_state: PlayerCharacterState = _get_state(new_state_key)
+	var new_state: PlayerCharacterState = get_state(new_state_key)
 
 	if _current_state:
 		_current_state.exit_state()

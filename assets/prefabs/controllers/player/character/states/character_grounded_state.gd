@@ -6,9 +6,11 @@ func process(_delta: float) -> void:
 
 # Happens regardless the character is active or not
 func _process(_delta: float) -> void:
+	_update_linear_damp()
 	if _handle_fall(): return
 
 func _handle_fall() -> bool:
+	if parent.get_current_state() != self: return false
 	if !character.is_grounded() and !character.is_submerged():
 		parent.switch_state(parent.States.FALL)
 		return true
