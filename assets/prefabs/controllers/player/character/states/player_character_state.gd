@@ -7,7 +7,7 @@ var main_camera: MainCamera
 var parent: PlayerCharacterController
 var character: DuckEntity
 
-var raw_move_dir: Vector2
+var h_move_dir: Vector3
 
 # =============== Lifecycle methods ===============
 func _enter_tree() -> void:
@@ -26,12 +26,13 @@ func process(_delta: float) -> void:
 	pass
 
 func physics_process(delta: float) -> void:
+	_calculate_h_move_dir()
 	_handle_move_and_rotate(delta)
 
 func exit_state() -> void:
 	pass
 # ==================================================
-func _handle_move_and_rotate(delta: float) -> void:
+func _calculate_h_move_dir() -> void:
 	var vc: VirtualCamera = main_camera.get_follow_target()
 	if not "y_gimbal" in vc:
 		push_warning("No y_gimbal node in virtual camera.")
@@ -47,9 +48,11 @@ func _handle_move_and_rotate(delta: float) -> void:
 	else:
 		used_basis = ref.global_basis
 		move_dir = used_basis.z * character.get_move_input().y + used_basis.x * character.get_move_input().x
-	move_dir = move_dir.normalized()
+	
+	h_move_dir = move_dir.normalized()
 
-	character.move(move_dir)
+func _handle_move_and_rotate(delta: float) -> void:
+	character.move(h_move_dir)
 
 	if character.get_move_input() != Vector2.ZERO:
-		character.rotate_visual_container(character.basis.inverse() * move_dir, delta)
+		character.rotate_visual_container(character.basis.inverse() * h_move_dir, delta)

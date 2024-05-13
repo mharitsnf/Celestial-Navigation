@@ -118,3 +118,6 @@ func get_node_in_group(group_name : String, object_type : Variant, index : int) 
         return null
     return instance
 # ===== ===== ===== ===== ===== =====
+
+func ease_out_quart(x: float) -> float:
+    return 1. - pow(1. - x, 4.)

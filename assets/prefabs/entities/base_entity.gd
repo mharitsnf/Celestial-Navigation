@@ -61,6 +61,9 @@ class GerstnerResult extends RefCounted:
 func is_submerged() -> bool:
 	return depth_from_ocean_surface > 0.
 
+func get_height_from_ocean_surface() -> float:
+	return -depth_from_ocean_surface
+
 func _update_collision_normal(normal : Vector3) -> void:
 	if _update_normal and is_submerged():
 		var new_up : Vector3 = normal

@@ -6,13 +6,14 @@ var player_boat: BoatEntity
 var player_boat_in_area: bool = false
 
 enum States {
-	GROUNDED, JUMP, FALL
+	GROUNDED, JUMP, FALL, FLY
 }
 
 var states: Dictionary = {
 	States.GROUNDED: null,
 	States.JUMP: null,
-	States.FALL: null
+	States.FALL: null,
+	States.FLY: null,
 }
 
 func _ready() -> void:
@@ -26,6 +27,7 @@ func _init_states() -> void:
 	states[States.GROUNDED] = get_node("Grounded")
 	states[States.JUMP] = get_node("Jump")
 	states[States.FALL] = get_node("Fall")
+	states[States.FLY] = get_node("Fly")
 
 func get_state(key: States) -> PlayerCharacterState:
 	return states[key]
