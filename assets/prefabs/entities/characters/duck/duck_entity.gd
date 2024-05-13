@@ -15,7 +15,6 @@ func set_sprinting(value: bool) -> void:
 func _limit_speed(state: PhysicsDirectBodyState3D) -> void:
     var current_limit: float = submerged_speed_limit if is_submerged() else (speed_limit if !is_sprinting() else sprint_speed_limit)
     speed_limit_value = lerp(speed_limit_value, current_limit, state.step * 5.)
-    print(speed_limit_value)
 
     var flat_vel : Vector3 = basis.inverse() * state.linear_velocity
     var xz_vel : Vector3 = Vector3(flat_vel.x, 0, flat_vel.z)
