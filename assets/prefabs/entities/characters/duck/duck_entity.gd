@@ -6,11 +6,17 @@ class_name DuckEntity extends CharacterEntity
 @export var fly_move_force: float = 15.
 @export var boost_force: float = 15.
 @export_group("Vertical Movement")
+@export var boosted_fly_damping: float = .5
 @export var flap_force: float = 15.
+@export var dive_force: float = 15.
+@export var fly_gravity_scale: float = .5
+@export var default_gravity_scale: float = .5
 
 const MAX_FLIGHT_ALTITUDE: float = 75.
 var altitude_scale: float = 0.
 var flying: bool
+
+var diving: bool
 
 var sprinting: bool
 var speed_limit_value: float
@@ -23,6 +29,12 @@ func is_flying() -> bool:
 
 func set_flying(value: bool) -> void:
     flying = value
+
+func is_diving() -> bool:
+    return diving
+
+func set_diving(value: bool) -> void:
+    diving = value
 
 func is_sprinting() -> bool:
     return sprinting
@@ -45,7 +57,12 @@ func flap() -> void:
 func boost(direction: Vector3) -> void:
     apply_central_impulse(direction * boost_force)
 
+func dive() -> void:
+    apply_force(-basis.y * ProjectSettings.get_setting("physics/3d/default_gravity"))
+
 func _limit_speed(state: PhysicsDirectBodyState3D) -> void:
+    if is_diving(): return
+
     # Determine which speed limit to use
     var current_limit: float = speed_limit
     if is_sprinting(): current_limit = sprint_speed_limit
@@ -69,6 +86,7 @@ func _limit_speed(state: PhysicsDirectBodyState3D) -> void:
     var new_flat_vel: Vector3 = Vector3(xz_vel.x, y_vel, xz_vel.z)
 
     state.linear_velocity = basis * new_flat_vel
+
     # print(get_height_from_ocean_surface())
     # print(state.linear_velocity.length())
     # print(y_vel)

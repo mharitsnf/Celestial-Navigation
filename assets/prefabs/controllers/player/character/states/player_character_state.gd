@@ -1,9 +1,6 @@
 class_name PlayerCharacterState extends Node
 
-var tpc: ThirdPersonCamera
-var fpc: FirstPersonCamera
 var main_camera: MainCamera
-
 var parent: PlayerCharacterController
 var character: DuckEntity
 
@@ -15,8 +12,6 @@ func _enter_tree() -> void:
 	character = get_parent().get_parent()
 
 func _ready() -> void:
-	tpc = STUtil.get_node_in_group_by_name(String(character.get_path()) + "/VCs", "TPC")
-	fpc = STUtil.get_node_in_group_by_name(String(character.get_path()) + "/VCs", "FPC")
 	main_camera = STUtil.get_only_node_in_group("main_camera")
 
 func enter_state() -> void:

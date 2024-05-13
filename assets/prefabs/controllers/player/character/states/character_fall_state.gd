@@ -6,7 +6,7 @@ var fall_duration: float = 0
 
 func process(delta: float) -> void:
     if _handle_jump(): return
-    if _handle_fly(): return
+    # if _handle_fly(): return
     fall_duration += delta
 
 # Happens regardless the character is active or not
@@ -20,12 +20,12 @@ func _handle_grounded() -> bool:
         return true
     return false
 
-func _handle_fly() -> bool:
-    if fall_duration < coyote_time: return false
-    if character.is_sprinting() and Input.is_action_just_pressed("character_jump"):
-        parent.switch_state(parent.States.FLY)
-        return true
-    return false
+# func _handle_fly() -> bool:
+#     if fall_duration < coyote_time: return false
+#     if character.is_sprinting() and Input.is_action_just_pressed("character_jump"):
+#         parent.switch_state(parent.States.FLY)
+#         return true
+#     return false
 
 func _handle_jump() -> bool:
     # Coyote jump only possible if the previous state is grounded

@@ -6,14 +6,13 @@ var player_boat: BoatEntity
 var player_boat_in_area: bool = false
 
 enum States {
-	GROUNDED, JUMP, FALL, FLY
+	GROUNDED, JUMP, FALL,
 }
 
 var states: Dictionary = {
 	States.GROUNDED: null,
 	States.JUMP: null,
 	States.FALL: null,
-	States.FLY: null,
 }
 
 func _ready() -> void:
@@ -27,7 +26,6 @@ func _init_states() -> void:
 	states[States.GROUNDED] = get_node("Grounded")
 	states[States.JUMP] = get_node("Jump")
 	states[States.FALL] = get_node("Fall")
-	states[States.FLY] = get_node("Fly")
 
 func get_state(key: States) -> PlayerCharacterState:
 	return states[key]
@@ -70,7 +68,7 @@ func _handle_idle(_delta: float) -> void:
 func _get_move_direction() -> void:
 	var move_input: Vector2 = Input.get_vector("character_left", "character_right", "character_forward", "character_backward")
 	(parent as CharacterEntity).set_move_input(move_input)
-	(parent as DuckEntity).set_sprinting(Input.is_action_pressed("character_sprint"))
+	# (parent as DuckEntity).set_sprinting(Input.is_action_pressed("character_sprint"))
 
 # Override from PlayerController
 func _get_start_interact_input() -> void:

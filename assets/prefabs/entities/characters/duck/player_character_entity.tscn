@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c2ipvtnsysqv"]
+[gd_scene load_steps=28 format=3 uid="uid://c2ipvtnsysqv"]
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_krv3m"]
 [ext_resource type="Script" path="res://assets/prefabs/entities/characters/duck/duck_entity.gd" id="2_3j4gu"]
@@ -14,7 +14,6 @@
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_grounded_state.gd" id="12_dmord"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_jump_state.gd" id="13_mcaeo"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_fall_state.gd" id="14_e6tnp"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/player/character/states/character_fly_component.gd" id="15_7kgkh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7v1cr"]
 friction = 0.0
@@ -76,7 +75,11 @@ sprint_speed_limit = 10.0
 fly_speed_limit = 20.0
 fly_move_force = 15.0
 boost_force = 7.0
-flap_force = 15.0
+boosted_fly_damping = 0.5
+flap_force = 30.0
+dive_force = 15.0
+fly_gravity_scale = 0.3
+default_gravity_scale = 1.0
 air_damping = 0.75
 jump_force = 15.0
 ground_damping = 1.0
@@ -183,9 +186,6 @@ script = ExtResource("13_mcaeo")
 [node name="Fall" type="Node" parent="Controller" index="2"]
 script = ExtResource("14_e6tnp")
 coyote_time = 0.1
-
-[node name="Fly" type="Node" parent="Controller" index="3"]
-script = ExtResource("15_7kgkh")
 
 [connection signal="area_entered" from="PlayerBoatScannerArea" to="Controller" method="_on_player_boat_area_entered"]
 [connection signal="area_exited" from="PlayerBoatScannerArea" to="Controller" method="_on_player_boat_area_exited"]
