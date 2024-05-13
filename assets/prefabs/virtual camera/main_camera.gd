@@ -116,9 +116,9 @@ func _transition(delta : float) -> void:
 			previous_target.remote_transform.global_position,
 			current_target.remote_transform.global_position - previous_target.remote_transform.global_position,
 			tween_elapsed_time,
-			tween_duration,
-			Tween.TRANS_CUBIC,
-			Tween.EASE_IN_OUT
+			current_target.virtual_camera.tween_duration,
+			current_target.virtual_camera.tween_transition,
+			current_target.virtual_camera.tween_ease
 		)
 		
 		var previous_quat : Quaternion = Quaternion(previous_target.remote_transform.global_basis.orthonormalized())
@@ -127,18 +127,18 @@ func _transition(delta : float) -> void:
 			previous_quat,
 			previous_quat.inverse() * current_quat,
 			tween_elapsed_time,
-			tween_duration,
-			Tween.TRANS_CUBIC,
-			Tween.EASE_IN_OUT
+			current_target.virtual_camera.tween_duration,
+			current_target.virtual_camera.tween_transition,
+			current_target.virtual_camera.tween_ease
 		)
 
 		trans_fov = Tween.interpolate_value(
 			previous_target.virtual_camera.get_fov(),
 			current_target.virtual_camera.get_fov() - previous_target.virtual_camera.get_fov(),
 			tween_elapsed_time,
-			tween_duration,
-			Tween.TRANS_CUBIC,
-			Tween.EASE_IN_OUT
+			current_target.virtual_camera.tween_duration,
+			current_target.virtual_camera.tween_transition,
+			current_target.virtual_camera.tween_ease
 		)
 
 		tween_elapsed_time += delta

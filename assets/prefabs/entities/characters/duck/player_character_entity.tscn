@@ -148,6 +148,7 @@ reference_node = NodePath("../../CollisionShape3D/Visuals")
 _offset = Vector3(0, 1.5, -1.5)
 target_group = NodePath("..")
 submerged_angle = Vector2(0, 80)
+tween_duration = 0.75
 
 [node name="FPCCamera" parent="FPC" index="0" instance=ExtResource("9_mw7os")]
 

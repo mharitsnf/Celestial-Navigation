@@ -22,6 +22,11 @@ class_name VirtualCamera extends Node3D
 var submerged: bool = false
 # ===== ===== ===== ===== ===== ===== =====
 
+@export_group("Entry tween transition settings")
+@export var tween_duration: float = .75
+@export var tween_transition: Tween.TransitionType = Tween.TRANS_CUBIC
+@export var tween_ease: Tween.EaseType = Tween.EASE_IN_OUT
+
 # ===== FoV =====
 @export_group("FoV settings")
 @export var min_fov: float = 30

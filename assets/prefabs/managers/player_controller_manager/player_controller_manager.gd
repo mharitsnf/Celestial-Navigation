@@ -101,6 +101,7 @@ func get_current_controller() -> PlayerController:
 # =============================================
 
 # ========== Switching functions ==========
+## Check if the player is able to switch to another entity type.
 func is_switchable() -> bool:
 	if is_transitioning(): return false
 	if !main_camera.get_follow_target().is_entry_camera(): return false
