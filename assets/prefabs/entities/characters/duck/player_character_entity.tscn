@@ -118,46 +118,44 @@ target_position = Vector3(0, -1.2, 0)
 collision_mask = 2
 debug_shape_thickness = 5
 
-[node name="TPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_6h6e7")]
+[node name="TPC" parent="." index="2" node_paths=PackedStringArray("target_group") instance=ExtResource("5_6h6e7")]
 _spring_length = 8.0
 _offset = Vector3(0, 2.5, 0)
 target_group = NodePath("..")
 entry_camera = true
 submerged_angle = Vector2(-30, 15)
-follow_target = NodePath("..")
 
 [node name="Controller" type="Node" parent="TPC" index="1"]
 script = ExtResource("6_8rbs4")
-joypad_inverted_y = true
+y_joypad_natural = true
 
-[node name="MenuTPC" parent="." index="3" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_6h6e7")]
+[node name="MenuTPC" parent="." index="3" node_paths=PackedStringArray("target_group") instance=ExtResource("5_6h6e7")]
 _spring_length = 8.0
 _offset = Vector3(0, 1.5, 0)
 target_group = NodePath("..")
 single_group_name = "MenuVC"
 switchable_camera = false
 copy_rotation_on_enter = false
-follow_target = NodePath("..")
 _fov = 45.0
 
 [node name="Controller" type="Node" parent="MenuTPC" index="1" node_paths=PackedStringArray("reference_node")]
 script = ExtResource("7_xldjt")
 offset = Vector3(-1, 0, 0)
+y_rotation_offset = 180.0
 reference_node = NodePath("../../CollisionShape3D/Visuals")
 
-[node name="FPC" parent="." index="4" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("8_ppiac")]
+[node name="FPC" parent="." index="4" node_paths=PackedStringArray("target_group") instance=ExtResource("8_ppiac")]
 _offset = Vector3(0, 1.5, -1.5)
 target_group = NodePath("..")
 submerged_angle = Vector2(0, 80)
-follow_target = NodePath("..")
 
 [node name="FPCCamera" parent="FPC" index="0" instance=ExtResource("9_mw7os")]
 
 [node name="Controller" type="Node" parent="FPC" index="2"]
 script = ExtResource("10_y603f")
-joypad_inverted_x = true
-mouse_inverted_x = true
-mouse_inverted_y = true
+x_joypad_natural = true
+x_mouse_natural = true
+y_mouse_natural = true
 
 [node name="PlayerBoatScannerArea" type="Area3D" parent="." index="5"]
 collision_layer = 0

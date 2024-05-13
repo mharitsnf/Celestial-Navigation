@@ -41,7 +41,7 @@ func _process(_delta: float) -> void:
             basis.z * Vector3(follow_distance, follow_distance, follow_distance)
         )
 
-        _interpolate_rotation(
+        _interpolate_look_at(
             targets[0].global_position +
             _get_adjusted_look_at_offset()
         )
@@ -57,7 +57,7 @@ func _process(_delta: float) -> void:
             basis.z * Vector3(follow_distance, follow_distance, follow_distance)
         )
 
-        _interpolate_rotation(
+        _interpolate_look_at(
             bounds.get_center() +
             _get_adjusted_look_at_offset()
         )
@@ -65,9 +65,9 @@ func _process(_delta: float) -> void:
 func _interpolate_position(target_position: Vector3) -> void:
     global_position = target_position
 
-func _interpolate_rotation(target_trans: Vector3) -> void:
+func _interpolate_look_at(target_look_at: Vector3) -> void:
     if global_basis.y != Vector3.ZERO:
-        rotation_target.look_at(target_trans, global_basis.y)
+        rotation_target.look_at(target_look_at, global_basis.y)
 
 func _get_adjusted_follow_offset() -> Vector3:
     return basis * follow_offset

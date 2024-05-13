@@ -1,13 +1,14 @@
 class_name PlayerVCC extends VirtualCameraController
 
+@export_group("Rotation Settings")
 @export var can_rotate: bool = true
 @export var rotation_speed: float = 1.
-@export_group("Joypad direction")
-@export var joypad_inverted_x: bool
-@export var joypad_inverted_y: bool
-@export_group("Mouse direction")
-@export var mouse_inverted_x: bool
-@export var mouse_inverted_y: bool
+@export_subgroup("Joypad direction")
+@export var x_joypad_natural: bool
+@export var y_joypad_natural: bool
+@export_subgroup("Mouse direction")
+@export var x_mouse_natural: bool
+@export var y_mouse_natural: bool
 
 func process(delta: float) -> void:
     _rotate_wrapper_joypad(delta)
@@ -21,8 +22,8 @@ func _rotate_wrapper_mouse(event : InputEventMouseMotion) -> void:
     if !can_rotate: return
     if !_is_mouse_allowed(): return
     var direction: Vector2 = event.relative * MOUSE_ROTATION_WEIGHT * rotation_speed
-    direction.x *= int(mouse_inverted_x) * 2 - 1
-    direction.y *= int(mouse_inverted_y) * 2 - 1
+    direction.x *= int(x_mouse_natural) * 2 - 1
+    direction.y *= int(y_mouse_natural) * 2 - 1
     _rotate(direction)
 
 const JOYPAD_ROTATION_WEIGHT: float = .01
@@ -30,8 +31,8 @@ func _rotate_wrapper_joypad(delta: float) -> void:
     if !can_rotate: return
     if !_is_joypad_allowed(): return
     var direction: Vector2 = Input.get_vector("rotate_camera_left", "rotate_camera_right", "rotate_camera_down", "rotate_camera_up") * delta * rotation_speed
-    direction.x *= int(joypad_inverted_x) * 2 - 1
-    direction.y *= int(joypad_inverted_y) * 2 - 1
+    direction.x *= int(x_joypad_natural) * 2 - 1
+    direction.y *= int(y_joypad_natural) * 2 - 1
     _rotate(direction)
 
 func _rotate(direction: Vector2) -> void:

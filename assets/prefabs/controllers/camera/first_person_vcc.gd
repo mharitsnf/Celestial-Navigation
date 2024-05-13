@@ -28,16 +28,18 @@ func unhandled_input(event: InputEvent) -> void:
 
 # ========== Enter and exit functions ==========
 func enter_camera() -> void:
-	if !camera_mask:
-		push_warning("Camera mask is not found") 
-		return
-	camera_mask.show_mask()
+	pass
+	# if !camera_mask:
+	# 	push_warning("Camera mask is not found") 
+	# 	return
+	# camera_mask.show_mask()
 
 func exit_camera() -> void:
-	if !camera_mask:
-		push_warning("Camera mask is not found") 
-		return
-	camera_mask.hide_mask()
+	pass
+	# if !camera_mask:
+	# 	push_warning("Camera mask is not found") 
+	# 	return
+	# camera_mask.hide_mask()
 # ========== ========== ========== ==========
 
 # ========== Input functions ==========

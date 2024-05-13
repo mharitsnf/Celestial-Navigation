@@ -54,12 +54,6 @@ func _ready() -> void:
 	# Determine who's the first controllable entity
 	if !has_current_player_object():
 		_init_player_object(PlayerObjectEnum.CHARACTER)
-	
-	# Add group camera target
-	# var objects_container: Node = STUtil.get_only_node_in_group("objects_container")
-	# var gct: GroupCameraTarget = group_cam_target_pscn.instantiate()
-	# gct.player_controller_manager = self
-	# objects_container.add_child.call_deferred(gct)
 
 func _process(delta: float) -> void:
 	if has_current_player_object() and get_current_controller() and !is_transitioning():
