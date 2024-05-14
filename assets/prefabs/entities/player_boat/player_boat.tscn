@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bl6seajhin6ok"]
+[gd_scene load_steps=16 format=3 uid="uid://bl6seajhin6ok"]
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_s5hml"]
 [ext_resource type="Script" path="res://assets/prefabs/entities/player_boat/player_boat_entity.gd" id="2_rbht2"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="5_5wq2t"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/camera/player_vcc.gd" id="6_rjn0y"]
 [ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="7_4om71"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/hard_look_vcc.gd" id="7_bks34"]
 [ext_resource type="PackedScene" uid="uid://ccsl3yyji70j7" path="res://assets/prefabs/controllers/camera/fpc_function/fpc_camera.tscn" id="8_k2oyu"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/camera/first_person_vcc.gd" id="8_t2aea"]
 [ext_resource type="PackedScene" uid="uid://c26yw05wco6bu" path="res://assets/prefabs/controllers/player/boat/player_boat_controller.tscn" id="9_wqan3"]
@@ -88,20 +89,9 @@ default_angle = Vector2(-15, 20)
 
 [node name="Controller" type="Node" parent="TPC" index="1"]
 script = ExtResource("6_rjn0y")
+y_joypad_natural = true
 
-[node name="ChatTPC" parent="." index="2" node_paths=PackedStringArray("target_group") instance=ExtResource("5_5wq2t")]
-_spring_length = 15.0
-_offset = Vector3(0, 3, 0)
-target_group = NodePath("..")
-single_group_name = "ChatVC"
-switchable_camera = false
-_fov = 45.0
-
-[node name="Controller" type="Node" parent="ChatTPC" index="1"]
-script = ExtResource("6_rjn0y")
-can_rotate = false
-
-[node name="MenuTPC" parent="." index="3" node_paths=PackedStringArray("target_group") instance=ExtResource("5_5wq2t")]
+[node name="MenuTPC" parent="." index="2" node_paths=PackedStringArray("target_group") instance=ExtResource("5_5wq2t")]
 _spring_length = 15.0
 _offset = Vector3(0, 3, 0)
 target_group = NodePath("..")
@@ -109,11 +99,11 @@ single_group_name = "MenuVC"
 switchable_camera = false
 _fov = 45.0
 
-[node name="Controller" type="Node" parent="MenuTPC" index="1"]
-script = ExtResource("6_rjn0y")
-can_rotate = false
+[node name="Controller" type="Node" parent="MenuTPC" index="1" node_paths=PackedStringArray("reference_node")]
+script = ExtResource("7_bks34")
+reference_node = NodePath("../../CollisionShape3D/PlayerBoatInst")
 
-[node name="FPC" parent="." index="4" node_paths=PackedStringArray("target_group") instance=ExtResource("7_4om71")]
+[node name="FPC" parent="." index="3" node_paths=PackedStringArray("target_group") instance=ExtResource("7_4om71")]
 _offset = Vector3(0, 10, 0)
 target_group = NodePath("..")
 submerged_angle = Vector2(-20, 80)
@@ -123,8 +113,11 @@ default_angle = Vector2(-20, 80)
 
 [node name="Controller" type="Node" parent="FPC" index="2"]
 script = ExtResource("8_t2aea")
+x_joypad_natural = true
+x_mouse_natural = true
+y_mouse_natural = true
 
-[node name="Controller" parent="." index="5" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("9_wqan3")]
+[node name="Controller" parent="." index="4" node_paths=PackedStringArray("dropoff_point", "interaction_scanner") instance=ExtResource("9_wqan3")]
 dropoff_point = NodePath("../CollisionShape3D/DropoffPoint")
 player_character_pscn = ExtResource("10_31xpf")
 interaction_scanner = NodePath("../CollisionShape3D/InteractionScanner")
