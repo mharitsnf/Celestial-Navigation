@@ -139,11 +139,13 @@ func _switch_camera(next_camera: VirtualCamera) -> void:
 # region State setter and getters
 
 # ========== Setters and getters ==========
+## Checks if the player is able to perform inputs.
 func _is_input_allowed() -> bool:
 	if is_interacting(): return false
 	if main_camera.is_transitioning(): return false
 	return true
 
+## Checks if the current player controller is active or not.
 func is_active() -> bool:
 	if is_interacting() or ui_manager.has_current_ui(): return false
 	return manager.get_current_controller() == self

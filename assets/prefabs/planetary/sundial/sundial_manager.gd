@@ -12,7 +12,13 @@ var dial: MeshInstance3D
 func _ready() -> void:
     # Get containers and references to others
     var sundial_boat_position: Node3D = STUtil.get_only_node_in_group("sundial_boat_position")
+    if !sundial_boat_position:
+        push_error("Sundial boat position is not found.")
+        return
     var objects_container: Node = STUtil.get_only_node_in_group("objects_container")
+    if !objects_container:
+        push_error("Objects container cannot be found.")
+        return
 
     # Create remote transform to the boat
     var sundial_manager_rt: RemoteTransform3D = STUtil.create_remote_transform("SundialManager")

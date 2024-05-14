@@ -78,50 +78,46 @@ collision_mask = 8
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3, 0)
 shape = SubResource("CapsuleShape3D_4nvc2")
 
-[node name="TPC" parent="." index="1" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_5wq2t")]
+[node name="TPC" parent="." index="1" node_paths=PackedStringArray("target_group") instance=ExtResource("5_5wq2t")]
 _spring_length = 15.0
 _offset = Vector3(0, 5, 0)
 target_group = NodePath("..")
 entry_camera = true
 submerged_angle = Vector2(-15, 20)
 default_angle = Vector2(-15, 20)
-follow_target = NodePath("..")
 
 [node name="Controller" type="Node" parent="TPC" index="1"]
 script = ExtResource("6_rjn0y")
 
-[node name="ChatTPC" parent="." index="2" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_5wq2t")]
+[node name="ChatTPC" parent="." index="2" node_paths=PackedStringArray("target_group") instance=ExtResource("5_5wq2t")]
 _spring_length = 15.0
 _offset = Vector3(0, 3, 0)
 target_group = NodePath("..")
 single_group_name = "ChatVC"
 switchable_camera = false
-follow_target = NodePath("..")
 _fov = 45.0
 
 [node name="Controller" type="Node" parent="ChatTPC" index="1"]
 script = ExtResource("6_rjn0y")
 can_rotate = false
 
-[node name="MenuTPC" parent="." index="3" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("5_5wq2t")]
+[node name="MenuTPC" parent="." index="3" node_paths=PackedStringArray("target_group") instance=ExtResource("5_5wq2t")]
 _spring_length = 15.0
 _offset = Vector3(0, 3, 0)
 target_group = NodePath("..")
 single_group_name = "MenuVC"
 switchable_camera = false
-follow_target = NodePath("..")
 _fov = 45.0
 
 [node name="Controller" type="Node" parent="MenuTPC" index="1"]
 script = ExtResource("6_rjn0y")
 can_rotate = false
 
-[node name="FPC" parent="." index="4" node_paths=PackedStringArray("target_group", "follow_target") instance=ExtResource("7_4om71")]
+[node name="FPC" parent="." index="4" node_paths=PackedStringArray("target_group") instance=ExtResource("7_4om71")]
 _offset = Vector3(0, 10, 0)
 target_group = NodePath("..")
 submerged_angle = Vector2(-20, 80)
 default_angle = Vector2(-20, 80)
-follow_target = NodePath("../CollisionShape3D")
 
 [node name="FPCCamera" parent="FPC" index="1" instance=ExtResource("8_k2oyu")]
 

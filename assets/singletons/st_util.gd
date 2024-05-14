@@ -8,6 +8,9 @@ func _enter_tree() -> void:
 # func _ready() -> void:
 #     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+func _process(_delta: float) -> void:
+    DebugDraw2D.set_text("FPS", Engine.get_frames_per_second())
+
 # ===== Input utility =====
 func _establish_input_connections() -> void:
     if !InputHelper.device_changed.is_connected(_on_input_device_changed):
