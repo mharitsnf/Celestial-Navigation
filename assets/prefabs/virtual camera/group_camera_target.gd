@@ -2,12 +2,12 @@ class_name GroupCameraTarget extends Node3D
 
 @export var follow_offset: Vector3 = Vector3.ZERO
 @export var x_rotation_amount: float = 0.
-@export var targets: Array[Node3D]
 @export_group("References")
 @export var offset_target: Node3D
 @export var rotation_target: Node3D
 @export var x_rotation_target: Node3D
 
+var targets: Array[Node3D]
 var prev_instance: Node3D
 var prev_controller: PlayerController
 var current_instance: Node3D
@@ -100,6 +100,18 @@ func _on_interaction_finished(target_interaction: Node3D) -> void:
 	# Wait for camera to finish transition before removing the target
 	await main_camera.transition_finished
 	remove_target(target_interaction)
+
+func get_follow_offset() -> Vector3:
+	return follow_offset
+
+func set_follow_offset(value: Vector3) -> void:
+	follow_offset = value
+
+func get_x_rotation_amount() -> float:
+	return x_rotation_amount
+
+func set_x_rotation_amount(value: float) -> void:
+	x_rotation_amount = value
 
 func add_target(new_target: Node3D) -> void:
 	targets.append(new_target)
