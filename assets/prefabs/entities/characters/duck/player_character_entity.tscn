@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c2ipvtnsysqv"]
+[gd_scene load_steps=27 format=3 uid="uid://c2ipvtnsysqv"]
 
 [ext_resource type="PackedScene" uid="uid://ci81rhjnjhe5x" path="res://assets/prefabs/entities/base_entity.tscn" id="1_krv3m"]
 [ext_resource type="Script" path="res://assets/prefabs/entities/characters/duck/duck_entity.gd" id="2_3j4gu"]
@@ -6,7 +6,6 @@
 [ext_resource type="Gradient" uid="uid://brm1w7c27pbwj" path="res://assets/resources/textures/light_gradient.tres" id="4_2gj4f"]
 [ext_resource type="PackedScene" uid="uid://diiot23srn01f" path="res://assets/prefabs/virtual camera/third_person_camera.tscn" id="5_6h6e7"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/camera/player_vcc.gd" id="6_8rbs4"]
-[ext_resource type="Script" path="res://assets/prefabs/controllers/camera/hard_look_vcc.gd" id="7_372d4"]
 [ext_resource type="PackedScene" uid="uid://bcgslrgfaqyrk" path="res://assets/prefabs/virtual camera/first_person_camera.tscn" id="8_ppiac"]
 [ext_resource type="PackedScene" uid="uid://ccsl3yyji70j7" path="res://assets/prefabs/controllers/camera/fpc_function/fpc_camera.tscn" id="9_mw7os"]
 [ext_resource type="Script" path="res://assets/prefabs/controllers/camera/first_person_vcc.gd" id="10_y603f"]
@@ -135,14 +134,7 @@ _offset = Vector3(0, 1.5, 0)
 target_group = NodePath("..")
 single_group_name = "MenuVC"
 switchable_camera = false
-copy_rotation_on_enter = false
 _fov = 45.0
-
-[node name="Controller" type="Node" parent="MenuTPC" index="1" node_paths=PackedStringArray("reference_node")]
-script = ExtResource("7_372d4")
-offset = Vector3(-1, 0, 0)
-y_rotation_offset = 180.0
-reference_node = NodePath("../../CollisionShape3D/Visuals")
 
 [node name="FPC" parent="." index="4" node_paths=PackedStringArray("target_group") instance=ExtResource("8_ppiac")]
 _offset = Vector3(0, 1.5, -1.5)
