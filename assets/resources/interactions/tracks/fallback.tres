@@ -6,7 +6,6 @@
 [sub_resource type="Resource" id="Resource_3l4yx"]
 script = ExtResource("1_ujbal")
 text_to_print = "Fallback track! Something is error..."
-auto_next = false
 
 [resource]
 script = ExtResource("2_pg4vk")

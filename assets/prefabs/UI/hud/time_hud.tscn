@@ -1,29 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://duaihjbmtuquu"]
+[gd_scene load_steps=6 format=3 uid="uid://duaihjbmtuquu"]
 
 [ext_resource type="Script" path="res://assets/prefabs/UI/hud/time_hud.gd" id="1_2omxq"]
 [ext_resource type="Texture2D" uid="uid://4c0gl64anwep" path="res://assets/resources/textures/UI/time_bg.svg" id="2_m7866"]
 [ext_resource type="Theme" uid="uid://bjh8cqfmixnsq" path="res://assets/resources/theme/main_theme.tres" id="2_mmnyw"]
 [ext_resource type="Texture2D" uid="uid://bab76gw2lnpha" path="res://assets/resources/textures/UI/house.svg" id="3_kp3li"]
+[ext_resource type="Script" path="res://assets/prefabs/controllers/HUD/time_hud_controller.gd" id="5_we0n3"]
 
-[node name="TimeHUD" type="MarginContainer" node_paths=PackedStringArray("meridian_label", "label_container", "hbox") groups=["time_hud"]]
+[node name="TimeHUD" type="MarginContainer" node_paths=PackedStringArray("meridian_label") groups=["time_hud"]]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -16.0
-offset_top = -110.0
-offset_right = 248.0
-offset_bottom = -32.0
+offset_top = -78.0
+offset_right = 264.0
 grow_vertical = 0
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_bottom = 32
 script = ExtResource("1_2omxq")
-slide_offset = Vector2(16, 0)
-initial_pos = Vector2(-16, 610)
 meridian_label = NodePath("MarginContainer/HBoxContainer/Control/Time")
-label_container = NodePath("MarginContainer/HBoxContainer/Control")
-hbox = NodePath("MarginContainer/HBoxContainer")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 2
@@ -68,3 +63,9 @@ grow_vertical = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 16
 text = "12:12"
+
+[node name="Controller" type="Node" parent="." node_paths=PackedStringArray("label_container", "hbox", "parent")]
+script = ExtResource("5_we0n3")
+label_container = NodePath("../MarginContainer/HBoxContainer/Control")
+hbox = NodePath("../MarginContainer/HBoxContainer")
+parent = NodePath("..")

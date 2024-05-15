@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://ccrt071yecucd"]
+
+[ext_resource type="PackedScene" uid="uid://d4etiolvk4kwu" path="res://assets/prefabs/UI/list_menu_button/list_menu_button.tscn" id="2_7v7ah"]
+[ext_resource type="Script" path="res://assets/resources/interactions/commands/ui/switch_menu_ic.gd" id="3_7l1yv"]
+[ext_resource type="PackedScene" uid="uid://bglct5r1qfmfr" path="res://assets/prefabs/controllers/UI/pause_main_menu/controller.tscn" id="3_lgob3"]
+
+[sub_resource type="Resource" id="Resource_1oei6"]
+script = ExtResource("3_7l1yv")
+target_menu = 0
+
+[sub_resource type="Resource" id="Resource_ri2i8"]
+script = ExtResource("3_7l1yv")
+target_menu = 0
+
+[sub_resource type="Resource" id="Resource_0sdb7"]
+script = ExtResource("3_7l1yv")
+target_menu = 0
+
+[sub_resource type="Resource" id="Resource_e2xj0"]
+script = ExtResource("3_7l1yv")
+target_menu = 0
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -268.0
+offset_right = 246.0
+grow_vertical = 0
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 64
+
+[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer"]
+clip_contents = true
+layout_mode = 2
+alignment = 2
+
+[node name="MainMenuButton" parent="MarginContainer/ButtonContainer" instance=ExtResource("2_7v7ah")]
+layout_mode = 2
+button_title = "Journal"
+pressed_command = SubResource("Resource_1oei6")
+
+[node name="MainMenuButton2" parent="MarginContainer/ButtonContainer" instance=ExtResource("2_7v7ah")]
+layout_mode = 2
+button_title = "Gallery"
+pressed_command = SubResource("Resource_ri2i8")
+
+[node name="MainMenuButton3" parent="MarginContainer/ButtonContainer" instance=ExtResource("2_7v7ah")]
+layout_mode = 2
+button_title = "Settings"
+pressed_command = SubResource("Resource_0sdb7")
+
+[node name="ListMenuButton" parent="MarginContainer/ButtonContainer" instance=ExtResource("2_7v7ah")]
+layout_mode = 2
+button_title = "Quit"
+pressed_command = SubResource("Resource_e2xj0")
+
+[node name="Controller" parent="." node_paths=PackedStringArray("margin_container", "button_container", "parent") instance=ExtResource("3_lgob3")]
+appear_to_focus_delay = 0.05
+margin_container = NodePath("../MarginContainer")
+button_container = NodePath("../MarginContainer/ButtonContainer")
+parent = NodePath("..")

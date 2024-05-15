@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b6c54usfla1jt"]
+[gd_scene load_steps=36 format=3 uid="uid://b6c54usfla1jt"]
 
 [ext_resource type="PackedScene" uid="uid://bohsb8opfjfgr" path="res://assets/levels/world_test.tscn" id="1_n8kch"]
 [ext_resource type="Script" path="res://assets/prefabs/UI/manager/ui_manager.gd" id="3_1ye6f"]
@@ -16,6 +16,7 @@
 [ext_resource type="Shader" path="res://assets/resources/shaders/kuwahara/kuwahara_4.gdshader" id="6_s5m2l"]
 [ext_resource type="Material" uid="uid://dq86rwx1owyye" path="res://assets/resources/materials/m_grain_pp.tres" id="7_b30w6"]
 [ext_resource type="Texture2D" uid="uid://de1lsimp3xj4n" path="res://assets/resources/textures/sextant_mask.png" id="8_gkf3r"]
+[ext_resource type="PackedScene" uid="uid://ca66t8ruic4ic" path="res://assets/prefabs/UI/pause_menu_background.tscn" id="14_3b4ha"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wow5l"]
 viewport_path = NodePath("Main/SubViewport")
@@ -272,9 +273,7 @@ layout_mode = 0
 anchors_preset = 0
 anchor_top = 0.0
 anchor_bottom = 0.0
-offset_left = 0.0
 offset_top = 0.0
-offset_right = 264.0
 offset_bottom = 78.0
 grow_vertical = 1
 
@@ -286,6 +285,15 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
+
+[node name="PauseMenuBackground" parent="KWH4/SubViewport/Control" instance=ExtResource("14_3b4ha")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="UIManager" type="CanvasLayer" parent="KWH4/SubViewport" groups=["ui_manager"]]
 layer = 4

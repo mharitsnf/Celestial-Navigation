@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca66t8ruic4ic"]
+
+[ext_resource type="Texture2D" uid="uid://b08kwe0h6jvox" path="res://assets/resources/textures/UI/menu_bg.png" id="1_8pit1"]
+[ext_resource type="Script" path="res://assets/prefabs/UI/pause_menu_background.gd" id="2_o4n37"]
+
+[node name="PauseMenuBackground" type="TextureRect" groups=["pause_menu_background"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8pit1")
+script = ExtResource("2_o4n37")

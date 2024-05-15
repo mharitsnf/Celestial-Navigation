@@ -172,9 +172,8 @@ collision_mask = 8
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractionScannerArea" index="0"]
 shape = SubResource("SphereShape3D_t1ygy")
 
-[node name="Controller" type="Node" parent="." index="7" node_paths=PackedStringArray("interaction_scanner")]
+[node name="Controller" type="Node" parent="." index="7"]
 script = ExtResource("11_cke8w")
-interaction_scanner = NodePath("../InteractionScannerArea")
 
 [node name="Grounded" type="Node" parent="Controller" index="0"]
 script = ExtResource("12_dmord")
@@ -188,3 +187,5 @@ coyote_time = 0.1
 
 [connection signal="area_entered" from="PlayerBoatScannerArea" to="Controller" method="_on_player_boat_area_entered"]
 [connection signal="area_exited" from="PlayerBoatScannerArea" to="Controller" method="_on_player_boat_area_exited"]
+[connection signal="area_entered" from="InteractionScannerArea" to="Controller" method="_on_interactable_entered"]
+[connection signal="area_exited" from="InteractionScannerArea" to="Controller" method="_on_interactable_exited"]

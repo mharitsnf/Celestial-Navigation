@@ -10,18 +10,16 @@
 [sub_resource type="Resource" id="Resource_e08ao"]
 script = ExtResource("3_wx2ya")
 text = "Hello!"
-auto_next = false
 
 [sub_resource type="Resource" id="Resource_et8ca"]
 script = ExtResource("3_wx2ya")
 text = "Welcome to the vast ocean!"
-auto_next = false
 
 [sub_resource type="Resource" id="Resource_swy28"]
 script = ExtResource("4_u0h7n")
+auto_next = true
 speaker = ExtResource("5_sd56v")
 commands = Array[ExtResource("3_wx2ya")]([SubResource("Resource_e08ao"), SubResource("Resource_et8ca")])
-auto_next = true
 
 [sub_resource type="Resource" id="Resource_t4j1q"]
 script = ExtResource("6_r0jvl")
@@ -31,23 +29,20 @@ commands = Array[Resource("res://assets/resources/interactions/commands/interact
 [sub_resource type="Resource" id="Resource_jui68"]
 script = ExtResource("3_wx2ya")
 text = "Did you know?"
-auto_next = false
 
 [sub_resource type="Resource" id="Resource_kuvfg"]
 script = ExtResource("3_wx2ya")
 text = "Lots of people gets lost in the sea"
-auto_next = false
 
 [sub_resource type="Resource" id="Resource_jr5o2"]
 script = ExtResource("3_wx2ya")
 text = "But those who can read the skies can go anywhere"
-auto_next = false
 
 [sub_resource type="Resource" id="Resource_b4ng7"]
 script = ExtResource("4_u0h7n")
+auto_next = true
 speaker = ExtResource("5_sd56v")
 commands = Array[ExtResource("3_wx2ya")]([SubResource("Resource_jui68"), SubResource("Resource_kuvfg"), SubResource("Resource_jr5o2")])
-auto_next = true
 
 [sub_resource type="Resource" id="Resource_cn651"]
 script = ExtResource("6_r0jvl")

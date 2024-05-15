@@ -1,5 +1,6 @@
 class_name ChatIC extends InteractionCommand
 
+@export var auto_next: bool = false
 @export var speaker: EntityData
 @export var commands: Array[ChatContentIC]
 

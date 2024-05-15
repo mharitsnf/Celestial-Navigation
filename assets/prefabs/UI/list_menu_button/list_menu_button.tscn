@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://d4etiolvk4kwu"]
 
-[ext_resource type="Script" path="res://assets/prefabs/UI/main_menu_button/main_menu_button.gd" id="1_px855"]
+[ext_resource type="Script" path="res://assets/prefabs/UI/list_menu_button/list_menu_button.gd" id="1_px855"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/masking.gdshader" id="2_oy6o0"]
 [ext_resource type="Texture2D" uid="uid://p3a3a0km6fyg" path="res://assets/resources/textures/UI/menu_button_underline.png" id="3_n71a3"]
 [ext_resource type="Theme" uid="uid://bjh8cqfmixnsq" path="res://assets/resources/theme/main_theme.tres" id="4_ebddj"]
@@ -30,7 +30,7 @@ shader_parameter/white_tex = ExtResource("3_n71a3")
 shader_parameter/black_tex = SubResource("GradientTexture1D_q2exg")
 shader_parameter/mask_tex = SubResource("GradientTexture1D_oovd7")
 
-[node name="MainMenuButton" type="Button" node_paths=PackedStringArray("label", "margin_container", "npr")]
+[node name="ListMenuButton" type="Button" node_paths=PackedStringArray("label", "margin_container", "npr")]
 custom_minimum_size = Vector2(150, 40)
 offset_right = 150.0
 offset_bottom = 40.0

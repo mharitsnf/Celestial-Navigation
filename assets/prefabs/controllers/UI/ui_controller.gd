@@ -18,7 +18,7 @@ func is_animating() -> bool:
 func before_exit_tree() -> STUtil.Promise:
     return STUtil.Promise.new()
 
-func _reset_animation() -> void:
+func reset_animation() -> void:
     pass
 
 func show_ui() -> void:

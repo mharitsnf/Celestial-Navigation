@@ -4,7 +4,6 @@ class_name PlayerController extends Node
 
 # Interactions
 @export_group("Interactions")
-@export var interaction_scanner: Area3D
 var interactions: Array
 var current_interactable: Interactable
 var current_track: InteractionTrack
@@ -29,19 +28,13 @@ func _enter_tree() -> void:
 	parent = get_parent()
 	manager = get_parent().get_parent()
 
-	if interaction_scanner:
-		if !interaction_scanner.area_entered.is_connected(_on_interactable_entered):
-			interaction_scanner.area_entered.connect(_on_interactable_entered)
-		if !interaction_scanner.area_exited.is_connected(_on_interactable_exited):
-			interaction_scanner.area_exited.connect(_on_interactable_exited)
-
 func _ready() -> void:
 	ui_manager = STUtil.get_only_node_in_group("ui_manager")
 
 	_setup_camera()
 
 func process(_delta: float) -> bool:
-	_get_toggle_main_menu_input()
+	_get_toggle_pause_menu_input()
 	_get_start_interact_input()
 	_get_switch_camera_input()
 	return !(is_interacting() or ui_manager.has_current_ui()) # If interacting or has an active ui from other means (like opening menu), do not proceed
@@ -160,7 +153,7 @@ func set_interacting(value: bool) -> void:
 # region Interaction
 
 # ========== Interaction functions ==========
-func _get_toggle_main_menu_input() -> void:
+func _get_toggle_pause_menu_input() -> void:
 	if !_is_input_allowed(): return
 
 	if Input.is_action_just_pressed("toggle_main_menu"):
@@ -168,9 +161,9 @@ func _get_toggle_main_menu_input() -> void:
 			ui_manager.UIEnum.NONE:
 				var mm_cam: VirtualCamera = STUtil.get_only_node_in_group(String(parent.get_path()) + "/MenuVC")
 				_switch_camera(mm_cam)
-				ui_manager.switch_current_ui(ui_manager.UIEnum.MAIN_MENU)
+				ui_manager.switch_current_ui(ui_manager.UIEnum.PAUSE_MENU)
 			
-			ui_manager.UIEnum.MAIN_MENU:
+			_:
 				_switch_camera(entry_cam)
 				ui_manager.switch_current_ui(ui_manager.UIEnum.NONE)
 
@@ -220,10 +213,19 @@ func _finish_interaction() -> void:
 
 func _interact() -> void:
 	_start_interaction()
+	
 	for c: InteractionCommand in current_track.commands:
 		await c.action(get_tree())
-		if !c.auto_next:
+		
+		# Continue immediately if the current command is the last one.
+		var idx_c: int = current_track.commands.find(c)
+		if idx_c > -1 and idx_c == current_track.commands.size()-1:
+			continue
+		
+		# If command has property auto_next and it's inactive, wait for player to press sth.
+		if "auto_next" in c and !c.auto_next:
 			await ui_manager.get_current_controller().interact_pressed
+	
 	current_interactable.handle_track_finished()
 	_finish_interaction()
 

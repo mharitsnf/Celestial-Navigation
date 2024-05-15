@@ -1,9 +1,10 @@
-class_name MainMenuButton extends Button
+class_name ListMenuButton extends Button
 
 @export var button_title: String = "Placeholder":
 	set(value):
 		button_title = value
 		if label: label.text = value
+@export var pressed_command: InteractionCommand
 
 @export_group("References")
 @export var label: Label
@@ -31,6 +32,9 @@ func _on_focus_entered() -> void:
 
 func _on_focus_exited() -> void:
 	animate_unselected()
+
+func get_pressed_command() -> InteractionCommand:
+	return pressed_command
 
 func animate_selected() -> void:
 	var tween: Tween = create_tween()

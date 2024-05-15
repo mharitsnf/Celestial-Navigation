@@ -24,12 +24,12 @@ class UserInterface extends RefCounted:
 enum UIEnum {
     NONE,
     CHAT_BOX,
-    MAIN_MENU
+    PAUSE_MENU
 }
 var current_ui: UserInterface
 var ui_dict: Dictionary = {
     UIEnum.CHAT_BOX: UserInterface.new(preload("res://assets/prefabs/UI/chat_box/chat_box.tscn"), UIEnum.CHAT_BOX),
-    UIEnum.MAIN_MENU: UserInterface.new(preload("res://assets/prefabs/UI/menu_bar/menu_bar.tscn"), UIEnum.MAIN_MENU),
+    UIEnum.PAUSE_MENU: UserInterface.new(preload("res://assets/prefabs/UI/pause_menu/pause_menu.tscn"), UIEnum.PAUSE_MENU),
 }
 
 func _process(delta: float) -> void:
@@ -72,5 +72,6 @@ func switch_current_ui(new_ui_enum: UIEnum) -> void:
     # Setup new UI
     var new_ui: UserInterface = ui_dict[new_ui_enum]
     if !new_ui.get_instance(): new_ui.create_instance()
+    new_ui.get_controller().reset_animation()
     current_ui = new_ui
     add_child(current_ui.get_instance())
