@@ -1,5 +1,6 @@
 class_name UIController extends Node
 
+@export var with_background: bool = true
 @export var animation_speed: float = .2
 @export var parent: Control
 

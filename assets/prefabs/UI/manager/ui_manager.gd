@@ -32,6 +32,11 @@ var ui_dict: Dictionary = {
     UIEnum.PAUSE_MENU: UserInterface.new(preload("res://assets/prefabs/UI/pause_menu/pause_menu.tscn"), UIEnum.PAUSE_MENU),
 }
 
+var bg_controller: HUDController
+
+func _ready() -> void:
+    bg_controller = STUtil.get_only_node_in_group("pause_menu_background").get_node("Controller")
+
 func _process(delta: float) -> void:
     if current_ui and get_current_controller():
         get_current_controller().process(delta)
@@ -64,7 +69,10 @@ func _remove_current_ui() -> void:
     current_ui = null
 
 func switch_current_ui(new_ui_enum: UIEnum) -> void:
-    # If we have another UI, remove
+    # If switch to nothing, hide the background
+    if new_ui_enum == UIEnum.NONE: bg_controller.hide_hud()
+    
+    # If we have another UI, remove it
     if current_ui: await _remove_current_ui()
     # If switch to nothing, return
     if new_ui_enum == UIEnum.NONE: return
@@ -72,6 +80,10 @@ func switch_current_ui(new_ui_enum: UIEnum) -> void:
     # Setup new UI
     var new_ui: UserInterface = ui_dict[new_ui_enum]
     if !new_ui.get_instance(): new_ui.create_instance()
-    new_ui.get_controller().reset_animation()
     current_ui = new_ui
+    
+    # Show background
+    if current_ui.get_controller().with_background and !bg_controller.is_shown():
+        bg_controller.show_hud()
+    
     add_child(current_ui.get_instance())

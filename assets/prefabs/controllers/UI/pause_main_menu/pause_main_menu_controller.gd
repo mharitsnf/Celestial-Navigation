@@ -5,7 +5,8 @@ class_name PauseMainMenuController extends UIController
 @export var margin_container: MarginContainer
 @export var button_container: VBoxContainer
 
-const INIT_POSITION: Vector2 = Vector2(0., 452.)
+const SLIDE_TO_SHOW_OFFSET: Vector2 = Vector2(32., 0.)
+const INIT_POSITION: Vector2 = Vector2(-32, 452.)
 var active_button: ListMenuButton = null
 
 # ==============================
@@ -61,14 +62,15 @@ func _on_list_menu_button_pressed(button: ListMenuButton) -> void:
 # region Animation
 
 func reset_animation() -> void:
-	margin_container.position = INIT_POSITION + Vector2(-32., 0.)
+	margin_container.position = INIT_POSITION
 	margin_container.modulate = Color(1.,1.,1.,0.)
 
 func show_ui() -> void:
+	reset_animation()
 	animating = true
 	var tween: Tween = create_tween()
 	tween.set_parallel()
-	tween.tween_property(margin_container, "position", INIT_POSITION, animation_speed).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(margin_container, "position", INIT_POSITION + SLIDE_TO_SHOW_OFFSET, animation_speed).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(margin_container, "modulate", Color(1.,1.,1.,1.), animation_speed).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
 	animation_finished.emit()
@@ -78,7 +80,7 @@ func hide_ui() -> void:
 	animating = true
 	var tween: Tween = create_tween()
 	tween.set_parallel()
-	tween.tween_property(margin_container, "position", INIT_POSITION + Vector2(-32., 0.), animation_speed).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(margin_container, "position", INIT_POSITION, animation_speed).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(margin_container, "modulate", Color(1.,1.,1.,0.), animation_speed).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
 	animation_finished.emit()

@@ -108,4 +108,5 @@ text_container = NodePath("../ChatContainer/MarginContainer")
 speaker_label = NodePath("../ChatContainer/MarginContainer/VBoxContainer/SpeakerLabel")
 chat_label = NodePath("../ChatContainer/MarginContainer/VBoxContainer/ChatLabel")
 timer = NodePath("../Timer")
+with_background = false
 parent = NodePath("..")

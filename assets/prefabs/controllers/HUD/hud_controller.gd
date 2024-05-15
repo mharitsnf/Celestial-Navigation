@@ -4,6 +4,7 @@ class_name HUDController extends Node
 @export var parent: Control
 
 var animating: bool = false
+var shown: bool = false
 
 signal animation_finished
 
@@ -14,6 +15,9 @@ func _ready() -> void:
 
 func is_animating() -> bool:
     return animating
+
+func is_shown() -> bool:
+    return shown
 
 func reset_animation() -> void:
     pass

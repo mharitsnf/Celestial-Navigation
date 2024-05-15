@@ -287,7 +287,6 @@ offset_right = 0.0
 offset_bottom = 0.0
 
 [node name="PauseMenuBackground" parent="KWH4/SubViewport/Control" instance=ExtResource("14_3b4ha")]
-visible = false
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0

@@ -36,6 +36,7 @@ func show_hud() -> void:
     await tween.finished
     
     animating = false
+    shown = true
 
 func hide_hud() -> void:
     if is_animating(): return
@@ -54,3 +55,4 @@ func hide_hud() -> void:
 
     parent.visible = false
     animating = false
+    shown = false
