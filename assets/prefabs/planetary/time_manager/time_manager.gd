@@ -1,6 +1,6 @@
-class_name TimeManager extends Node3D
+class_name TimeManager extends Node
 
-@export var time_speed: float = 1.
+@export var time_speed: float = 215.
 var time_elapsed: float = 0.
 var current_day: int = 0
 
@@ -14,7 +14,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_calculate_time_elapsed(delta)
-	_rotate_per_time(delta)
 
 	if time_hud:
 		var meridian_time: Array = get_time()
@@ -29,14 +28,14 @@ func _calculate_time_elapsed(delta: float) -> void:
 	time_elapsed += delta * time_speed
 	time_elapsed = fmod(time_elapsed, SECONDS_PER_DAY)
 
-func _rotate_per_time(_delta: float) -> void:
-	rotation_degrees.y = remap(time_elapsed, 0., SECONDS_PER_DAY, 360, 0)
-
 func get_local_time() -> Array:
 	return []
 
 func _snap_to_five(value: int) -> int:
 	return floor(value / 5.) * 5
+
+func get_time_elapsed() -> float:
+	return time_elapsed
 
 func get_time(time: float = time_elapsed) -> Array:
 	var seconds: int = _snap_to_five(floori(fmod(time, 60.)))

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgmqmmf5ummrr"]
+
+[ext_resource type="Environment" uid="uid://b02nrfs0an2ut" path="res://assets/resources/environments/main.tres" id="1_g8g72"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ikuen"]
+radius = 100.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_l7uif"]
+radius = 100.0
+height = 200.0
+
+[node name="Globe" type="Node3D"]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = ExtResource("1_g8g72")
+
+[node name="Planet" type="StaticBody3D" parent="Environment"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Planet"]
+shape = SubResource("SphereShape3D_ikuen")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Planet"]
+mesh = SubResource("SphereMesh_l7uif")

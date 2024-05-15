@@ -1,6 +1,7 @@
-[gd_scene load_steps=36 format=3 uid="uid://b6c54usfla1jt"]
+[gd_scene load_steps=37 format=3 uid="uid://b6c54usfla1jt"]
 
 [ext_resource type="PackedScene" uid="uid://bohsb8opfjfgr" path="res://assets/levels/world_test.tscn" id="1_n8kch"]
+[ext_resource type="PackedScene" uid="uid://eretk66dkpdh" path="res://assets/prefabs/planetary/time_manager/time_manager.tscn" id="2_nmls7"]
 [ext_resource type="Script" path="res://assets/prefabs/UI/manager/ui_manager.gd" id="3_1ye6f"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/kuwahara/kuwahara_1.gdshader" id="3_fdjca"]
 [ext_resource type="PackedScene" uid="uid://v5c54hsyvq5g" path="res://assets/prefabs/UI/camera_mask/camera_mask.tscn" id="3_yisfc"]
@@ -113,6 +114,8 @@ shader_parameter/transition_noise_tex = SubResource("NoiseTexture2D_g7ims")
 
 [node name="SaveSystem" parent="." instance=ExtResource("4_bncqj")]
 
+[node name="TimeManager" parent="." instance=ExtResource("2_nmls7")]
+
 [node name="Main" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,7 +123,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="Main"]
+[node name="SubViewport" type="SubViewport" parent="Main" groups=["main_viewport"]]
 handle_input_locally = false
 msaa_3d = 2
 screen_space_aa = 1

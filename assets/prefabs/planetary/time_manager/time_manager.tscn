@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://eretk66dkpdh"]
+
+[ext_resource type="Script" path="res://assets/prefabs/planetary/time_manager/time_manager.gd" id="1_334mm"]
+
+[node name="TimeManager" type="Node" groups=["persist", "time_manager"]]
+script = ExtResource("1_334mm")
